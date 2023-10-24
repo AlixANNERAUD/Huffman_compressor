@@ -1,3 +1,3 @@
 pdflatex rapport.tex
-rm *.aux
+find . -name "*.aux" -type f -delete
 rm *.log

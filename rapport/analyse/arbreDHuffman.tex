@@ -1,0 +1,31 @@
+\section{Arbre d'Huffman}
+
+\begin{tad}
+    \tadNom{HuffmanTree}
+    \tadParametres{HuffmanTree}
+    \tadDependances{Byte, HuffmanTree}
+    \begin{tadOperations}{obtenirElement}
+        \tadOperation{huffmanTree}{}{\tadParams{HuffmanTree}}
+        \tadOperation{delete}{\tadParams{HuffmanTree}}{\tadParams{HuffmanTree}}
+        \tadOperation{setValue}{\tadParams{HuffmanTree, Byte}}{\tadParams{HuffmanTree}}
+        \tadOperation{setRightSon}{\tadParams{HuffmanTree, HuffmanTree}}{\tadParams{HuffmanTree}}
+        \tadOperation{setLeftSon}{\tadParams{HuffmanTree, HuffmanTree}}{\tadParams{HuffmanTree}}
+        \tadOperation{getValue}{\tadParams{HuffmanTree}}{\tadParams{Byte}}
+        \tadOperationAvecPreconditions{getRightSon}{\tadParams{HuffmanTree}}{\tadParams{HuffmanTree}}
+        \tadOperationAvecPreconditions{getLeftSon}{\tadParams{HuffmanTree}}{\tadParams{HuffmanTree}}
+        \tadOperation{getLength}{\tadParams{HuffmanTree}}{\tadParams{Natural}}
+    \end{tadOperations}
+    \begin{tadSemantiques}{longueur}
+        \tadSemantique{huffmanTree}{cree une arbre d'huffman.}
+        \tadSemantique{delete}{detruit l'arbre ainsi que tout ses fils de manière récursive.}
+        \tadSemantique{insert}{insere un autre arbre a une position donnee.}
+        \tadSemantique{getLength}{renvoie la profondeur de l'arbre.}
+    \end{tadSemantiques}
+    \begin{tadAxiomes}
+        \tadAxiome{isEmpty(huffmanTree())}
+        \tadAxiome{not(isEmpty(inserer(l,i,e)))}
+    \end{tadAxiomes}
+    \begin{tadPreconditions}{obtenirElement(l,i)}
+
+    \end{tadPreconditions}
+\end{tad}
