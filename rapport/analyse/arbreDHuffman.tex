@@ -14,14 +14,14 @@
 \begin{tad}
     \tadNom{HuffmanTree}
     \tadParametres{HuffmanTree}
-    \tadDependances{Byte, HuffmanTree}
+    \tadDependances{Bit, HuffmanTree}
     \begin{tadOperations}{obtenirElement}
         \tadOperation{huffmanTree}{}{\tadParams{HuffmanTree}}
         \tadOperation{delete}{\tadParams{HuffmanTree}}{\tadParams{HuffmanTree}}
-        \tadOperation{setValue}{\tadParams{HuffmanTree, Byte}}{\tadParams{HuffmanTree}}
+        \tadOperation{setValue}{\tadParams{HuffmanTree, Bit}}{\tadParams{HuffmanTree}}
         \tadOperation{setRightSon}{\tadParams{HuffmanTree, HuffmanTree}}{\tadParams{HuffmanTree}}
         \tadOperation{setLeftSon}{\tadParams{HuffmanTree, HuffmanTree}}{\tadParams{HuffmanTree}}
-        \tadOperation{getValue}{\tadParams{HuffmanTree}}{\tadParams{Byte}}
+        \tadOperation{getValue}{\tadParams{HuffmanTree}}{\tadParams{Bit}}
         \tadOperationAvecPreconditions{getRightSon}{\tadParams{HuffmanTree}}{\tadParams{HuffmanTree}}
         \tadOperationAvecPreconditions{getLeftSon}{\tadParams{HuffmanTree}}{\tadParams{HuffmanTree}}
         \tadOperation{getLength}{\tadParams{HuffmanTree}}{\tadParams{Natural}}
