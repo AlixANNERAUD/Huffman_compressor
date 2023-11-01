@@ -1,0 +1,45 @@
+\section{Fichier binaire}
+
+\newcommand{\binaryFile}{\textbf{BinaryFile}}
+
+\begin{tad}
+    \tadNom{\binaryFile}
+    \tadParametres{\chaine, \mode, \byte, \caractere}
+    \begin{tadOperations}{test}
+        \tadOperation{binaryFile}{\chaine}{\binaryFile}
+        \tadOperationAvecPreconditions{open}{\tadParams{\binaryFile, \mode}}{\binaryFile}
+        \tadOperationAvecPreconditions{close}{\binaryFile}{\binaryFile}
+        \tadOperation{isOpen}{\binaryFile}{\booleen}
+        \tadOperationAvecPreconditions{getMode}{\binaryFile}{\mode}
+        \tadOperationAvecPreconditions{isEnd}{\binaryFile}{\booleen}
+        \tadOperationAvecPreconditions{writeByte}{\tadParams{\binaryFile, \byte}}{\binaryFile}
+        \tadOperationAvecPreconditions{readByte}{\binaryFile}{\byte}
+        \tadOperationAvecPreconditions{writeNatural}{\tadParams{\binaryFile, \naturel}}{\binaryFile}
+        \tadOperationAvecPreconditions{readNatural}{\binaryFile}{\naturel}
+        \tadOperationAvecPreconditions{writeCharacter}{\tadParams{\binaryFile, \caractere}}{\binaryFile}
+        \tadOperationAvecPreconditions{readCharacter}{\binaryFile}{\caractere}
+    \end{tadOperations}
+    \begin{tadSemantiques}{read<Type}
+        \tadSemantique{binaryFile}{Création un fichier binaire à partir de son chemin.}
+        \tadSemantique{open}{Ouvre un fichier binaire en mode lecture ou écriture. Si le fichier est ouvert en mode écriture et qu'il existe déjà, il est écrasé. Sinon il est créé.}
+        \tadSemantique{close}{Ferme un fichier binaire.}
+        \tadSemantique{isOpen}{Renvoie vrai si le fichier est ouvert, faux sinon.}
+        \tadSemantique{getMode}{Renvoie le mode d'ouverture du fichier.}
+        \tadSemantique{isEnd}{Renvoie si le curseur se trouve à la fin du fichier.}
+        \tadSemantique{write<Type>}{Écrit un octet, entier naturel ou caractère dans le fichier.}
+        \tadSemantique{read<Type>}{Lit un octet, entier naturel ou caractère dans le fichier.}
+    \end{tadSemantiques}
+    \begin{tadPreconditions}{}
+        \tadPrecondition{open(file, mode)}{non isOpen(file)}
+        \tadPrecondition{close(file)}{isOpen(file)}
+        \tadPrecondition{getMode(file)}{isOpen(file)}
+        \tadPrecondition{isEnd(file)}{isOpen(file)}
+        \tadPrecondition{writeByte(file, byte)}{isOpen(file) et getMode(file) = write}
+        \tadPrecondition{readByte(file)}{isOpen(file) et getMode(file) = read}
+        \tadPrecondition{writeNatural(file, natural)}{isOpen(file) et getMode(file) = write}
+        \tadPrecondition{readNatural(file)}{isOpen(file) et getMode(file) = read}
+        \tadPrecondition{writeCharacter(file, character)}{isOpen(file) et getMode(file) = write}
+        \tadPrecondition{readCharacter(file)}{isOpen(file) et getMode(file) = read}
+
+    \end{tadPreconditions}
+\end{tad}
