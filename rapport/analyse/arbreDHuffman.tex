@@ -1,31 +1,40 @@
 \section{Arbre d'Huffman}
 
+\newcommand{\huffmanTree}{\textbf{HuffmanTree}}
+
 \begin{tad}
-    \tadNom{HuffmanTree}
-    \tadParametres{HuffmanTree}
-    \tadDependances{Bit, HuffmanTree}
-    \begin{tadOperations}{obtenirElement}
-        \tadOperation{huffmanTree}{}{\tadParams{HuffmanTree}}
-        \tadOperation{delete}{\tadParams{HuffmanTree}}{\tadParams{HuffmanTree}}
-        \tadOperation{setValue}{\tadParams{HuffmanTree, Bit}}{\tadParams{HuffmanTree}}
-        \tadOperation{setRightSon}{\tadParams{HuffmanTree, HuffmanTree}}{\tadParams{HuffmanTree}}
-        \tadOperation{setLeftSon}{\tadParams{HuffmanTree, HuffmanTree}}{\tadParams{HuffmanTree}}
-        \tadOperation{getValue}{\tadParams{HuffmanTree}}{\tadParams{Bit}}
-        \tadOperationAvecPreconditions{getRightSon}{\tadParams{HuffmanTree}}{\tadParams{HuffmanTree}}
-        \tadOperationAvecPreconditions{getLeftSon}{\tadParams{HuffmanTree}}{\tadParams{HuffmanTree}}
-        \tadOperation{getLength}{\tadParams{HuffmanTree}}{\tadParams{Natural}}
+    \tadNom{\huffmanTree}
+    \tadParametres{\byte, \naturel, \typePointeur{\huffmanTree}}
+    \tadDependances{\byte, \naturel, \huffmanTree}
+    \begin{tadOperations}{setRightLeaf}
+        \tadOperation{huffmanTree}{\tadParams{\byte, \naturel}}{\huffmanTree}
+        \tadOperation{delete}{\tadParams{\huffmanTree}}{\huffmanTree}
+        
+        \tadOperation{isValid}{\huffmanTree}{\booleen}
+        \tadOperation{getValue}{\huffmanTree}{\byte}
+        \tadOperation{getWeight}{\huffmanTree}{\naturel}
+        \tadOperation{getDepth}{\huffmanTree}{\naturel}
+        \tadOperationAvecPreconditions{getRightLeaf}{\huffmanTree}{\huffmanTree}
+        \tadOperationAvecPreconditions{getLeftLeaf}{\huffmanTree}{\huffmanTree}
+    
+        \tadOperation{setRightLeaf}{\tadParams{\huffmanTree, \huffmanTree}}{\huffmanTree}
+        \tadOperation{setLeftLeaf}{\tadParams{\huffmanTree, \huffmanTree}}{\huffmanTree}
     \end{tadOperations}
-    \begin{tadSemantiques}{longueur}
-        \tadSemantique{huffmanTree}{cree une arbre d'huffman.}
-        \tadSemantique{delete}{detruit l'arbre ainsi que tout ses fils de manière récursive.}
-        \tadSemantique{insert}{insere un autre arbre a une position donnee.}
-        \tadSemantique{getLength}{renvoie la profondeur de l'arbre.}
+    \begin{tadSemantiques}{getDepth}
+        \tadSemantique{huffmanTree}{Crée une arbre d'huffman.}
+        \tadSemantique{delete}{Détruit l'arbre ainsi que tout ses fils de manière récursive.}
+        \tadSemantique{getValue}{Renvoi la valeur du noeud.}
+        \tadSemantique{getWeight}{Renvoi le poids du noeud.}
+        \tadSemantique{getDepth}{Renvoie la profondeur de l'arbre.}
     \end{tadSemantiques}
     \begin{tadAxiomes}
-        \tadAxiome{isEmpty(huffmanTree())}
-        \tadAxiome{not(isEmpty(inserer(l,i,e)))}
+        \tadAxiome{getDepth(huffmanTree('A', 4)) = 1}
+        \tadAxiome{getWeight(huffmanTree(octet(16), 4)) = octet(16)}
+        \tadAxiome{getValue(huffmanTree(octet(16), 4)) = octet(16)}
     \end{tadAxiomes}
-    \begin{tadPreconditions}{obtenirElement(l,i)}
-
+    \begin{tadPreconditions}{getLeftLeaf(tree)}
+        \tadPrecondition{isValid(tree)}{getDepth(tree) > 0}
+        \tadPrecondition{getRightLeaf(tree)}{getDepth(tree) > 0}
+        \tadPrecondition{getLeftLeaf(tree)}{getDepth(tree) > 0}
     \end{tadPreconditions}
 \end{tad}
