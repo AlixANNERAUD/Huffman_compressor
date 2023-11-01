@@ -1,0 +1,18 @@
+\section{Fichier binaire}
+
+\subsection*{Signatures}
+
+\begin{algorithme}
+    \signatureFonction{binaryFile}{chemin : \chaine}{\binaryFile}{}
+    \signatureProcedure{open}{\paramEntreeSortie{fichier : \binaryFile}, \paramEntree{mode : \mode}}{}
+    \signatureProcedure{close}{\paramEntreeSortie{fichier : \binaryFile}}{}
+    \signatureFonction{isOpen}{fichier : \binaryFile}{\booleen}{}
+    \signatureFonction{getMode}{fichier : \binaryFile}{\mode}{}
+    \signatureFonction{isEnd}{fichier : \binaryFile}{\booleen}{}
+    \signatureProcedure{writeByte}{\paramEntreeSortie{fichier : \binaryFile}, \paramEntree{byte : \byte}}{}
+    \signatureFonction{readByte}{fichier : \binaryFile}{\byte}{}
+    \signatureProcedure{writeNatural}{\paramEntreeSortie{fichier : \binaryFile}, \paramEntree{natural : \naturel}}{}
+    \signatureFonction{readNatural}{fichier : \binaryFile}{\naturel}{}
+    \signatureProcedure{writeCharacter}{\paramEntreeSortie{fichier : \binaryFile}, \paramEntree{character : \caractere}}{}
+    \signatureFonction{readCharacter}{fichier : \binaryFile}{\caractere}{}
+\end{algorithme}
