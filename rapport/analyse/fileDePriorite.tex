@@ -1,0 +1,33 @@
+\section{File de priorité}
+
+En informatique, une file est un type abstrait de données permettant le stockage et l'accès à des données selon le principe du premier entré, premier sorti (FIFO).
+Dans notre cas, ce principe n'est respecté que partiellement, car ce sont bien les élément en tête de file qui sont retirés en premier.
+Cependant, l'ajout d'un élément se fait en fonction de son poids et de son ordre ascii en cas d'égalité.
+
+\newcommand{\priorityQueue}{\textbf{PriorityQueue}}
+
+\begin{tad}
+    \tadNom{\priorityQueue}
+    \tadParametres{\tableau{1..256}{of}{\typePointeur{\huffmanTree}}, \naturel}
+    \tadDependances{\huffmanTree, \naturel}
+    \begin{tadOperations}{insert}
+        \tadOperation{priorityQueue}{}{\tadParams{\priorityQueue}}
+        \tadOperation{getLength}{\tadParams{\priorityQueue}}{\naturel}
+        \tadOperationAvecPreconditions{pop}{\tadParams{\priorityQueue}}{\tadParams{\huffmanTree, \priorityQueue}}
+        \tadOperationAvecPreconditions{insert}{\tadParams{\priorityQueue, \huffmanTree}}{\tadParams{\priorityQueue}}
+    \end{tadOperations}
+    \begin{tadSemantiques}{}
+        \tadSemantique{priorityQueue}{Crée une file de priorité vide.}
+        \tadSemantique{getLength}{Renvoi la taille de la file de priorité.}
+        \tadSemantique{pop}{Renvoi puis supprime l'élément situé en tête de file.}
+        \tadSemantique{insert}{Insère un élément dans la file de priorité en respectant l'ordre de priorité (poids puis ordre ascii en cas d'égalité).}
+    \end{tadSemantiques}
+    \begin{tadAxiomes}
+        \tadAxiome{getLength(insert(queue, tree)) = getLength(queue) + 1}
+        \tadAxiome{pop(insert(queue, tree)) = tree}
+    \end{tadAxiomes}
+    \begin{tadPreconditions}{}
+        \tadPrecondition{pop}{getLength(queue) > 0}
+        \tadPrecondition{insert}{getLength(queue) < 256}
+    \end{tadPreconditions}
+\end{tad}
