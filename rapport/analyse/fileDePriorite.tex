@@ -8,7 +8,7 @@ Cependant, l'ajout d'un élément se fait en fonction de son poids et de son ord
 
 \begin{tad}
     \tadNom{\priorityQueue}
-    \tadParametres{\tableau{1..256}{of}{\typePointeur{\huffmanTree}}, \naturel}
+    \tadParametres{\huffmanTree}
     \tadDependances{\huffmanTree, \naturel}
     \begin{tadOperations}{insert}
         \tadOperation{priorityQueue}{}{\tadParams{\priorityQueue}}
@@ -28,6 +28,6 @@ Cependant, l'ajout d'un élément se fait en fonction de son poids et de son ord
     \end{tadAxiomes}
     \begin{tadPreconditions}{}
         \tadPrecondition{pop}{getLength(queue) > 0}
-        \tadPrecondition{insert}{getLength(queue) < 256}
+        \tadPrecondition{insert}{getLength(queue) < maxLength}
     \end{tadPreconditions}
 \end{tad}
