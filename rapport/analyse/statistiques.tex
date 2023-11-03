@@ -1,0 +1,28 @@
+\section{Statistiques}
+
+
+\newcommand{\statistiques}{\textbf{Statistiques}}
+
+\begin{tad}
+	\tadNom{\statistiques}
+	\tadParametres{}
+	\tadDependances{\byte, \naturel}
+	\begin{tadOperations}{insert}
+		\tadOperation{statistiques}{}{\tadParams{\statistiques}}
+		\tadOperation{getStatByte}{\tadParams{\byte, \statistiques}}{\naturel}
+		\tadOperation{setStatByte}{\tadParams{\byte, \statistiques, \naturel}}{\tadParams{\statistiques}}
+		\tadOperation{setStatFile}{\tadParams{\binaryFile, \statistiques}}{\tadParams{\statistiques}}
+	\end{tadOperations}
+	\begin{tadSemantiques}{}
+		\tadSemantique{statistiques}{Crée un tableau de statistiques à 0 pour chaque byte.}
+		\tadSemantique{getStatByte}{Renvoi le nombre d'occurences d'un byte.}
+		\tadSemantique{setStatByte}{Permet d'assigner un nombre d'occurences à un byte.}
+		\tadSemantique{setStatFile}{Permet d'assigner le nombre d'occurences de tous les bytes d'un fichier.}
+	\end{tadSemantiques}
+	\begin{tadAxiomes}
+		\tadAxiome{getStatByte(byte, statistiques()) = 0 \forall byte}
+		\tadAxiome{getStatByte(byte, setStatByte(byte, statistiques(), x)) = x}
+	\end{tadAxiomes}
+	\begin{tadPreconditions}{}
+	\end{tadPreconditions}
+\end{tad}
