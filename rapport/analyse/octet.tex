@@ -9,18 +9,18 @@
     \begin{tadOperations}{obtenirElement}
         \tadOperation{byte}{}{\tadParams{\byte}}
         \tadOperationAvecPreconditions{changeibit}{\tadParams{\byte,Natural}}{\tadParams{\byte}}
-        \tadOperationAvecPreconditions{getibit}{\tadParams{\byte, Natural}}{\tadParams{Bit}}
+        \tadOperationAvecPreconditions{getbit}{\tadParams{\byte, Natural}}{\tadParams{Bit}}
     \end{tadOperations}
     \begin{tadSemantiques}{\byte}
-        \tadSemantique{\byte}{create a \byte 0.}
-        \tadSemantique{changeibit}{change the ith bit.}
-        \tadSemantique{getibit}{return the ith bit.}
+        \tadSemantique{\byte}{crée le Byte 0.}
+        \tadSemantique{changeibit}{change le ième bit.}
+        \tadSemantique{getbit}{retourne le ième bit.}
     \end{tadSemantiques}
     \begin{tadAxiomes}
-        \tadAxiome{getibit(a,i)=getibit(changeibit(changeibit(a,i),i),i)}
+        \tadAxiome{getbit(a,i)=getbit(changeibit(changeibit(a,i),i),i)}
     \end{tadAxiomes}
     \begin{tadPreconditions}{TableDeCodage}
 		\tadPrecondition{changeibit(a,i)}{1 $\leq$ i $\leq$ 8}
-		\tadPrecondition{getibit(a,i)}{1 $\leq$ i $\leq$ 8}
+		\tadPrecondition{getbit(a,i)}{1 $\leq$ i $\leq$ 8}
     \end{tadPreconditions}
 \end{tad}
