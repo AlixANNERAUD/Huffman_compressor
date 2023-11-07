@@ -4,23 +4,28 @@
 
 \begin{tad}
     \tadNom{\binaryCode}
-    \tadParametres{\bit}
-    \tadDependances{\bit, \naturel}
+    \tadParametres{}
+    \tadDependances{\bit, \naturel, \booleen}
     \begin{tadOperations}{getBit}
         \tadOperation{binaryCode}{}{\tadParams{\binaryCode}}
         \tadOperationAvecPreconditions{setBit}{\tadParams{\binaryCode,\naturel, \bit}}{\tadParams{\binaryCode}}
+        \tadOperation{isBinaryCode}{\tadParams{\binaryCode}}{\tadParams{\booleen}}
+        \tadOperationAvecPreconditions{length}{\tadParams{\binaryCode}}{\tadParams{\naturel}}
         \tadOperationAvecPreconditions{getBit}{\tadParams{\binaryCode, \naturel}}{\tadParams{\bit}}
     \end{tadOperations}
     \begin{tadSemantiques}{getBit}
         \tadSemantique{binaryCode}{Créer un code binaire vide.}
-        \tadSemantique{setBit}{Défini le ième bit de l'octet.}
-        \tadSemantique{getBit}{Renvoi le ième bit de l'octet.}
+        \tadSemantique{setBit}{Défini le ième bit d'un code binaire.}
+        \tadSemantique{isBinaryCode}{Savoir si c'est un code binaire qui désigne une feuille dans l'arbre de Huffman.}
+        \tadSemantique{length}{Renvoi la longueur d'un code binaire.}
+        \tadSemantique{getBit}{Renvoi le ième bit d'un code binaire.}
     \end{tadSemantiques}
     \begin{tadAxiomes}
         \tadAxiome{getBit(a,i)=getBit(setBit(setBit(a,i),i),i)}
     \end{tadAxiomes}
     \begin{tadPreconditions}{getBit(code, index)}
 		\tadPrecondition{setBit(code, index, bit)}{0 $\leqslant$ i $\leqslant$ 7}
-		\tadPrecondition{getBit(code, index)}{0 $\leqslant$ i $\leqslant$ 7}
+        \tadPrecondition{length(code)}{isBinaryCode(code)}
+		\tadPrecondition{getBit(code, index)}{0 $\leqslant$ i $\leqslant$ 7 }
     \end{tadPreconditions}
 \end{tad}
