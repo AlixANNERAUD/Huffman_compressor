@@ -1,27 +1,27 @@
-\section{Statistiques}
+\section{Statistics}
 
 
-\newcommand{\statistiques}{\textbf{Statistiques}}
+\newcommand{\Statistics}{\textbf{Statistics}}
 
 \begin{tad}
-	\tadNom{\statistiques}
+	\tadNom{\Statistics}
 	\tadParametres{}
 	\tadDependances{\byte, \naturel}
 	\begin{tadOperations}{insert}
-		\tadOperation{statistiques}{}{\tadParams{\statistiques}}
-		\tadOperation{getStatByte}{\tadParams{\byte, \statistiques}}{\naturel}
-		\tadOperation{setStatByte}{\tadParams{\byte, \statistiques, \naturel}}{\tadParams{\statistiques}}
-		\tadOperation{setStatFile}{\tadParams{\binaryFile, \statistiques}}{\tadParams{\statistiques}}
+		\tadOperation{Statistics}{}{\tadParams{\statistics}}
+		\tadOperation{getStatByte}{\tadParams{\statistics, \byte}}{\naturel}
+		\tadOperation{setStatByte}{\tadParams{\statistics, \byte, \naturel}}{\tadParams{\statistics}}
+		\tadOperation{setStatFile}{\tadParams{\statistics, \binaryFile}}{\tadParams{\statistics}}
 	\end{tadOperations}
 	\begin{tadSemantiques}{}
-		\tadSemantique{statistiques}{Crée un tableau de statistiques à 0 pour chaque byte.}
+		\tadSemantique{Statistics}{Crée un tableau de Statistics à 0 pour chaque byte.}
 		\tadSemantique{getStatByte}{Renvoi le nombre d'occurences d'un byte.}
 		\tadSemantique{setStatByte}{Permet d'assigner un nombre d'occurences à un byte.}
 		\tadSemantique{setStatFile}{Permet d'assigner le nombre d'occurences de tous les bytes d'un fichier.}
 	\end{tadSemantiques}
 	\begin{tadAxiomes}
-		\tadAxiome{getStatByte(byte, statistiques()) = 0 \forall byte}
-		\tadAxiome{getStatByte(byte, setStatByte(byte, statistiques(), x)) = x}
+		\tadAxiome{getStatByte(byte, statistics()) = 0 \forall byte}
+		\tadAxiome{getStatByte(byte, setStatByte(byte, statistics(), x)) = x}
 	\end{tadAxiomes}
 	\begin{tadPreconditions}{}
 	\end{tadPreconditions}
