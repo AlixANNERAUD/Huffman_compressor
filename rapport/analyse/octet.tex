@@ -1,16 +1,18 @@
-\subsection{Byte}
+\subsection{Octet}
+
+\newcommand{\byte}{\textbf{Byte}}
 
 \begin{tad}
-    \tadNom{Byte}
+    \tadNom{\byte}
     \tadParametres{Bit}
     \tadDependances{Bit, Natural}
     \begin{tadOperations}{obtenirElement}
-        \tadOperation{byte}{}{\tadParams{Byte}}
-        \tadOperationAvecPreconditions{changeibit}{\tadParams{Byte,Natural}}{\tadParams{Byte}}
-        \tadOperationAvecPreconditions{getibit}{\tadParams{Byte, Natural}}{\tadParams{Bit}}
+        \tadOperation{byte}{}{\tadParams{\byte}}
+        \tadOperationAvecPreconditions{changeibit}{\tadParams{\byte,Natural}}{\tadParams{\byte}}
+        \tadOperationAvecPreconditions{getibit}{\tadParams{\byte, Natural}}{\tadParams{Bit}}
     \end{tadOperations}
-    \begin{tadSemantiques}{Byte}
-        \tadSemantique{Byte}{create a Byte 0.}
+    \begin{tadSemantiques}{\byte}
+        \tadSemantique{\byte}{create a \byte 0.}
         \tadSemantique{changeibit}{change the ith bit.}
         \tadSemantique{getibit}{return the ith bit.}
     \end{tadSemantiques}
