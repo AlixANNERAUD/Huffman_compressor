@@ -1,18 +1,18 @@
-\subsection{Octet}
+\subsection{Byte}
 
 \begin{tad}
-    \tadNom{Octet}
+    \tadNom{Byte}
     \tadParametres{Bit}
     \tadDependances{Bit, Natural}
     \begin{tadOperations}{obtenirElement}
-        \tadOperation{octet}{}{\tadParams{Octet}}
-        \tadOperationAvecPreconditions{changeibit}{\tadParams{Octet,Natural}}{\tadParams{Octet}}
-        \tadOperationAvecPreconditions{getibit}{\tadParams{Octet, Natural}}{\tadParams{Bit}}
+        \tadOperation{byte}{}{\tadParams{Byte}}
+        \tadOperationAvecPreconditions{changeibit}{\tadParams{Byte,Natural}}{\tadParams{Byte}}
+        \tadOperationAvecPreconditions{getibit}{\tadParams{Byte, Natural}}{\tadParams{Bit}}
     \end{tadOperations}
-    \begin{tadSemantiques}{longueur}
-        \tadSemantique{Octet}{crée un Octet 0.}
-        \tadSemantique{changeibit}{change le ième bit.}
-        \tadSemantique{getibit}{renvoie le ième bit.}
+    \begin{tadSemantiques}{Byte}
+        \tadSemantique{Byte}{create a Byte 0.}
+        \tadSemantique{changeibit}{change the ith bit.}
+        \tadSemantique{getibit}{return the ith bit.}
     \end{tadSemantiques}
     \begin{tadAxiomes}
         \tadAxiome{getibit(a,i)=getibit(changeibit(changeibit(a,i),i),i)}
@@ -22,5 +22,3 @@
 		\tadPrecondition{getibit(a,i)}{1 $\leq$ i $\leq$ 8}
     \end{tadPreconditions}
 \end{tad}
-
-\end{document}
