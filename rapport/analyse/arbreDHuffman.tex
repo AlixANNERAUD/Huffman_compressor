@@ -4,21 +4,22 @@
 
 \begin{tad}
     \tadNom{\huffmanTree}
-    \tadParametres{\byte, \naturel, \typePointeur{\huffmanTree}}
+    \tadParametres{\byte, \naturel, \booleen, \typePointeur{\huffmanTree}}
     \tadDependances{\byte, \naturel, \huffmanTree}
-    \begin{tadOperations}{setRightLeaf}
-        \tadOperation{huffmanTree}{\tadParams{\byte, \naturel}}{\huffmanTree}
+    \begin{tadOperations}{setLeaf}
+        \tadOperation{huffmanTree}{\tadParams{\naturel}}{\huffmanTree}
         \tadOperation{delete}{\tadParams{\huffmanTree}}{\huffmanTree}
         
         \tadOperation{isValid}{\huffmanTree}{\booleen}
-        \tadOperation{getValue}{\huffmanTree}{\byte}
+        \tadOperation{hasValue}{\huffmanTree}{\booleen}
+        \tadOperationAvecPreconditions{getValue}{\huffmanTree}{\byte}
         \tadOperation{getWeight}{\huffmanTree}{\naturel}
         \tadOperation{getDepth}{\huffmanTree}{\naturel}
         \tadOperationAvecPreconditions{getRightLeaf}{\huffmanTree}{\huffmanTree}
         \tadOperationAvecPreconditions{getLeftLeaf}{\huffmanTree}{\huffmanTree}
     
-        \tadOperation{setRightLeaf}{\tadParams{\huffmanTree, \huffmanTree}}{\huffmanTree}
-        \tadOperation{setLeftLeaf}{\tadParams{\huffmanTree, \huffmanTree}}{\huffmanTree}
+        \tadOperation{setValue}{\huffmanTree}{\huffmanTree}
+        \tadOperation{setLeaf}{\tadParams{\huffmanTree, \huffmanTree, \huffmanTree}}{\huffmanTree}
     \end{tadOperations}
     \begin{tadSemantiques}{getDepth}
         \tadSemantique{huffmanTree}{Crée une arbre d'huffman.}
@@ -34,6 +35,7 @@
     \end{tadAxiomes}
     \begin{tadPreconditions}{getLeftLeaf(tree)}
         \tadPrecondition{isValid(tree)}{getDepth(tree) > 0}
+        \tadPrecondition{getValue(tree)}{hasValue(tree)}
         \tadPrecondition{getRightLeaf(tree)}{getDepth(tree) > 0}
         \tadPrecondition{getLeftLeaf(tree)}{getDepth(tree) > 0}
     \end{tadPreconditions}
