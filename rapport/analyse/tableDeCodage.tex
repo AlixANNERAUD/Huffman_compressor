@@ -6,32 +6,33 @@
   \tadNom{\codingTable}
   \tadDependances{\byte, \naturel, \binaryCode,\huffmanTree}
   \begin{tadOperations}{\codingTable}
-    \tadOperation{tableDeCodage}{}{\tadParams{\codingTable}}
-    \tadOperationAvecPreconditions{remplirTable}{\tadParams{\huffmanTree, \naturel, \codingTable}}{\tadParams{\codingTable}}
-    \tadOperationAvecPreconditions{ajouterTable}{\tadParams{\codingTable, \byte, CodeBinaire}}{\tadParams{\codingTable}}
-    \tadOperationAvecPreconditions{obtenirCodeTable}{\tadParams{\codingTable, \byte}}{\tadParams{CodeBinaire}}
-    \tadOperation{estPresent}{\tadParams{\codingTable, \byte}}{\tadParams{Booléen}}
+    \tadOperation{codingTable}{}{\tadParams{\codingTable}}
+    \tadOperationAvecPreconditions{fillTable}{\tadParams{\huffmanTree, \naturel, \codingTable}}{\tadParams{\codingTable}}
+    \tadOperationAvecPreconditions{addInTable}{\tadParams{\codingTable, \byte, CodeBinaire}}{\tadParams{\codingTable}}
+    \tadOperationAvecPreconditions{getCodeTable}{\tadParams{\codingTable, \byte}}{\tadParams{CodeBinaire}}
+    \tadOperation{isPresent}{\tadParams{\codingTable, \byte}}{\tadParams{Booléen}}
     \tadOperation{tableLength}{\tadParams{\codingTable}}{\tadParams{Naturel}}
   \end{tadOperations}
   \begin{tadSemantiques}{\codingTable}
-    \tadSemantique{tableDeCodage}{crée une Table de Codage Vide}
-    \tadSemantique{remplirTable}{rempli une table de codage à partir d'un Arbre de Huffman*}
-    \tadSemantique{ajouterTable}{ajoute un élément(clé octet + fréquence Code Binaire) à la table}
-    \tadSemantique{obtenirCodeTable}{retourne le Code Binaire associé à un octet donné dans la Table de Codage}
-    \tadSemantique{estPresent}{verifie la présence d'une entrée de la table}
+    \tadSemantique{codingTable}{crée une Table de Codage Vide}
+    \tadSemantique{fillTable}{rempli une table de codage à partir d'un Arbre de Huffman*}
+    \tadSemantique{addInTable}{ajoute un élément(clé octet + fréquence Code Binaire) à la table}
+    \tadSemantique{getCodeTable}{retourne le Code Binaire associé à un octet donné dans la Table de Codage}
+    \tadSemantique{isPresent}{verifie la présence d'une entrée de la table}
     \tadSemantique{tableLength}{calcul le nombre d'entrées dans la table}
   \end{tadSemantiques}
   \begin{tadAxiomes}
-    \tadAxiome{obtenirCodeTable(ajouterTable(Table,code,oct),oct)=code}
-    \tadAxiome{estPresent(ajouterTable(Table,code,oct),oct)}
-    \tadAxiome{non(estPresent(tableDeCodage(),oct))}
-    \tadAxiome{tableLength(tableDeCodage())=0}
-    \tadAxiome{tableLength(ajouterTable(tableDeCodage(),code,octet))=1}
+    \tadAxiome{getCodeTable(addInTable(Table,code,oct),oct)=code}
+    \tadAxiome{isPresent(addInTable(Table,code,oct),oct)}
+    \tadAxiome{not(isPresent(codingTable(),oct))}
+    \tadAxiome{tableLength(codingTable())=0}
+    \tadAxiome{tableLength(addInTable(codingTable(),code,octet))=1}
   \end{tadAxiomes}
   \begin{tadPreconditions}{\codingTable}
-    \tadPrecondition{ajouterTable(Table,code,oct)}{non(estPresent(Table,code))}
-    \tadPrecondition{obtenirCodeTable(Table,code)}{estPresent(Table,code)}
-    \tadPrecondition{remplirTable(Table,arbre)}{tableLength(Table) = 0}
+    \tadPrecondition{addInTable(Table,code,oct)}{not(isPresent(Table,code))}
+    \tadPrecondition{getCodeTable(Table,code)}{isPresent(Table,code)}
+    \tadPrecondition{fillTable(Table,arbre)}{tableLength(Table) = 0}
   \end{tadPreconditions}
 \end{tad}
 
+hhh
