@@ -1,11 +1,26 @@
-
-\section{Octet}
-
-\newcommand{\byte}{\textbf{Byte}}
+\subsection{Octet}
 
 \begin{tad}
-    \tadNom{\byte}
-    
-    
-
+    \tadNom{Octet}
+    \tadParametres{Bit}
+    \tadDependances{Bit, Natural}
+    \begin{tadOperations}{obtenirElement}
+        \tadOperation{octet}{}{\tadParams{Octet}}
+        \tadOperationAvecPreconditions{changeibit}{\tadParams{Octet,Natural}}{\tadParams{Octet}}
+        \tadOperationAvecPreconditions{getibit}{\tadParams{Octet, Natural}}{\tadParams{Bit}}
+    \end{tadOperations}
+    \begin{tadSemantiques}{longueur}
+        \tadSemantique{Octet}{crée un Octet 0.}
+        \tadSemantique{changeibit}{change le ième bit.}
+        \tadSemantique{getibit}{renvoie le ième bit.}
+    \end{tadSemantiques}
+    \begin{tadAxiomes}
+        \tadAxiome{getibit(a,i)=getibit(changeibit(changeibit(a,i),i),i)}
+    \end{tadAxiomes}
+    \begin{tadPreconditions}{TableDeCodage}
+		\tadPrecondition{changeibit(a,i)}{1 $\leq$ i $\leq$ 8}
+		\tadPrecondition{getibit(a,i)}{1 $\leq$ i $\leq$ 8}
+    \end{tadPreconditions}
 \end{tad}
+
+\end{document}
