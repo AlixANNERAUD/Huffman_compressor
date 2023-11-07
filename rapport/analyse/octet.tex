@@ -9,10 +9,10 @@
     \begin{tadOperations}{obtenirElement}
         \tadOperation{byte}{}{\tadParams{\byte}}
         \tadOperationAvecPreconditions{changeibit}{\tadParams{\byte,Natural}}{\tadParams{\byte}}
-        \tadOperationAvecPreconditions{getbit}{\tadParams{\byte, Natural}}{\tadParams{Bit}}
+        \tadOperationAvecPreconditions{getbit}{\tadParams{\byte, Natural}}{\tadParams{\bit}}
     \end{tadOperations}
     \begin{tadSemantiques}{\byte}
-        \tadSemantique{\byte}{crée le Byte 0.}
+        \tadSemantique{Byte}{crée le Byte 0.}
         \tadSemantique{changeibit}{change le ième bit.}
         \tadSemantique{getbit}{retourne le ième bit.}
     \end{tadSemantiques}
