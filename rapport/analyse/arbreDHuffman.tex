@@ -4,15 +4,15 @@
 
 \begin{tad}
     \tadNom{\huffmanTree}
-    \tadParametres{\byte, \naturel, \booleen, \typePointeur{\huffmanTree}}
-    \tadDependances{\byte, \naturel, \huffmanTree}
+    \tadParametres{Element}
+    \tadDependances{\naturel, \huffmanTree}
     \begin{tadOperations}{setLeaf}
         \tadOperation{huffmanTree}{\tadParams{\naturel}}{\huffmanTree}
         \tadOperation{delete}{\tadParams{\huffmanTree}}{\huffmanTree}
         
         \tadOperation{isValid}{\huffmanTree}{\booleen}
         \tadOperation{hasValue}{\huffmanTree}{\booleen}
-        \tadOperationAvecPreconditions{getValue}{\huffmanTree}{\byte}
+        \tadOperationAvecPreconditions{getValue}{\huffmanTree}{Element}
         \tadOperation{getWeight}{\huffmanTree}{\naturel}
         \tadOperation{getDepth}{\huffmanTree}{\naturel}
         \tadOperationAvecPreconditions{getRightLeaf}{\huffmanTree}{\huffmanTree}
