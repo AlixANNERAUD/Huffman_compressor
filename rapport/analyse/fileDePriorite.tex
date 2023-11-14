@@ -26,8 +26,8 @@ Cependant, l'ajout d'un élément se fait en fonction de son poids et de son ord
         \tadAxiome{getLength(insert(queue, tree)) = getLength(queue) + 1}
         \tadAxiome{pop(insert(queue, tree)) = tree}
     \end{tadAxiomes}
-    \begin{tadPreconditions}{insert}
-        \tadPrecondition{pop}{getLength(queue) > 0}
-        \tadPrecondition{insert}{getLength(queue) < MAXIMUM_LENGTH}
+    \begin{tadPreconditions}{insert(queue, element)}
+        \tadPrecondition{pop(queue)}{getLength(queue) > 0}
+        \tadPrecondition{insert(queue, element)}{getLength(queue) < 256}
     \end{tadPreconditions}
 \end{tad}
