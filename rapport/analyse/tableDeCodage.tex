@@ -1,18 +1,20 @@
 \section{Table De Codage}
 
+\newcommand{\codingTable}{\textbf{CodingTable}}
+
 \begin{tad}
-  \tadNom{CodingTable}
-  \tadDependances{Byte, Naturel, BinaryCode, HuffmanTree}
+  \tadNom{\codingTable}
+  \tadDependances{\byte, Naturel, \binaryCode, \huffmanTree}
   \begin{tadOperations}{tableLength}
-    \tadOperation{codingTable}{}{\tadParams{CodingTable}}
-    \tadOperationAvecPreconditions{fillTable}{\tadParams{ArbreDeHuffman, Naturel, CodingTable}}{\tadParams{CodingTable}}
-    \tadOperationAvecPreconditions{addTable}{\tadParams{CodingTable, Octet, CodeBinaire}}{\tadParams{CodingTable}}
-    \tadOperationAvecPreconditions{getTableCode}{\tadParams{CodingTable, Octet}}{\tadParams{CodeBinaire}}
-    \tadOperation{isPresent}{\tadParams{CodingTable, Octet}}{\tadParams{Booléen}}
-    \tadOperation{tableLength}{\tadParams{CodingTable}}{\tadParams{Naturel}}
+    \tadOperation{codingTable}{}{\tadParams{\codingTable}}
+    \tadOperationAvecPreconditions{fillTable}{\tadParams{\huffmanTree, Naturel, \codingTable}}{\tadParams{\codingTable}}
+    \tadOperationAvecPreconditions{addTable}{\tadParams{\codingTable, \byte, \binaryCode}}{\tadParams{\codingTable}}
+    \tadOperationAvecPreconditions{getTableCode}{\tadParams{\codingTable, \byte}}{\tadParams{\binaryCode}}
+    \tadOperation{isPresent}{\tadParams{\codingTable, \byte}}{\tadParams{Booléen}}
+    \tadOperation{tableLength}{\tadParams{\codingTable}}{\tadParams{Naturel}}
   \end{tadOperations}
   \begin{tadSemantiques}{tableLength}
-    \tadSemantique{CodingTable}{crée une Table de Codage Vide}
+    \tadSemantique{\codingTable}{crée une Table de Codage Vide}
     \tadSemantique{fillTable}{rempli une table de codage à partir d'un Arbre de Huffman}
     \tadSemantique{addTable}{ajoute un élément(clé Octet + fréquence Code Binaire) à la table}
     \tadSemantique{getTableCode}{retourne le Code Binaire associé à un Octet donné dans la Table de Codage}
@@ -22,9 +24,9 @@
   \begin{tadAxiomes}
     \tadAxiome{getTableCode(addTable(Table,code,oct),oct)=code}
     \tadAxiome{isPresent(addTable(Table,code,oct),oct)}
-    \tadAxiome{non(isPresent(CodingTable(),oct))}
-    \tadAxiome{tableLength(CodingTable())=0}
-    \tadAxiome{tableLength(addTable(CodingTable(),code,octet))=1}
+    \tadAxiome{non(isPresent(Table(),oct))}
+    \tadAxiome{tableLength(Table())=0}
+    \tadAxiome{tableLength(addTable(Table(),code,oct))=1}
   \end{tadAxiomes}
   \begin{tadPreconditions}{fillTable(Table,arbre)}
     \tadPrecondition{addTable(Table,code,oct)}{non(isPresent(Table,code))}
