@@ -14,13 +14,13 @@
 		\tadOperation{increaseCount}{\tadParams{\statistics, \element}}{\tadParams{\statistics}}
 	\end{tadOperations}
 	\begin{tadSemantiques}{}
-		\tadSemantique{statistics}{Crée un tableau de Statistics à 0 pour chaque byte.}
+		\tadSemantique{statistics}{Crée un tableau de Statistics à 0 pour chaque element.}
 		\tadSemantique{getCount}{Renvoi le nombre d'occurences d'un element.}
 		\tadSemantique{setCount}{Permet d'assigner un nombre d'occurences à un element.}
 		\tadSematique
 	\end{tadSemantiques}
 	\begin{tadAxiomes}
-		\tadAxiome{getCount(element, statistics()) = 0 \forall byte}
+		\tadAxiome{getCount(element, statistics()) = 0 \forall element}
 		\tadAxiome{getCount(element, setCount(byte, statistics(), x)) = x}
 	\end{tadAxiomes}
 	\begin{tadPreconditions}{}
