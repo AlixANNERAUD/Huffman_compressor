@@ -8,13 +8,13 @@ Cependant, l'ajout d'un élément se fait en fonction de son poids et de son ord
 
 \begin{tad}
     \tadNom{\priorityQueue}
-    \tadParametres{\huffmanTree}
-    \tadDependances{\huffmanTree, \naturel}
+    \tadParametres{Element}
+    \tadDependances{\naturel}
     \begin{tadOperations}{insert}
         \tadOperation{priorityQueue}{}{\tadParams{\priorityQueue}}
         \tadOperation{getLength}{\tadParams{\priorityQueue}}{\naturel}
-        \tadOperationAvecPreconditions{pop}{\tadParams{\priorityQueue}}{\tadParams{\huffmanTree, \priorityQueue}}
-        \tadOperationAvecPreconditions{insert}{\tadParams{\priorityQueue, \huffmanTree}}{\tadParams{\priorityQueue}}
+        \tadOperationAvecPreconditions{pop}{\tadParams{\priorityQueue}}{\tadParams{\priorityQueue, Element}}
+        \tadOperationAvecPreconditions{insert}{\tadParams{\priorityQueue, Element}}{\tadParams{\priorityQueue}}
     \end{tadOperations}
     \begin{tadSemantiques}{}
         \tadSemantique{priorityQueue}{Crée une file de priorité vide.}
@@ -28,6 +28,6 @@ Cependant, l'ajout d'un élément se fait en fonction de son poids et de son ord
     \end{tadAxiomes}
     \begin{tadPreconditions}{}
         \tadPrecondition{pop}{getLength(queue) > 0}
-        \tadPrecondition{insert}{getLength(queue) < maxLength}
+        \tadPrecondition{insert}{getLength(queue) < MAXIMUM_LENGTH}
     \end{tadPreconditions}
 \end{tad}
