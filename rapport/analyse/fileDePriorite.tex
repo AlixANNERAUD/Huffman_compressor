@@ -28,6 +28,6 @@ Cependant, l'ajout d'un élément se fait en fonction de son poids et de son ord
     \end{tadAxiomes}
     \begin{tadPreconditions}{insert(queue, element)}
         \tadPrecondition{pop(queue)}{getLength(queue) > 0}
-        \tadPrecondition{insert(queue, element)}{getLength(queue) < 256}
+        \tadPrecondition{insert(queue, element)}{getLength(queue) < MAXLENGTH}
     \end{tadPreconditions}
 \end{tad}
