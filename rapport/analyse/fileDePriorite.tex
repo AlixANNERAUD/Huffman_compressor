@@ -16,7 +16,7 @@ Cependant, l'ajout d'un élément se fait en fonction de son poids et de son ord
         \tadOperationAvecPreconditions{pop}{\tadParams{\priorityQueue}}{\tadParams{\priorityQueue, Element}}
         \tadOperationAvecPreconditions{insert}{\tadParams{\priorityQueue, Element}}{\tadParams{\priorityQueue}}
     \end{tadOperations}
-    \begin{tadSemantiques}{}
+    \begin{tadSemantiques}{insert}
         \tadSemantique{priorityQueue}{Crée une file de priorité vide.}
         \tadSemantique{getLength}{Renvoi la taille de la file de priorité.}
         \tadSemantique{pop}{Renvoi puis supprime l'élément situé en tête de file.}
@@ -26,7 +26,7 @@ Cependant, l'ajout d'un élément se fait en fonction de son poids et de son ord
         \tadAxiome{getLength(insert(queue, tree)) = getLength(queue) + 1}
         \tadAxiome{pop(insert(queue, tree)) = tree}
     \end{tadAxiomes}
-    \begin{tadPreconditions}{}
+    \begin{tadPreconditions}{insert}
         \tadPrecondition{pop}{getLength(queue) > 0}
         \tadPrecondition{insert}{getLength(queue) < MAXIMUM_LENGTH}
     \end{tadPreconditions}
