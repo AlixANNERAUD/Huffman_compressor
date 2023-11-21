@@ -5,19 +5,19 @@
 
 \begin{tad}
 	\tadNom{\statistics}
-	\tadParametres{\element}
+	\tadParametres{element}
 	\tadDependances{\naturel}
 	\begin{tadOperations}{insert}
 		\tadOperation{statistics}{}{\tadParams{\statistics}}
-		\tadOperation{getCount}{\tadParams{\statistics, \element}}{\naturel}
-		\tadOperation{setCount}{\tadParams{\statistics, \element, \naturel}}{\tadParams{\statistics}}
-		\tadOperation{increaseCount}{\tadParams{\statistics, \element}}{\tadParams{\statistics}}
+		\tadOperation{getCount}{\tadParams{\statistics, element}}{\naturel}
+		\tadOperation{setCount}{\tadParams{\statistics, element, \naturel}}{\tadParams{\statistics}}
+		\tadOperation{increaseCount}{\tadParams{\statistics, element}}{\tadParams{\statistics}}
 	\end{tadOperations}
 	\begin{tadSemantiques}{}
 		\tadSemantique{statistics}{Crée un tableau de Statistics à 0 pour chaque element.}
 		\tadSemantique{getCount}{Renvoi le nombre d'occurences d'un element.}
 		\tadSemantique{setCount}{Permet d'assigner un nombre d'occurences à un element.}
-		\tadSematique
+		\tadSematique{increaseCount}{Permet d'augmenter d'un l'occurence d'un élément.}
 	\end{tadSemantiques}
 	\begin{tadAxiomes}
 		\tadAxiome{getCount(element, statistics()) = 0 \forall element}
