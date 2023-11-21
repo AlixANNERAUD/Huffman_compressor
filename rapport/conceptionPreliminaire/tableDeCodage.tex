@@ -1,0 +1,10 @@
+\section{Table de codage}
+
+\begin{algorithme}
+    \signatureFonction{codingTable}{}{\codingTable}{}
+    \signatureProcedure{add}{\paramEntreeSortie{codingTable : \codingTable}, \paramEntree{byte : \byte}, \paramEntree{binaryCode : \binaryCode}}
+    {add(table, byte, binary\_code): non(isPresent(codingTable, byte))}
+    \signatureFonction{getCode}{codingTable : \codingTable, byte : \byte}{\binaryCode}
+    {getCode(table, byte): isPresent(table, byte)}
+    \signatureFonction{isPresent}{codingTable : \codingTable, byte : \byte}{\booleen}{}
+\end{algorithme}
