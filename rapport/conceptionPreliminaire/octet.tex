@@ -1,0 +1,18 @@
+\section{Octet}
+
+\subsection*{Structure de données}
+
+\begin{algorithme}
+    \begin{enregistrement}{\Octet}
+        \champEnregistrement{data}{\tableau{1..8}{of}{\Bit}}
+        \champEnregistrement{length}{\naturel}
+    \end{enregistrement}
+\end{algorithme}
+
+\subsection*{Signatures}
+
+\begin{algorithme}
+    \signatureFonction{byte}{}{\Byte}{}
+    \signatureProcedure{setbit}{\paramEntreeSortie{byte : \Byte}, \paramEntree{i : \naturel}}{1 $\leq$ i $\leq$ 8}
+    \signatureFonction{getbit}{byte : \Byte, i : \naturel}{\Bit}{1 $\leq$ i $\leq$ 8}
+\end{algorithme}
