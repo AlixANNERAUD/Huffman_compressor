@@ -3,8 +3,8 @@
 \subsection*{Signatures}
 
 \begin{algorithme}
-    \signatureFonction{statistiques}{}{\statistics}{}
-    \signatureFonction{getStatByte}{stat : \statistics, oct : \byte}{\naturel}{}
-    \signatureProcedure{setStatByte}{\paramEntreeSortie{arbre : \huffmanTree}, \paramEntree{fils : \typePointeur{\huffmanTree}}}{}
-    \signatureProcedure{setStatFile}{arbre : \huffmanTree}{\byte}{}
+    \signatureFonction{statistics}{}{\statistics}{}
+    \signatureFonction{getCount}{stat : \statistics, e : Element}{\naturel}{}
+    \signatureProcedure{setCount}{\paramEntreeSortie{stat : \statistics}, \paramEntree{e : Element, n : \naturel}, \paramEntreeSortie}{}
+    \signatureProcedure{increaseCount}{\paramEntreeSortie{stat : \statistics}, \paramEntree{e : Element}}{}
 \end{algorithme}
