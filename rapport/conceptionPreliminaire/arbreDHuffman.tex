@@ -1,18 +1,5 @@
 \section{Arbre de Huffman}
 
-\subsection*{Structure de données}
-
-\begin{algorithme}
-    \begin{enregistrement}{\huffmanTree}
-        \champEnregistrement{value}{\byte}
-        \champEnregistrement{weight}{\naturel}
-        \champEnregistrement{rightLeaf}{\typePointeur{\huffmanTree}}
-        \champEnregistrement{leftLeaf}{\typePointeur{\huffmanTree}}
-    \end{enregistrement}    
-\end{algorithme}
-
-\subsection*{Signatures}
-
 \begin{algorithme}
     \signatureFonction{huffmanTree}{value : \byte, weight : \naturel}{\huffmanTree}{}
     \signatureProcedure{delete}{\paramEntreeSortie{arbre : \huffmanTree}}{}

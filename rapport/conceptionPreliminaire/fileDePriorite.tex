@@ -1,16 +1,5 @@
 \section{File de priorité}
 
-\subsection*{Structure de données}
-
-\begin{algorithme}
-    \begin{enregistrement}{\priorityQueue}
-        \champEnregistrement{data}{\tableau{1..256}{of}{\typePointeur{\huffmanTree}}}
-        \champEnregistrement{length}{\naturel}
-    \end{enregistrement}
-\end{algorithme}
-
-\subsection*{Signatures}
-
 \begin{algorithme}
     \signatureFonction{priorityQueue}{}{\priorityQueue}{}
     \signatureFonction{getLength}{queue : \priorityQueue}{\naturel}{}
