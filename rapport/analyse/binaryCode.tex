@@ -6,33 +6,31 @@
     \tadNom{\binaryCode}
     \tadParametres{}
     \tadDependances{\bit, \naturel}
-    \begin{tadOperations}{getBit}
-        \tadOperation{binaryCode}{\tadParams{\bit}}{\tadParams{\binaryCode}}
-        \tadOperation{length}{\tadParams{\binaryCode}}{\tadParams{\naturel}}
-        \tadOperationAvecPreconditions{setBit}{\tadParams{\binaryCode, \naturel, \bit}}{\tadParams{\binaryCode}}
-        \tadOperationAvecPreconditions{getBit}{\tadParams{\binaryCode, \naturel}}{\tadParams{\bit}}
-        \tadOperationAvecPreconditions{deleteLastBit}{\tadParams{\binaryCode}}{\tadParams{\binaryCode}}
-        \tadOperationAvecPreconditions{deleteBit}{\tadParams{\binaryCode}}{\tadParams{\binaryCode}}
-        \tadOperation{duplicate}{}{}
-        \tadOperation{destroy}{}{}        
+    \begin{tadOperations}{clone}
+        \tadOperation{binaryCode}{}{\binaryCode}
+        \tadOperation{getLength}{\tadParams{\binaryCode}}{\naturel}
+        \tadOperationAvecPreconditions{getBit}{\tadParams{\binaryCode, \naturel}}{\bit}
+        \tadOperationAvecPreconditions{addBit}{\tadParams{\binaryCode, \bit}}{\binaryCode}
+        \tadOperationAvecPreconditions{deleteBit}{\tadParams{\binaryCode, \naturel}}{\binaryCode}
+        \tadOperationAvecPreconditions{deleteLastBit}{\binaryCode}{\binaryCode}
+        \tadOperation{clone}{\binaryCode}{\binaryCode}
     \end{tadOperations}
-    \begin{tadSemantiques}{getBit}
-        \tadSemantique{binaryCode}{Créer un code binaire à partir d'un bit.}
-        \tadSemantique{length}{Renvoi la longueur d'un code binaire.}
-        \tadSemantique{setBit}{Défini le ième bit d'un code binaire.}
+    \begin{tadSemantiques}{clone}
+        \tadSemantique{binaryCode}{Créer un code binaire vide.}
+        \tadSemantique{getLength}{Renvoi la longueur d'un code binaire (le nombre de bits).}
         \tadSemantique{getBit}{Renvoi le ième bit d'un code binaire.}
+        \tadSemantique{addBit}{Ajoute un bit à la fin d'un code binaire.}
+        \tadSemantique{deleteBit}{Supprimer le bit à  les bits d'un code binaire.}
         \tadSemantique{deleteLastBit}{Supprimer le dernier bit d'un code binaire.}
-        \tadSemantique{deleteBit}{Supprimer tous les bits d'un code binaire.}
-        \tadSemantique{duplicate}{}
-        \tadSemantique{destroy}{}
+        \tadSemantique{clone}{Créer une copie d'un code binaire.}
     \end{tadSemantiques}
     \begin{tadAxiomes}
         \tadAxiome{getBit(code,i)=getBit(setBit(setBit(code,i),i),i)}     
     \end{tadAxiomes}
-    \begin{tadPreconditions}{getBit(code, index)}
-		\tadPrecondition{setBit(code, i, bit)}{0 $\leqslant$ i $\leqslant$ length(code)}
-        \tadPrecondition{getBit(code, i)}{0 $\leqslant$ i $\leqslant$ length(code)}
-        \tadPrecondition{deleteLastBit(code)}{length(code) $\ne$ 0}
+    \begin{tadPreconditions}{deleteLastBit(code)}
+		\tadPrecondition{getBit(code, i, bit)}{0 $\leqslant$ i $\leqslant$ getLength(code)}
+        \tadPrecondition{addBit(code, bit)}{getLength(code) < MAXIMUM\_LENGTH}
         \tadPrecondition{deleteBit(code)}{length(code) $\ne$ 0}
+        \tadPrecondition{deleteLastBit(code)}{length(code) $\ne$ 0}
     \end{tadPreconditions}
 \end{tad}
