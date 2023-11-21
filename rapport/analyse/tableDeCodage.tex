@@ -4,14 +4,14 @@
 
 \begin{tad}
   \tadNom{\codingTable}
-  \tadDependances{\byte, Naturel, \binaryCode, \huffmanTree}
+  \tadDependances{\byte, \naturel, \binaryCode, \huffmanTree}
   \begin{tadOperations}{tableLength}
     \tadOperation{codingTable}{}{\tadParams{\codingTable}}
-    \tadOperationAvecPreconditions{fillTable}{\tadParams{\huffmanTree, Naturel, \codingTable}}{\tadParams{\codingTable}}
+    \tadOperationAvecPreconditions{fillTable}{\tadParams{\huffmanTree, \naturel, \codingTable}}{\tadParams{\codingTable}}
     \tadOperationAvecPreconditions{addTable}{\tadParams{\codingTable, \byte, \binaryCode}}{\tadParams{\codingTable}}
     \tadOperationAvecPreconditions{getTableCode}{\tadParams{\codingTable, \byte}}{\tadParams{\binaryCode}}
     \tadOperation{isPresent}{\tadParams{\codingTable, \byte}}{\tadParams{Booléen}}
-    \tadOperation{tableLength}{\tadParams{\codingTable}}{\tadParams{Naturel}}
+    \tadOperation{tableLength}{\tadParams{\codingTable}}{\tadParams{\naturel}}
   \end{tadOperations}
   \begin{tadSemantiques}{tableLength}
     \tadSemantique{codingTable}{crée une Table de Codage Vide}
