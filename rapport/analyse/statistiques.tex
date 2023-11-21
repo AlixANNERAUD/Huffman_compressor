@@ -1,17 +1,16 @@
 \section{Statistics}
 
-
 \newcommand{\statistics}{\textbf{Statistics}}
 
 \begin{tad}
 	\tadNom{\statistics}
-	\tadParametres{element}
+	\tadParametres{Element}
 	\tadDependances{\naturel}
 	\begin{tadOperations}{insert}
 		\tadOperation{statistics}{}{\tadParams{\statistics}}
-		\tadOperation{getCount}{\tadParams{\statistics, element}}{\naturel}
-		\tadOperation{setCount}{\tadParams{\statistics, element, \naturel}}{\tadParams{\statistics}}
-		\tadOperation{increaseCount}{\tadParams{\statistics, element}}{\tadParams{\statistics}}
+		\tadOperation{getCount}{\tadParams{\statistics, Element}}{\naturel}
+		\tadOperation{setCount}{\tadParams{\statistics, Element, \naturel}}{\tadParams{\statistics}}
+		\tadOperation{increaseCount}{\tadParams{\statistics, Element}}{\tadParams{\statistics}}
 	\end{tadOperations}
 	\begin{tadSemantiques}{increaseCount}
 		\tadSemantique{statistics}{Crée un tableau de Statistics à 0 pour chaque element.}
@@ -23,6 +22,4 @@
 		\tadAxiome{getCount(element, statistics()) = 0 \forall element}
 		\tadAxiome{getCount(element, setCount(byte, statistics(), x)) = x}
 	\end{tadAxiomes}
-	\begin{tadPreconditions}{}
-	\end{tadPreconditions}
 \end{tad}
