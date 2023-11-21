@@ -9,7 +9,6 @@
     \begin{tadOperations}{getLeftLeaf}
         \tadOperation{newLeaf}{\tadParams{\byte,\naturel}}{\huffmanTree}
         \tadOperation{newTree}{\tadParams{\huffmanTree, \huffmanTree}}{\huffmanTree}
-        \tadOperation{delete}{\tadParams{\huffmanTree}}{\huffmanTree}
         \tadOperation{isLeaf}{\huffmanTree}{\booleen}
         \tadOperationAvecPreconditions{getValue}{\huffmanTree}{Element}
         \tadOperation{getWeight}{\huffmanTree}{\naturel}
@@ -19,7 +18,6 @@
     \begin{tadSemantiques}{getLeftLeaf}
         \tadSemantique{newLeaf}{Créer un nœud d'Huffman de type feuille (avec un poids et une valeur, mais sans fils).}
         \tadSemantique{newTree}{Créer un nœud d'Huffman de type arbre (avec un poids et deux fils, mais sans valeur).}
-        \tadSemantique{delete}{Détruit le nœud ainsi que tout ses fils dans le cas d'un arbre.}
         \tadSemantique{isLeaf}{Renvoi si le noeud est une feuille.}
         \tadSemantique{getValue}{Renvoi la valeur du noeud.}
         \tadSemantique{getRightLeaf}{Renvoi le fils droit du noeud.}
