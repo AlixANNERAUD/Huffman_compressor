@@ -4,23 +4,22 @@
 
 \begin{tad}
     \tadNom{\byte}
-    \tadParametres{Bit}
-    \tadDependances{Bit, Natural}
-    \begin{tadOperations}{obtenirElement}
-        \tadOperation{byte}{}{\tadParams{\byte}}
-        \tadOperationAvecPreconditions{setbit}{\tadParams{\byte,Natural}}{\tadParams{\byte}}
-        \tadOperationAvecPreconditions{getbit}{\tadParams{\byte, Natural}}{\tadParams{\bit}}
+    \tadDependances{\bit, \naturel}
+    \begin{tadOperations}{getBit}
+        \tadOperation{byte}{\naturel}{\byte}
+        \tadOperationAvecPreconditions{setBit}{\tadParams{\byte,\naturel,\bit}}{\byte}
+        \tadOperationAvecPreconditions{getBit}{\tadParams{\byte, \naturel}}{\bit}
     \end{tadOperations}
-    \begin{tadSemantiques}{\byte}
-        \tadSemantique{Byte}{crée le Byte 0.}
-        \tadSemantique{setbit}{change le ième bit.}
-        \tadSemantique{getbit}{retourne le ième bit.}
+    \begin{tadSemantiques}{getBit}
+        \tadSemantique{byte}{Crée un octet a partir d'un naturel.}
+        \tadSemantique{setBit}{Défini le i-ème bit.}
+        \tadSemantique{getBit}{Obtient le i-ème bit.}
     \end{tadSemantiques}
     \begin{tadAxiomes}
-        \tadAxiome{getbit(a,i)=getbit(setbit(setbit(a,i),i),i)}
+        \tadAxiome{getBit(setBit(octet, i, bit), i) = bit}
     \end{tadAxiomes}
-    \begin{tadPreconditions}{TableDeCodage}
-		\tadPrecondition{setbit(a,i)}{1 $\leq$ i $\leq$ 8}
-		\tadPrecondition{getbit(a,i)}{1 $\leq$ i $\leq$ 8}
+    \begin{tadPreconditions}{getBit(octet, i)}
+		\tadPrecondition{setBit(octet, i)}{1 $\leq$ i $\leq$ 8}
+		\tadPrecondition{getBit(octet, i)}{1 $\leq$ i $\leq$ 8}
     \end{tadPreconditions}
 \end{tad}
