@@ -19,8 +19,8 @@
   \end{tadSemantiques}
   \begin{tadAxiomes}
     \tadAxiome{getCode(add(Table,oct,code),oct)=code}
-    \tadAxiome{isPresent(add(Table,oct,code),oct)=True}
-    \tadAxiome{isPresent(codingTable(),oct)=False}
+    \tadAxiome{isPresent(add(Table,oct,code),oct)}
+    \tadAxiome{non(isPresent(codingTable(),oct))}
   \end{tadAxiomes}
   \begin{tadPreconditions}{getCode(table, byte)}
     \tadPrecondition{add(table, byte, binary\_code)}{non(isPresent(table, byte))}
