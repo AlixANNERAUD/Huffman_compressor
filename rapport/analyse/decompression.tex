@@ -3,17 +3,15 @@
 
 \begin{itemize}
     \item decompress(\binaryFile) : \binaryFile
-    %\item getStatistics(\binaryFile, \statistics, \naturel)
     \begin{itemize}
-        \item computeStatistics(\binaryFile) : \statistics
-        \item buildHuffmanTree(\statistics) : \huffmanTree
+        \item getStatistics(\binaryFile) : \statistics
         \begin{itemize}
-            \item initPriorityQueue(\statistics) : \priorityQueue<\huffmanTree>
-            \item updatePriorityQueue(\priorityQueue<\huffmanTree>) : \priorityQueue<\huffmanTree>
+            \item verification(\binaryFile) : \booleen
         \end{itemize}
-        \item buildCodingTable(\huffmanTree) : \codingTable
-        \item compressFile(\binaryFile, \codingTable) : \binaryFile
+        \item buildHuffmanTree(\statistics) : \huffmanTree
+        \item reconstructFile(\binaryFile, \huffmanTree) : \binaryFile
         \begin{itemize}
+            \item isLeaf(\huffmanTree) : \booleen
             \item writeBinaryCodeToFile(\binaryFile, \binaryCode) : \binaryFile
         \end{itemize}
     \end{itemize}
