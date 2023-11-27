@@ -4,9 +4,9 @@
 \begin{itemize}
     \item decompress(\binaryFile) : \binaryFile
     \begin{itemize}
-        \item getStatistics(\binaryFile) : \statistics
+        \item readHeader(\binaryFile) : \statistics, \booleen
         \begin{itemize}
-            \item verification(\binaryFile) : \booleen
+            \item checkFileType(\binaryFile) : \booleen
         \end{itemize}
         \item buildHuffmanTree(\statistics) : \huffmanTree
         \begin{itemize}
@@ -15,7 +15,6 @@
         \end{itemize}
         \item reconstructFile(\binaryFile, \huffmanTree) : \binaryFile
         \begin{itemize}
-            \item isLeaf(\huffmanTree) : \booleen
             \item writeBinaryCodeToFile(\binaryFile, \byte) : \binaryFile
         \end{itemize}
     \end{itemize}
