@@ -1,0 +1,13 @@
+\section{Décompression}
+
+\begin{algorithme}
+    \signatureFonction {decompress}{compressFile : \binaryFile}{\binaryFile}{}
+    \signatureFonction {getStatistics}{compressFile : \binaryFile}{\statistics}{}
+    \signatureFonction {verification}{compressFile : \binaryFile}{\booleen}{}
+    \signatureFonction {buildHuffmanTree}{stat : \statistics}{\huffmanTree}{}
+    \signatureFonction {initPriorityQueue}{stat : \statistics}{\priorityQueue<\huffmanTree>}{}
+    \signatureProcedure {updatePriorityQueue}{\paramEntreeSortie {pq : \priorityQueue<\huffmanTree>}}{}
+    \signatureFonction {reconstructFile}{compressFile : \binaryFile, ht : \huffmanTree}{\binaryFile}{}
+    \signatureFonction {isLeaf}{ht : \huffmanTree}{\booleen}{}
+    \signatureProcedure {writeBinaryCodeToFile}{\paramEntreeSortie {decompressFile : \binaryFile}, \paramEntree {leaf : \huffmanTree}}{isLeaf(leaf)}
+\end{algorithme}
