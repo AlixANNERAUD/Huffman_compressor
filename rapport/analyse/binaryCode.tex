@@ -18,9 +18,9 @@
     \begin{tadSemantiques}{clone}
         \tadSemantique{binaryCode}{Crée un code binaire vide.}
         \tadSemantique{getLength}{Renvoie la longueur d'un code binaire (le nombre de bits).}
-        \tadSemantique{getBit}{Renvoie le ième bit d'un code binaire.}
+        \tadSemantique{getBit}{Renvoie un bit d'une position donnée d'un code binaire.}
         \tadSemantique{addBit}{Ajoute un bit à la fin d'un code binaire.}
-        \tadSemantique{deleteBit}{Supprime le bit à  les bits d'un code binaire.}
+        \tadSemantique{deleteBit}{Supprime un bit d'une position donnée d'un code binaire.}
         \tadSemantique{deleteLastBit}{Supprime le dernier bit d'un code binaire.}
         \tadSemantique{clone}{Crée une copie d'un code binaire.}
     \end{tadSemantiques}
@@ -34,7 +34,7 @@
     \begin{tadPreconditions}{deleteLastBit(code)}
 		\tadPrecondition{getBit(code, i)}{0 $\leqslant$ i $\leqslant$ getLength(code)}
         \tadPrecondition{addBit(code, bit)}{getLength(code) < MAXIMUM\_LENGTH}
-        \tadPrecondition{deleteBit(code)}{length(code) $\ne$ 0}
-        \tadPrecondition{deleteLastBit(code)}{length(code) $\ne$ 0}
+        \tadPrecondition{deleteBit(code)}{getLength(code) $\ne$ 0}
+        \tadPrecondition{deleteLastBit(code)}{getLength(code) $\ne$ 0}
     \end{tadPreconditions}
 \end{tad}
