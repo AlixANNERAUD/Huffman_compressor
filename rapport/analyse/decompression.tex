@@ -20,15 +20,3 @@
         \end{itemize}
     \end{itemize}
 \end{itemize}
-
-\subsubsection{Signatures}
-
-\function decompress(compressFile : \binaryFile) : \binaryFile
-\function getStatistics(compressFile : \binaryFile) : \statistics
-\function verification(compressFile : \binaryFile) : \booleen
-\function buildHuffmanTree(stats : \statistics) : \huffmanTree
-\function initPriorityQueue(stats : \statistics) : \priorityQueue<\huffmanTree>
-\procedure updatePriorityQueue(E/S pq : \priorityQueue<\huffmanTree>)
-\function reconstructFile(compressFile : \binaryFile, ht : \huffmanTree) : \binaryFile
-\function isLeaf(ht : \huffmanTree) : \booleen
-\procedure writeBinaryCodeToFile(E/S decompressFile : \binaryFile, E byte : \byte) 
