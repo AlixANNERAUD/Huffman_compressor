@@ -12,6 +12,7 @@
         \tadOperation{isOpen}{\binaryFile}{\booleen}
         \tadOperationAvecPreconditions{getMode}{\binaryFile}{\mode}
         \tadOperationAvecPreconditions{isEnd}{\binaryFile}{\booleen}
+        \tadOperationAvecPreconditions{seek}{\tadParams{\binaryFile, \naturel}}{\binaryFile}
         \tadOperationAvecPreconditions{writeByte}{\tadParams{\binaryFile, \byte}}{\binaryFile}
         \tadOperationAvecPreconditions{readByte}{\binaryFile}{\byte}
         \tadOperationAvecPreconditions{writeNatural}{\tadParams{\binaryFile, \naturel}}{\binaryFile}
@@ -26,6 +27,7 @@
         \tadSemantique{isOpen}{Renvoie vrai si le fichier est ouvert, faux sinon.}
         \tadSemantique{getMode}{Renvoie le mode d'ouverture du fichier.}
         \tadSemantique{isEnd}{Renvoie si le curseur se trouve à la fin du fichier.}
+        \tadSemantique{seek}{Déplace le curseur à la position donnée.}
         \tadSemantique{write<Type>}{Écrit un octet, entier naturel ou caractère dans le fichier.}
         \tadSemantique{read<Type>}{Lit un octet, entier naturel ou caractère dans le fichier.}
     \end{tadSemantiques}
@@ -34,12 +36,12 @@
         \tadPrecondition{close(file)}{isOpen(file)}
         \tadPrecondition{getMode(file)}{isOpen(file)}
         \tadPrecondition{isEnd(file)}{isOpen(file)}
+        \tadPrecondition{seek(file, position)}{isOpen(file)}
         \tadPrecondition{writeByte(file, byte)}{isOpen(file) et getMode(file) = write}
         \tadPrecondition{readByte(file)}{isOpen(file) et getMode(file) = read}
         \tadPrecondition{writeNatural(file, natural)}{isOpen(file) et getMode(file) = write}
         \tadPrecondition{readNatural(file)}{isOpen(file) et getMode(file) = read}
         \tadPrecondition{writeCharacter(file, character)}{isOpen(file) et getMode(file) = write}
         \tadPrecondition{readCharacter(file)}{isOpen(file) et getMode(file) = read}
-
     \end{tadPreconditions}
 \end{tad}
