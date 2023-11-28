@@ -1,0 +1,14 @@
+\section{Compression}
+
+\begin{algorithme}
+    \signatureProcedure {compress}{\paramEntree {file : \binaryFile}, \paramEntreeSortie{compressFile : \binaryFile, \paramSortie{error : \booleen}}}{}
+    \signatureFonction {computeStatistics}{file : \binaryFile}{\statistics}{}
+    \signatureFonction {buildHuffmanTree}{stat : \statistics}{\huffmanTree}{}
+    \signatureFonction {initPriorityQueue}{stat : \statistics}{\priorityQueue<\huffmanTree>}{}
+    \signatureProcedure {updatePriorityQueue}{\paramEntreeSortie {pq : \priorityQueue<\huffmanTree>}}{}
+    \signatureFonction {buildCodingTable}{tree : \huffmanTree}{\codingTable}{}
+    \signatureProcedure {writeHeader}{\paramEntreeSortie {decompressFile : \binaryFile}, \paramEntree {leaf : \huffmanTree}}{isLeaf(leaf)}
+    \signatureProcedure {compressSourceBytes}{\paramEntreeSortie {decompressFile : \binaryFile}, \paramEntree {leaf : \huffmanTree}}{isLeaf(leaf)}
+\end{algorithme}
+
+NB : buildHuffmanTree, initPriorityQueue et updatePriorityQueue sont les mêmes fonctions dans compresser et décompresser. 

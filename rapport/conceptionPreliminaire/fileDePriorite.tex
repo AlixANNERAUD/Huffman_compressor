@@ -3,6 +3,6 @@
 \begin{algorithme}
     \signatureFonction{priorityQueue}{}{\priorityQueue}{}
     \signatureFonction{getLength}{queue : \priorityQueue}{\naturel}{}
-    \signatureFonction{pop}{\paramEntreeSortie{queue : \priorityQueue}}{\huffmanTree}{getLength(queue) > 0}
-    \signatureProcedure{insert}{\paramEntreeSortie{queue : \priorityQueue}, \paramEntree{tree : \huffmanTree}}{getLength(queue) < MAXLENGTH}
+    \signatureProcedure{pop}{\paramEntreeSortie{queue : \priorityQueue}, \paramSortie{e : Element}}{getLength(queue) > 0}
+    \signatureProcedure{insert}{\paramEntreeSortie{queue : \priorityQueue}, \paramEntree{ e : Element}}{getLength(queue) < MAXLENGTH}
 \end{algorithme}
