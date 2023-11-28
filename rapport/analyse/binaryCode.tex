@@ -34,7 +34,7 @@
     \begin{tadPreconditions}{deleteLastBit(code)}
 		\tadPrecondition{getBit(code, i)}{0 $\leqslant$ i $\leqslant$ getLength(code)}
         \tadPrecondition{addBit(code, bit)}{getLength(code) < MAXIMUM\_LENGTH}
-        \tadPrecondition{deleteBit(code)}{getLength(code) $\ne$ 0}
+        \tadPrecondition{deleteBit(code, i)}{0 $\leqslant$ i $\leqslant$ getLength(code)}
         \tadPrecondition{deleteLastBit(code)}{getLength(code) $\ne$ 0}
     \end{tadPreconditions}
 \end{tad}
