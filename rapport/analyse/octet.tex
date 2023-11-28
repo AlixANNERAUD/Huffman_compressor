@@ -6,7 +6,7 @@
     \tadNom{\byte}
     \tadDependances{\bit, \naturel}
     \begin{tadOperations}{getBit}
-        \tadOperation{byte}{\naturel}{\byte}
+        \tadOperationAvecPreconditions{byte}{\naturel}{\byte}
         \tadOperationAvecPreconditions{setBit}{\tadParams{\byte,\naturel,\bit}}{\byte}
         \tadOperationAvecPreconditions{getBit}{\tadParams{\byte, \naturel}}{\bit}
     \end{tadOperations}
@@ -16,10 +16,11 @@
         \tadSemantique{getBit}{Obtient le i-ème bit.}
     \end{tadSemantiques}
     \begin{tadAxiomes}
-        \tadAxiome{getBit(setBit(octet, i, bit), i) = bit}
+        \tadAxiome{getBit(setBit(byte, i, bit), i) = bit}
     \end{tadAxiomes}
-    \begin{tadPreconditions}{getBit(octet, i)}
-		\tadPrecondition{setBit(octet, i)}{1 $\leq$ i $\leq$ 8}
-		\tadPrecondition{getBit(octet, i)}{1 $\leq$ i $\leq$ 8}
+    \begin{tadPreconditions}{getBit(byte, i)}
+        \tadPrecondition{byte(natural)}{natural < 256}
+		\tadPrecondition{setBit(byte, i)}{1 $\leq$ i $\leq$ 8}
+		\tadPrecondition{getBit(byte, i)}{1 $\leq$ i $\leq$ 8}
     \end{tadPreconditions}
 \end{tad}
