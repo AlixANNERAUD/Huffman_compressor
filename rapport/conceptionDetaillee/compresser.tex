@@ -52,5 +52,13 @@
                 \instruction{push(queue, leaf)}
             }
         }
+
+        \tantque{non(isEmpty(queue))}
+        {
+            \affecter{leftLeaf}{pop(queue)}
+            \affecter{rightLeaf}{pop(queue)}
+            \affecter{tree}{newNode(leftLeaf, rightLeaf)}
+            \instruction{push(queue, tree)}
+        }
     }
 \end{algorithme}
