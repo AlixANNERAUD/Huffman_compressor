@@ -5,8 +5,12 @@
     \type {byte} {\tableau{1..8}{de}{\bit}}
 
         \fonction{byte}{natural : \naturel}{\byte}{natural < 256}
-        {b : \byte}
+        {b : \byte, i : \naturel}
         {
+            \pour{i}{1}{8}{}{
+                \affecter{b[i]}{natural mod 2**i}
+                \affecter{natural}{natural div 2**i}
+            } 
             \retourner {b}
         }
         \\
