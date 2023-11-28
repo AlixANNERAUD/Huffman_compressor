@@ -24,7 +24,7 @@
     \instruction{compressSourceBytes(source, destination, table)}
     \retourner{Vrai}
     }
-
+    \\
     \fonction{computeStatistics}{source : \binaryFile}{\statistics}{}
     {byte : \byte}
     {
@@ -34,7 +34,7 @@
         \affecter{byte}{readByte(source)}
         \instruction{increaseCount(stat, byte)}
     }}
-
+    \\
     \fonction{buildHuffmanTree}{stat : \statistics}{\huffmanTree}{}
     {queue : \priorityQueue,
      tree, leaf, rightLeaf, leftLeaf : \huffmanTree,
@@ -45,6 +45,7 @@
         \pour{i}{0}{255}{}
         {
             \affecter{byte}{i}
+            \commentaire{On crée une feuille d'arbre d'Huffman pour chaque octet disctinct présent dans le fichier}
             \affecter{count}{getCount(stat, byte)}
             \sialors{count > 0}
             {
@@ -56,9 +57,20 @@
         \tantque{non(isEmpty(queue))}
         {
             \affecter{leftLeaf}{pop(queue)}
-            \affecter{rightLeaf}{pop(queue)}
-            \affecter{tree}{newNode(leftLeaf, rightLeaf)}
-            \instruction{push(queue, tree)}
+            \sialorssinon{non(isEmpty(queue))}
+            {
+                \affecter{rightLeaf}{pop(queue)}
+                \commentaire{Si la file contient au moins deux éléments, on les fusionne pour créer un nouvel arbre}
+                \affecter{tree}{newNode(leftLeaf, rightLeaf)}
+                \instruction{push(queue, tree)}
+            }
+            {
+                \affecter{tree}{leftLeaf}
+                \commentaire{S'il ne reste qu'un seul élément dans la file, c'est l'arbre de Huffman}
+            }
         }
+
+        \retourner{tree}
     }
+    
 \end{algorithme}
