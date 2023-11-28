@@ -7,8 +7,8 @@
     \signatureFonction {initPriorityQueue}{stat : \statistics}{\priorityQueue<\huffmanTree>}{}
     \signatureProcedure {updatePriorityQueue}{\paramEntreeSortie {pq : \priorityQueue<\huffmanTree>}}{}
     \signatureFonction {buildCodingTable}{tree : \huffmanTree}{\codingTable}{}
-    \signatureProcedure {writeHeader}{\paramEntree {file : \binaryFile}, \paramEntree {table : \codingTable}, \paramEntreeSortie {compressFile :\binaryFile}}{}
-    \signatureProcedure {compressSourceBytes}{\paramEntree {file : \binaryFile}, \paramEntree {table : \codingTable}, \paramEntreeSortie {compressFile :\binaryFile}}{}
+    \signatureProcedure {writeHeader}{\paramEntree {file : \binaryFile}, \paramEntree {table : \codingTable}, \paramEntreeSortie {compressFile : \binaryFile}}{}
+    \signatureProcedure {compressSourceBytes}{\paramEntree {file : \binaryFile}, \paramEntree {table : \codingTable}, \paramEntreeSortie {compressFile : \binaryFile}}{}
 \end{algorithme}
 
 NB : buildHuffmanTree, initPriorityQueue et updatePriorityQueue sont les mêmes fonctions dans compresser et décompresser. 
