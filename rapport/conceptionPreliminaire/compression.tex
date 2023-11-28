@@ -1,12 +1,12 @@
 \section{Compression}
 
 \begin{algorithme}
-    \signatureProcedure {compress}{\paramEntree {compressFile : \binaryFile}, \paramEntreeSortie{outputFile : \binaryFile, \paramSortie{error : \booleen}}}{}
-    \signatureFonction {computeStatistics}{compressFile : \binaryFile, size : \naturel}{\statistics}{}
+    \signatureProcedure {compress}{\paramEntree {file : \binaryFile}, \paramEntreeSortie{compressFile : \binaryFile, \paramSortie{error : \booleen}}}{}
+    \signatureFonction {computeStatistics}{file : \binaryFile}{\statistics}{}
     \signatureFonction {buildHuffmanTree}{stat : \statistics}{\huffmanTree}{}
     \signatureFonction {initPriorityQueue}{stat : \statistics}{\priorityQueue<\huffmanTree>}{}
     \signatureProcedure {updatePriorityQueue}{\paramEntreeSortie {pq : \priorityQueue<\huffmanTree>}}{}
-    \signatureFonction {buildCodingTable}{compressFile : \binaryFile, ht : \huffmanTree}{\binaryFile}{}
+    \signatureFonction {buildCodingTable}{tree : \huffmanTree}{\codingTable}{}
     \signatureProcedure {writeHeader}{\paramEntreeSortie {decompressFile : \binaryFile}, \paramEntree {leaf : \huffmanTree}}{isLeaf(leaf)}
     \signatureProcedure {compressSourceBytes}{\paramEntreeSortie {decompressFile : \binaryFile}, \paramEntree {leaf : \huffmanTree}}{isLeaf(leaf)}
 \end{algorithme}
