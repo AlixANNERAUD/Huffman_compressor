@@ -7,7 +7,7 @@
     \tadParametres{Element}
     \tadDependances{\naturel, \huffmanTree}
     \begin{tadOperations}{getLeftLeaf}
-        \tadOperation{newLeaf}{\tadParams{\byte,\naturel}}{\huffmanTree}
+        \tadOperation{newLeaf}{\tadParams{Element,\naturel}}{\huffmanTree}
         \tadOperation{newTree}{\tadParams{\huffmanTree, \huffmanTree}}{\huffmanTree}
         \tadOperation{isLeaf}{\huffmanTree}{\booleen}
         \tadOperationAvecPreconditions{getValue}{\huffmanTree}{Element}
