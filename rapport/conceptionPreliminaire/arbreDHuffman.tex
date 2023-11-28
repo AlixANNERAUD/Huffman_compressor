@@ -4,8 +4,8 @@
     \signatureFonction{newLeaf}{value : \byte, weight : \naturel}{\huffmanTree}{}
     \signatureFonction{newTree}{tree1 : \huffmanTree,tree2 : \huffmanTree}{\huffmanTree}{}
     \signatureFonction{isLeaf}{tree : \huffmanTree}{\booleen}{}
-    \signatureFonction{getValue}{tree : \huffmanTree}{\byte}{}
+    \signatureFonction{getValue}{tree : \huffmanTree}{\byte}{isLeaf(tree)}
     \signatureFonction{getWeight}{tree : \huffmanTree}{\naturel}{}
-    \signatureFonction{getLeftLeaf}{tree : \huffmanTree}{\typePointeur{\huffmanTree}}{}
-    \signatureFonction{getRightLeaf}{tree : \huffmanTree}{\typePointeur{\huffmanTree}}{}
+    \signatureFonction{getLeftLeaf}{tree : \huffmanTree}{\typePointeur{\huffmanTree}}{non(isLeaf(tree))}
+    \signatureFonction{getRightLeaf}{tree : \huffmanTree}{\typePointeur{\huffmanTree}}{non(isLeaf(tree))}
 \end{algorithme}
