@@ -1,0 +1,64 @@
+\section{Decompresser}
+
+\begin{algorithme}
+% Déclaration
+    \fonction{compresser}{source, destination : \binaryFile}{\booleen}{}
+% Déclaration
+    {stat : \statistics,
+     tree : \huffmanTree,
+     table : \codingTable}
+% Corps
+    {
+    \affecter{stat}{statistics()}
+    \commentaire{Initialisation des structures de données}
+    \affecter{tree}{huffmanTree()}    
+    \affecter{table}{codingTable()}
+    \affecter{stat}{computeStatistics(stat, source)}
+    \commentaire{Calcul des statistiques}
+    \affecter{tree}{buildHuffmanTree(stat)}
+    \commentaire{Construction de l'arbre de Huffman à partir des statistiques}
+    \affecter{table}{buildCodingTable(tree)}
+    \commentaire{Construction de la table de codage à partir de l'arbre de Huffman}
+    \instruction{writeHeader(destination, stat)}
+    \commentaire{Écriture de l'en-tête (identifiant, statistiques ...) dans le fichier de destination}
+    \instruction{compressSourceBytes(source, destination, table)}
+    \retourner{Vrai}
+    }
+
+    \fonction{computeStatistics}{source : \binaryFile}{\statistics}{}
+    {byte : \byte}
+    {
+    \instruction{seek(binaryFile, 0)}
+    \tantque{non(isEnd(source))}
+    {   
+        \affecter{byte}{readByte(source)}
+        \instruction{increaseCount(stat, byte)}
+    }}
+
+    \fonction{buildHuffmanTree}{stat : \statistics}{\huffmanTree}{}
+    {queue : \priorityQueue,
+     tree, leaf, rightLeaf, leftLeaf : \huffmanTree,
+     byte : \byte,
+     count : \naturel}
+    {
+        \affecter{queue}{priorityQueue()}
+        \pour{i}{0}{255}{}
+        {
+            \affecter{byte}{i}
+            \affecter{count}{getCount(stat, byte)}
+            \sialors{count > 0}
+            {
+                \affecter{leaf}{newLeaf(byte, count)}
+                \instruction{push(queue, leaf)}
+            }
+        }
+
+        \tantque{non(isEmpty(queue))}
+        {
+            \affecter{leftLeaf}{pop(queue)}
+            \affecter{rightLeaf}{pop(queue)}
+            \affecter{tree}{newNode(leftLeaf, rightLeaf)}
+            \instruction{push(queue, tree)}
+        }
+    }
+\end{algorithme}
