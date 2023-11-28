@@ -7,7 +7,7 @@
         \fonction{byte}{natural : \naturel}{\byte}{natural < 256}
         {b : \byte, i : \naturel}
         {
-            \pour{i}{1}{8}{}{
+            \pour{i}{0}{7}{}{
                 \affecter{b[i]}{natural mod 2**i}
                 \affecter{natural}{natural div 2**i}
             } 
