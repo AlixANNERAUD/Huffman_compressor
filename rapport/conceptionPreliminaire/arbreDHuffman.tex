@@ -1,10 +1,9 @@
 \section{Arbre de Huffman}
 
 \begin{algorithme}
-    \signatureFonction{huffmanTree}{value : \byte, weight : \naturel}{\huffmanTree}{}
-    \signatureProcedure{delete}{\paramEntreeSortie{tree : \huffmanTree}}{}
-    \signatureProcedure{setRightLeaf}{\paramEntreeSortie{tree : \huffmanTree}, \paramEntree{fils : \typePointeur{\huffmanTree}}}{}
-    \signatureProcedure{setLeftLeaf}{\paramEntreeSortie{tree : \huffmanTree}, \paramEntree{fils : \typePointeur{\huffmanTree}}}{}
+    \signatureFonction{newLeaf}{value : \byte, weight : \naturel}{\huffmanTree}{}
+    \signatureFonction{newTree}{tree1 : \huffmanTree,tree2 : \huffmanTree}{\huffmanTree}{}
+    \signatureFonction{isLeaf}{tree : \huffmanTree}{\booleen}{}
     \signatureFonction{getValue}{tree : \huffmanTree}{\byte}{}
     \signatureFonction{getWeight}{tree : \huffmanTree}{\naturel}{}
     \signatureFonction{getLeftLeaf}{tree : \huffmanTree}{\typePointeur{\huffmanTree}}{}
