@@ -1,9 +1,9 @@
 \section{Décompression}
 
 \begin{algorithme}
-    \signatureFonction {decompress}{compressFile : \binaryFile}{\binaryFile}{}
-    \signatureFonction {getStatistics}{compressFile : \binaryFile}{\statistics}{}
-    \signatureFonction {verification}{compressFile : \binaryFile}{\booleen}{}
+    \signatureProcedure {decompress}{\paramEntree {compressFile : \binaryFile}, \paramEntreeSortie{outputFile : \binaryFile, \paramSortie{error : \booleen}}}{}
+    \signatureFonction {readHeader}{compressFile : \binaryFile, size : \naturel}{\statistics}{}
+    \signatureFonction {checkFileType}{compressFile : \binaryFile}{\booleen}{}
     \signatureFonction {buildHuffmanTree}{stat : \statistics}{\huffmanTree}{}
     \signatureFonction {initPriorityQueue}{stat : \statistics}{\priorityQueue<\huffmanTree>}{}
     \signatureProcedure {updatePriorityQueue}{\paramEntreeSortie {pq : \priorityQueue<\huffmanTree>}}{}
