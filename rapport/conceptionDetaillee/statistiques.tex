@@ -1,13 +1,48 @@
 \section{Statistiques}
 
 \begin{algorithme}
+    \type{enregistrement}{statistics}
+        \champEnregistrement{lesElements}{\tableau{1..256}{d'}{\Element}}
+        \champEnregistrement{nbOccurrence}{\tableau{1..256}{de}{\naturel}}
+    \end{enregistrement}
+        
 
     \Fonction{statistics}{}{\statistics}{}
-
+    {res : statistics}
+    {
+        \affecter{\champ{res}{lesElements}}{\tableau{1..256}{d'}{\Element}}
+        \affecter{\champ{res}{nbOccurrence}}{\tableau{1..256}{de}{\naturel}}
+        \retourner{res}        
+    }
+    \\
     \Fonction{getCount}{stat : \statistics, e : Element}{\naturel}{}
-
+    {i : \naturel}
+    {
+        \affecter{i}{1}
+        \tantque{i $\leq$ 255 et non{e = {\champ{stat}{lesElements}}[i]}
+            \affecter{i}{i+1}
+        }
+        \retourner{{\champ{stat}{nbOccurrence}}[i]}    
+    }
+    \\
     \Procedure{setCount}{\paramEntreeSortie{stat : \statistics}, \paramEntree{e : Element, n : \naturel}}{}
-
+    {i : \naturel}
+    {
+        \affecter{i}{1}
+        \tantque{i $\leq$ 255 et non{e = {\champ{stat}{lesElements}}[i]}
+            \affecter{i}{i+1}
+        }
+        \affecter{{\champ{stat}{nbOccurrence}}[i]}{n}
+    }
+    \\
     \Procedure{increaseCount}{\paramEntreeSortie{stat : \statistics}, \paramEntree{e : Element}}{}
-
+    {i : \naturel}
+    {
+        \affecter{i}{1}
+        \tantque{i $\leq$ 255 et non{e = {\champ{stat}{lesElements}}[i]}
+            \affecter{i}{i+1}
+        }
+        \affecter{{\champ{stat}{nbOccurrence}}[i]}{{\champ{stat}{nbOccurrence}}[i]+1}
+    }
+    \\
 \end{algorithme}
