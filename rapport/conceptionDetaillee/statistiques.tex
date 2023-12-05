@@ -2,7 +2,7 @@
 
 \begin{algorithme}
     \begin{enregistrement}{statistics}
-        \champEnregistrement{lesElements}{\tableau{1..256}{d'}{\Element}}
+        \champEnregistrement{lesElements}{\tableau{1..256}{d'}{Element}}
         \champEnregistrement{nbOccurrence}{\tableau{1..256}{de}{\naturel}}
     \end{enregistrement}
         
@@ -10,7 +10,7 @@
     \fonction{statistics}{}{\statistics}{}
     {res : statistics}
     {
-        \affecter{\champ{res}{lesElements}}{\tableau{1..256}{d'}{\Element}}
+        \affecter{\champ{res}{lesElements}}{\tableau{1..256}{d'}{Element}}
         \affecter{\champ{res}{nbOccurrence}}{\tableau{1..256}{de}{\naturel}}
         \retourner{res}        
     }
@@ -19,7 +19,7 @@
     {i : \naturel}
     {
         \affecter{i}{1}
-        \tantque{i $\leq$ 255 et non{e = {\champ{stat}{lesElements}}[i]}}{
+        \tantque{i $\leq$ 255 et non({e = {\champ{stat}{lesElements}}[i]})}{
             \affecter{i}{i+1}
         }
         \retourner{{\champ{stat}{nbOccurrence}}[i]}    
@@ -29,7 +29,7 @@
     {i : \naturel}
     {
         \affecter{i}{1}
-        \tantque{i $\leq$ 255 et non{e = {\champ{stat}{lesElements}}[i]}}{
+        \tantque{i $\leq$ 255 et non({e = {\champ{stat}{lesElements}}[i]})}{
             \affecter{i}{i+1}
         }
         \affecter{{\champ{stat}{nbOccurrence}}[i]}{n}
@@ -39,7 +39,7 @@
     {i : \naturel}
     {
         \affecter{i}{1}
-        \tantque{i $\leq$ 255 et non{e = {\champ{stat}{lesElements}}[i]}}{
+        \tantque{i $\leq$ 255 et non({e = {\champ{stat}{lesElements}}[i]})}{
             \affecter{i}{i+1}
         }
         \affecter{{\champ{stat}{nbOccurrence}}[i]}{{\champ{stat}{nbOccurrence}}[i]+1}
