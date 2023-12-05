@@ -1,0 +1,64 @@
+\section{Code binaire}
+
+\constante{MAXIMUM\_LENGTH}{1000} % TODO : à vérifier
+
+\begin{algorithme}
+    \begin{enregistrement}{\binaryCode}
+        \champEnregistrement{bits}{\tableauUneDimension{1..MAXIMUM\_LENGTH}{of }{\bit}}
+        \champEnregistrement{length}{\naturel}
+    \end{enregistrement}
+
+    \espace{}
+
+    \fonction{binary\_code}{}{\binaryCode}
+    {}
+    {binary\_code : \binaryCode}
+    {   \affecter{\champ{binary\_code}{length}}{0}
+        \retourner{binary\_code}}
+
+    \espace{}
+
+    \fonction{get\_length}{binary\_code : \binaryCode}{\naturel}
+    {}
+    {}
+    {\retourner{\champ{binary\_code}{length}}}
+
+    \espace{}
+
+    \fonction{get\_bit}{binary\_code : \binaryCode, index : \naturel}{bit}
+    {$0 \leqslant i \leqslant get\_length(binary\_code)$}
+    {}
+    {\retourner{\champ{binary\_code}{bits}[index]}}
+
+    \espace{}
+
+    \procedure{add\_bit}{\paramEntreeSortie{binary\_code : \binaryCode}, \paramEntree{bit : \bit}}
+    {$get\_length(binary\_code) < MAXIMUM\_LENGTH$}
+    {}
+    {   \sialorssinon{get\_length(binary\_code) < MAXIMUM\_LENGTH}
+        {   \affecter{\champ{binary\_code}{length}}{\champ{binary\_code}{length} + 1}
+            \affecter{\champ{binary\_code}{bits}[\champ{binary\_code}{length}]}{bit}}
+        {}
+    }
+
+    \espace{}
+
+    \procedure{delete\_bit}{\paramEntreeSortie{binary\_code : \binaryCode}, \paramEntree{index : \naturel}}
+    {$0 \leqslant index < get\_length(binary\_code)$}
+    {}
+    {   \sialorssinon{get\_length(binary\_code) > 0}
+        {   \affecter{\champ{binary\_code}{length}}{\champ{binary\_code}{length} - 1}}
+        {}
+    }
+
+    \espace{}
+
+    \procedure{delete\_last\_bit}{\paramEntreeSortie{binary\_code : \binaryCode}}
+    {$get\_length(binary\_code) > 0$}
+    {}
+    {   \sialorssinon{get\_length(binary\_code) > 0}
+        {   \affecter{\champ{binary\_code}{length}}{\champ{binary\_code}{length} - 1}}
+        {}
+    }
+
+\end{algorithme}
