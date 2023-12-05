@@ -7,23 +7,23 @@
     \commentaire{La ligne 0 de table donne les codes binaires associés aux bytes stockés dans la ligne 1.}
     \champEnregistrement{size}{[0..255]}
     \end{enregistrement}
-    \\
+    \espace
     \fonction{codingTable}{}{\codingTable}{}
     {codingTable : \codingTable}
     {
-       \affecter {codingTable.size}{0}
+        \affecter {codingTable.size}{0}
         \retourner {codingTable}
     }
-    \\
+    \espace
     \procedure{add}{\paramEntreeSortie{codingTable : \codingTable}, \paramEntree{byte : \byte}, \paramEntree{binaryCode : \binaryCode}}
     {add(table, byte, binaryCode): non(isPresent(codingTable, byte))}
     {}
     {
         \affecter {codingTable[codingTable.size+1][0]}{binaryCode}
         \affecter {codingTable[codingTable.size+1][1]}{byte}
-        \affecter {codingTable.size}{codingTable.size+1}    
+        \affecter {codingTable.size}{codingTable.size+1}
     }
-    \\
+    \espace
     \fonction{getCode}{codingTable : \codingTable, byte : \byte}{\binaryCode}
     {getCode(table, byte): isPresent(table, byte)}
     {i : \naturel}
@@ -34,7 +34,7 @@
         }
         \retourner {codingTable[i]}
     }
-    \\
+    \espace
     \fonction{isPresent}{codingTable : \codingTable, byte : \byte}{\booleen}{}
     {i : \naturel}
     {
@@ -42,8 +42,8 @@
         \tantque{codingTable[i][1] $\ne$ byte et i < codingTable.size}{
             \affecter {i}{i+1}
         }
-        \retourner {codingTable[i][1] = byte} 
+        \retourner {codingTable[i][1] = byte}
         \commentaire {On vérifie qu'on a bien trouvé byte, et que l'arrêt de la boucle n'est pas parce qu'on a parcouru entièrement le tableau}
     }
-    
+
 \end{algorithme}
