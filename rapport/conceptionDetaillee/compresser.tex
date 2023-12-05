@@ -1,45 +1,44 @@
 \section{Compresser}
 
 \begin{algorithme}
-% Déclaration
+    % Déclaration
     \fonction{compresser}{source, destination : \binaryFile}{\booleen}{}
-% Déclaration
+    % Déclaration
     {stat : \statistics,
-     tree : \huffmanTree,
-     table : \codingTable}
-% Corps
+        tree : \huffmanTree,
+        table : \codingTable}
+    % Corps
     {
-    \affecter{stat}{statistics()}
-    \commentaire{Initialisation des structures de données}
-    \affecter{tree}{huffmanTree()}    
-    \affecter{table}{codingTable()}
-    \affecter{stat}{computeStatistics(stat, source)}
-    \commentaire{Calcul des statistiques}
-    \affecter{tree}{buildHuffmanTree(stat)}
-    \commentaire{Construction de l'arbre de Huffman à partir des statistiques}
-    \affecter{table}{buildCodingTable(tree)}
-    \commentaire{Construction de la table de codage à partir de l'arbre de Huffman}
-    \instruction{writeHeader(destination, stat)}
-    \commentaire{Écriture de l'en-tête (identifiant, statistiques ...) dans le fichier de destination}
-    \instruction{compressSourceBytes(source, destination, table)}
-    \retourner{Vrai}
+        \affecter{stat}{statistics()}
+        \commentaire{Initialisation des structures de données}
+        \affecter{tree}{huffmanTree()}
+        \affecter{stat}{computeStatistics(stat, source)}
+        \commentaire{Calcul des statistiques}
+        \affecter{tree}{buildHuffmanTree(stat)}
+        \commentaire{Construction de l'arbre de Huffman à partir des statistiques}
+        \affecter{table}{buildCodingTable(tree)}
+        \commentaire{Construction de la table de codage à partir de l'arbre de Huffman}
+        \instruction{writeHeader(destination, stat)}
+        \commentaire{Écriture de l'en-tête (identifiant, statistiques ...) dans le fichier de destination}
+        \instruction{compressSourceBytes(source, destination, table)}
+        \retourner{Vrai}
     }
-    \\
+    \espace
     \fonction{computeStatistics}{source : \binaryFile}{\statistics}{}
     {byte : \byte}
     {
-    \instruction{seek(binaryFile, 0)}
-    \tantque{non(isEnd(source))}
-    {   
-        \affecter{byte}{readByte(source)}
-        \instruction{increaseCount(stat, byte)}
-    }}
-    \\
+        \instruction{seek(binaryFile, 0)}
+        \tantque{non(isEnd(source))}
+        {
+            \affecter{byte}{readByte(source)}
+            \instruction{increaseCount(stat, byte)}
+        }}
+    \espace
     \fonction{buildHuffmanTree}{stat : \statistics}{\huffmanTree}{}
     {queue : \priorityQueue,
-     tree, leaf, rightLeaf, leftLeaf : \huffmanTree,
-     byte : \byte,
-     count : \naturel}
+        tree, leaf, rightLeaf, leftLeaf : \huffmanTree,
+        byte : \byte,
+        count : \naturel}
     {
         \affecter{queue}{priorityQueue()}
         \pour{i}{0}{255}{}
@@ -72,5 +71,47 @@
 
         \retourner{tree}
     }
-    
+    \espace
+    \fonction{buildCodingTable}{tree : \huffmanTree}{\codingTable}{}
+    {table : \codingTable,
+        binaryCode : \binaryCode,
+        byte : \byte}
+    {
+        \affecter{table}{codingTable()}
+        \affecter{binaryCode}{newBinaryCode()}
+        \affecter{byte}{0}
+        \instruction{buildCodingTableRecursive(tree, table, binaryCode, byte)}
+        \retourner{table}
+    }
+    \espace
+    \procedure{buildCodingTableRecursive}{\paramEntree{tree : \huffmanTree}, \paramEntreeSortie{table : \codingTable}, \paramEntreeSortie{current\_binary\_code : \binaryCode}, \paramEntree{byte : \byte}}
+    {}
+    {}
+    {
+        \sialorssinon{isLeaf(tree)}
+        {
+            \instruction{add(table, getValue(tree), binaryCode)}
+        }
+        {
+            \instruction{addBit(current\_binary\_code, 0)}
+            \instruction{buildCodingTableRecursive(getLeftLeaf(tree), table, current\_binary\_code, byte)}
+            \instruction{removeLastBit(current\_binary\_code)}
+            \instruction{addBit(current\_binary\_code, 1)}
+            \instruction{buildCodingTableRecursive(getRightLeaf(tree), table, current\_binary\_code, byte)}
+            \instruction{removeLastBit(current\_binary\_code)}
+        }
+    }
+    \espace
+    \procedure{writeHeader}{\paramEntree{destination : \binaryFile}, \paramEntree{stat : \statistics, size : \naturel}}
+    {}
+    {}
+    {
+        \instruction{writeString(destination, "HUFF")}
+        \commentaire{Écriture de l'identifiant utilisé pour reconnaître les fichiers compressés d'Huffman}
+        \instruction{writeNatural(destination, size)}
+        \commentaire{Écriture de la taille des données compressées}
+        \instruction{writeNatural(destination, getSize(stat) + sizeof(size) + sizeof("HUFF") - 1)}
+        \commentaire{Écriture de la taille de l'en-tête (décallage où commence le données)}
+    }
+
 \end{algorithme}
