@@ -1,11 +1,11 @@
 \section{Code binaire}
 
 \begin{algorithme}
-    \signatureFonction {binaryCode}{}{\binaryCode}{}
-    \signatureFonction {getLength}{bc : \binaryCode}{\naturel}{}
-    \signatureFonction {getBit}{bc : \binaryCode, position : \naturel}{\binaryCode}{position $\leq$ getLength(bc)}
-    \signatureProcedure {addBit}{\paramEntreeSortie {bc : \binaryCode}, {\paramEntree bit : \bit}}{getLength(bc) < MAXIMUM\_LENGTH}
-    \signatureProcedure {deleteBit}{\paramEntreeSortie {bc : \binaryCode}, {\paramEntree position : \naturel}}{getLength(bc) > 0 and position $\leq$ getLength(bc)}
-    \signatureProcedure {deleteLastBit}{\paramEntreeSortie {bc : \binaryCode}}{getLength(bc) > 0}
-    \signatureFonction {clone}{bc : \binaryCode}{\binaryCode}{}
+    \signatureFonction {binary\_code}{}{\binaryCode}{}
+    \signatureFonction {get\_length}{binary\_code : \binaryCode}{\naturel}{}
+    \signatureFonction {get\_bit}{binary\_code : \binaryCode, position : \naturel}{\binaryCode}{position $\leq$ getLength(binary\_code)}
+    \signatureProcedure {add\_bit}{\paramEntreeSortie {binary\_code : \binaryCode}, {\paramEntree bit : \bit}}{getLength(binary\_code) < MAXIMUM\_LENGTH}
+    \signatureProcedure {delete\_bit}{\paramEntreeSortie {binary\_code : \binaryCode}, {\paramEntree position : \naturel}}{getLength(binary\_code) > 0 and position $\leq$ getLength(binary\_code)}
+    \signatureProcedure {delete\_last\_bit}{\paramEntreeSortie {binary\_code : \binaryCode}}{getLength(binary\_code) > 0}
+    \signatureFonction {clone}{binary\_code : \binaryCode}{\binaryCode}{}
 \end{algorithme}
