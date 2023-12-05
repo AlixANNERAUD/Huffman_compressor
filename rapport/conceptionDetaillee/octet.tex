@@ -4,30 +4,33 @@
 
     \type {byte} {\tableau{1..8}{de}{\bit}}
 
-        \fonction{byte}{natural : \naturel}{\byte}{natural < 256}
-        {b : \byte, i : \naturel}
-        {
-            \pour{i}{0}{7}{}{
-                \affecter{b[i]}{natural mod 2**i}
-                \affecter{natural}{natural div 2**i}
-            } 
-            \retourner {b}
+    \fonction{byte}{natural : \naturel}{\byte}{natural < 256}
+    {b : \byte, i : \naturel}
+    {
+        \pour{i}{0}{7}{}{
+            \affecter{b[i]}{natural mod 2**i}
+            \affecter{natural}{natural div 2**i}
         }
-        \\
-        \procedure{setBit}{\paramEntreeSortie{byte : \byte}, \paramEntree{position : \naturel}, \paramEntree{bit : \bit}}
-        {1 $\leq$ position $\leq$ 8}
-        {}
-        {
-            \affecter {byte[position]}{bit}
-        }
-        \\
-        \fonction{getBit}{byte : \byte, position : \naturel}{\bit}
-        {1 $\leq$ position $\leq$ 8}
-        {}
-        {
-            \retourner {byte[position]}
-        }
-        
-        
-    \end{algorithme}
-    
+        \retourner {b}
+    }
+
+    \espace
+
+    \procedure{setBit}{\paramEntreeSortie{byte : \byte}, \paramEntree{position : \naturel}, \paramEntree{bit : \bit}}
+    {1 $\leq$ position $\leq$ 8}
+    {}
+    {
+        \affecter {byte[position]}{bit}
+    }
+
+    \espace
+
+    \fonction{getBit}{byte : \byte, position : \naturel}{\bit}
+    {1 $\leq$ position $\leq$ 8}
+    {}
+    {
+        \retourner {byte[position]}
+    }
+
+
+\end{algorithme}
