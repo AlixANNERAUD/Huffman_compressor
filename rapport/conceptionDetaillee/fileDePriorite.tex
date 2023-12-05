@@ -1,10 +1,22 @@
 \section{File de priorité}
 
 \begin{algorithme}
+    \begin{enregistrement}{priorityQueue}
+        \champEnregistrement{tab}{\tableau{1..MAX}{of}{\huffmanTree}}
+        \champEnregistrement{length}{\naturel}
+    \end{enregistrement}
 
-    \fonction{priorityQueue}{}{\priorityQueue}{}{}{\retourner{feuznfzkjenfgkz}}
-    \fonction{getLength}{queue : \priorityQueue}{\naturel}{}{}{\retourner{feuznfzkjenfgkz}}
-    \fonction{pop}{queue : \priorityQueue, }{\priorityQueue,e : Element}{getLength(queue) > 0}{}{\retourner{feuznfzkjenfgkz}}
-    \fonction{insert}{queue : \priorityQueue,  e : Element}{\priorityQueue}{getLength(queue) < MAXLENGTH}{}{\retourner{feuznfzkjenfgkz}}
+    \fonction{priorityQueue}{}{\priorityQueue}{}
+    {
+        pQ : \priorityQueue
+    }{
+        \affecter{\champ{pQ}{length}}{0}
+        \retourner{pQ}
+        }
+    
+    \fonction{getLength}{pQ : \priorityQueue}{\naturel}{}{}{\retourner{\champ{pQ}{length}}}
+    
+    \fonction{pop}{pQ : \priorityQueue, }{\priorityQueue, Element}{getLength(pQ) > 0}{}{\retourner{feuznfzkjenfgkz}}
+    \fonction{insert}{pQ : \priorityQueue,  e : Element}{\priorityQueue}{getLength(pQ) < MAXLENGTH}{}{\retourner{feuznfzkjenfgkz}}
 
 \end{algorithme}
