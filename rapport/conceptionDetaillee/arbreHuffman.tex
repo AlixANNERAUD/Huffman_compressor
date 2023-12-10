@@ -9,16 +9,16 @@
         \champEnregistrement{leftChild}{\huffmanTree}
         \champEnregistrement{rightChild}{\huffmanTree}
     \end{enregistrement}
-
+    \espace
     \type {HuffmanTree}{\pointeur {Knot}}
-
+    \espace
     \fonction{newLeaf}{value : \byte, weight : \naturel}{\huffmanTree}{}
     {ht : huffmanTree}
     {
        \affecter{\pointeur{ht}.value}{value}
        \affecter{\pointeur{ht}.weight}{weight}
-       \affecter{\pointeur{\pointeur{ht}}.leftChild}{pointeurNULL}
-       \affecter{\pointeur{\pointeur{ht}}.rightChild}{pointeurNULL}
+       \affecter{\pointeur{\pointeur{ht}.leftChild}}{\pointeurNULL}
+       \affecter{\pointeur{\pointeur{ht}.rightChild}}{\pointeurNULL}
        \retourner{ht}
     }
     \espace
@@ -26,8 +26,8 @@
     {ht : huffmanTree}
     {
         \affecter {\pointeur{ht}} {newLeaf(byte(0), \pointeur{tree1}.weight + \pointeur{tree2}.weight)}
-        \affecter {\pointeur{ht}.leftChild}{tree1}
-        \affecter {\pointeur{ht}.rightChild}{tree2}
+        \affecter {\pointeur{\pointeur{ht}.leftChild}}{tree1}
+        \affecter {\pointeur{\pointeur{ht}.rightChild}}{tree2}
     }
     \espace
     \fonction{isLeaf}{tree : \huffmanTree}{\booleen}{}
@@ -51,13 +51,13 @@
     \fonction{getLeftChild}{tree : \huffmanTree}{\typePointeur{\huffmanTree}}{non(isLeaf(tree))}
     {}
     {
-        \retourner {rien}
+        \retourner {\pointeur{\pointeur{tree}.leftChild}}
     }
     \espace
     \fonction{getRightChild}{tree : \huffmanTree}{\typePointeur{\huffmanTree}}{non(isLeaf(tree))}
     {}
     {
-        \retourner {rien}
+        \retourner {\pointeur{\pointeur{tree}.rightChild}}
     }
     \espace
    
