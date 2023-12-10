@@ -1,1 +1,65 @@
 \section{Arbre de Huffman}
+
+
+\begin{algorithme}
+
+    \begin {enregistrement}{Knot}
+        \champEnregistrement{value}{\byte}
+        \champEnregistrement{weight}{\naturel}
+        \champEnregistrement{leftChild}{\huffmanTree}
+        \champEnregistrement{rightChild}{\huffmanTree}
+    \end{enregistrement}
+
+    \type {HuffmanTree}{\pointeur {Knot}}
+
+    \fonction{newLeaf}{value : \byte, weight : \naturel}{\huffmanTree}{}
+    {ht : huffmanTree}
+    {
+       \affecter{\pointeur{ht}.value}{value}
+       \affecter{\pointeur{ht}.weight}{weight}
+       \affecter{\pointeur{\pointeur{ht}}.leftChild}{pointeurNULL}
+       \affecter{\pointeur{\pointeur{ht}}.rightChild}{pointeurNULL}
+       \retourner{ht}
+    }
+    \espace
+    \fonction{newTree}{tree1 : \huffmanTree,tree2 : \huffmanTree}{\huffmanTree}{}
+    {ht : huffmanTree}
+    {
+        \affecter {\pointeur{ht}} {newLeaf(byte(0), \pointeur{tree1}.weight + \pointeur{tree2}.weight)}
+        \affecter {\pointeur{ht}.leftChild}{tree1}
+        \affecter {\pointeur{ht}.rightChild}{tree2}
+    }
+    \espace
+    \fonction{isLeaf}{tree : \huffmanTree}{\booleen}{}
+    {}
+    {
+        \retourner {(\pointeur{tree}.leftChild = \pointeurNULL) et (\pointeur{tree}.rightChild = \pointeurNULL)}
+    }
+    \espace
+    \fonction{getValue}{tree : \huffmanTree}{\byte}{isLeaf(tree)}
+    {}
+    {
+        \retourner {\pointeur{tree}.value}
+    }
+    \espace
+    \fonction{getWeight}{tree : \huffmanTree}{\naturel}{}
+    {}
+    {
+        \retourner {\pointeur{tree}.weight}
+    }
+    \espace
+    \fonction{getLeftChild}{tree : \huffmanTree}{\typePointeur{\huffmanTree}}{non(isLeaf(tree))}
+    {}
+    {
+        \retourner {rien}
+    }
+    \espace
+    \fonction{getRightChild}{tree : \huffmanTree}{\typePointeur{\huffmanTree}}{non(isLeaf(tree))}
+    {}
+    {
+        \retourner {rien}
+    }
+    \espace
+   
+\end{algorithme}
+
