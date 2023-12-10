@@ -1,49 +1,66 @@
 \section{Table de codage}
 
 \begin{algorithme}
-
-    \begin {enregistrement}{codingTable}
-    \champEnregistrement{table}{\tableau{0..255, 0..1}{de}{\binaryCode}}
-    \commentaire{La ligne 0 de table donne les codes binaires associés aux bytes stockés dans la ligne 1.}
-    \champEnregistrement{size}{[0..255]}
+    \begin {enregistrement}{coupleByteBC}
+        \champEnregistrement {byte}{\byte}
+        \champEnregistrement {BC}{\binaryCode}
     \end{enregistrement}
-    \espace
+
+    \begin {enregistrement}{CodingTable}
+        \champEnregistrement{table}{\tableau{0..255, 0..1}{de}{coupleByteBC}}
+        \champEnregistrement{size}{[0..255]}
+    \end{enregistrement}
+    \\
     \fonction{codingTable}{}{\codingTable}{}
     {codingTable : \codingTable}
     {
-        \affecter {codingTable.size}{0}
+       \affecter {codingTable.size}{0}
         \retourner {codingTable}
     }
-    \espace
+    \\
     \procedure{add}{\paramEntreeSortie{codingTable : \codingTable}, \paramEntree{byte : \byte}, \paramEntree{binaryCode : \binaryCode}}
     {add(table, byte, binaryCode): non(isPresent(codingTable, byte))}
-    {}
+    {i : [0..255]}
     {
-        \affecter {codingTable[codingTable.size+1][0]}{binaryCode}
-        \affecter {codingTable[codingTable.size+1][1]}{byte}
-        \affecter {codingTable.size}{codingTable.size+1}
+        \affecter{i}{0}
+        \tantque {codingTable[codingTable.size - i].byte > byte et i < codingTable.size}
+            \affecter {codingTable[codingTable.size - i + 1]}{codingTable[codingTable.size - i]}
+            \affecter {i}{i+1}
+        \commentaire {La table de codage est ordonnée en fonction des bytes, ce qui réduit la complexité de l'encodage mais n'affecte pas celle du décodage}
+        \affecter {codingTable[codingTable.size - i + 1].BC}{binaryCode}
+        \affecter {codingTable[codingTable.size - i + 1].byte}{byte}
+        \affecter {codingTable.size}{codingTable.size+1}    
     }
-    \espace
+    \\
     \fonction{getCode}{codingTable : \codingTable, byte : \byte}{\binaryCode}
     {getCode(table, byte): isPresent(table, byte)}
-    {i : \naturel}
+    {d, m, g : [0..255]}
     {
-        \affecter{i}{0}
-        \tantque{codingTable[i][1] $\ne$ byte}{
-            \affecter {i}{i+1}
+        \affecter{g}{0}
+        \affecter{d}{codingTable.size}
+        \tantque{g<d}{
+            \affecter {m}{(g + d) div 2}
+            \sialorssinon{codingTable[m].byte > byte}
+                {\affecter{d}{m-1}}
+                {\affecter{g}{m}}
         }
-        \retourner {codingTable[i]}
+        \retourner {codingTable[d].BC}
     }
-    \espace
+        
+    
+    \\
     \fonction{isPresent}{codingTable : \codingTable, byte : \byte}{\booleen}{}
-    {i : \naturel}
+    {d, m, g : [0..255]}
     {
-        \affecter{i}{0}
-        \tantque{codingTable[i][1] $\ne$ byte et i < codingTable.size}{
-            \affecter {i}{i+1}
+        \affecter{g}{0}
+        \affecter{d}{codingTable.size}
+        \tantque{g<d}{
+            \affecter {m}{(g + d) div 2}
+            \sialorssinon{codingTable[m].byte > byte}
+                {\affecter{d}{m-1}}
+                {\affecter{g}{m}}
         }
-        \retourner {codingTable[i][1] = byte}
-        \commentaire {On vérifie qu'on a bien trouvé byte, et que l'arrêt de la boucle n'est pas parce qu'on a parcouru entièrement le tableau}
+        \retourner{codingTable[d].byte = byte}
     }
-
+    
 \end{algorithme}
