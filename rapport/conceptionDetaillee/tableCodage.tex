@@ -10,28 +10,28 @@
         \champEnregistrement{table}{\tableau{0..255, 0..1}{de}{coupleByteBC}}
         \champEnregistrement{size}{[0..255]}
     \end{enregistrement}
-    \\
+    \espace
     \fonction{codingTable}{}{\codingTable}{}
     {codingTable : \codingTable}
     {
        \affecter {codingTable.size}{0}
         \retourner {codingTable}
     }
-    \\
+    \espace
     \procedure{add}{\paramEntreeSortie{codingTable : \codingTable}, \paramEntree{byte : \byte}, \paramEntree{binaryCode : \binaryCode}}
     {add(table, byte, binaryCode): non(isPresent(codingTable, byte))}
     {i : [0..255]}
     {
         \affecter{i}{0}
-        \tantque {codingTable[codingTable.size - i].byte > byte et i < codingTable.size}
+        \tantque {codingTable[codingTable.size - i].byte > byte et i < codingTable.size}{
             \affecter {codingTable[codingTable.size - i + 1]}{codingTable[codingTable.size - i]}
-            \affecter {i}{i+1}
+            \affecter {i}{i+1}}
         \commentaire {La table de codage est ordonnée en fonction des bytes, ce qui réduit la complexité de l'encodage mais n'affecte pas celle du décodage}
         \affecter {codingTable[codingTable.size - i + 1].BC}{binaryCode}
         \affecter {codingTable[codingTable.size - i + 1].byte}{byte}
-        \affecter {codingTable.size}{codingTable.size+1}    
+        \affecter {codingTable.size}{codingTable.size + 1}
     }
-    \\
+    \espace
     \fonction{getCode}{codingTable : \codingTable, byte : \byte}{\binaryCode}
     {getCode(table, byte): isPresent(table, byte)}
     {d, m, g : [0..255]}
@@ -46,8 +46,6 @@
         }
         \retourner {codingTable[d].BC}
     }
-        
-    
     \\
     \fonction{isPresent}{codingTable : \codingTable, byte : \byte}{\booleen}{}
     {d, m, g : [0..255]}
