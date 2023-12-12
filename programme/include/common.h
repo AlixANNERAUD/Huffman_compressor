@@ -1,0 +1,6 @@
+#ifndef COMMON_H_INCLUDED
+#define COMMON_H_INCLUDED
+
+#define NULL 0
+
+#endif // COMMON_H_INCLUDED
