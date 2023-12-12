@@ -1,17 +1,21 @@
 # Nom de l'exécutable
 TARGET = bin/huffman_compressor
 
-# Compilateur
-CC = gcc
-
-# Options de compilation
-CFLAGS = -Wall -Iinclude
-
 # Répertoires
 SRC_DIR = src
 INCLUDE_DIR = include
 BIN_DIR = bin
 TEST_DIR = tests
+DOCS_DIR = docs
+RAPPORT_DIR = ../rapport
+
+# Compilateur
+CC = gcc
+DOXYGEN = doxygen
+LATEX = pdflatex
+
+# Options de compilation
+CFLAGS = -Wall -Iinclude
 
 # Liste des fichiers source
 SOURCES = $(wildcard $(SRC_DIR)/*.c)
@@ -40,17 +44,25 @@ $(BIN_DIR)/%.o: $(SRC_DIR)/%.c
 run: $(TARGET)
 	./$(TARGET)
 
-# Règle pour compiler et exécuter les tests unitaires
+# Règle pour compiler et exécuter les tests  unitaires
 test: $(TEST_OBJECTS)
-	$(CC) $^ -o $(BIN_DIR)/tests
+	$(CC) $^ -o $(BIN_DIR)/tests -lcunit
 	./$(BIN_DIR)/tests
 
 # Règle pour générer les fichiers objets à partir des fichiers de test
 $(BIN_DIR)/%.o: $(TEST_DIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
+docs:
+	cd $(DOCS_DIR) && $(DOXYGEN) Doxyfile
+
+rapport:
+	cd $(RAPPORT_DIR) && $(LATEX) rapport.tex
+
 # Nettoie les fichiers objets et l'exécutable
 clean:
 	rm -f $(OBJECTS) $(TARGET)
+	rm -rf $(DOCS_DIR)/html/
+	rm -rf $(DOCS_DIR)/latex/
 
-.PHONY: all clean
+.PHONY: all clean docs
