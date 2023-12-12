@@ -60,7 +60,7 @@
             {
                 \affecter{rightLeaf}{pop(queue)}
                 \commentaire{Si la file contient au moins deux éléments, on les fusionne pour créer un nouvel arbre}
-                \affecter{tree}{newNode(leftLeaf, rightLeaf)}
+                \affecter{tree}{newTree(leftLeaf, rightLeaf)}
                 \instruction{push(queue, tree)}
             }
             {
@@ -111,7 +111,8 @@
         \instruction{writeNatural(destination, size)}
         \commentaire{Écriture de la taille des données compressées}
         \instruction{writeNatural(destination, getSize(stat) + sizeof(size) + sizeof("HUFF") - 1)}
-        \commentaire{Écriture de la taille de l'en-tête (décallage où commence le données)}
+        \commentaire{Écriture de la taille de l'en-tête (décallage où commencent les données)}
+        \instruction{write}
     }
 
 \end{algorithme}
