@@ -1,64 +1,94 @@
 \section{Decompresser}
 
 \begin{algorithme}
-% Déclaration
-    \fonction{compresser}{source, destination : \binaryFile}{\booleen}{}
-% Déclaration
+    \procedure {decompress}{\paramEntree {compressFile : \binaryFile}, \paramEntreeSortie{outputFile : \binaryFile, \paramSortie{error : \booleen}}}{}
     {stat : \statistics,
      tree : \huffmanTree,
      table : \codingTable}
-% Corps
     {
-    \affecter{stat}{statistics()}
-    \commentaire{Initialisation des structures de données}
-    \affecter{tree}{huffmanTree()}    
-    \affecter{table}{codingTable()}
-    \affecter{stat}{computeStatistics(stat, source)}
-    \commentaire{Calcul des statistiques}
-    \affecter{tree}{buildHuffmanTree(stat)}
-    \commentaire{Construction de l'arbre de Huffman à partir des statistiques}
-    \affecter{table}{buildCodingTable(tree)}
-    \commentaire{Construction de la table de codage à partir de l'arbre de Huffman}
-    \instruction{writeHeader(destination, stat)}
-    \commentaire{Écriture de l'en-tête (identifiant, statistiques ...) dans le fichier de destination}
-    \instruction{compressSourceBytes(source, destination, table)}
-    \retourner{Vrai}
-    }
-
-    \fonction{computeStatistics}{source : \binaryFile}{\statistics}{}
-    {byte : \byte}
-    {
-    \instruction{seek(binaryFile, 0)}
-    \tantque{non(isEnd(source))}
-    {   
-        \affecter{byte}{readByte(source)}
-        \instruction{increaseCount(stat, byte)}
-    }}
-
-    \fonction{buildHuffmanTree}{stat : \statistics}{\huffmanTree}{}
-    {queue : \priorityQueue,
-     tree, leaf, rightLeaf, leftLeaf : \huffmanTree,
-     byte : \byte,
-     count : \naturel}
-    {
-        \affecter{queue}{priorityQueue()}
-        \pour{i}{0}{255}{}
+        \affecter{stat}{statistics()}
+        \commentaire{Initialisation des structures de données}
+        \affecter{tree}{huffmanTree()}    
+        \affecter{table}{codingTable()}
+        \affecter{stat, size, huff}{readHeader(compressFile)}
+        \commentaire{Lecture de l'en-tête contenant les statistiques, la taille du fichier, et une vérification du type de fichier}
+        \sialorssinon{checkFileType(huff)}{
+            \affecter{tree}{buildHuffmanTree(stat)}
+            \commentaire{Construction de l'arbre de Huffman à partir des statistiques}
+            \affecter {outputFile}{\instruction{reconstructFile(compressFile, tree)}}
+            \affecter{error}{Faux}
+        }
         {
-            \affecter{byte}{i}
-            \affecter{count}{getCount(stat, byte)}
-            \sialors{count > 0}
-            {
-                \affecter{leaf}{newLeaf(byte, count)}
-                \instruction{push(queue, leaf)}
+            \affecter{error}{Vrai}
+        }
+    }
+    \espace
+    \fonction{readHeader}{compressFile : \binaryFile} {\statistics, \naturel, String}
+    {}
+    {h, u, f1, f2 : Char
+     stat : \statistics
+     size : \naturel
+    }
+    {
+        \instruction{readChar(compressFile, h)}
+        \instruction{readChar(compressFile, u)}
+        \instruction{readChar(compressFile, f1)}
+        \instruction{readChar(compressFile, f2)}
+        \affecter{huff}{h + u + f1 + f2}
+        \commentaire{Lecture de l'identifiant utilisé pour reconnaître les fichiers compressés d'Huffman, doit valoir "HUFF"}
+        \instruction{readNatural(compressFile, size)}
+        \commentaire{Lecture de la taille des données compressées}
+        \retourner {stat, size, huff}
+    }
+    \fonction {checkFileType}{huff : String}{\booleen}{}
+    {}
+    {
+        \retourner {huff = "HUFF"}
+    }
+    \espace
+    \fonction{buildHuffmanTree}{stat : \statistics}{\huffmanTree}
+    {}
+    {}
+    {
+        \retourner {cf compresser}
+    }
+    \espace
+    \fonction {reconstructFile}{compressFile : \binaryFile, ht : \huffmanTree}{\binaryFile}{}
+    {decompressFile : \binaryFile
+     pos : \naturel
+     byte, byteToWrite : \byte}
+    {
+        \affecter{decompressFile}{\instruction{binaryFile()}}
+        \instruction{open(decompressFile)}
+        \affecter{pos}{1}
+        \affecter{byte}{\instruction{readByte(compressFile)}}
+        \tantque{non(\instruction{EOF(compressFile)})}{
+            \affecter{byteToWrite, byte, pos}{\instruction{readBinaryCode(compressFile, pos, byte, ht)}}
+            \instruction{writeByte(decompressFile, byteToWrite)}
+        }
+        \retourner{decompressFile}
+    }
+    \espace
+    \fonction{readBinaryCode}{compressFile : \binaryFile, pos : \naturel, byte : \byte, ht : \huffmanTree}{\byte, \byte, \naturel}{1 $\leq$ pos $\leq$ 8}
+    {b : \bit
+    temp : \huffmanTree}
+    {
+        \affecter{temp}{ht}
+        \tantque{non(isLeaf(temp))}{
+            \tantque{pos < 9 et non(isLeaf(temp))}{
+                \affecter{b}{getBit(byte, pos)}
+                \sialorssinon{b = 0}{
+                    \affecter{temp}{getLeftChild(temp)}
+                }
+                {
+                    \affecter{temp}{getRightChild(temp)}
+                }
+                \affecter{pos}{pos+1}
             }
+            \affecter{pos}{1}
+            \affecter{byte}{\instruction{readByte(compress)}}
         }
-
-        \tantque{non(isEmpty(queue))}
-        {
-            \affecter{leftLeaf}{pop(queue)}
-            \affecter{rightLeaf}{pop(queue)}
-            \affecter{tree}{newNode(leftLeaf, rightLeaf)}
-            \instruction{push(queue, tree)}
-        }
+        \retourner{getValue(temp), byte, pos}
     }
+    \espace
 \end{algorithme}

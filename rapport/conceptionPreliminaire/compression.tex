@@ -4,8 +4,6 @@
     \signatureProcedure {compress}{\paramEntree {file : \binaryFile}, \paramEntreeSortie{compressFile : \binaryFile, \paramSortie{error : \booleen}}}{}
     \signatureFonction {computeStatistics}{file : \binaryFile}{\statistics}{}
     \signatureFonction {buildHuffmanTree}{stat : \statistics}{\huffmanTree}{}
-    \signatureFonction {initPriorityQueue}{stat : \statistics}{\priorityQueue<\huffmanTree>}{}
-    \signatureProcedure {updatePriorityQueue}{\paramEntreeSortie {pq : \priorityQueue<\huffmanTree>}}{}
     \signatureFonction {buildCodingTable}{tree : \huffmanTree}{\codingTable}{}
     \signatureProcedure {writeHeader}{\paramEntree {file : \binaryFile}, \paramEntree {table : \codingTable}, \paramEntreeSortie {compressFile : \binaryFile}}{}
     \signatureProcedure {compressSourceBytes}{\paramEntree {file : \binaryFile}, \paramEntree {table : \codingTable}, \paramEntreeSortie {compressFile : \binaryFile}}{}

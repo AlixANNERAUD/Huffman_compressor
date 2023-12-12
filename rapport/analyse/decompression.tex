@@ -2,16 +2,16 @@
 
 
 \begin{itemize}
-    \item decompress(\binaryFile) : \binaryFile
+    \item decompress(\binaryFile) : \binaryFile, \booleen
     \begin{itemize}
-        \item readHeader(\binaryFile) : \statistics, \booleen
+        \item readHeader(\binaryFile) : \statistics, \naturel, String
         \begin{itemize}
             \item checkFileType(\binaryFile) : \booleen
         \end{itemize}
         \item buildHuffmanTree(\statistics) : \huffmanTree
         \item reconstructFile(\binaryFile, \huffmanTree) : \binaryFile
         \begin{itemize}
-            \item writeBinaryCodeToFile(\binaryFile, \byte) : \binaryFile
+            \item readBinaryCode(\binaryFile, \naturel, \byte, \huffmanTree) : \byte, \byte, \naturel
         \end{itemize}
     \end{itemize}
 \end{itemize}
