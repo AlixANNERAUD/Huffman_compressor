@@ -50,8 +50,8 @@ run: $(TARGET)
 
 # Règle pour compiler et exécuter les tests unitaires
 test: $(TEST_OBJECTS)
-	$(CC) $^ -o $(BIN_TEST_DIR)/test -lcunit
-	./$(BIN_TEST_DIR)/test
+	$(CC) $^ -o $(BIN_TEST_DIR)/main -lcunit
+	./$(BIN_TEST_DIR)/main
 
 # Règle pour générer les fichiers objets à partir des fichiers de test
 $(BIN_TEST_DIR)/%.o: $(TEST_SOURCE_DIR)/%.c
