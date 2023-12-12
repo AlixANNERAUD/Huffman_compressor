@@ -31,7 +31,7 @@
                 }
         }
         \pour{i}{1}{\champ{pQ}{length}}{}{
-        \sialors{\champ{e}{weight}>\champ{\champ{pQ}{tab}[i]}{weight} & \champ{e}{weight} <= \champ{\champ{pQ}{tab}[i+1]}{weight}}{
+        \sialors{\champ{e}{weight}>\champ{\champ{pQ}{tab}[i]}{weight} et \champ{e}{weight} <= \champ{\champ{pQ}{tab}[i+1]}{weight}}{
             \sialorssinon{\champ{e}{weight} = \champ{\champ{pQ}{tab}[i+1]}{weight}}{
                 \sialors {\champ{e}{value} <= \champ{\champ{pQ}{tab}[i+1]}{value}}{
                     \affecter{temp}{\champ{pQ}{tab}[i+1]}
@@ -46,6 +46,6 @@
             }
         }}
         \retourner{pQ}
-        }
+    }
 
 \end{algorithme}
