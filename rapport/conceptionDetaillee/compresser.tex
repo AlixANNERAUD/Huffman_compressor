@@ -9,15 +9,13 @@
         table : \codingTable}
     % Corps
     {
-        \affecter{stat}{statistics()}
-        \commentaire{Initialisation des structures de données}
-        \affecter{tree}{huffmanTree()}
-        \affecter{stat}{computeStatistics(stat, source)}
+        \affecter{stat}{computeStatistics(source)}
         \commentaire{Calcul des statistiques}
         \affecter{tree}{buildHuffmanTree(stat)}
         \commentaire{Construction de l'arbre de Huffman à partir des statistiques}
         \affecter{table}{buildCodingTable(tree)}
         \commentaire{Construction de la table de codage à partir de l'arbre de Huffman}
+        \affecter{destination}{binaryFile("compressFile")}
         \instruction{writeHeader(destination, stat)}
         \commentaire{Écriture de l'en-tête (identifiant, statistiques ...) dans le fichier de destination}
         \instruction{compressSourceBytes(source, destination, table)}
@@ -25,14 +23,18 @@
     }
     \espace
     \fonction{computeStatistics}{source : \binaryFile}{\statistics}{}
-    {byte : \byte}
+    {byte : \byte, stat : \statistics}
     {
+        \affecter{stat}{statistics()}
+        \commentaire{Initialisation des structures de données}
         \instruction{seek(binaryFile, 0)}
         \tantque{non(isEnd(source))}
         {
             \affecter{byte}{readByte(source)}
             \instruction{increaseCount(stat, byte)}
-        }}
+        }
+        \retourner{stat}
+        }
     \espace
     \fonction{buildHuffmanTree}{stat : \statistics}{\huffmanTree}{}
     {queue : \priorityQueue,
@@ -40,6 +42,7 @@
         byte : \byte,
         count : \naturel}
     {
+        \affecter{tree}{huffmanTree()}
         \affecter{queue}{priorityQueue()}
         \pour{i}{0}{255}{}
         {
@@ -78,7 +81,7 @@
         byte : \byte}
     {
         \affecter{table}{codingTable()}
-        \affecter{binaryCode}{newBinaryCode()}
+        \affecter{binaryCode}{binary\_code()}
         \affecter{byte}{0}
         \instruction{buildCodingTableRecursive(tree, table, binaryCode, byte)}
         \retourner{table}
@@ -114,5 +117,22 @@
         \commentaire{Écriture de la taille de l'en-tête (décallage où commencent les données)}
         \instruction{write}
     }
-
+    \espace
+    \procedure{compressSourceBytes}{\paramEntree{source : \binaryFile}, \paramEntreeSortie{destination : \binaryFile}, \paramEntree{table : \codingTable}}
+    {}
+    {binaryCode : \binaryCode}
+    {
+        \instruction{open(source, read)}
+        \instruction{open(destination, write)}
+        \instruction{seek(source, 0)}
+        \tantque{non(isEnd(source))}
+        {
+            \affecter{byte}{readByte(source)}
+            \affecter{binaryCode}{getCode(table,byte)}
+            \instruction{writeByte(destination,binaryCode)}
+        }
+        \instruction{close(source)}
+        \instruction{close(destination)}
+    }
+    \espace
 \end{algorithme}
