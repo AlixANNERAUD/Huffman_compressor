@@ -14,7 +14,7 @@
         \affecter{\champ{res}{nbOccurrence}}{\tableau{1..256}{de}{\naturel}}
         \retourner{res}        
     }
-    \\
+    \espace
     \fonction{getCount}{stat : \statistics, e : Element}{\naturel}{}
     {i : \naturel}
     {
@@ -24,7 +24,7 @@
         }
         \retourner{{\champ{stat}{nbOccurrence}}[i]}    
     }
-    \\
+    \espace
     \procedure{setCount}{\paramEntreeSortie{stat : \statistics}, \paramEntree{e : Element, n : \naturel}}{}
     {i : \naturel}
     {
@@ -34,7 +34,7 @@
         }
         \affecter{{\champ{stat}{nbOccurrence}}[i]}{n}
     }
-    \\
+    \espace
     \procedure{increaseCount}{\paramEntreeSortie{stat : \statistics}, \paramEntree{e : Element}}{}
     {i : \naturel}
     {
@@ -44,5 +44,5 @@
         }
         \affecter{{\champ{stat}{nbOccurrence}}[i]}{{\champ{stat}{nbOccurrence}}[i]+1}
     }
-    \\
+    \espace
 \end{algorithme}
