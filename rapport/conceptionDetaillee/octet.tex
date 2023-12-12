@@ -3,7 +3,7 @@
 \begin{algorithme}
 
     \type {Byte} {\tableau{0..7}{de}{\bit}}
-
+    \espace
     \fonction{byte}{natural : \naturel}{\byte}{natural < 256}
     {b : \byte, i : [0..7]}
     {
@@ -13,8 +13,8 @@
         } 
         \retourner {b}
     }
-    \\
-    \fonction{byteToNatural}{byte : \byte}{\natural}{}
+    \espace
+    \fonction{byteToNatural}{byte : \byte}{\naturel}{}
     {nat : \naturel, i : [0..7]}
     {
         \pour{i}{0}{7}{}{
@@ -22,14 +22,14 @@
         } 
         \retourner {nat}
     }
-    \\
+    \espace
     \procedure{setBit}{\paramEntreeSortie{byte : \byte}, \paramEntree{position : \naturel}, \paramEntree{bit : \bit}}
     {1 $\leq$ position $\leq$ 8}
     {}
     {
         \affecter {byte[position]}{bit}
     }
-    \\
+    \espace
     \fonction{getBit}{byte : \byte, position : \naturel}{\bit}
     {1 $\leq$ position $\leq$ 8}
     {}
