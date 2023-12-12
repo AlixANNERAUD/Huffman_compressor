@@ -5,7 +5,10 @@ TARGET = bin/huffman_compressor
 SRC_DIR = src
 INCLUDE_DIR = include
 BIN_DIR = bin
+BIN_TEST_DIR = $(BIN_DIR)/tests
 TEST_DIR = tests
+TEST_SOURCE_DIR = $(TEST_DIR)/src
+TEST_INCLUDE_DIR = $(TEST_DIR)/include
 DOCS_DIR = docs
 RAPPORT_DIR = ../rapport
 
@@ -15,7 +18,8 @@ DOXYGEN = doxygen
 LATEX = pdflatex
 
 # Options de compilation
-CFLAGS = -Wall -Iinclude
+CFLAGS = -Wall -Wpedantic -I$(INCLUDE_DIR)
+CFLAGS_TEST = $(CFLAGS) -I$(TEST_INCLUDE_DIR) -lcunit
 
 # Liste des fichiers source
 SOURCES = $(wildcard $(SRC_DIR)/*.c)
@@ -24,10 +28,10 @@ SOURCES = $(wildcard $(SRC_DIR)/*.c)
 OBJECTS = $(SOURCES:$(SRC_DIR)/%.c=$(BIN_DIR)/%.o)
 
 # Liste des fichiers source des tests
-TEST_SOURCES = $(wildcard $(TEST_DIR)/*.c)
+TEST_SOURCES = $(wildcard $(TEST_SOURCE_DIR)/*.c)
 
 # Liste des fichiers objets générés à partir des fichiers de test
-TEST_OBJECTS = $(TEST_SOURCES:$(TEST_DIR)/%.c=$(BIN_DIR)/%.o)
+TEST_OBJECTS = $(TEST_SOURCES:$(TEST_SOURCE_DIR)/%.c=$(BIN_TEST_DIR)/%.o)
 
 # Règle par défaut
 all: $(TARGET)
@@ -44,14 +48,14 @@ $(BIN_DIR)/%.o: $(SRC_DIR)/%.c
 run: $(TARGET)
 	./$(TARGET)
 
-# Règle pour compiler et exécuter les tests  unitaires
+# Règle pour compiler et exécuter les tests unitaires
 test: $(TEST_OBJECTS)
-	$(CC) $^ -o $(BIN_DIR)/tests -lcunit
-	./$(BIN_DIR)/tests
+	$(CC) $^ -o $(BIN_TEST_DIR)/test -lcunit
+	./$(BIN_TEST_DIR)/test
 
 # Règle pour générer les fichiers objets à partir des fichiers de test
-$(BIN_DIR)/%.o: $(TEST_DIR)/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
+$(BIN_TEST_DIR)/%.o: $(TEST_SOURCE_DIR)/%.c
+	$(CC) $(CFLAGS_TEST) -c $< -o $@ 
 
 docs:
 	cd $(DOCS_DIR) && $(DOXYGEN) Doxyfile
@@ -62,6 +66,7 @@ rapport:
 # Nettoie les fichiers objets et l'exécutable
 clean:
 	rm -f $(OBJECTS) $(TARGET)
+	rm -f $(TEST_OBJECTS)
 	rm -rf $(DOCS_DIR)/html/
 	rm -rf $(DOCS_DIR)/latex/
 
