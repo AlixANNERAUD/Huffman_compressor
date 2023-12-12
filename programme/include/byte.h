@@ -1,0 +1,4 @@
+#ifndef BYTE_H_DEFINED
+#define BYTE_H_DEFINED
+
+#endif // BYTE_H_DEFINED
