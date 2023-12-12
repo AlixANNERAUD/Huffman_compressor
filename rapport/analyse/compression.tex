@@ -7,10 +7,6 @@
     \begin{itemize}
         \item computeStatistics(\binaryFile) : \statistics
         \item buildHuffmanTree(\statistics) : \huffmanTree
-        \begin{itemize}
-            \item initPriorityQueue(\statistics) : \priorityQueue<\huffmanTree>
-            \item updatePriorityQueue(\priorityQueue<\huffmanTree>) : \priorityQueue<\huffmanTree>
-        \end{itemize}
         \item buildCodingTable(\huffmanTree) : \codingTable
         \item writeHeader(\binaryFile, \codingTable) : \binaryFile
         \item compressSourceBytes(\binaryFile, \codingTable) : \binaryFile
