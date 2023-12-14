@@ -2,8 +2,7 @@
 #define COMMON_H_INCLUDED
 
 #include <stddef.h>
-
-#define SUCCESS 0
-#define FAILURE -1
+#include <assert.h>
+#include <stdbool.h>
 
 #endif // COMMON_H_INCLUDED
