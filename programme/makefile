@@ -1,14 +1,4 @@
-# Nom de l'exécutable
-TARGET = bin/huffman_compressor
-
 # Répertoires
-SRC_DIR = src
-INCLUDE_DIR = include
-BIN_DIR = bin
-BIN_TEST_DIR = $(BIN_DIR)/tests
-TEST_DIR = tests
-TEST_SOURCE_DIR = $(TEST_DIR)/src
-TEST_INCLUDE_DIR = $(TEST_DIR)/include
 DOCS_DIR = docs
 RAPPORT_DIR = ../rapport
 
@@ -17,40 +7,60 @@ CC = gcc
 DOXYGEN = doxygen
 LATEX = pdflatex
 
-# Options de compilation
-CFLAGS = -Wall -Wpedantic -I$(INCLUDE_DIR)
-CFLAGS_TEST = $(CFLAGS) -I$(TEST_INCLUDE_DIR) -lcunit
-
 # Liste des fichiers source
+SRC_DIR = src
+INCLUDE_DIR = include
+BIN_DIR = bin
 SOURCES = $(wildcard $(SRC_DIR)/*.c)
-
-# Liste des fichiers objets générés à partir des fichiers source
 OBJECTS = $(SOURCES:$(SRC_DIR)/%.c=$(BIN_DIR)/%.o)
+TARGET = $(BIN_DIR)/main
+CFLAGS = -Wall -Wpedantic -I$(INCLUDE_DIR) -I$(LIB_INCLUDE_DIR)
 
 # Liste des fichiers source des tests
+TEST_DIR = tests
+TEST_SOURCE_DIR = $(TEST_DIR)/src
+TEST_INCLUDE_DIR = $(TEST_DIR)/include
 TEST_SOURCES = $(wildcard $(TEST_SOURCE_DIR)/*.c)
-
-# Liste des fichiers objets générés à partir des fichiers de test
 TEST_OBJECTS = $(TEST_SOURCES:$(TEST_SOURCE_DIR)/%.c=$(BIN_TEST_DIR)/%.o)
+BIN_TEST_DIR = $(BIN_DIR)/tests
+TEST_TARGET = $(BIN_TEST_DIR)/main
+CFLAGS_TEST = -Wall -Wpedantic -I$(TEST_INCLUDE_DIR) -I$(LIB_INCLUDE_DIR) -lcunit
 
-# Règle par défaut
-all: $(TARGET)
-
-# Règle pour générer l'exécutable
-$(TARGET): $(OBJECTS)
-	$(CC) $^ -o $@
+# Liste des fichiers source de la librairie
+LIB_DIR = lib
+LIB_SOURCE_DIR = $(LIB_DIR)/src
+LIB_INCLUDE_DIR = $(LIB_DIR)/include
+LIB_SOURCES = $(wildcard $(LIB_SOURCE_DIR)/*.c)
+LIB_OBJECTS = $(LIB_SOURCES:$(LIB_SOURCE_DIR)/%.c=$(BIN_LIB_DIR)/%.o)
+BIN_LIB_DIR = $(BIN_DIR)/lib
+CFLAGS_LIB = -Wall -Wpedantic -I$(LIB_INCLUDE_DIR)
 
 # Règle pour générer les fichiers objets à partir des fichiers source
 $(BIN_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
+
+# Règle pour générer les fichiers objets à partir des fichiers source de la librairie
+$(BIN_LIB_DIR)/%.o: $(LIB_SOURCE_DIR)/%.c
+	$(CC) $(CFLAGS_LIB) -c $< -o $@ 
+
+# Règle pour générer les fichiers objets à partir des fichiers source des tests
+$(TEST_SOURCE_DIR)/%.o: $(TEST_SOURCE_DIR)/%.c
+	$(CC) $(CFLAGS_TEST) -c $< -o $@
+
+# Règle pour générer l'exécutable
+$(TARGET): $(OBJECTS) $(LIB_OBJECTS)
+	$(CC) $^ -o $@ $(CFLAGS)
+
+# Règle pour générer l'éxécutable des tests unitaires
+$(TEST_TARGET): $(TEST_OBJECTS) $(LIB_OBJECTS)
+	$(CC) $^ -o $@ $(CFLAGS_TEST)
 
 # Règle pour exécuter l'exécutable
 run: $(TARGET)
 	./$(TARGET)
 
 # Règle pour compiler et exécuter les tests unitaires
-test: $(TEST_OBJECTS)
-	$(CC) $^ -o $(BIN_TEST_DIR)/main -lcunit
+test: $(TEST_TARGET) 
 	./$(BIN_TEST_DIR)/main
 
 # Règle pour générer les fichiers objets à partir des fichiers de test
@@ -66,6 +76,7 @@ rapport:
 # Nettoie les fichiers objets et l'exécutable
 clean:
 	rm -f $(OBJECTS) $(TARGET)
+	rm -f $(LIB_OBJECTS)
 	rm -f $(TEST_OBJECTS)
 	rm -rf $(DOCS_DIR)/html/
 	rm -rf $(DOCS_DIR)/latex/
