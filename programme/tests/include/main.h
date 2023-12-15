@@ -2,4 +2,4 @@
 
 #include "CUnit/Basic.h"
 
-void HuffmanTree_add_tests(CU_pSuite suite);
+void HuffmanTree_add_tests();

@@ -11,11 +11,7 @@ int main() {
         return CU_get_error();
 
     // Add tests to suite
-    pSuite = CU_add_suite("Suite_1", NULL, NULL);
-    if (NULL == pSuite) {
-        CU_cleanup_registry();
-        return CU_get_error();
-    }
+    HuffmanTree_add_tests();
 
     // - Run all tests
     CU_basic_set_mode(CU_BRM_VERBOSE); // Set verbs mode
