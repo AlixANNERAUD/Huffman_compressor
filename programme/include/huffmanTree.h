@@ -7,9 +7,11 @@ typedef struct {
 // TODO : A compléter
 } HuffmanTree;
 
-HuffmanTree HuffmanTree_new_leaf(char value, unsigned int weight);
+HuffmanTree* HuffmanTree_new_leaf(char value, unsigned int weight);
 
-HuffmanTree HuffmanTree_new_tree(HuffmanTree *left, HuffmanTree *right);
+HuffmanTree* HuffmanTree_new_tree(HuffmanTree *left, HuffmanTree *right);
+
+void HuffmanTree_delete(HuffmanTree *tree);
 
 bool HuffmanTree_is_leaf(const HuffmanTree *tree);
 
