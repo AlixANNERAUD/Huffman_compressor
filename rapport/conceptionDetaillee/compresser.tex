@@ -2,14 +2,14 @@
 
 \begin{algorithme}
     % Déclaration
-    \fonction{compresser}{source, destination : \binaryFile}{\booleen}{}
-    %\procedure{compresser}{\paramEntree{source : \binaryFile}, \paramEntreeSortie{destination : \binaryFile}, \paramSortie{error : \booleen}}{}
+    \procedure{compresser}{\paramEntree{source : \binaryFile}, \paramEntreeSortie{destination : \binaryFile}, \paramSortie{error : \booleen}}{}
     % Déclaration
     {stat : \statistics,
         tree : \huffmanTree,
         table : \codingTable}
     % Corps
     {
+        \affecter{error}{Faux}
         \instruction{open(source, read)}
         \affecter{stat}{computeStatistics(source)}
         \commentaire{Calcul des statistiques}
@@ -25,7 +25,7 @@
         \instruction{close(source)}
         \instruction{close(destination)}
         \retourner{Vrai}
-    %\affecter{error}{Vrai}
+        \affecter{error}{Vrai}
     }
     \espace
     \fonction{computeStatistics}{source : \binaryFile}{\statistics}{}
@@ -135,7 +135,7 @@
         {
             \affecter{byte}{readByte(source)}
             \affecter{binaryCode}{getCode(table,byte)}
-            \instruction{writeByte(destination,binaryCode)}
+            \instruction{write(destination,binaryCode)} % à changer
         }
         
     }
