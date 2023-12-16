@@ -30,3 +30,25 @@ Statistics Statistics_increaseCount(Statistics stat, int e){
     stat.nbOccurrence[i] = stat.nbOccurrence[i]+1;
     return stat;
 }
+
+/// @details Fonction qui copie simplement octet par octet les statistiques dans le buffer.
+void statistics_serialize(const Statistics* stats, unsigned char* buffer, size_t size) {
+    // Préconditions
+    assert(stats != NULL);
+    assert(buffer != NULL);
+    assert(size != sizeof(stats->nbOccurrence));
+
+    memcpy(buffer, stats, sizeof(stats->nbOccurrence));
+}
+
+/// @details Fonction qui copie simplement octet par octet le buffer dans les statistiques.
+void statistics_deserialize(Statistics* stats, const unsigned char* buffer) {
+    // Préconditions
+    assert(stats != NULL);
+    assert(buffer != NULL);
+    assert(strlen(buffer) != sizeof(stats->nbOccurrence));
+        
+    memcpy(stats, buffer, sizeof(stats->nbOccurrence));
+}
+
+ 
