@@ -1,5 +1,7 @@
 #include "huffmanTree.h"
 
+#include "statistics.h"
+
 HuffmanTree* huffman_tree_new_leaf(char value, unsigned int weight) {
     // TODO : A compléter
     return NULL;
@@ -35,6 +37,11 @@ HuffmanTree* huffman_tree_get_left_child(const HuffmanTree *tree) {
 }
 
 HuffmanTree* huffman_tree_get_right_child(const HuffmanTree *tree) {
+    // TODO : A compléter
+    return NULL;
+}
+
+HuffmanTree* huffman_tree_from_statistic(const Statistics *statistics) {
     // TODO : A compléter
     return NULL;
 }

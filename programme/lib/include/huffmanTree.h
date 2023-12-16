@@ -7,6 +7,7 @@ typedef struct {
 // TODO : A compléter
 } HuffmanTree;
 
+
 HuffmanTree* huffman_tree_new_leaf(char value, unsigned int weight);
 
 HuffmanTree* huffman_tree_new_tree(HuffmanTree *left, HuffmanTree *right);
@@ -22,5 +23,9 @@ unsigned int huffman_tree_get_weight(const HuffmanTree *tree);
 HuffmanTree* huffman_tree_get_left_child(const HuffmanTree *tree);
 
 HuffmanTree* huffman_tree_get_right_child(const HuffmanTree *tree);
+
+typedef struct _ Statistics; // Déclaration anticipée pour réduire les dépendances inter-fichiers.
+
+HuffmanTree* huffman_tree_from_statistic(const Statistics *statistics); // Transtypage
 
 #endif // HUFFMAN_TREE_H_DEFINED
