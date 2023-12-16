@@ -1,0 +1,16 @@
+\section{Implementation}
+
+\subsection{Préconditions}
+
+Afin d'éviter tout comportement indéfini, nous avons vérifié les préconditions à l'exécution des fonctions.
+Pour cela, nous avons utilisé \texttt{assert.h} de la bibliothèque standard du C. 
+Ainsi, si une précondition n'est pas respectée, le programme s'arrête et affiche un message d'erreur.
+Cela permet de détecter une bonne partie des erreurs d'implementation lors du développement.
+
+\subsection{Gestion des erreurs}
+
+Afin de gérer les erreurs au temps d'exécution, nous avons fait le choix de ne pas utiliser \texttt{errno.h} de la bibliothèque standard du C.
+Cette étant trop limitée, nous avons préféré <a completer>.
+A la place, nous avons créer des énumerations dans les fichiers d'entête (\texttt{.h}) afin de pouvoir gérer les erreurs de manière plus précise.
+Nous avons également ajouté des fonctions permettant de convertir ces énumerations en chaîne de caractères afin de pouvoir afficher des messages d'erreurs plus explicites.
+Cela permet une gestion des erreurs plus précise et plus lisible.
