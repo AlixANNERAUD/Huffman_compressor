@@ -1,0 +1,48 @@
+\section{Structure du projet}
+
+\subsection{Arborescence}
+
+Le projet est organisé en plusieurs dossiers et sous-dossiers :
+
+\begin{itemize}
+    \item \texttt{rapport} : contient le rapport du projet.
+    \begin{itemize}
+        \item \texttt{analyse} : contient la partie analyse du rapport.
+        \item \texttt{conceptionDetaillee} : contient la partie conception détaillée du rapport.
+        \item \texttt{conceptionPreliminaire} : contient la partie conception préliminaire du rapport.
+        \item \texttt{developpment} : contient la partie développement du rapport (cette partie).
+        \item \texttt{conclusion} : contient la conclusion du rapport.
+    \end{itemize}
+    \item \texttt{programme} : contient le code source du programme.
+    \begin{itemize}
+        \item \texttt{bin} : contient l'exécutable et fichiers objets issus de la compilation.
+        \item \texttt{doc} : contient la configuration de \texttt{Doxygen} ainsi que la documentation générée.
+        \item \texttt{include} : contient les fichiers d'entête (\texttt{.h}).
+        \item \texttt{lib} : contient la bibliothèque principale (TAD).
+        \begin{itemize}
+            \item \texttt{include} : contient les fichiers d'entête (\texttt{.h}) de la bibliothèque.
+            \item \texttt{src} : contient les fichiers source (\texttt{.c}) de la bibliothèque. 
+        \end{itemize}
+        \item \texttt{src} : contient les fichiers source (\texttt{.c}).
+        \item \texttt{test} : contient les fichiers de test.
+        \begin{itemize}
+            \item \texttt{include} : contient les fichiers d'entête (\texttt{.h}) des tests.
+            \item \texttt{src} : contient les fichiers source (\texttt{.c}) des tests.
+        \end{itemize}
+    \end{itemize}
+    \item 
+\end{itemize}
+
+\subsection{\texttt{Makefile}}
+
+Le projet étant assez conséquent, il est nécessaire d'automatiser la compilation.
+Pour cela, nous avons utilisé \texttt{Make}.
+Ce dernier vient le fichier \texttt{makefile} situé à la racine du dossier \texttt{programme}.
+Les commandes disponibles sont les suivantes :
+\begin{itemize}
+    \item \texttt{make} : execute la commande \texttt{make run}.
+    \item \texttt{make run} : compile et exécute le programme principal.
+    \item \texttt{make test} : compile et exécute les tests.
+    \item \texttt{make doc} : génère la documentation \texttt{Doxygen}.
+    \item \texttt{make clean} : supprime les fichiers objets et l'exécutable.
+\end{itemize}
