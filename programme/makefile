@@ -1,13 +1,13 @@
 # Répertoires
 DOCS_DIR = docs
-RAPPORT_DIR = ../rapport
+REPORT_DIR = ../rapport
 
-# Compilateur
+# Compilateurs
 CC = gcc
 DOXYGEN = doxygen
 LATEX = pdflatex
 
-# Liste des fichiers source
+# Variables pour la compilation du programme
 SRC_DIR = src
 INCLUDE_DIR = include
 BIN_DIR = bin
@@ -16,7 +16,7 @@ OBJECTS = $(SOURCES:$(SRC_DIR)/%.c=$(BIN_DIR)/%.o)
 TARGET = $(BIN_DIR)/main
 CFLAGS = -Wall -Wpedantic -I$(INCLUDE_DIR) -I$(LIB_INCLUDE_DIR)
 
-# Liste des fichiers source des tests
+# Variables pour la compilation des tests unitaires
 TEST_DIR = tests
 TEST_SOURCE_DIR = $(TEST_DIR)/src
 TEST_INCLUDE_DIR = $(TEST_DIR)/include
@@ -26,7 +26,7 @@ BIN_TEST_DIR = $(BIN_DIR)/tests
 TEST_TARGET = $(BIN_TEST_DIR)/main
 CFLAGS_TEST = -Wall -Wpedantic -I$(TEST_INCLUDE_DIR) -I$(LIB_INCLUDE_DIR) -lcunit
 
-# Liste des fichiers source de la librairie
+# Variables pour la compilation de la librairie
 LIB_DIR = lib
 LIB_SOURCE_DIR = $(LIB_DIR)/src
 LIB_INCLUDE_DIR = $(LIB_DIR)/include
@@ -67,11 +67,13 @@ test: $(TEST_TARGET)
 $(BIN_TEST_DIR)/%.o: $(TEST_SOURCE_DIR)/%.c
 	$(CC) $(CFLAGS_TEST) -c $< -o $@ 
 
-docs:
+# Règle pour générer la documentation
+doc:
 	cd $(DOCS_DIR) && $(DOXYGEN) Doxyfile
 
-rapport:
-	cd $(RAPPORT_DIR) && $(LATEX) rapport.tex
+# Règle pour générer le rapport
+report:
+	cd $(REPORT_DIR) && $(LATEX) rapport.tex
 
 # Nettoie les fichiers objets et l'exécutable
 clean:
