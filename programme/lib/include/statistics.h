@@ -4,7 +4,7 @@
 
 #include "common.h"
 
-typedef struct
+typedef struct Statistics
 {
     int lesElements[Statistics_MAX]; // type huffmantree
     FileSize nbOccurrence[Statistics_MAX];

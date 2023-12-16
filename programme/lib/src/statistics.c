@@ -1,5 +1,7 @@
 #include "statistics.h"
 
+#include <string.h> // memcpy
+
 Statistics statistics_create(){
     Statistics res;
     return res;

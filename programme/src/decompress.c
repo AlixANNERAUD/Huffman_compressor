@@ -65,7 +65,7 @@ DecompressResult decompress(FILE *input, FILE *output)
     if (result != DECOMPRESS_RESULT_OK)
         return result;
 
-    HuffmanTree *tree = build_huffman_tree(&statistics);
+    HuffmanTree *tree = huffman_tree_from_statistic(&statistics);
 
     assert(tree != NULL);
 
