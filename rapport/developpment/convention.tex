@@ -1,6 +1,7 @@
 \section{Convention}
 
-Afin de garantir une certaines cohérence dans le code, nous avons décidé d'adopter les conventions suivantes :
+Afin de garantir une certaines cohérence dans le code, nous avons décidé d'adopter une convention de programmation.
+Cette convention est inspirée de celle utilisée par la communauté C.
 
 \subsection{Langage}
 
@@ -10,16 +11,14 @@ Afin de garantir une certaines cohérence dans le code, nous avons décidé d'ad
     \item Les acronymes sont proscrits.
 \end{itemize}
 
-
-\subsection{Conventions de nommage}
-
-La plupart des conventions de nommage utilisé sont inspirées de celles utilisées par la communauté C.
+\subsection{Nommage des identifiants}
 
 \begin{itemize}
-    \item Les macro et constante (variables constantes, enumerations ...) seront écrites en majuscule et séparées par des tirets du bas.
-    \item Les identifiants des types seront écrits en \texttt{CasseDePascal}. Par exemple : \binaryCode.
-    \item Les identifiants des variables et des fonctions sont écrits en \texttt{casse\_de\_serpent}. Par exemple : \texttt{binaryFile}.
-    \item Dans le cas où les fonctions sont des méthodes (c'est-à-dire qu'elles sont liées à un type), le nom de la fonction sera préfixé par le nom du type. Par exemple : \texttt{binary\_code\_get\_length}.
+    \item Les macro et constante (variables constantes, macro constante, enumerations ...) seront écrites en majuscule et séparées par des tirets du bas. Par exemple : \texttt{MAXIMUM\_LENGTH}.
+    \item Les identifiants des types seront écrits en casse de pascal. Par exemple : \texttt{BinaryCode}.
+    \item Les identifiants des variables et des fonctions sont écrits en \texttt{casse\_de\_serpent}. Par exemple : \texttt{write\_header}.
+    \item Dans le cas où l'identifiants dépend d'un type (excepté les types eux-mêmes), le nom de l'identifiant sera préfixé par le nom du type tout en conservant sa casse d'origine.
+    Par exemple : \texttt{binary\_code\_length} dans le cas d'une fonction et \texttt{CODING\_TABLE\_MAXIMUM\_SIZE} dans le cas d'une constante.
 \end{itemize}
 
 \subsection{Conventions de programmation}
