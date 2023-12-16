@@ -1,5 +1,4 @@
-#ifndef DECOMPRESS_H_INCLUDED
-#define DECOMPRESS_H_INCLUDED
+#pragma once
 
 // - Bibliothèques 
 
@@ -26,5 +25,3 @@ typedef enum {
 DecompressResult decompress(FILE* input, FILE* output);
 
 void decompress_error_to_string(DecompressResult error, char* buffer, size_t buffer_size);
-
-#endif // DECOMPRESS_H_INCLUDED

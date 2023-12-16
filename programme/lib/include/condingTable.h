@@ -1,5 +1,4 @@
-#ifndef CODING_TABLE_H_DEFINED
-#define CODING_TABLE_H_DEFINED
+#pragma once
 
 #include "common.h"
 
@@ -42,5 +41,3 @@ int CodingTable_get_value(const CodingTable* codingTable, char key);
 /// @param key Clé à rechercher.
 /// @return TRUE si la clé est présente, FALSE sinon.
 bool CodingTable_is_present(const CodingTable* codingTable, char key);
-
-#endif // CODING_TABLE_H_DEFINED

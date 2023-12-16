@@ -1,5 +1,4 @@
-#ifndef PIRIORITY_QUEUE_H_DEFINED
-#define PIRIORITY_QUEUE_H_DEFINED
+#pragma once
 
 #include "common.h"
 
@@ -31,7 +30,3 @@ int PriorityQueue_pop(PriorityQueue *queue);
 /// @param queue File de priorité.
 /// @param node Nœud à enfiler.
 void PriorityQueue_push(PriorityQueue *queue, int node);
-
-
-
-#endif // PIRIORITY_QUEUE_H_DEFINED

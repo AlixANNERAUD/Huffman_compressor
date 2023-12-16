@@ -1,5 +1,4 @@
-#ifndef STATISTICS_H_DEFINED
-#define STATISTICS_H_DEFINED
+#pragma once
 
 #define Statistics_MAX 256
 
@@ -28,5 +27,3 @@ void statistics_serialize(const Statistics* stats, unsigned char* buffer, FileSi
 /// @param stats Les statistiques.
 /// @param buffer Le buffer d'une taille de 64 * 256 = 2048 octets.
 void statistics_deserialize(Statistics* stats, const unsigned char* buffer);
-
-#endif // STATISTICS_H_DEFINED

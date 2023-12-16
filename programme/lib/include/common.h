@@ -1,5 +1,4 @@
-#ifndef COMMON_H_INCLUDED
-#define COMMON_H_INCLUDED
+#pragma once
 
 #include <stddef.h>
 #include <assert.h>
@@ -7,5 +6,3 @@
 #include <stdint.h>
 
 typedef uint64_t FileSize;
-
-#endif // COMMON_H_INCLUDED

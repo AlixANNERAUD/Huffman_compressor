@@ -1,5 +1,4 @@
-#ifndef HUFFMAN_TREE_H_DEFINED
-#define HUFFMAN_TREE_H_DEFINED
+#pragma once
 
 #include "common.h"
 
@@ -24,8 +23,6 @@ HuffmanTree* huffman_tree_get_left_child(const HuffmanTree *tree);
 
 HuffmanTree* huffman_tree_get_right_child(const HuffmanTree *tree);
 
-typedef struct _ Statistics; // Déclaration anticipée pour réduire les dépendances inter-fichiers.
+typedef struct Statistics; // Déclaration anticipée pour réduire les dépendances inter-fichiers.
 
 HuffmanTree* huffman_tree_from_statistic(const Statistics *statistics); // Transtypage
-
-#endif // HUFFMAN_TREE_H_DEFINED

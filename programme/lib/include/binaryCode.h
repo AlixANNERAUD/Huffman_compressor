@@ -1,5 +1,4 @@
-#ifndef BINARY_CODE_H_DEFINED
-#define BINARY_CODE_H_DEFINED
+#pragma once
 
 #include "common.h"
 
@@ -24,5 +23,3 @@ void binary_code_remove_bit(BinaryCode* binaryCode, size_t index);
 void binary_code_remove_last_bit(BinaryCode* binaryCode);
 
 BinaryCode binary_code_clone(const BinaryCode* binaryCode);
-
-#endif // BINARY_CODE_H_DEFINED
