@@ -3,12 +3,14 @@
 \begin{algorithme}
     % Déclaration
     \fonction{compresser}{source, destination : \binaryFile}{\booleen}{}
+    %\procedure{compresser}{\paramEntree{source : \binaryFile}, \paramEntreeSortie{destination : \binaryFile}, \paramSortie{error : \booleen}}{}
     % Déclaration
     {stat : \statistics,
         tree : \huffmanTree,
         table : \codingTable}
     % Corps
     {
+        \instruction{open(source, read)}
         \affecter{stat}{computeStatistics(source)}
         \commentaire{Calcul des statistiques}
         \affecter{tree}{buildHuffmanTree(stat)}
@@ -16,10 +18,14 @@
         \affecter{table}{buildCodingTable(tree)}
         \commentaire{Construction de la table de codage à partir de l'arbre de Huffman}
         \affecter{destination}{binaryFile("compressFile")}
+        \instruction{open(destination, write)}
         \instruction{writeHeader(destination, stat)}
         \commentaire{Écriture de l'en-tête (identifiant, statistiques ...) dans le fichier de destination}
         \instruction{compressSourceBytes(source, destination, table)}
+        \instruction{close(source)}
+        \instruction{close(destination)}
         \retourner{Vrai}
+    %\affecter{error}{Vrai}
     }
     \espace
     \fonction{computeStatistics}{source : \binaryFile}{\statistics}{}
@@ -120,10 +126,10 @@
     \espace
     \procedure{compressSourceBytes}{\paramEntree{source : \binaryFile}, \paramEntreeSortie{destination : \binaryFile}, \paramEntree{table : \codingTable}}
     {}
-    {binaryCode : \binaryCode}
+    {binaryCode : \binaryCode, byte : \byte}
     {
-        \instruction{open(source, read)}
-        \instruction{open(destination, write)}
+    
+        
         \instruction{seek(source, 0)}
         \tantque{non(isEnd(source))}
         {
@@ -131,8 +137,7 @@
             \affecter{binaryCode}{getCode(table,byte)}
             \instruction{writeByte(destination,binaryCode)}
         }
-        \instruction{close(source)}
-        \instruction{close(destination)}
+        
     }
     \espace
 \end{algorithme}
