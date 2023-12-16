@@ -8,16 +8,16 @@
 typedef struct
 {
     int lesElements[Statistics_MAX]; // type huffmantree
-    unsigned int nbOccurrence[Statistics_MAX];
+    FileSize nbOccurrence[Statistics_MAX];
 } Statistics;
 
-Statistics Statistics_statistics();
+Statistics statistics_create();
 
-unsigned int Statistics_getCount(Statistics stat, int e);
+unsigned int statistics_get_count(Statistics stat, int e);
 
-Statistics Statistics_setCount(Statistics stat, int e, unsigned int n);
+Statistics statistics_set_count(Statistics stat, int e, unsigned int n);
 
-Statistics Statistics_increaseCount(Statistics stat, int e);
+Statistics statistics_increase_count(Statistics stat, int e);
 
 /// @brief Fonction qui sérialise les statistiques dans un tableau d'octets.
 /// @param stats Les statistiques

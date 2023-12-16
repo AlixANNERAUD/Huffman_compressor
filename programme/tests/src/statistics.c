@@ -5,5 +5,5 @@
 #include "CUnit/Basic.h"
 
 void test_Statistics_statistics() {
-    Statistics s = Statistics_statistics();
+    Statistics s = statistics_create();
 }

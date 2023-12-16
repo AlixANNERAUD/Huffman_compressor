@@ -1,11 +1,11 @@
 #include "statistics.h"
 
-Statistics Statistics_statistics(){
+Statistics statistics_create(){
     Statistics res;
     return res;
 }
 
-unsigned int Statistics_getCount(Statistics stat, int e){
+unsigned int statistics_get_count(Statistics stat, int e){
     int i = 0;
     while(i<=Statistics_MAX-1 && !(e = stat.lesElements[i])){
         i=i+1;
@@ -13,7 +13,7 @@ unsigned int Statistics_getCount(Statistics stat, int e){
     return stat.nbOccurrence[i];
 }
 
-Statistics Statistics_setCount(Statistics stat, int e, unsigned int n){
+Statistics statistics_set_count(Statistics stat, int e, unsigned int n){
     int i = 0;
     while(i<=Statistics_MAX-1 && !(e = stat.lesElements[i])){
         i=i+1;
@@ -22,7 +22,7 @@ Statistics Statistics_setCount(Statistics stat, int e, unsigned int n){
     return stat;
 }
 
-Statistics Statistics_increaseCount(Statistics stat, int e){
+Statistics statistics_increase_count(Statistics stat, int e){
     int i = 0;
     while(i<=Statistics_MAX-1 && !(e = stat.lesElements[i])){
         i=i+1;
