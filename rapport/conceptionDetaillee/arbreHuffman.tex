@@ -3,14 +3,14 @@
 
 \begin{algorithme}
 
-    \begin {enregistrement}{Knot}
+    \begin {enregistrement}{Node}
         \champEnregistrement{value}{\byte}
         \champEnregistrement{weight}{\naturel}
         \champEnregistrement{leftChild}{\huffmanTree}
         \champEnregistrement{rightChild}{\huffmanTree}
     \end{enregistrement}
     \espace
-    \type {HuffmanTree}{\pointeur {Knot}}
+    \type {HuffmanTree}{\pointeur {Node}}
     \espace
     \fonction{newLeaf}{value : \byte, weight : \naturel}{\huffmanTree}{}
     {ht : huffmanTree}
