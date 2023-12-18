@@ -1,6 +1,6 @@
 #include "condingTable.h"
 
-CodingTable CodingTable_create()
+CodingTable coding_table_create()
 {
     CodingTable codingTable;
     codingTable.length = 0;
@@ -11,11 +11,11 @@ CodingTable CodingTable_create()
 /// Cette fonction ne doit pas être appelée si la clé est déjà présente dans la table.
 /// La table étant ordonnée, l'insertion et la recherche d'un clé se font en O(log(n)), accélérant ainsi la compression.
 /// Cependant, la recherche d'une valeur se fait en O(n) car la table n'est pas indexée par valeur
-void CodingTable_add(CodingTable *codingTable, char key, int value)
+void coding_table_add(CodingTable *codingTable, char key, int value)
 {
     // Préconditions
     assert(codingTable != NULL);
-    assert(CodingTable_is_present(codingTable, key));
+    assert(coding_table_is_present(codingTable, key));
    
     size_t i = codingTable->length;
     // On décale les éléments de la table pour insérer le nouvel élément
@@ -33,11 +33,11 @@ void CodingTable_add(CodingTable *codingTable, char key, int value)
 
 /// @details Cette fonction vérifie si une clé est présente dans la table de codage.
 /// La recherche est effectuée par dichotomie, ce qui permet d'effectuer la recherche en O(log(n)) 
-int CodingTable_get_value(const CodingTable* codingTable, char key)
+int coding_table_get_value(const CodingTable* codingTable, char key)
 {
     // Préconditions
     assert(codingTable != NULL);
-    assert(CodingTable_is_present(codingTable, key));
+    assert(coding_table_is_present(codingTable, key));
 
     size_t min = 0;
     size_t max = codingTable->length - 1;
@@ -59,7 +59,7 @@ int CodingTable_get_value(const CodingTable* codingTable, char key)
     return codingTable->entries[mid].value;
 }
 
-bool CodingTable_is_present(const CodingTable* codingTable, char key)
+bool coding_table_is_present(const CodingTable* codingTable, char key)
 {
     // Préconditions
     assert(codingTable != NULL);

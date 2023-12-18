@@ -22,22 +22,22 @@ typedef struct
 } CodingTable;
 
 /// @brief Crée une table de codage vide.
-CodingTable CodingTable_create();
+CodingTable coding_table_create();
 
 /// @brief Ajoute une entrée dans la table de codage.
 /// @param codingTable Table de codage à modifier.
 /// @param key Clé à ajouter.
 /// @param value Valeur à ajouter.
-void CodingTable_add(CodingTable *codingTable, char key, int value);
+void coding_table_add(CodingTable *codingTable, char key, int value);
 
 /// @brief Récupère la valeur associée à une clé dans la table de codage.
 /// @param codingTable Table de codage à consulter.
 /// @param key Clé à rechercher.
 /// @return Valeur associée à la clé.
-int CodingTable_get_value(const CodingTable* codingTable, char key);
+int coding_table_get_value(const CodingTable* codingTable, char key);
 
 /// @brief Vérifie si une clé est présente dans la table de codage.
 /// @param codingTable Table de codage à consulter.
 /// @param key Clé à rechercher.
 /// @return TRUE si la clé est présente, FALSE sinon.
-bool CodingTable_is_present(const CodingTable* codingTable, char key);
+bool coding_table_is_present(const CodingTable* codingTable, char key);
