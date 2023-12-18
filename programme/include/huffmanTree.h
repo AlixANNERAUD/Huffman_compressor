@@ -17,7 +17,7 @@ typedef struct {
     struct node *rightChild;
 } node;
 
-typedef *node huffmanTree;
+typedef node* huffmanTree;
 
 // - - Fonctions
 
