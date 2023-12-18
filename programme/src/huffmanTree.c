@@ -1,10 +1,6 @@
 #include "huffmanTree.h"
-#include "byte.h"
 
 // - Définitions
-
-
-
 
 // - - Fonctions privées
 
@@ -12,7 +8,7 @@
 // - - Fonctions publiques
 
 
-huffmanTree newLeaf(byte value, unsigned int weight)
+huffmanTree newLeaf(Byte value, unsigned int weight)
 {
     huffmanTree *tree = malloc(sizeof(node));
 
@@ -26,7 +22,7 @@ huffmanTree newLeaf(byte value, unsigned int weight)
 
 huffmanTree newTree(huffmanTree *tree1, huffmanTree *tree2)
 {
-    huffmanTree *tree = newLeaf(byte(0), tree1->weight + tree2->weight);
+    huffmanTree *tree = newLeaf(Byte(0), tree1->weight + tree2->weight);
     tree->*leftChild = *tree1;
     tree->*rightChild = *tree2;
 
@@ -38,7 +34,7 @@ bool isLeaf (huffmanTree *tree)
     return ((tree->*leftChild==NULL) && (tree->*rightChild==NULL));
 }
 
-byte getValue(huffmanTree *tree)
+Byte getValue(huffmanTree *tree)
 {
     //Précondition
     assert(isLeaf(tree));
