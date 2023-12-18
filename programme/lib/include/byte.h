@@ -1,10 +1,12 @@
 #pragma once
 
-typedef Bit Byte[8];
+#include "bit.h"
 
-Byte byte_byte(unsigned int natural);
+typedef unsigned char Byte;
 
-unsigned int byte_byte_to_natural(Byte byte);
+Byte byte_create(unsigned int natural);
+
+unsigned int byte_to_natural(Byte byte);
 
 void byte_set_bit(Byte* byte, unsigned int position, Bit bit);
 
