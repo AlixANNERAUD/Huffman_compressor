@@ -42,3 +42,14 @@ void test_binary_code_remove_last_bit() {
     binary_code_remove_last_bit(&code);
     CU_ASSERT_EQUAL(code.bits[code.length-1],BIT_0);
 }
+
+void binary_code_tests()
+{
+    CU_pSuite suite = CU_add_suite("binaryCode", NULL, NULL);
+    CU_add_test(suite, "test_binary_code_create", test_binary_code_create);
+    CU_add_test(suite, "test_binary_code_get_length", test_binary_code_get_length);
+    CU_add_test(suite, "test_binary_code_get_bit", test_binary_code_get_bit);
+    CU_add_test(suite, "test_binary_code_add_bit", test_binary_code_add_bit);
+    CU_add_test(suite, "test_binary_code_remove_bit", test_binary_code_remove_bit);
+    CU_add_test(suite, "test_binary_code_remove_last_bit", test_binary_code_remove_last_bit);
+}
