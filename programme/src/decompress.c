@@ -36,7 +36,7 @@ DecompressResult read_header(FILE *input, Statistics *statistics, size_t *size)
     statistics_deserialize(statistics, buffer); // On désérialise les statistiques
 }
 
-DecompressResult decompress_data(FILE *input, FILE *output, const HuffmanTree tree, size_t *decompressedSize)
+DecompressResult decompress_data(FILE *input, FILE *output, const HuffmanTree tree, FileSize *decompressedSize)
 {
     unsigned char bitReadPosition = 0;
     HuffmanTree currentTree = tree;
@@ -49,12 +49,10 @@ DecompressResult decompress_data(FILE *input, FILE *output, const HuffmanTree tr
         if (bitReadPosition > 7)
         {
             unsigned char bitsRead;
-            if (fread(&bitsRead, sizeof(bitsRead), 1, input) != 1)  
-                return DECOMPRESS_RESULT_ERROR_PREMATURE_END_OF_FILE;   // Lecture du nombre de bits à lire
-            sourceByte = byte_create(bitsRead); // Conversion d'un naturel non signé d'un octet en octet
-
+            if (fread(&bitsRead, sizeof(bitsRead), 1, input) != 1)
+                return DECOMPRESS_RESULT_ERROR_PREMATURE_END_OF_FILE; // Lecture du nombre de bits à lire
+            sourceByte = byte_create(bitsRead);                       // Conversion d'un naturel non signé d'un octet en octet
             bitReadPosition = 0;
-
         }
 
         if (huffman_tree_is_leaf(currentTree))
