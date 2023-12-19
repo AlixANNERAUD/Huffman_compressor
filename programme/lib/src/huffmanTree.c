@@ -27,7 +27,7 @@ HuffmanTree huffman_tree_new_tree(HuffmanTree left, HuffmanTree right) {
     assert(left);
     assert(right);
 
-    HuffmanTree tree = newLeaf(Byte(0), left->weight + right->weight);
+    HuffmanTree tree = huffman_tree_new_leaf(byte_create(0), 0);
     tree->leftChild = left;
     tree->rightChild = right;
 
@@ -59,7 +59,7 @@ bool huffman_tree_is_leaf(const HuffmanTree tree) {
 char huffman_tree_get_value(const HuffmanTree tree) {
     //Préconditions
     assert(tree);
-    assert(isLeaf(tree));
+    assert(huffman_tree_is_leaf(tree));
 
     return tree->value;
 }
@@ -74,7 +74,7 @@ unsigned int huffman_tree_get_weight(const HuffmanTree tree) {
 HuffmanTree huffman_tree_get_left_child(const HuffmanTree tree) {
    //Prédonditions
     assert(tree);
-    assert(!(isLeaf(tree)));
+    assert(!huffman_tree_is_leaf(tree));
 
     return tree->leftChild;
 }
@@ -82,7 +82,7 @@ HuffmanTree huffman_tree_get_left_child(const HuffmanTree tree) {
 HuffmanTree huffman_tree_get_right_child(const HuffmanTree tree) {
    //Préconditions
     assert(tree);
-    assert(!(isLeaf(tree)));
+    assert(!(huffman_tree_is_leaf(tree)));
 
     return tree->rightChild;
 }
