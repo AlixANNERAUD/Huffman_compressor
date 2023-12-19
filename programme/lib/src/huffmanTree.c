@@ -8,7 +8,6 @@
 
 // - - Fonctions privées
 
-
 // - - Fonctions publiques
 
 HuffmanTree huffman_tree_new_leaf(char value, unsigned int weight) {
@@ -92,6 +91,7 @@ HuffmanTree* huffman_tree_from_statistic(const Statistics* statistics) {
     //Précondition
     assert(statistics);
     
-
+    //TODO
+    
     return NULL;
 }
