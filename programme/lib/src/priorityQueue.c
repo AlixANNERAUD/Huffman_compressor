@@ -13,12 +13,12 @@ size_t PriorityQueue_get_length(const PriorityQueue *priorityQueue) {
     return priorityQueue->length;
 }
 
-int PriorityQueue_pop(PriorityQueue *priorityQueue) {
+HuffmanTree PriorityQueue_pop(PriorityQueue *priorityQueue) {
     // Préconditions
     assert(priorityQueue != NULL);
     assert(priorityQueue->length > 0);
 
-    int node = priorityQueue->nodes[priorityQueue->length - 1];
+    HuffmanTree node = priorityQueue->nodes[priorityQueue->length - 1];
     priorityQueue->length--;
     return node;
 }
