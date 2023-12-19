@@ -1,13 +1,14 @@
 #pragma once
 
 #include "common.h"
+#include "huffmanTree.h"
 
 #define PRIORITY_QUEUE_MAXIMUM_SIZE 256
 
 /// @brief Structure représentant une file de priorité.
 typedef struct {
     /// @brief Noeuds de la file de priorité.
-    int nodes[PRIORITY_QUEUE_MAXIMUM_SIZE];
+    HuffmanTree nodes[PRIORITY_QUEUE_MAXIMUM_SIZE];
     /// @brief Taille de la file de priorité.
     size_t length;
 } PriorityQueue;
