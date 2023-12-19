@@ -6,8 +6,8 @@
 
 typedef struct Statistics
 {
-    int lesElements[Statistics_MAX]; // type huffmantree
-    FileSize nbOccurrence[Statistics_MAX];
+    BinaryCode lesElements[Statistics_MAX];
+    unsigned int nbOccurrence[Statistics_MAX];
 } Statistics;
 
 Statistics statistics_create();
