@@ -3,6 +3,7 @@
 #define Statistics_MAX 256
 
 #include "common.h"
+#include "binaryCode.h"
 
 typedef struct Statistics
 {
