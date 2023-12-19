@@ -1,4 +1,4 @@
-#include "condingTable.h"
+#include "codingTable.h"
 
 CodingTable coding_table_create()
 {
