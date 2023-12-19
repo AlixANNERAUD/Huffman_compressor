@@ -6,7 +6,7 @@ PriorityQueue PriorityQueue_create() {
     return priorityQueue;
 }
 
-size_t PriorityQueue_length(const PriorityQueue *priorityQueue) {
+size_t PriorityQueue_get_length(const PriorityQueue *priorityQueue) {
     // Préconditions
     assert(priorityQueue != NULL);
 
