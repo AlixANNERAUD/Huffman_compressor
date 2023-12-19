@@ -24,8 +24,8 @@ void binary_code_add_bit(BinaryCode* code, Bit bit) {
 }
 
 void binary_code_remove_bit(BinaryCode* code, unsigned int index) {
-    assert(!(index >= 0 && index < binary_code_get_length(code)))
-    assert(!(binary_code_get_length(code) > 0));
+    assert(index < binary_code_get_length(code));
+    assert(binary_code_get_length(code) > 0);
     for(int i=index;i<binary_code_get_length(code)-1;i=i+1){
         code->bits[i]=code->bits[i+1];
     }
