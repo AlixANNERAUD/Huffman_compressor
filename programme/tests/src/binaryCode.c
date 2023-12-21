@@ -21,7 +21,7 @@ void test_binary_code_get_bit() {
 void test_binary_code_add_bit() {
     BinaryCode code = binary_code_create();
     binary_code_add_bit(&code,BIT_1);
-    CU_ASSERT_EQUAL(code.bits.[code.length-1],BIT_1);
+    CU_ASSERT_EQUAL(code.bits[code.length-1],BIT_1);
 }
 
 void test_binary_code_remove_bit() {
