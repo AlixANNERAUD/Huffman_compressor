@@ -20,7 +20,7 @@ TODO
 
 ## ℹ️ About
 
-This project is under the MIT license. 
+This project is under the [MIT license](LICENSE).
 
 The authors are:
 - Alix ANNERAUD
