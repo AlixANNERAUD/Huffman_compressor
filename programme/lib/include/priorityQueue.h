@@ -25,9 +25,9 @@ size_t priority_queue_get_length(const PriorityQueue *queue);
 /// @brief Défile le dernier élément de la file de priorité.
 /// @param queue File de priorité à défiler.
 /// @return Dernier élément de la file de priorité.
-int priority_queue_pop(PriorityQueue *queue);
+HuffmanTree riority_queue_pop(PriorityQueue *queue);
 
 /// @brief Enfile un élément dans la file de priorité.
 /// @param queue File de priorité.
 /// @param node Nœud à enfiler.
-void priority_queue_push(PriorityQueue *queue, int node);
+void priority_queue_push(PriorityQueue *queue, HuffmanTree node);

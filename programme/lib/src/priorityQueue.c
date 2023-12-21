@@ -23,7 +23,7 @@ HuffmanTree priority_queue_pop(PriorityQueue *priorityQueue) {
     return node;
 }
 
-void priority_queue_push(PriorityQueue *priorityQueue, int node) {
+void priority_queue_push(PriorityQueue *priorityQueue, HuffmanTree node) {
     // Préconditions
     assert(priorityQueue != NULL);
     assert(priorityQueue->length < PRIORITY_QUEUE_MAXIMUM_SIZE);
