@@ -6,7 +6,7 @@
 #define PRIORITY_QUEUE_MAXIMUM_SIZE 256
 
 /// @brief Structure représentant une file de priorité.
-typedef struct {
+typedef struct PriorityQueue {
     /// @brief Noeuds de la file de priorité.
     HuffmanTree nodes[PRIORITY_QUEUE_MAXIMUM_SIZE];
     /// @brief Taille de la file de priorité.
