@@ -1,19 +1,19 @@
 #include "priorityQueue.h"
 
-PriorityQueue PriorityQueue_create() {
+PriorityQueue priority_queue_create() {
     PriorityQueue priorityQueue;
     priorityQueue.length = 0;
     return priorityQueue;
 }
 
-size_t PriorityQueue_get_length(const PriorityQueue *priorityQueue) {
+size_t priority_queue_get_length(const PriorityQueue *priorityQueue) {
     // Préconditions
     assert(priorityQueue != NULL);
 
     return priorityQueue->length;
 }
 
-HuffmanTree PriorityQueue_pop(PriorityQueue *priorityQueue) {
+HuffmanTree priority_queue_pop(PriorityQueue *priorityQueue) {
     // Préconditions
     assert(priorityQueue != NULL);
     assert(priorityQueue->length > 0);
@@ -23,7 +23,7 @@ HuffmanTree PriorityQueue_pop(PriorityQueue *priorityQueue) {
     return node;
 }
 
-void PriorityQueue_push(PriorityQueue *priorityQueue, int node) {
+void priority_queue_push(PriorityQueue *priorityQueue, int node) {
     // Préconditions
     assert(priorityQueue != NULL);
     assert(priorityQueue->length < PRIORITY_QUEUE_MAXIMUM_SIZE);
