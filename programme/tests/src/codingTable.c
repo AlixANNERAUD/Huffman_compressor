@@ -20,3 +20,12 @@ void test_coding_table_get_value(){
 void test_coding_table_is_present(){
 
 }
+
+void coding_table_add_tests()
+{
+    CU_pSuite suite = CU_add_suite("codingTable", NULL, NULL);
+    CU_add_test(suite, "test_coding_table_create", test_coding_table_create);
+    CU_add_test(suite, "test_coding_table_add", test_coding_table_add);
+    CU_add_test(suite, "test_coding_table_get_value", test_coding_table_get_value);
+    CU_add_test(suite, "test_coding_table_is_present", test_coding_table_is_present);
+}

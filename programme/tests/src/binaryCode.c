@@ -43,7 +43,7 @@ void test_binary_code_remove_last_bit() {
     CU_ASSERT_EQUAL(code.bits[code.length-1],BIT_0);
 }
 
-void binary_code_tests()
+void binary_code_add_tests()
 {
     CU_pSuite suite = CU_add_suite("binaryCode", NULL, NULL);
     CU_add_test(suite, "test_binary_code_create", test_binary_code_create);

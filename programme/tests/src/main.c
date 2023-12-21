@@ -11,7 +11,7 @@ int main() {
         return CU_get_error();
 
     // Add tests to suite
-    HuffmanTree_add_tests();
+    huffman_tree_add_tests();
 
     // - Run all tests
     CU_basic_set_mode(CU_BRM_VERBOSE); // Set verbs mode

@@ -39,7 +39,7 @@ void test_priority_queue_push_and_pop() {
 
 }
 
-void priorityQueue_add_tests()
+void priority_queue_add_tests()
 {
     CU_pSuite suite = CU_add_suite("PriorityQueue", NULL, NULL);
     CU_add_test(suite, "test_priority_queue_create", test_priority_queue_create);
