@@ -2,7 +2,7 @@
 
 #include "statistics.h"
 
-#include "huffmanTree.h"
+#include <malloc.h> // Pour malloc et free
 
 // - Définitions
 
