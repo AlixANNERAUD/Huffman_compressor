@@ -7,32 +7,32 @@ Statistics statistics_create(){
     return res;
 }
 
-unsigned int statistics_get_count(Statistics stat, int e){
+unsigned int statistics_get_count(Statistics* stat, int e){
     int i = 0;
-    while(i<=Statistics_MAX-1 && !(e == stat.lesElements[i])){
+    while(i<=Statistics_MAX-1 && !(e == stat->lesElements[i])){
         i=i+1;
     }
-    assert(e != stat.lesElements[i]);
-    return stat.nbOccurrence[i];
+    assert(e != stat->lesElements[i]);
+    return stat->nbOccurrence[i];
 }
 
-Statistics statistics_set_count(Statistics stat, int e, unsigned int n){
+Statistics statistics_set_count(Statistics* stat, int e, unsigned int n){
     int i = 0;
-    while(i<=Statistics_MAX-1 && !(e == stat.lesElements[i])){
+    while(i<=Statistics_MAX-1 && !(e == stat->lesElements[i])){
         i=i+1;
     }
-    assert(e != stat.lesElements[i]);
-    stat.nbOccurrence[i] = n;
+    assert(e != stat->lesElements[i]);
+    stat->nbOccurrence[i] = n;
     return stat;
 }
 
-Statistics statistics_increase_count(Statistics stat, int e){
+Statistics statistics_increase_count(Statistics* stat, int e){
     int i = 0;
-    while(i<=Statistics_MAX-1 && !(e == stat.lesElements[i])){
+    while(i<=Statistics_MAX-1 && !(e == stat->lesElements[i])){
         i=i+1;
     }
-    assert(e != stat.lesElements[i]);
-    stat.nbOccurrence[i] = stat.nbOccurrence[i]+1;
+    assert(e != stat->lesElements[i]);
+    stat.nbOccurrence[i] = stat->nbOccurrence[i]+1;
     return stat;
 }
 
