@@ -12,6 +12,11 @@ int main() {
 
     // Add tests to suite
     huffman_tree_add_tests();
+    priority_queue_add_tests();
+    byte_add_tests();
+    coding_table_add_tests();
+    statistics_add_tests();
+    binary_code_add_tests();
 
     // - Run all tests
     CU_basic_set_mode(CU_BRM_VERBOSE); // Set verbs mode
