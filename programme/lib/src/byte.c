@@ -11,7 +11,7 @@ Byte byte_create(unsigned int natural){
 
 unsigned int byte_to_natural(Byte byte){
     
-    unsigned int res=byte;
+    unsigned int res = byte;
 
     return res;
 }
@@ -21,17 +21,17 @@ void byte_set_bit(Byte* byte, unsigned int position, Bit bit) {
 
     Byte temp = byte;
     if (bit == BIT_0)
-        temp &= ~(1 << position); // and
+        temp &= ~(1 << position); // &= AND, ~ NOT, décaler à gauche puis fixer le bit 0 à la position donnée
     else 
-        temp |= (1 << position); // or
+        temp |= (1 << position); // |= OR, décaler à gauche puis fixer le bit 1 à la position donnée
     *byte = temp;
 }
 
 Bit byte_get_bit(Byte byte, unsigned int position){
-    assert(position <=7);
+    assert(position <= 7);
 
     Bit res;
-    if ((byte >> position)&1 == 1) // comparer(and) avec 1 donne le bit
+    if ((byte >> position)&1 == 1) // décaler à droite puis comparer avec 1 (AND) donne le bit à la position 
         res = BIT_1;
     else
         res = BIT_0;
