@@ -12,7 +12,7 @@
 // - - Types
 
 /// @brief 
-typedef struct {
+typedef struct Node {
     /// @brief Valeur (byte) du noeud. NB : Utile uniquement dans une feuille. 
     Byte value;
     /// @brief Poids du noeud, son poids propre s'il est une feuille, la somme du poids de ses fils sinon. 
@@ -23,7 +23,7 @@ typedef struct {
     struct Node* rightChild;
 } Node;
 
-typedef struct Node* HuffmanTree;
+typedef Node* HuffmanTree;
 
 // - - Fonctions
 
