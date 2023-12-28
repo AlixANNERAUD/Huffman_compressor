@@ -26,4 +26,5 @@ typedef enum {
 /// @return Résultat de la décompression
 DecompressResult decompress(FILE* input, FILE* output);
 
-DecompressResult decompress_error_to_string(DecompressResult error, char* buffer, size_t buffer_size);
+DecompressResult decompress_error_to_string(DecompressResult error, char* buffer, FileSize buffer_size);
+

@@ -23,7 +23,7 @@ typedef struct {
     struct Node* rightChild;
 } Node;
 
-typedef Node* HuffmanTree;
+typedef struct Node* HuffmanTree;
 
 // - - Fonctions
 

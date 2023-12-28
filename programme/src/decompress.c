@@ -20,14 +20,14 @@ bool is_huffman_compressed_file(FILE *input)
         return false;
 }
 
-DecompressResult read_header(FILE *input, Statistics *statistics, size_t *size)
+DecompressResult read_header(FILE *input, Statistics *statistics, FileSize *size)
 {
     // - Lecture de l'en-tête
     // - - Vérification de l'identifiant
     if (!is_huffman_compressed_file(input))
         return DECOMPRESS_RESULT_ERROR_INVALID_HEADER;
     // - - Lecture de la taille des données compressées
-    if (fread(size, sizeof(size_t), 1, input) != 1)
+    if (fread(size, sizeof(FileSize), 1, input) != 1)
         return DECOMPRESS_RESULT_ERROR_INVALID_HEADER;
     // - - Lecture des statistiques
     unsigned char buffer[sizeof(statistics->nbOccurrence)];
@@ -45,7 +45,7 @@ DecompressResult decompress_data(FILE *input, FILE *output, const HuffmanTree tr
 
     while (feof(input) == 0)
     {
-        BinaryCode code = binary_code_create();
+        //BinaryCode code = binary_code_create();
         if (bitReadPosition > 7)
         {
             unsigned char bitsRead;
@@ -93,7 +93,7 @@ DecompressResult decompress(FILE *input, FILE *output)
         return DECOMPRESS_RESULT_ERROR_PREMATURE_END_OF_FILE;
 
     DecompressResult result = DECOMPRESS_RESULT_OK;
-    size_t size;
+    FileSize size;
     Statistics statistics = statistics_create();
     result = read_header(input, &statistics, &size);
 
@@ -107,14 +107,14 @@ DecompressResult decompress(FILE *input, FILE *output)
     if (feof(input) != 0)
         return DECOMPRESS_RESULT_ERROR_PREMATURE_END_OF_FILE;
 
-    result = decompress_data(input, output, tree, size);
+    result = decompress_data(input, output, *tree, &size);
 
-    huffman_tree_delete(tree);
+    huffman_tree_delete(*tree);
 
     return result;
 }
 
-DecompressResult decompress_error_to_string(DecompressResult error, char *buffer, size_t buffer_size)
+DecompressResult decompress_error_to_string(DecompressResult error, char *buffer, FileSize buffer_size)
 {
     switch (error)
     {
