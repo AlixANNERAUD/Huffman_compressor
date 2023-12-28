@@ -12,17 +12,17 @@
 #define Statistics_MAX 256
 
 #include "common.h"
-#include "binaryCode.h"
+#include "byte.h"
 
 /**
  * @struct Statistics
- * Structure associant chaque élément à son nombre d’occurrence
+ * Structure associant chaque élément à son nombre d'occurence
 */
 typedef struct Statistics
 {
-    ///@brief Tableau des Codes Binaires représentant les éléments
-    BinaryCode lesElements[Statistics_MAX];
-    /// @brief Tableau des nombres d'occurrences de chaque élément
+    ///@brief Tableau des octet représentant les éléments
+    Byte lesElements[Statistics_MAX];
+    /// @brief Tableau des nombres d'occurences de chaque élément
     unsigned int nbOccurrence[Statistics_MAX];
 } Statistics;
 
@@ -33,29 +33,29 @@ typedef struct Statistics
 Statistics statistics_create();
 
 /**
- * @fn unsigned int statistics_get_count(Statistics stat, BinaryCode e)
- * @brief Fonction qui renvoie le nombre d’occurrence d'un élément e
+ * @fn unsigned int statistics_get_count(Statistics stat, Byte e)
+ * @brief Fonction qui renvoie le nombre d'occurence d'un élément e
  * @param stat Les statistiques
- * @param e élément sous forme de code binaire
+ * @param e élément sous forme d'octet
 */
-unsigned int statistics_get_count(const Statistics* stat, BinaryCode e);
+unsigned int statistics_get_count(Statistics stat, Byte e);
 
 /**
- * @fn statistics_set_count(Statistics* stat, BinaryCode e, unsigned int n)
- * @brief Fonction qui permet de définir le nombre d'occurrences d'un élément e
+ * @fn statistics_set_count(Statistics* stat, Byte e, unsigned int n)
+ * @brief Fonction qui permet de définir le nombre d'occurences d'un élément e
  * @param stat Les statistiques
- * @param e élément sous forme de code binaire
- * @param n Nombre d'occurrences de e
+ * @param e élément sous forme d'octet
+ * @param n Nombre d'occurences de e
 */
-void statistics_set_count(Statistics* stat, BinaryCode e, unsigned int n);
+void statistics_set_count(Statistics* stat, Byte e, unsigned int n);
 
 /**
- * @fn statistics_increase_count(Statistics* stat, BinaryCode e)
- * @brief Fonction qui permet d'augmenter de 1 le nombre d’occurrence d'un élément e
+ * @fn statistics_increase_count(Statistics* stat, Byte e)
+ * @brief Fonction qui permet d'augmenter de 1 le nombre d'occurence d'un élément e
  * @param stat Les statistiques
- * @param e élément sous forme de code binaire
+ * @param e élément sous forme d'octet
 */
-void statistics_increase_count(Statistics* stat, BinaryCode e);
+void statistics_increase_count(Statistics* stat, Byte e);
 
 /// @brief Fonction qui sérialise les statistiques dans un tableau d'octets.
 /// @param stats Les statistiques

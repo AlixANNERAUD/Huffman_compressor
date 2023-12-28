@@ -14,9 +14,9 @@ Statistics statistics_create(){
 
 /** @details 
  * Cette fonction va parcourir le tableau des éléments(O[n]) jusqu'à trouver 
- * l'élément e et ainsi retourner son nombre d’occurrence associé dans le tableau des nombres d'occurrences
+ * l'élément e et ainsi retourner son nombre d'occurence associé dans le tableau des nombres d'occurences
  * */
-unsigned int statistics_get_count(const Statistics* stat, BinaryCode e){
+unsigned int statistics_get_count(const Statistics* stat, Byte e){
     int i = 0;
     while(i<=Statistics_MAX-1 && !(e == stat->lesElements[i])){
         i=i+1;
@@ -27,9 +27,9 @@ unsigned int statistics_get_count(const Statistics* stat, BinaryCode e){
 
 /** @details
  * Cette fonction va parcourir le tableau des éléments(O[n]) jusqu'à trouver 
- * l'élément e et ainsi définir son nombre d’occurrence à n dans le tableau des nombres d'occurrences
+ * l'élément e et ainsi définir son nombre d'occurence à n dans le tableau des nombres d'occurences
 */
-void statistics_set_count(Statistics* stat, BinaryCode e, unsigned int n){
+void statistics_set_count(Statistics* stat, Byte e, unsigned int n){
     int i = 0;
     while(i<=Statistics_MAX-1 && !(e == stat->lesElements[i])){
         i=i+1;
@@ -40,9 +40,9 @@ void statistics_set_count(Statistics* stat, BinaryCode e, unsigned int n){
 
 /** @details
  * Cette fonction va parcourir le tableau des éléments(O[n]) jusqu'à trouver 
- * l'élément e et ainsi augmenter son nombre d’occurrence de 1 dans le tableau des nombres d'occurrences
+ * l'élément e et ainsi augmenter son nombre d'occurence de 1 dans le tableau des nombres d'occurences
 */
-void statistics_increase_count(Statistics* stat, BinaryCode e){
+void statistics_increase_count(Statistics* stat, Byte e){
     int i = 0;
     while(i<=Statistics_MAX-1 && !(e == stat->lesElements[i])){
         i=i+1;
