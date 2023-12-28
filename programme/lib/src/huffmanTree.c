@@ -41,9 +41,9 @@ void huffman_tree_delete(HuffmanTree tree) {
 
     HuffmanTree tmpTree = tree;
     
-    if (tmpTree->leftChild) huffman_tree_delete(&tmpTree->leftChild);
+    if (tmpTree->leftChild) huffman_tree_delete(tmpTree->leftChild);
 
-    if (tmpTree->rightChild) huffman_tree_delete(&tmpTree->rightChild);
+    if (tmpTree->rightChild) huffman_tree_delete(tmpTree->rightChild);
 
     free(tmpTree);
 
