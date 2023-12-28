@@ -18,6 +18,8 @@ bool is_huffman_compressed_file(FILE *input)
 
     if (strncmp(identifier, "HUFF", sizeof(identifier)) != 0)
         return false;
+
+    return true;
 }
 
 DecompressResult read_header(FILE *input, Statistics *statistics, FileSize *size)
@@ -34,6 +36,8 @@ DecompressResult read_header(FILE *input, Statistics *statistics, FileSize *size
     if (fread(buffer, sizeof(unsigned char), sizeof(buffer), input) != sizeof(buffer))
         return DECOMPRESS_RESULT_ERROR_INVALID_HEADER;
     statistics_deserialize(statistics, buffer); // On désérialise les statistiques
+
+    return DECOMPRESS_RESULT_OK;
 }
 
 DecompressResult decompress_data(FILE *input, FILE *output, const HuffmanTree tree, FileSize *decompressedSize)
@@ -68,7 +72,7 @@ DecompressResult decompress_data(FILE *input, FILE *output, const HuffmanTree tr
         {
             Byte destinationByte = huffman_tree_get_value(currentTree);           // On récupère la valeur de l'octet
             unsigned char naturalToWrite = byte_to_natural(destinationByte);      // Conversion d'un octet en naturel non signé d'un octet
-            if (fwrite(&output, sizeof(naturalToWrite), 1, &naturalToWrite) != 1) // Ecriture de l'octet dans le fichier de sortie
+            if (fwrite(&naturalToWrite, sizeof(naturalToWrite), 1, output) != 1) // Ecriture de l'octet dans le fichier de sortie
                 return DECOMPRESS_RESULT_ERROR_FAILED_TO_WRITE_OUTPUT_FILE;
             currentTree = tree; // Retour à la racine
             *decompressedSize++;
