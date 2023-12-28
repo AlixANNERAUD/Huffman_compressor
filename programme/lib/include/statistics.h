@@ -38,7 +38,7 @@ Statistics statistics_create();
  * @param stat Les statistiques
  * @param e élément sous forme de code binaire
 */
-unsigned int statistics_get_count(Statistics stat, BinaryCode e);
+unsigned int statistics_get_count(const Statistics* stat, BinaryCode e);
 
 /**
  * @fn statistics_set_count(Statistics* stat, BinaryCode e, unsigned int n)
