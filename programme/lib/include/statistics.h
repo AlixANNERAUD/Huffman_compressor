@@ -13,11 +13,11 @@ typedef struct Statistics
 
 Statistics statistics_create();
 
-unsigned int statistics_get_count(Statistics* stat, int e);
+unsigned int statistics_get_count(Statistics stat, int e);
 
-Statistics statistics_set_count(Statistics* stat, int e, unsigned int n);
+void statistics_set_count(Statistics* stat, int e, unsigned int n);
 
-Statistics statistics_increase_count(Statistics* stat, int e);
+void statistics_increase_count(Statistics* stat, int e);
 
 /// @brief Fonction qui sérialise les statistiques dans un tableau d'octets.
 /// @param stats Les statistiques
