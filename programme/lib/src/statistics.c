@@ -16,7 +16,7 @@ Statistics statistics_create(){
  * Cette fonction va parcourir le tableau des éléments(O[n]) jusqu'à trouver 
  * l'élément e et ainsi retourner son nombre d'occurence associé dans le tableau des nombres d'occurences
  * */
-unsigned int statistics_get_count(Statistics stat, BinaryCode e){
+unsigned int statistics_get_count(const Statistics* stat, BinaryCode e){
     int i = 0;
     while(i<=Statistics_MAX-1 && !(e == stat->lesElements[i])){
         i=i+1;
