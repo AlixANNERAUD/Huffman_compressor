@@ -40,9 +40,10 @@
         \affecter{d}{codingTable.size}
         \tantque{g<d}{
             \affecter {m}{(g + d) div 2}
-            \sialorssinon{codingTable[m].byte > byte}
+            \sialors{codingTable[m].byte > byte}{
                 {\affecter{d}{m-1}}
                 {\affecter{g}{m}}
+            }
         }
         \retourner {codingTable[d].BC}
     }
