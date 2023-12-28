@@ -48,11 +48,11 @@ void statistics_increase_count(Statistics* stat, Byte e){
         i=i+1;
     }
     assert(e != stat->lesElements[i]);//précondition
-    stat.nbOccurrence[i] = stat->nbOccurrence[i]+1;
+    stat->nbOccurrence[i] = stat->nbOccurrence[i]+1;
 }
 
 /// @details Fonction qui copie simplement octet par octet les statistiques dans le buffer.
-void statistics_serialize(const Statistics* stats, unsigned char* buffer, size_t size) {
+void statistics_serialize(const Statistics* stats, unsigned char* buffer, FileSize size) {
     // Préconditions
     assert(stats != NULL);
     assert(buffer != NULL);

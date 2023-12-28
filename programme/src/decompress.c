@@ -114,7 +114,7 @@ DecompressResult decompress(FILE *input, FILE *output)
     return result;
 }
 
-void decompress_error_to_string(DecompressResult error, char *buffer, size_t buffer_size)
+DecompressResult decompress_error_to_string(DecompressResult error, char *buffer, size_t buffer_size)
 {
     switch (error)
     {

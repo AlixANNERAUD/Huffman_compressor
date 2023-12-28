@@ -38,3 +38,4 @@ void priority_queue_push(PriorityQueue *priorityQueue, HuffmanTree node) {
     
     priorityQueue->length++;
 }
+

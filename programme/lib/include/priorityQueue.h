@@ -31,3 +31,4 @@ HuffmanTree riority_queue_pop(PriorityQueue *queue);
 /// @param queue File de priorité.
 /// @param node Nœud à enfiler.
 void priority_queue_push(PriorityQueue *queue, HuffmanTree node);
+

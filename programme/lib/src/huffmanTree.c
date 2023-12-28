@@ -2,7 +2,8 @@
 
 #include "statistics.h"
 
-#include <malloc.h> // Pour malloc et free
+#include <stdlib.h> // Pour malloc et free (include <malloc.h> ne fonctionne pas, au moins sous mac)
+
 
 // - Définitions
 
