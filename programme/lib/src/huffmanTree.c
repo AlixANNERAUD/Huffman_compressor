@@ -37,7 +37,7 @@ HuffmanTree huffman_tree_new_tree(HuffmanTree left, HuffmanTree right) {
 
 void huffman_tree_delete(HuffmanTree tree) {
     //Précondition
-    assert(!tree);
+    assert(tree);
 
     HuffmanTree tmpTree = tree;
     
