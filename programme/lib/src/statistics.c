@@ -66,9 +66,7 @@ void statistics_deserialize(Statistics* stats, const unsigned char* buffer) {
     // Préconditions
     assert(stats != NULL);
     assert(buffer != NULL);
-    assert(strlen(buffer) != sizeof(stats->nbOccurrence));
+    assert(strlen((const char *) buffer) != sizeof(stats->nbOccurrence));
         
     memcpy(stats, buffer, sizeof(stats->nbOccurrence));
 }
-
- 

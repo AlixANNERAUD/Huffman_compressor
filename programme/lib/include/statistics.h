@@ -38,7 +38,7 @@ Statistics statistics_create();
  * @param stat Les statistiques
  * @param e élément sous forme d'octet
 */
-unsigned int statistics_get_count(Statistics stat, Byte e);
+unsigned int statistics_get_count(const Statistics* stat, Byte e);
 
 /**
  * @fn statistics_set_count(Statistics* stat, Byte e, unsigned int n)
