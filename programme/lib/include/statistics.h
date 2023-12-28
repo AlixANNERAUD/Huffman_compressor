@@ -16,13 +16,13 @@
 
 /**
  * @struct Statistics
- * Structure associant chaque élément à son nombre d'occurence
+ * Structure associant chaque élément à son nombre d’occurrence
 */
 typedef struct Statistics
 {
     ///@brief Tableau des Codes Binaires représentant les éléments
     BinaryCode lesElements[Statistics_MAX];
-    /// @brief Tableau des nombres d'occurences de chaque élément
+    /// @brief Tableau des nombres d'occurrences de chaque élément
     unsigned int nbOccurrence[Statistics_MAX];
 } Statistics;
 
@@ -34,7 +34,7 @@ Statistics statistics_create();
 
 /**
  * @fn unsigned int statistics_get_count(Statistics stat, BinaryCode e)
- * @brief Fonction qui renvoie le nombre d'occurence d'un élément e
+ * @brief Fonction qui renvoie le nombre d’occurrence d'un élément e
  * @param stat Les statistiques
  * @param e élément sous forme de code binaire
 */
@@ -42,16 +42,16 @@ unsigned int statistics_get_count(const Statistics* stat, BinaryCode e);
 
 /**
  * @fn statistics_set_count(Statistics* stat, BinaryCode e, unsigned int n)
- * @brief Fonction qui permet de définir le nombre d'occurences d'un élément e
+ * @brief Fonction qui permet de définir le nombre d'occurrences d'un élément e
  * @param stat Les statistiques
  * @param e élément sous forme de code binaire
- * @param n Nombre d'occurences de e
+ * @param n Nombre d'occurrences de e
 */
 void statistics_set_count(Statistics* stat, BinaryCode e, unsigned int n);
 
 /**
  * @fn statistics_increase_count(Statistics* stat, BinaryCode e)
- * @brief Fonction qui permet d'augmenter de 1 le nombre d'occurence d'un élément e
+ * @brief Fonction qui permet d'augmenter de 1 le nombre d’occurrence d'un élément e
  * @param stat Les statistiques
  * @param e élément sous forme de code binaire
 */
