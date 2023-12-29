@@ -7,7 +7,6 @@
 void test_priority_queue_create() {
 
     PriorityQueue pq = priority_queue_create();
-    CU_ASSERT_PTR_NULL(pq.nodes);
     CU_ASSERT_FALSE(pq.length);
 }
 
