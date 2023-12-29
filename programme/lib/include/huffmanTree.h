@@ -64,6 +64,12 @@ HuffmanTree huffman_tree_get_left_child(const HuffmanTree tree);
 /// @return Le fils droit
 HuffmanTree huffman_tree_get_right_child(const HuffmanTree tree);
 
+/// @brief Fonction permettant de comparer deux arbres d'Huffman (utilisée pour la file de priorité)
+/// @param tree1 Arbre 1
+/// @param tree2 Arbre 2
+/// @return Vrai si tree1 est considéré comme plus grand que tree2, faux sinon
+bool huffman_tree_greater_than(HuffmanTree tree1, HuffmanTree tree2);
+
 void huffman_tree_delete(HuffmanTree tree);
 
 typedef struct Statistics Statistics; // Déclaration anticipée pour réduire les dépendances inter-fichiers.
