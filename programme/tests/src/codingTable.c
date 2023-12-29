@@ -25,9 +25,12 @@ void test_coding_table_add(){
 void test_coding_table_get_value(){
     CodingTable table = coding_table_create();
     coding_table_add(&table,'a',7);
+    CU_ASSERT(coding_table_is_present(&table,'a'));
     coding_table_add(&table,'b',5);
+    CU_ASSERT(coding_table_is_present(&table,'b'));
+    CU_ASSERT(!coding_table_is_present(&table,'c'));
+    CU_ASSERT_EQUAL(coding_table_get_value(&table,'a'),7);
     CU_ASSERT_EQUAL(coding_table_get_value(&table,'b'),5);
-    CU_ASSERT_EQUAL(coding_table_get_value(&table,'1'),7);
 }
 
 void test_coding_table_is_present(){
