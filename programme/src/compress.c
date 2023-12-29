@@ -36,3 +36,18 @@ CodingTable coding_table_from_huffman_tree(HuffmanTree tree){
     return table;
 }
 // Pour être franc je comprends pas pourquoi on utilise la variable byte ici.
+
+void coding_table_from_huffman_tree_recursive(HuffmanTree tree, CodingTable* table, BinaryCode* current_code, Byte byte){
+    if (huffman_tree_is_leaf(tree))
+        coding_table_add(&table,huffman_tree_get_value(tree),current_code);
+    else
+    {
+        binary_code_add_bit(&current_code, BIT_0);
+        coding_table_from_huffman_tree_recursive(huffman_tree_get_left_child(tree), &table, &current_code, byte);
+        binary_code_remove_last_bit(&current_code);
+        binary_code_add_bit(&current_code, BIT_1);
+        coding_table_from_huffman_tree_recursive(huffman_tree_get_right_child(tree), &table, &current_code, byte);
+        binary_code_remove_last_bit(&current_code);
+    }
+}
+// J'ai pas très bien compris cet algo
