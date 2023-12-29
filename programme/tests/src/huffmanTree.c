@@ -34,10 +34,21 @@ void test_huffman_tree_is_leaf()
     huffman_tree_delete(tree);
 }
 
+void test_huffman_tree_greater_than()
+{
+    HuffmanTree left = huffman_tree_new_leaf('a', 1);
+    HuffmanTree right = huffman_tree_new_leaf('b', 2);
+    CU_ASSERT_TRUE(huffman_tree_greater_than(right, left));
+    CU_ASSERT_FALSE(huffman_tree_greater_than(left, right));
+    huffman_tree_delete(left);
+    huffman_tree_delete(right);
+}
+
 void huffman_tree_add_tests()
 {
     CU_pSuite suite = CU_add_suite("HuffmanTree", NULL, NULL);
     CU_add_test(suite, "test_huffman_tree_new_leaf", test_huffman_tree_new_leaf);
     CU_add_test(suite, "test_huffman_tree_new_tree", test_huffman_tree_new_tree);
     CU_add_test(suite, "test_huffman_tree_is_leaf", test_huffman_tree_is_leaf);
+    CU_add_test(suite, "test_huffman_tree_greater_than", test_huffman_tree_greater_than);
 }
