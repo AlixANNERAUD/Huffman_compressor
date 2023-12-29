@@ -9,19 +9,20 @@ CodingTable coding_table_create()
 
 /// @details Cette fonction ajoute un ensemble clé-valeur dans la table de codage.
 /// Cette fonction ne doit pas être appelée si la clé est déjà présente dans la table.
-/// La table étant ordonnée, l'insertion et la recherche d'un clé se font en O(log(n)), accélérant ainsi la compression.
+/// La table étant ordonnée, la recherche d'un clé se font en O(log(n)), accélérant ainsi la compression.
 /// Cependant, la recherche d'une valeur se fait en O(n) car la table n'est pas indexée par valeur
 void coding_table_add(CodingTable *codingTable, char key, int value)
 {
     // Préconditions
-    assert(codingTable != NULL);
-    assert(coding_table_is_present(codingTable, key));
-   
+
+    assert(codingTable); // Pointeur non nul
+    assert(!coding_table_is_present(codingTable, key));
+
     size_t i = codingTable->length;
     // On décale les éléments de la table pour insérer le nouvel élément
-    while (codingTable->entries[i].key > key && i > 0)
+    while (codingTable->entries[i - 1].key > key && i > 0)
     {
-        codingTable->entries[i + 1] = codingTable->entries[i];
+        codingTable->entries[i] = codingTable->entries[i - 1];
         i--;
     }
 
@@ -62,24 +63,30 @@ int coding_table_get_value(const CodingTable* codingTable, char key)
 bool coding_table_is_present(const CodingTable* codingTable, char key)
 {
     // Préconditions
-    assert(codingTable != NULL);
+    assert(codingTable); // Pointeur non null
 
-    size_t min = 0;
-    size_t max = codingTable->length - 1;
-    size_t mid = (min + max) / 2;
+    if (codingTable->length == 0)   // Si la table est vide, la clé n'est pas présente (et on évite un débordement d'entier)
+        return false;
+    
 
-    while (min <= max && codingTable->entries[mid].key != key)
+    size_t left = 0;
+    size_t right = codingTable->length - 1;
+    size_t middle = (left + right) / 2;
+
+   // printf("left: %zu, right: %zu, middle: %zu\n", left, right, middle);
+
+    while (left < right && codingTable->entries[middle].key != key)
     {
-        if (codingTable->entries[mid].key > key)
+        if (codingTable->entries[middle].key > key)
         {
-            max = mid - 1;
+            right = middle - 1;
         }
         else
         {
-            min = mid + 1;
+            left = middle + 1;
         }
-        mid = (min + max) / 2;
+        middle = (left + right) / 2;
     }
 
-    return codingTable->entries[mid].key == key;
+    return codingTable->entries[middle].key == key;
 }
