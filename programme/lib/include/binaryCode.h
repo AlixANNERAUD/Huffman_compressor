@@ -10,10 +10,10 @@
 #include "bit.h"
 
 /**
- * @def BinaryCode_MAX
+ * @def BINARY_CODE_MAX
  * La taille maximale d'un code binaire
 */
-#define BinaryCode_MAX 1000
+#define BINARY_CODE_MAX 1000
 
 /**
  * @struct BinaryCode
@@ -21,7 +21,7 @@
 */
 typedef struct {
     /// @brief Tableau de Bits
-    Bit bits[BinaryCode_MAX]; 
+    Bit bits[BINARY_CODE_MAX]; 
     /// @brief Longueur du tableau
     unsigned int length;
 } BinaryCode;

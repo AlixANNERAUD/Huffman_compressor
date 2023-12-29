@@ -21,7 +21,8 @@ unsigned int binary_code_get_length(const BinaryCode* code) {
 }
 
 Bit binary_code_get_bit(const BinaryCode* code, unsigned int index) {
-    assert(!(index >= 0 && index <= binary_code_get_length(code)));//précondition
+    assert(index >= 0);
+    assert(index <= binary_code_get_length(code));//précondition
     return code->bits[index];
 }
 
@@ -30,7 +31,7 @@ Bit binary_code_get_bit(const BinaryCode* code, unsigned int index) {
  * Bit par le Bit souhaiter
 */
 void binary_code_add_bit(BinaryCode* code, Bit bit) {
-    assert(!(binary_code_get_length(code)< BinaryCode_MAX));//précondition
+    assert(binary_code_get_length(code) < BINARY_CODE_MAX);//précondition
     code->length = code->length+1;
     code->bits[code->length-1]=bit;
 }
@@ -54,6 +55,6 @@ void binary_code_remove_bit(BinaryCode* code, unsigned int index) {
  * Cette fonction réduit la taille du code binaire de 1
 */
 void binary_code_remove_last_bit(BinaryCode* code) {
-    assert(!(binary_code_get_length(code)> 0));//précondition
+    assert(binary_code_get_length(code)> 0);//précondition
     code->length = code->length -1;
 }
