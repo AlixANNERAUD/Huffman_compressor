@@ -116,7 +116,7 @@ bool huffman_tree_greater_than(HuffmanTree tree1, HuffmanTree tree2)
     if (huffman_tree_get_weight(tree1) > huffman_tree_get_weight(tree2))    // Si le poids de tree1 est plus grand que celui de tree2, on retourne vrai
         return true;
 
-    if (huffman_tree_get_weight(tree1) == huffman_tree_get_weight(tree2))   // Si les poids sont égaux, on compare les valeurs
+    if (huffman_tree_get_weight(tree1) == huffman_tree_get_weight(tree2) && huffman_tree_is_leaf(tree1) && huffman_tree_is_leaf(tree2)) // Si les poids sont égaux et que les deux arbres sont des feuilles, on compare les valeurs
         return (huffman_tree_get_value(tree1) > huffman_tree_get_value(tree2));
 
     return false;
