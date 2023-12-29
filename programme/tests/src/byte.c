@@ -5,9 +5,9 @@ void test_byte_create(){
     Byte a = byte_create(0);
     Byte b = byte_create(255);    
     Byte c = byte_create(122);
-    CU_ASSERT_EQUAL(a,'0');
-    CU_ASSERT_EQUAL(b,'255');
-    CU_ASSERT_EQUAL(c,'122');
+    CU_ASSERT_EQUAL(a,0);
+    CU_ASSERT_EQUAL(b,255);
+    CU_ASSERT_EQUAL(c,122);
 }
 
 void test_byte_to_natural(){
@@ -18,7 +18,7 @@ void test_byte_to_natural(){
 void test_byte_set_bit(){
     Byte b = byte_create(128);
     byte_set_bit(&b,0,BIT_0);
-    CU_ASSERT_EQUAL(b,'0');
+    CU_ASSERT_EQUAL(b,0);
 }
 
 void test_byte_get_bit(){
