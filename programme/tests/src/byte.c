@@ -17,13 +17,15 @@ void test_byte_to_natural(){
 
 void test_byte_set_bit(){
     Byte b = byte_create(128);
-    byte_set_bit(&b,0,BIT_0);
+    byte_set_bit(&b,7,BIT_0);
     CU_ASSERT_EQUAL(b,0);
+    byte_set_bit(&b,0,BIT_1);
+    CU_ASSERT_EQUAL(b,1);
 }
 
 void test_byte_get_bit(){
     Byte b = byte_create(128);
-    Bit b0 = byte_get_bit(b,0);
+    Bit b0 = byte_get_bit(b,7);
     CU_ASSERT_EQUAL(b0,BIT_1);
 }
 
