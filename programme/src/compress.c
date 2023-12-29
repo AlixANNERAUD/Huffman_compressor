@@ -1,7 +1,6 @@
 #include "compress.h"
 #include "statistics.h"
-#include "byte.h"
-
+#include "huffmanTree.h"
 
 
 bool compress(FILE *input, FILE *output) {
