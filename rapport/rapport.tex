@@ -7,6 +7,12 @@
 \usepackage{geometry} % pour les marges
 \usepackage{multirow} % pour combiner des cellules dans un tableau
 \usepackage{makecell}
+% Dépendances pour doxygen
+\usepackage{doxygen}
+\usepackage[pagebackref=true]{hyperref}
+\usepackage{listings}
+\usepackage{ifthen}
+\newcommand{\+}{} % car manquante 
 
 \geometry{margin=1in}
 
@@ -33,5 +39,7 @@
 \include{developpment/developpment}
 
 \include{conclusion}
+
+\include{annexes/annexes}
 
 \end{document}
