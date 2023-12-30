@@ -5,7 +5,7 @@
 #include "statistics.h"
 #include "huffmanTree.h"
 #include "codingTable.h"
-#include "binaryCode.h""
+#include "binaryCode.h"
 #include <stdio.h>
 
 bool compress(FILE *in, FILE *out);
