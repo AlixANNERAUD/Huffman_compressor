@@ -116,10 +116,20 @@ HuffmanTree *huffman_tree_from_statistic(const Statistics *stat)
         count = stat[i];
         if(count>0){
             leaf = huffman_tree_new_leaf(byte_create(i), count);
+            priority_queue_push(queue, leaf);
         }
     }
-
-    return NULL;
+    while ((priority_queue_get_length)>0){
+        leftLeaf = priority_queue_pop(&queue);
+        if ((priority_queue_get_length)>0){
+            rightLeaf = priority_queue_pop(&queue);
+            tree = huffman_tree_new_tree(leftLeaf, rightLeaf);
+        }
+        else {
+            tree = leftLeaf;
+        }
+    }
+    return tree;
 }
 
 bool huffman_tree_greater_than(HuffmanTree tree1, HuffmanTree tree2)
