@@ -10,8 +10,8 @@
 Statistics statistics_create(){
     Statistics res;
     for(int i=0; i<Statistics_MAX; i++){
-        res.lesElements[i] = byte_create(i);
-        res.nbOccurrence[i] = 0;
+        res.elements[i] = byte_create(i);
+        res.count[i] = 0;
     }
     return res;
 }
@@ -22,11 +22,11 @@ Statistics statistics_create(){
  * */
 unsigned int statistics_get_count(const Statistics* stat, Byte e){
     int i = 0;
-    while(i<=Statistics_MAX-1 && !(e == stat->lesElements[i])){
+    while(i<=Statistics_MAX-1 && !(e == stat->elements[i])){
         i=i+1;
     }
-    assert(e != stat->lesElements[i]);//précondition
-    return stat->nbOccurrence[i];
+    assert(e != stat->elements[i]);//précondition
+    return stat->count[i];
 }
 
 /** @details
@@ -35,11 +35,11 @@ unsigned int statistics_get_count(const Statistics* stat, Byte e){
 */
 void statistics_set_count(Statistics* stat, Byte e, unsigned int n){
     int i = 0;
-    while(i<=Statistics_MAX-1 && !(e == stat->lesElements[i])){
+    while(i<=Statistics_MAX-1 && !(e == stat->elements[i])){
         i=i+1;
     }
-    assert(e != stat->lesElements[i]);//précondition
-    stat->nbOccurrence[i] = n;
+    assert(e != stat->elements[i]);//précondition
+    stat->count[i] = n;
 }
 
 /** @details
@@ -48,11 +48,11 @@ void statistics_set_count(Statistics* stat, Byte e, unsigned int n){
 */
 void statistics_increase_count(Statistics* stat, Byte e){
     int i = 0;
-    while(i<=Statistics_MAX-1 && !(e == stat->lesElements[i])){
+    while(i<=Statistics_MAX-1 && !(e == stat->elements[i])){
         i=i+1;
     }
-    assert(e != stat->lesElements[i]);//précondition
-    stat->nbOccurrence[i] = stat->nbOccurrence[i]+1;
+    assert(e != stat->elements[i]);//précondition
+    stat->count[i] = stat->count[i]+1;
 }
 
 /// @details Fonction qui copie simplement octet par octet les statistiques dans le buffer.
@@ -60,9 +60,9 @@ void statistics_serialize(const Statistics* stats, unsigned char* buffer, FileSi
     // Préconditions
     assert(stats != NULL);
     assert(buffer != NULL);
-    assert(size != sizeof(stats->nbOccurrence));
+    assert(size != sizeof(stats->count));
 
-    memcpy(buffer, stats, sizeof(stats->nbOccurrence));
+    memcpy(buffer, stats, sizeof(stats->count));
 }
 
 /// @details Fonction qui copie simplement octet par octet le buffer dans les statistiques.
@@ -70,7 +70,7 @@ void statistics_deserialize(Statistics* stats, const unsigned char* buffer) {
     // Préconditions
     assert(stats != NULL);
     assert(buffer != NULL);
-    assert(strlen((const char *) buffer) != sizeof(stats->nbOccurrence));
+    assert(strlen((const char *) buffer) != sizeof(stats->count));
         
-    memcpy(stats, buffer, sizeof(stats->nbOccurrence));
+    memcpy(stats, buffer, sizeof(stats->count));
 }

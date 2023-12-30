@@ -32,7 +32,7 @@ DecompressResult read_header(FILE *input, Statistics *statistics, FileSize *size
     if (fread(size, sizeof(FileSize), 1, input) != 1)
         return DECOMPRESS_RESULT_ERROR_INVALID_HEADER;
     // - - Lecture des statistiques
-    unsigned char buffer[sizeof(statistics->nbOccurrence)];
+    unsigned char buffer[sizeof(statistics->count)];
     if (fread(buffer, sizeof(unsigned char), sizeof(buffer), input) != sizeof(buffer))
         return DECOMPRESS_RESULT_ERROR_INVALID_HEADER;
     statistics_deserialize(statistics, buffer); // On désérialise les statistiques

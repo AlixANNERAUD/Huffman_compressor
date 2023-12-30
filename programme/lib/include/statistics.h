@@ -21,9 +21,9 @@
 typedef struct Statistics
 {
     ///@brief Tableau des octet représentant les éléments
-    Byte lesElements[Statistics_MAX];
+    Byte elements[Statistics_MAX];
     /// @brief Tableau des nombres d'occurences de chaque élément
-    unsigned int nbOccurrence[Statistics_MAX];
+    unsigned int count[Statistics_MAX];
 } Statistics;
 
 /**
