@@ -31,7 +31,7 @@ typedef Node* HuffmanTree;
 /// @param value Byte pour lequel on crée la feuille
 /// @param weight poids (nb d'occurence) du Byte dans le fichier
 /// @return Un arbre d'Huffman qui est une feuille
-HuffmanTree huffman_tree_new_leaf(char value, unsigned int weight);
+HuffmanTree huffman_tree_new_leaf(Byte value, unsigned int weight);
 
 /// @brief Fonction créant un arbre à partir de ses fils gauche et droit
 /// @param tree1 Futur fils gauhe
@@ -47,7 +47,7 @@ bool huffman_tree_is_leaf(const HuffmanTree tree);
 /// @brief Accesseur de la valeur d'une feuille (Précondition : Doit être une feuille)
 /// @param tree 
 /// @return La valeur de la feuille
-char huffman_tree_get_value(const HuffmanTree tree);
+Byte huffman_tree_get_value(const HuffmanTree tree);
 
 /// @brief Accesseur du poids d'un noeud
 /// @param tree 

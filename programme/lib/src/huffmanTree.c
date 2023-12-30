@@ -2,6 +2,8 @@
 
 #include "statistics.h"
 
+#include "priorityQueue.h"
+
 #include <stdlib.h> // Pour malloc et free (include <malloc.h> ne fonctionne pas, au moins sous mac)
 
 // - Définitions
@@ -10,7 +12,7 @@
 
 // - - Fonctions publiques
 
-HuffmanTree huffman_tree_new_leaf(char value, unsigned int weight)
+HuffmanTree huffman_tree_new_leaf(Byte value, unsigned int weight)
 {
 
     HuffmanTree tree = malloc(sizeof(Node));
@@ -62,7 +64,7 @@ bool huffman_tree_is_leaf(const HuffmanTree tree)
     return ((tree->leftChild == NULL) && (tree->rightChild == NULL));
 }
 
-char huffman_tree_get_value(const HuffmanTree tree)
+Byte huffman_tree_get_value(const HuffmanTree tree)
 {
     // Préconditions
     assert(tree);
@@ -97,12 +99,25 @@ HuffmanTree huffman_tree_get_right_child(const HuffmanTree tree)
     return tree->rightChild;
 }
 
-HuffmanTree *huffman_tree_from_statistic(const Statistics *statistics)
+HuffmanTree *huffman_tree_from_statistic(const Statistics *stat)
 {
     // Précondition
-    assert(statistics);
+    assert(stat);
 
-    // TODO
+    HuffmanTree tree;
+    HuffmanTree leaf;
+    HuffmanTree rightLeaf;
+    HuffmanTree leftLeaf;
+    Byte byte;
+    FileSize count;
+    PriorityQueue queue = priority_queue_create();
+
+    for (FileSize i=0;i<256;i++){
+        count = stat[i];
+        if(count>0){
+            leaf = huffman_tree_new_leaf(byte_create(i), count);
+        }
+    }
 
     return NULL;
 }
