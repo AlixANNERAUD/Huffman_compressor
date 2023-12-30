@@ -36,7 +36,7 @@ void coding_table_add(CodingTable *codingTable, Byte key, BinaryCode value);
 /// @param codingTable Table de codage à consulter.
 /// @param key Clé à rechercher.
 /// @return Valeur associée à la clé.
-int coding_table_get_value(const CodingTable* codingTable, Byte key);
+BinaryCode coding_table_get_value(const CodingTable* codingTable, Byte key);
 
 /// @brief Vérifie si une clé est présente dans la table de codage.
 /// @param codingTable Table de codage à consulter.

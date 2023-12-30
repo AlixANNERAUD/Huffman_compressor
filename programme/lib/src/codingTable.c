@@ -35,7 +35,7 @@ void coding_table_add(CodingTable *codingTable, Byte key, BinaryCode value)
 
 /// @details Cette fonction vérifie si une clé est présente dans la table de codage.
 /// La recherche est effectuée par dichotomie, ce qui permet d'effectuer la recherche en O(log(n)) 
-int coding_table_get_value(const CodingTable* codingTable, Byte key)
+BinaryCode coding_table_get_value(const CodingTable* codingTable, Byte key)
 {
     // Préconditions
     assert(codingTable != NULL);
