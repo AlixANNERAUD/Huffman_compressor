@@ -23,6 +23,9 @@ Statistics* compute_statistics(FILE *input){
     return stat;
 }
 
+// La fonction huffman_tree_from_statistic correspond à buildHuffmanTree dans le rapport
+// TODO in huffmanTree.c
+
 void coding_table_from_huffman_tree_recursive(HuffmanTree tree, CodingTable* table, BinaryCode* current_code, Byte byte){
     if (huffman_tree_is_leaf(tree))
         coding_table_add(table,huffman_tree_get_value(tree), byte_to_natural(byte));
@@ -36,9 +39,6 @@ void coding_table_from_huffman_tree_recursive(HuffmanTree tree, CodingTable* tab
         binary_code_remove_last_bit(current_code);
     }
 }
-// J'ai pas très bien compris cet algo
-//La fonction huffman_tree_from_statistic correspond à buildHuffmanTree dans le rapport
-//Mais il me semble qu'elle n'est pas encore finie dans huffmanTree.c
 
 CodingTable coding_table_from_huffman_tree(HuffmanTree tree){
     CodingTable table;
@@ -51,3 +51,11 @@ CodingTable coding_table_from_huffman_tree(HuffmanTree tree){
     return table;
 }
 // Pour être franc je comprends pas pourquoi on utilise la variable byte ici.
+
+void write_header (FILE destination, Statistics stat, FileSize size){
+    //TODO
+}
+
+void compress_source_bytes (FILE source, FILE* destination, CodingTable table){
+    //TODO
+}
