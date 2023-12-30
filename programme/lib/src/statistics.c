@@ -9,6 +9,10 @@
 
 Statistics statistics_create(){
     Statistics res;
+    for(int i=0; i<Statistics_MAX; i++){
+        res.lesElements[i] = byte_create(i);
+        res.nbOccurrence[i] = 0;
+    }
     return res;
 }
 
