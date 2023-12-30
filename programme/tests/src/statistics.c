@@ -28,16 +28,16 @@ void test_statistics_count()
     Statistics s;
     statistics_initialize(s);
     for (unsigned int i = 0; i < STATISTICS_MAX; i++)
-        statistics_set_count(&s, byte_create(i), 0xFFFF - i);
+        statistics_set_count(s, byte_create(i), 0xFFFF - i);
 
     for (unsigned int i = 0; i < STATISTICS_MAX; i++)
-        CU_ASSERT_EQUAL(statistics_get_count(&s, byte_create(i)), 0xFFFF - i);
+        CU_ASSERT_EQUAL(statistics_get_count(s, byte_create(i)), 0xFFFF - i);
 
     for (unsigned int i = 0; i < STATISTICS_MAX; i++)
-        statistics_increase_count(&s, byte_create(i));
+        statistics_increase_count(s, byte_create(i));
 
     for (unsigned int i = 0; i < STATISTICS_MAX; i++)
-        CU_ASSERT_EQUAL(statistics_get_count(&s, byte_create(i)), 0xFFFF - i + 1)
+        CU_ASSERT_EQUAL(statistics_get_count(s, byte_create(i)), 0xFFFF - i + 1)
 }
 
 void test_statistics_serialization()
