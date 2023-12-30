@@ -12,7 +12,7 @@ Statistics compute_statistics(FILE *input){
     Byte byte;
     Statistics stat;
     
-    stat = statistics_create();
+    stat = statistics_initialize();
     fseek(input,0,SEEK_SET); 
     while (feof(input) == 0)
     {

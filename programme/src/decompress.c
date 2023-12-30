@@ -98,7 +98,7 @@ DecompressResult decompress(FILE *input, FILE *output)
 
     DecompressResult result = DECOMPRESS_RESULT_OK;
     FileSize size;
-    Statistics statistics = statistics_create();
+    Statistics statistics = statistics_initialize();
     result = read_header(input, &statistics, &size);
 
     if (result != DECOMPRESS_RESULT_OK)

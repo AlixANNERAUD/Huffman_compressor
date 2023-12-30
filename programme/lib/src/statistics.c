@@ -1,76 +1,54 @@
 /**
  * @file statistique.c
  * fichier d'implémentation du TAD Statistique
-*/
+ */
+
+// - Dépendances
 
 #include "statistics.h"
 
-#include <string.h> // memcpy
+#include <string.h> // memcpy et memset
 
-Statistics statistics_create(){
-    Statistics res;
-    for(int i=0; i<Statistics_MAX; i++){
-        res.elements[i] = byte_create(i);
-        res.count[i] = 0;
-    }
-    return res;
+// - - Defintion des fonctions publiques
+
+void statistics_initialize(Statistics stat)
+{
+    memset(stat, 0, sizeof(Statistics));    // On met tout à 0
 }
 
-/** @details 
- * Cette fonction va parcourir le tableau des éléments(O[n]) jusqu'à trouver 
- * l'élément e et ainsi retourner son nombre d'occurence associé dans le tableau des nombres d'occurences
- * */
-unsigned int statistics_get_count(const Statistics* stat, Byte e){
-    int i = 0;
-    while(i<=Statistics_MAX-1 && !(e == stat->elements[i])){
-        i=i+1;
-    }
-    assert(e != stat->elements[i]);//précondition
-    return stat->count[i];
+unsigned int statistics_get_count(const Statistics stat, Byte e)
+{
+    return stat[byte_to_natural(e)];
 }
 
-/** @details
- * Cette fonction va parcourir le tableau des éléments(O[n]) jusqu'à trouver 
- * l'élément e et ainsi définir son nombre d'occurence à n dans le tableau des nombres d'occurences
-*/
-void statistics_set_count(Statistics* stat, Byte e, unsigned int n){
-    int i = 0;
-    while(i<=Statistics_MAX-1 && !(e == stat->elements[i])){
-        i=i+1;
-    }
-    assert(e != stat->elements[i]);//précondition
-    stat->count[i] = n;
+void statistics_set_count(Statistics stat, Byte e, unsigned int n)
+{
+    stat[byte_to_natural(e)] = n;
 }
 
-/** @details
- * Cette fonction va parcourir le tableau des éléments(O[n]) jusqu'à trouver 
- * l'élément e et ainsi augmenter son nombre d'occurence de 1 dans le tableau des nombres d'occurences
-*/
-void statistics_increase_count(Statistics* stat, Byte e){
-    int i = 0;
-    while(i<=Statistics_MAX-1 && !(e == stat->elements[i])){
-        i=i+1;
-    }
-    assert(e != stat->elements[i]);//précondition
-    stat->count[i] = stat->count[i]+1;
+void statistics_increase_count(Statistics stat, Byte e)
+{
+    stat[byte_to_natural(e)]++;
 }
 
 /// @details Fonction qui copie simplement octet par octet les statistiques dans le buffer.
-void statistics_serialize(const Statistics* stats, unsigned char* buffer, FileSize size) {
+void statistics_serialize(const Statistics stats, void *buffer, FileSize size)
+{
     // Préconditions
     assert(stats != NULL);
     assert(buffer != NULL);
-    assert(size != sizeof(stats->count));
+    assert(size != sizeof(Statistics));
 
-    memcpy(buffer, stats, sizeof(stats->count));
+    memcpy(buffer, stats, sizeof(Statistics));
 }
 
 /// @details Fonction qui copie simplement octet par octet le buffer dans les statistiques.
-void statistics_deserialize(Statistics* stats, const unsigned char* buffer) {
+void statistics_deserialize(Statistics stats, const void *buffer)
+{
     // Préconditions
     assert(stats != NULL);
     assert(buffer != NULL);
-    assert(strlen((const char *) buffer) != sizeof(stats->count));
-        
-    memcpy(stats, buffer, sizeof(stats->count));
+    assert(strlen((const char *)buffer) != sizeof(Statistics));
+
+    memcpy(stats, buffer, sizeof(Statistics));
 }

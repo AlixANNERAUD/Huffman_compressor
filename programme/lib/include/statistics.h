@@ -6,31 +6,21 @@
 #pragma once
 
 /**
- * @def Statistics_MAX
+ * @def STATISTICS_MAX
  * La taille maximale du TAD Statistique
 */
-#define Statistics_MAX 256
+#define STATISTICS_MAX 256
 
 #include "common.h"
 #include "byte.h"
 
-/**
- * @struct Statistics
- * Structure associant chaque élément à son nombre d'occurence
-*/
-typedef struct Statistics
-{
-    ///@brief Tableau des octet représentant les éléments
-    Byte elements[Statistics_MAX];
-    /// @brief Tableau des nombres d'occurences de chaque élément
-    unsigned int count[Statistics_MAX];
-} Statistics;
+typedef FileSize Statistics[STATISTICS_MAX];
 
 /**
  * @fn Statistics statistics_create()
  * @brief Fonction qui crée un TAD Statistique
 */
-Statistics statistics_create();
+void statistics_initialize(Statistics stat);
 
 /**
  * @fn unsigned int statistics_get_count(Statistics stat, Byte e)
@@ -38,7 +28,7 @@ Statistics statistics_create();
  * @param stat Les statistiques
  * @param e élément sous forme d'octet
 */
-unsigned int statistics_get_count(const Statistics* stat, Byte e);
+unsigned int statistics_get_count(const Statistics stat, Byte e);
 
 /**
  * @fn statistics_set_count(Statistics* stat, Byte e, unsigned int n)
@@ -47,7 +37,7 @@ unsigned int statistics_get_count(const Statistics* stat, Byte e);
  * @param e élément sous forme d'octet
  * @param n Nombre d'occurences de e
 */
-void statistics_set_count(Statistics* stat, Byte e, unsigned int n);
+void statistics_set_count(Statistics stat, Byte e, unsigned int n);
 
 /**
  * @fn statistics_increase_count(Statistics* stat, Byte e)
@@ -55,14 +45,14 @@ void statistics_set_count(Statistics* stat, Byte e, unsigned int n);
  * @param stat Les statistiques
  * @param e élément sous forme d'octet
 */
-void statistics_increase_count(Statistics* stat, Byte e);
+void statistics_increase_count(Statistics stat, Byte e);
 
 /// @brief Fonction qui sérialise les statistiques dans un tableau d'octets.
 /// @param stats Les statistiques
 /// @param buffer Le buffer d'une taille de 64 * 256 = 2048 octets.
-void statistics_serialize(const Statistics* stats, unsigned char* buffer, FileSize size);
+void statistics_serialize(const Statistics stats, void* buffer, FileSize size);
 
 /// @brief Fonction qui désérialise les statistiques depuis un tableau d'octets.
 /// @param stats Les statistiques.
 /// @param buffer Le buffer d'une taille de 64 * 256 = 2048 octets.
-void statistics_deserialize(Statistics* stats, const unsigned char* buffer);
+void statistics_deserialize(Statistics stats, const void* buffer);

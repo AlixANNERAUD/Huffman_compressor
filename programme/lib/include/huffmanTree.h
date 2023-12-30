@@ -72,7 +72,7 @@ bool huffman_tree_greater_than(HuffmanTree tree1, HuffmanTree tree2);
 
 void huffman_tree_delete(HuffmanTree tree);
 
-typedef struct Statistics Statistics; // Déclaration anticipée pour réduire les dépendances inter-fichiers.
+typedef FileSize Statistics[256]; // Déclaration anticipée pour réduire les dépendances inter-fichiers.
 
 typedef struct PriorityQueue PriorityQueue; // De même 
 
