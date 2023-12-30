@@ -23,12 +23,9 @@ Statistics* compute_statistics(FILE *input){
     return stat;
 }
 
-// La fonction huffman_tree_from_statistic correspond à buildHuffmanTree dans le rapport
-// TODO in huffmanTree.c
-
 void coding_table_from_huffman_tree_recursive(HuffmanTree tree, CodingTable* table, BinaryCode* current_code, Byte byte){
     if (huffman_tree_is_leaf(tree))
-        coding_table_add(table,huffman_tree_get_value(tree), byte_to_natural(byte));
+        coding_table_add(table, huffman_tree_get_value(tree), *current_code);
     else
     {
         binary_code_add_bit(current_code, BIT_0);

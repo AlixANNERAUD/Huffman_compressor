@@ -1,15 +1,17 @@
 #pragma once
 
 #include "common.h"
+#include "binaryCode.h"
+#include "byte.h"
 
 #define CODING_TABLE_MAXIMUM_SIZE 256
 
 /// @brief Structure pair clé-valeur de la table de codage.
 typedef struct {
     /// @brief Clé de la table de codage.
-    char key;
+    Byte key;
     /// @brief Valeur de la table de codage.
-    int value;
+    BinaryCode value;
 } CodingTableEntry;
 
 /// @brief Structure table de codage.
@@ -28,16 +30,16 @@ CodingTable coding_table_create();
 /// @param codingTable Table de codage à modifier.
 /// @param key Clé à ajouter.
 /// @param value Valeur à ajouter.
-void coding_table_add(CodingTable *codingTable, char key, int value);
+void coding_table_add(CodingTable *codingTable, Byte key, BinaryCode value);
 
 /// @brief Récupère la valeur associée à une clé dans la table de codage.
 /// @param codingTable Table de codage à consulter.
 /// @param key Clé à rechercher.
 /// @return Valeur associée à la clé.
-int coding_table_get_value(const CodingTable* codingTable, char key);
+int coding_table_get_value(const CodingTable* codingTable, Byte key);
 
 /// @brief Vérifie si une clé est présente dans la table de codage.
 /// @param codingTable Table de codage à consulter.
 /// @param key Clé à rechercher.
 /// @return TRUE si la clé est présente, FALSE sinon.
-bool coding_table_is_present(const CodingTable* codingTable, char key);
+bool coding_table_is_present(const CodingTable* codingTable, Byte key);
