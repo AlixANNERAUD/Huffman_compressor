@@ -1,15 +1,16 @@
 #include "compress.h"
+
 #include "statistics.h"
 #include "huffmanTree.h"
+#include "statistics.h"
 #include "codingTable.h"
+#include "binaryCode.h"
 
+#include <string.h>
 
-bool compress(FILE *input, FILE *output) {
-    //fopen(&input, "rb");
-    //fopen(&output, "wb");
-    // TODO
-    return false;
-}
+// - Définitions
+
+// - - Fonctions privées
 
 Statistics* compute_statistics(FILE *input){
     Byte byte;
@@ -49,8 +50,6 @@ CodingTable coding_table_from_huffman_tree(HuffmanTree tree){
     coding_table_from_huffman_tree_recursive(tree, &table, &code);
     return table;
 }
-// Pour être franc je comprends pas pourquoi on utilise la variable byte ici. 
-// Bah franchement, je sais pas non plus... Elle a sauté
 
 void write_header (FILE destination, Statistics stat, FileSize size){
     fprintf(&destination, "HUFF");
@@ -69,3 +68,48 @@ void write_header (FILE destination, Statistics stat, FileSize size){
         fprintf(destination, "%bc", bc);    // Comment écrire un bc ? L'écrire bit par bit ? Si oui comment (pour écrire les bits 01001 et non la chaîne '01001' ?)
     }
 } */
+
+// - - Fonctions publiques
+
+CompressResult compress(FILE *input, FILE *output) {
+    //fopen(&input, "rb");
+    //fopen(&output, "wb");
+
+    // Préconditions
+    assert(input != NULL);
+    assert(output != NULL);
+
+    if (ferror(input) || ferror(output))
+        return COMPRESS_RESULT_ERROR_FILE;
+
+    if (feof(input))
+        return COMPRESS_RESULT_ERROR_PREMATURE_END_OF_FILE;
+
+    CompressResult result = COMPRESS_RESULT_OK;
+    // TODO
+    return result;
+
+}
+
+CompressResult decompress_error_to_string(CompressResult error, char *buffer, FileSize buffer_size)
+{
+    switch (error)
+    {
+    case COMPRESS_RESULT_OK:
+        strncpy(buffer, "No error", buffer_size);
+        break;
+    case COMPRESS_RESULT_ERROR_FILE:
+        strncpy(buffer, "File error", buffer_size);
+        break;
+    case COMPRESS_RESULT_ERROR_PREMATURE_END_OF_FILE:
+        strncpy(buffer, "Premature end of file", buffer_size);
+        break;
+    case COMPRESS_RESULT_ERROR_FAILED_TO_WRITE_OUTPUT_FILE:
+        strncpy(buffer, "Failed to write output file", buffer_size);
+        break;
+    default:
+        strncpy(buffer, "Unknown error", buffer_size);
+        break;
+    }
+    return error;
+}
