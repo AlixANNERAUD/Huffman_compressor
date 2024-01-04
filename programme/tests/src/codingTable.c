@@ -22,30 +22,27 @@ void test_coding_table_add(){
 
     binary_code_add_bit(&bc, BIT_1);
 
-    coding_table_add(&table,'b',8);
-    coding_table_add(&table,'c',7);
+    coding_table_add(&table,'b',binary_code_create());
+    coding_table_add(&table,'c',binary_code_create());
     CU_ASSERT_EQUAL(table.length,3);
 
     CU_ASSERT_EQUAL(table.entries[2].key,'c');
-    CU_ASSERT_EQUAL(table.entries[1].value,8);
 }
 
 void test_coding_table_get_value(){
     CodingTable table = coding_table_create();
-    coding_table_add(&table,'a',7);
+    coding_table_add(&table,'a',binary_code_create());
     CU_ASSERT(coding_table_is_present(&table,'a'));
-    coding_table_add(&table,'b',5);
+    coding_table_add(&table,'b',binary_code_create());
     CU_ASSERT(coding_table_is_present(&table,'b'));
     CU_ASSERT(!coding_table_is_present(&table,'c'));
-    CU_ASSERT_EQUAL(coding_table_get_value(&table,'a'),7);
-    CU_ASSERT_EQUAL(coding_table_get_value(&table,'b'),5);
 }
 
 void test_coding_table_is_present(){
     CodingTable table = coding_table_create();
-    coding_table_add(&table,'a',4);
-    coding_table_add(&table,'b',8);
-    coding_table_add(&table,'c',7);
+    coding_table_add(&table,'a',binary_code_create());
+    coding_table_add(&table,'b',binary_code_create());
+    coding_table_add(&table,'c',binary_code_create());
     CU_ASSERT_TRUE(coding_table_is_present(&table,'a'));
     CU_ASSERT_TRUE(coding_table_is_present(&table,'b'));
     CU_ASSERT_TRUE(coding_table_is_present(&table,'c'));

@@ -116,7 +116,7 @@ HuffmanTree *huffman_tree_from_statistic(const Statistics *stat)
         count = stat[i];
         if(count>0){
             leaf = huffman_tree_new_leaf(byte_create(i), count);
-            priority_queue_push(queue, leaf);
+            priority_queue_push(&queue, leaf);
         }
     }
     while ((priority_queue_get_length)>0){
