@@ -52,7 +52,6 @@ CodingTable coding_table_from_huffman_tree(HuffmanTree tree)
 
 void write_header (FILE destination, Statistics stat, FileSize size)
 {
-    fseek(&destination,0,SEEK_SET); 
     fprintf(&destination, "HUFF");                              // Identifiant d'un fichier compressé
     fprintf(&destination, "%llu", sizeof(*stat) + sizeof(size) + sizeof("HUFF") - 1 + size);    // Taille total du fichier
     fprintf(&destination, "%lu", sizeof(*stat) + sizeof(size) + sizeof("HUFF") - 1);            // Taille de l'entête
