@@ -14,7 +14,7 @@ BIN_DIR = bin
 SOURCES = $(wildcard $(SRC_DIR)/*.c)
 OBJECTS = $(SOURCES:$(SRC_DIR)/%.c=$(BIN_DIR)/%.o)
 TARGET = $(BIN_DIR)/main
-CFLAGS = -Wall -Wpedantic -I$(INCLUDE_DIR) -I$(LIB_INCLUDE_DIR)
+CFLAGS = -Wall -Wpedantic -I$(INCLUDE_DIR) -I$(LIB_INCLUDE_DIR) -g
 
 # Variables pour la compilation des tests unitaires
 TEST_DIR = tests
