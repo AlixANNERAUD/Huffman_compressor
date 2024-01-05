@@ -7,11 +7,11 @@
             "request": "launch",
             "targetArchitecture": "x64",
             "program": "${workspaceRoot}/programme/bin/main",
-            "args": [],
+            "args": ["c", "test.txt"],
             "stopAtEntry": false,
             "cwd": "${workspaceRoot}",
             "environment": [],
-            "externalConsole": true,
+            "externalConsole": false,
             "linux": {
                 "MIMode": "gdb"
             },
@@ -20,7 +20,8 @@
             },
             "windows": {
                 "MIMode": "gdb"
-            }
+            },
+            "preLaunchTask": "make build"
         },
         // attach here, which I don't care about
     ]
