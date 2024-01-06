@@ -14,7 +14,7 @@ BIN_DIR = bin
 SOURCES = $(wildcard $(SRC_DIR)/*.c)
 OBJECTS = $(SOURCES:$(SRC_DIR)/%.c=$(BIN_DIR)/%.o)
 TARGET = $(BIN_DIR)/main
-CFLAGS = -Wall -Wpedantic -I$(INCLUDE_DIR) -I$(LIB_INCLUDE_DIR) -g
+CFLAGS = -Wall -Wpedantic -I$(INCLUDE_DIR) -I$(LIB_INCLUDE_DIR) -g -ggdb
 
 # Variables pour la compilation des tests unitaires
 TEST_DIR = tests
@@ -57,7 +57,11 @@ $(TEST_TARGET): $(TEST_OBJECTS) $(LIB_OBJECTS)
 
 # Règle pour exécuter l'exécutable
 run: $(TARGET)
-	./$(TARGET)
+	./$(TARGET) 
+
+test_compress: $(TARGET)
+	./$(TARGET) c test.txt
+	
 
 # Règle pour compiler et exécuter les tests unitaires
 test: $(TEST_TARGET) 
