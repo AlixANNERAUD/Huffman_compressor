@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdarg.h>
+#include <time.h>
 // - - Librairie système
 #include <unistd.h>
 // - - Local
@@ -38,7 +39,7 @@ bool ends_with(const char *string, const char *suffix)
 /// @param mode Résultat de la lecture du mode
 /// @param intput_file_path Résultat de la lecture du chemin du fichier d'entrée
 /// @return `true` si les arguments ont bien été lus, `false` sinon
-bool read_arguments(int argc, const char *argv[], char *mode, char **intput_file_path)
+bool read_arguments(int argc, const char *argv[], char *mode, const char **intput_file_path)
 {
     // - On affiche les arguments
     for (int i = 0; i < argc; i++)
@@ -71,40 +72,39 @@ bool read_arguments(int argc, const char *argv[], char *mode, char **intput_file
 /// @return `true` si les fichiers ont bien été ouverts, `false` sinon
 bool open_files(char mode, const char *input_file_path, FILE **input_file, FILE **output_file)
 {
-    char *output_file_path = malloc(strlen(input_file_path) + 6); // +6 pour le ".huff\0" (pas forcément nécessaire dans le cas de la décompression, mais plus simple)
-    if (mode == 'c')
+    // - Dans le cas d'une décompression, on vérifie que le fichier d'entrée est bien un fichier .huff
+    if (mode == 'd' && !ends_with(input_file_path, ".huff"))
     {
-        // - Création du nom du fichier de sortie
-        strcpy(output_file_path, input_file_path); // On copie le nom du fichier d'entrée
-        strcat(output_file_path, ".huff");         // On ajoute l'extension
-
-        // - On ouvre les fichiers
-        *input_file = fopen(input_file_path, "r");
-        *output_file = fopen(output_file_path, "w");
+        print_error("Invalid input file. Expected a .huff file, got : %s\n", input_file_path);
+        return false;
     }
-    else if (mode == 'd')
-    {
-        // - On vérifie que le fichier d'entrée est bien un fichier .huff
-        if (!ends_with(input_file_path, ".huff"))
-        {
-            print_error("Invalid input file. Expected a .huff file, got %s\n", input_file_path);
-            return false;
-        }
-        // - Création du nom du fichier de sortie
-        strncpy(output_file_path, input_file_path, strlen(input_file_path) - 5); // On enlève les 5 derniers caractères (".huff")
-        // - On ouvre les fichiers
-        *input_file = fopen(input_file_path, "r");
-        *output_file = fopen(output_file_path, "w"); // On ouvre le fichier de sortie
-    }
-    free(output_file_path); // On libère la mémoire allouée pour le nom du fichier de sortie
-    rewind(*input_file);    // On remet le curseur au début du fichier d'entrée
-    // - On vérifie que les fichiers ont bien été ouverts
-    if (*input_file == NULL)
+    *input_file = fopen(input_file_path, "r"); // On ouvre le fichier d'entrée en lecture
+    // - On vérifie que le a bien été ouvert
+    if (*input_file == NULL || ferror(*input_file))
     {
         print_error("Error while opening input file.\n");
         return false;
     }
-    if (*output_file == NULL)
+    rewind(*input_file); // On remet le curseur au début du fichier d'entrée
+
+    // - Création du nom du fichier de sortie
+    char *output_file_path = malloc(strlen(input_file_path) + 6); // +6 pour le ".huff\0" (pas forcément nécessaire dans le cas de la décompression, mais plus simple)
+    switch (mode)
+    {
+    case 'c':
+        strcpy(output_file_path, input_file_path); // On copie le nom du fichier d'entrée
+        strcat(output_file_path, ".huff");         // On ajoute l'extension
+        break;
+    case 'd':
+        strncpy(output_file_path, input_file_path, strlen(input_file_path) - 5); // On enlève les 5 derniers caractères (".huff")
+        break;
+    default:
+        return false;
+    }
+    *output_file = fopen(output_file_path, "w+"); // On ouvre le fichier de sortie en écriture
+    free(output_file_path);                      // On libère la mémoire allouée pour le nom du fichier de sortie
+    // - On vérifie que le fichier a bien été ouvert
+    if (*output_file == NULL || ferror(*output_file))
     {
         print_error("Error while opening output file.\n");
         return false;
@@ -115,26 +115,27 @@ bool open_files(char mode, const char *input_file_path, FILE **input_file, FILE 
 int main(int argc, const char *argv[])
 {
     char mode = '\0';
-    char *input_file_path;
+    const char *input_file_path;
 
     if (!read_arguments(argc, argv, &mode, &input_file_path))
         return EXIT_FAILURE;
 
-    printf("Current working directory : %s\n", getcwd(NULL, 0)); // "getcwd" = "get current working directory
     printf("Input file path : %s\n", input_file_path);
 
     FILE *inputFile;
     FILE *outputFile;
 
     if (!open_files(mode, input_file_path, &inputFile, &outputFile))
+    {
         return EXIT_FAILURE;
-
-    
+    }
 
     if (mode == 'c')
     {
         printf("Compressing ...\n");
+        clock_t start = clock();
         CompressResult compressResult = compress(inputFile, outputFile);
+        clock_t end = clock();
         if (compressResult != COMPRESS_RESULT_OK)
         {
             printf("Error while compressing file.\n");
@@ -144,12 +145,14 @@ int main(int argc, const char *argv[])
             // print_error("%s", errorBuffer);
         }
         else
-            printf("File compressed successfully.\n");
+            printf("File compressed successfully in %f seconds.\n", (double)(end - start) / CLOCKS_PER_SEC);
     }
     else if (mode == 'd')
     {
         printf("Decompressing ...\n");
+        clock_t start = clock();
         DecompressResult decompressResult = decompress(inputFile, outputFile);
+        clock_t end = clock();
         if (decompressResult != DECOMPRESS_RESULT_OK)
         {
             char errorBuffer[1024];
@@ -158,9 +161,9 @@ int main(int argc, const char *argv[])
             print_error("%s", errorBuffer);
         }
         else
-            printf("File decompressed successfully.\n");
+            printf("File decompressed successfully in %f seconds.\n", (double)(end - start) / CLOCKS_PER_SEC);
     }
- 
+
     fclose(inputFile);
     fclose(outputFile);
     return EXIT_SUCCESS;
