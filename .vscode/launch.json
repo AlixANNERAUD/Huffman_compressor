@@ -2,12 +2,40 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "C",
+            "name": "Debug compress",
             "type": "cppdbg",
             "request": "launch",
             "targetArchitecture": "x64",
             "program": "${workspaceRoot}/programme/bin/main",
-            "args": ["c", "test.txt"],
+            "args": [
+                "c",
+                "test.txt"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceRoot}",
+            "environment": [],
+            "externalConsole": false,
+            "linux": {
+                "MIMode": "gdb"
+            },
+            "osx": {
+                "MIMode": "lldb"
+            },
+            "windows": {
+                "MIMode": "gdb"
+            },
+            "preLaunchTask": "make build"
+        },
+        {
+            "name": "Debug decompress",
+            "type": "cppdbg",
+            "request": "launch",
+            "targetArchitecture": "x64",
+            "program": "${workspaceRoot}/programme/bin/main",
+            "args": [
+                "d",
+                "test.txt.huff"
+            ],
             "stopAtEntry": false,
             "cwd": "${workspaceRoot}",
             "environment": [],
@@ -25,4 +53,4 @@
         },
         // attach here, which I don't care about
     ]
-    }
+}
