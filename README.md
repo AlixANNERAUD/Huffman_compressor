@@ -16,8 +16,20 @@ Here are the `make` commands (execute in the `programme` directory) to compile t
 
 ## 🏃‍♂️ Usage
 
-TODO 
+To run the executable (`programme/bin/main`), you can use the following command:
 
+- To compress a file:
+```bash
+./programme/bin/main c [FILE]
+```
+- To decompress a file:
+```bash
+./programme/bin/main d [FILE]
+```
+
+> [!IMPORTANT]
+> When decompressing a file, the file must have the `.huff` extension.
+ 
 ## ℹ️ About
 
 This project is under the [MIT license](LICENSE).
