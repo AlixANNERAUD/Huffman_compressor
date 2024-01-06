@@ -32,12 +32,13 @@ To run the executable (`programme/bin/main`), you can use the following command:
  
 ## ℹ️ About
 
-This project is under the [MIT license](LICENSE).
-
-The authors are:
+This project was made by:
 - Alix ANNERAUD
 - Aliénor TRANOUEZ
 - Maël PLANCHOT
-- Fang
+- Fangxuan ZHOU
+
+This project is under the [MIT license](LICENSE).
+
 
 
