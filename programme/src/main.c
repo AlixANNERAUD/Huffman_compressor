@@ -102,7 +102,7 @@ bool open_files(char mode, const char *input_file_path, FILE **input_file, FILE 
         return false;
     }
     *output_file = fopen(output_file_path, "w+"); // On ouvre le fichier de sortie en écriture
-    free(output_file_path);                      // On libère la mémoire allouée pour le nom du fichier de sortie
+    free(output_file_path);                       // On libère la mémoire allouée pour le nom du fichier de sortie
     // - On vérifie que le fichier a bien été ouvert
     if (*output_file == NULL || ferror(*output_file))
     {
@@ -126,9 +126,7 @@ int main(int argc, const char *argv[])
     FILE *outputFile;
 
     if (!open_files(mode, input_file_path, &inputFile, &outputFile))
-    {
         return EXIT_FAILURE;
-    }
 
     if (mode == 'c')
     {
