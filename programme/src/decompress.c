@@ -126,31 +126,30 @@ DecompressResult decompress(FILE *input, FILE *output)
     return result;
 }
 
-DecompressResult decompress_error_to_string(DecompressResult error, char *buffer, size_t buffer_size)
+void decompress_error_to_string(DecompressResult error, char *buffer, size_t bufferSize)
 {
     switch (error)
     {
     case DECOMPRESS_RESULT_OK:
-        strncpy(buffer, "No error", buffer_size);
+        strncpy(buffer, "No error", bufferSize);
         break;
     case DECOMPRESS_RESULT_ERROR_FILE:
-        strncpy(buffer, "File error", buffer_size);
+        strncpy(buffer, "File error", bufferSize);
         break;
     case DECOMPRESS_RESULT_ERROR_PREMATURE_END_OF_FILE:
-        strncpy(buffer, "Premature end of file", buffer_size);
+        strncpy(buffer, "Premature end of file", bufferSize);
         break;
     case DECOMPRESS_RESULT_ERROR_INVALID_HEADER:
-        strncpy(buffer, "Invalid header", buffer_size);
+        strncpy(buffer, "Invalid header", bufferSize);
         break;
     case DECOMPRESS_RESULT_ERROR_FAILED_TO_WRITE_OUTPUT_FILE:
-        strncpy(buffer, "Failed to write output file", buffer_size);
+        strncpy(buffer, "Failed to write output file", bufferSize);
         break;
     case DECOMPRESS_RESULT_INCONSISTENT_DECOMPRESSED_FILE:
-        strncpy(buffer, "Inconsistent decompressed file", buffer_size);
+        strncpy(buffer, "Inconsistent decompressed file", bufferSize);
         break;
     default:
-        strncpy(buffer, "Unknown error", buffer_size);
+        strncpy(buffer, "Unknown error", bufferSize);
         break;
     }
-    return error;
 }

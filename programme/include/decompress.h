@@ -27,5 +27,10 @@ typedef enum {
 /// @return Résultat de la décompression
 DecompressResult decompress(FILE* input, FILE* output);
 
-DecompressResult decompress_error_to_string(DecompressResult error, char* buffer, size_t buffer_size);
+/// @brief Fonction pour transcrire un résultat de décompression en chaîne de caractères.
+/// @param error Résultat de la décompression
+/// @param buffer Chaîne de caractères résultante
+/// @param bufferSize Taille de la chaîne de caractères résultante
+/// @return Résultat de la décompression
+void decompress_error_to_string(DecompressResult error, char* buffer, size_t bufferSize);
 
