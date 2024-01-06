@@ -1,6 +1,5 @@
 #include "codingTable.h"
 
-
 CodingTable coding_table_create()
 {
     CodingTable codingTable;
@@ -14,10 +13,7 @@ CodingTable coding_table_create()
 /// Cependant, la recherche d'une valeur se fait en O(n) car la table n'est pas indexée par valeur
 void coding_table_add(CodingTable *codingTable, Byte key, BinaryCode value)
 {
-    // Préconditions
-
-    assert(codingTable); // Pointeur non nul
-    assert(!coding_table_is_present(codingTable, key));
+    assert(!coding_table_search(codingTable, key, NULL)); // Clé non présente dans la table
 
     size_t i = codingTable->length;
     // On décale les éléments de la table pour insérer le nouvel élément
@@ -26,7 +22,7 @@ void coding_table_add(CodingTable *codingTable, Byte key, BinaryCode value)
         codingTable->entries[i] = codingTable->entries[i - 1];
         i--;
     }
-
+    
     // On insère le nouvel élément
     codingTable->entries[i].key = key;
     codingTable->entries[i].value = value;
@@ -34,60 +30,30 @@ void coding_table_add(CodingTable *codingTable, Byte key, BinaryCode value)
 }
 
 /// @details Cette fonction vérifie si une clé est présente dans la table de codage.
-/// La recherche est effectuée par dichotomie, ce qui permet d'effectuer la recherche en O(log(n)) 
-BinaryCode coding_table_get_value(const CodingTable* codingTable, Byte key)
+/// La recherche est effectuée par dichotomie, ce qui permet d'effectuer la recherche en O(log(n))
+BinaryCode coding_table_get_value(const CodingTable *codingTable, Byte key)
 {
-    // Préconditions
-    assert(codingTable != NULL);
-    assert(coding_table_is_present(codingTable, key));
-
-    size_t min = 0;
-    size_t max = codingTable->length - 1;
-    size_t mid = (min + max) / 2;
-
-    while (codingTable->entries[mid].key != key)
-    {
-        if (codingTable->entries[mid].key > key)
-        {
-            max = mid - 1;
-        }
-        else
-        {
-            min = mid + 1;
-        }
-        mid = (min + max) / 2;
-    }
-
-    return codingTable->entries[mid].value;
+    size_t index;
+    assert(coding_table_search(codingTable, key, &index));
+    return codingTable->entries[index].value;
 }
 
-bool coding_table_is_present(const CodingTable* codingTable, Byte key)
+/// @details Cette fonction effectue une recherche dichotomique dans la table de codage.
+bool coding_table_search(const CodingTable *codingTable, Byte key, size_t *index)
 {
-    // Préconditions
-    assert(codingTable); // Pointeur non null
-
-    if (codingTable->length == 0)   // Si la table est vide, la clé n'est pas présente (et on évite un débordement d'entier)
-        return false;
-    
-
-    size_t left = 0;
-    size_t right = codingTable->length - 1;
-    size_t middle = (left + right) / 2;
-
-   // printf("left: %zu, right: %zu, middle: %zu\n", left, right, middle);
-
-    while (left < right && codingTable->entries[middle].key != key)
+    size_t left = 0, right = codingTable->length, middle = 0;
+    bool found = false;
+    while (!found && left != right)
     {
-        if (codingTable->entries[middle].key > key)
-        {
-            right = middle - 1;
-        }
-        else
-        {
-            left = middle + 1;
-        }
         middle = (left + right) / 2;
+        if (key < codingTable->entries[middle].key)
+            right = middle;
+        else if (key > codingTable->entries[middle].key)
+            left = middle + 1;
+        else
+            found = true;
     }
-
-    return codingTable->entries[middle].key == key;
+    if (index != NULL)
+        *index = middle;
+    return found;
 }
