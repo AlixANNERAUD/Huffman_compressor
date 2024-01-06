@@ -54,7 +54,7 @@ void statistics_increment_count(Statistics stat, Byte e);
 /// @brief Fonction qui renvoie la taille du fichier.
 /// @param stat Les statistiques
 /// @return La taille du fichier.
-FileSize statistics_get_file_size(const Statistics stat);
+FileSize statistics_get_total_count(const Statistics stat);
 
 /// @brief Fonction qui calcule les statistiques à partir d'un fichier.
 /// @param statistics Les statistiques résultantes.
