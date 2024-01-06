@@ -29,10 +29,11 @@ DecompressResult read_header(FILE *input, Statistics statistics)
     if (!is_huffman_compressed_file(input))
         return DECOMPRESS_RESULT_ERROR_INVALID_HEADER;
     // - - Lecture des statistiques
-    unsigned char buffer[sizeof(Statistics)];
-    if (fread(buffer, sizeof(unsigned char), sizeof(buffer), input) != sizeof(buffer))
+    unsigned char buffer[sizeof(Statistics) + sizeof(FileSize)];
+    if (fread(buffer, sizeof(buffer), 1, input) != 1)
+        return DECOMPRESS_RESULT_ERROR_PREMATURE_END_OF_FILE;
+    if (!statistics_deserialize(statistics, buffer))
         return DECOMPRESS_RESULT_ERROR_INVALID_HEADER;
-    statistics_deserialize(statistics, buffer); // On désérialise les statistiques
     return DECOMPRESS_RESULT_OK;
 }
 
