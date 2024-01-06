@@ -35,7 +35,7 @@
     \procedure{add\_bit}{\paramEntreeSortie{binary\_code : \binaryCode}, \paramEntree{bit : \bit}}
     {$get\_length(binary\_code) < MAXIMUM\_LENGTH$}
     {}
-    {   \sialorssinon{get\_length(binary\_code) < MAXIMUM\_LENGTH}
+    {   \sialorssinon{get\_length(binary\_code) < MAXIMUM\_LENGTH} 
         {   \affecter{\champ{binary\_code}{length}}{\champ{binary\_code}{length} + 1}
             \affecter{\champ{binary\_code}{bits}[\champ{binary\_code}{length}]}{bit}}
         {}
@@ -43,20 +43,23 @@
 
     \espace{}
 
-    \procedure{delete\_bit}{\paramEntreeSortie{binary\_code : \binaryCode}, \paramEntree{index : \naturel}}
+    \procedure{remove\_bit}{\paramEntreeSortie{binary\_code : \binaryCode}, \paramEntree{index : \naturel}}
     {$0 \leqslant index < get\_length(binary\_code)$}
     {}
     {   \sialorssinon{get\_length(binary\_code) > 0}
-        {   \affecter{\champ{binary\_code}{length}}{\champ{binary\_code}{length} - 1}}
+        {   \pour{i}{index}{get\_length(binary\_code)-1}{}{
+            \affecter{\champ{binary\_code}{bits}[i]}{\champ{binary\_code}{bits}[i+1]}
+            }
+            \affecter{\champ{binary\_code}{length}}{\champ{binary\_code}{length} - 1}}
         {}
     }
 
     \espace{}
 
-    \procedure{delete\_last\_bit}{\paramEntreeSortie{binary\_code : \binaryCode}}
+    \procedure{remove\_last\_bit}{\paramEntreeSortie{binary\_code : \binaryCode}}
     {$get\_length(binary\_code) > 0$}
     {}
-    {   \sialorssinon{get\_length(binary\_code) > 0}
+    {   \sialorssinon{get\_length(binary\_code) > 0}% Est-ce que on garde cette ligne, et lignes 38, 49?
         {   \affecter{\champ{binary\_code}{length}}{\champ{binary\_code}{length} - 1}}
         {}
     }
