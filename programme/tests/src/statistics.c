@@ -56,7 +56,7 @@ void test_statistics_serialization()
         CU_ASSERT_EQUAL(statistics_get_count(s2, byte_create(i)), 0xFF - i);
         Sum += 0xFF - i;
     }
-    CU_ASSERT_EQUAL(statistics_get_file_size(s2), Sum);
+    CU_ASSERT_EQUAL(statistics_get_total_count(s2), Sum);
 }
 
 /**
