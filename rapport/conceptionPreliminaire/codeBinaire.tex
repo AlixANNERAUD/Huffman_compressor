@@ -3,9 +3,9 @@
 \begin{algorithme}
     \signatureFonction {binary\_code}{}{\binaryCode}{}
     \signatureFonction {get\_length}{binary\_code : \binaryCode}{\naturel}{}
-    \signatureFonction {get\_bit}{binary\_code : \binaryCode, position : \naturel}{\binaryCode}{position $\leq$ getLength(binary\_code)}
-    \signatureProcedure {add\_bit}{\paramEntreeSortie {binary\_code : \binaryCode}, {\paramEntree bit : \bit}}{getLength(binary\_code) < MAXIMUM\_LENGTH}
-    \signatureProcedure {delete\_bit}{\paramEntreeSortie {binary\_code : \binaryCode}, {\paramEntree position : \naturel}}{getLength(binary\_code) > 0 and position $\leq$ getLength(binary\_code)}
-    \signatureProcedure {delete\_last\_bit}{\paramEntreeSortie {binary\_code : \binaryCode}}{getLength(binary\_code) > 0}
+    \signatureFonction {get\_bit}{binary\_code : \binaryCode, position : \naturel}{\binaryCode}{position $\leq$ get\_length(binary\_code)}
+    \signatureProcedure {add\_bit}{\paramEntreeSortie {binary\_code : \binaryCode}, {\paramEntree bit : \bit}}{get\_length(binary\_code) < MAXIMUM\_LENGTH}
+    \signatureProcedure {delete\_bit}{\paramEntreeSortie {binary\_code : \binaryCode}, {\paramEntree position : \naturel}}{get\_length(binary\_code) > 0 and position $\leq$ get\_length(binary\_code)}
+    \signatureProcedure {delete\_last\_bit}{\paramEntreeSortie {binary\_code : \binaryCode}}{get\_length(binary\_code) > 0}
     \signatureFonction {clone}{binary\_code : \binaryCode}{\binaryCode}{}
 \end{algorithme}
