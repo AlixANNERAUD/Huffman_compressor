@@ -5,7 +5,7 @@
     \signatureFonction {get\_length}{binary\_code : \binaryCode}{\naturel}{}
     \signatureFonction {get\_bit}{binary\_code : \binaryCode, position : \naturel}{\binaryCode}{position $\leq$ get\_length(binary\_code)}
     \signatureProcedure {add\_bit}{\paramEntreeSortie {binary\_code : \binaryCode}, {\paramEntree bit : \bit}}{get\_length(binary\_code) < MAXIMUM\_LENGTH}
-    \signatureProcedure {delete\_bit}{\paramEntreeSortie {binary\_code : \binaryCode}, {\paramEntree position : \naturel}}{get\_length(binary\_code) > 0 and position $\leq$ get\_length(binary\_code)}
-    \signatureProcedure {delete\_last\_bit}{\paramEntreeSortie {binary\_code : \binaryCode}}{get\_length(binary\_code) > 0}
+    \signatureProcedure {remove\_bit}{\paramEntreeSortie {binary\_code : \binaryCode}, {\paramEntree position : \naturel}}{get\_length(binary\_code) > 0 and position $\leq$ get\_length(binary\_code)}
+    \signatureProcedure {remove\_last\_bit}{\paramEntreeSortie {binary\_code : \binaryCode}}{get\_length(binary\_code) > 0}
     \signatureFonction {clone}{binary\_code : \binaryCode}{\binaryCode}{}
 \end{algorithme}
