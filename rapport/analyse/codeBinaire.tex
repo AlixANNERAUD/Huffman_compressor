@@ -30,7 +30,7 @@
         \tadAxiome{get\_bit(code,get\_length(code))=get\_bit(remove\_last\_bit(add\_bit(code,bit)),get\_length(code))}
         \tadAxiome{get\_bit(add\_bit(code,bit),get\_length(code))=bit}
     \end{tadAxiomes}
-    \begin{tadPreconditions}{remove\_last\_bit}
+    \begin{tadPreconditions}{remove\_last\_bit(code)}
 		\tadPrecondition{get\_bit(code, i)}{i $\leq$ get\_length(code)}
         \tadPrecondition{add\_bit(code, bit)}{get\_length(code) < MAXIMUM\_LENGTH}
         \tadPrecondition{remove\_bit(code, i)}{i $\leq$ get\_length(code) et 0 < get\_length(code)}
