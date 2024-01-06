@@ -1,9 +1,10 @@
 \section{Octet}
 
 \begin{algorithme}
-    \signatureFonction{byte}{natural : \naturel}{\byte}{}
-    \signatureProcedure{setBit}{\paramEntreeSortie{byte : \byte}, \paramEntree{natural : \naturel}, \paramEntree{bit : \bit}}
-    {setBit(byte, i, bit): 1 $\leq$ i $\leq$ 8}
-    \signatureFonction{getBit}{byte : \byte, natural : \naturel}{\bit}
-    {getBit(byte, i): 1 $\leq$ i $\leq$ 8}
+    \signatureFonction{byte}{natural : \naturel}{\byte}{natural < 256}
+    \signatureFonction{byte_to_natural}{byte : \byte}{\naturel}{}
+    \signatureProcedure{set_bit}{\paramEntreeSortie{byte : \byte}, \paramEntree{i : \naturel}, \paramEntree{bit : \bit}}
+    {i $\leq$ 7}
+    \signatureFonction{get_bit}{byte : \byte, i : \naturel}{\bit}
+    {i $\leq$ 7}
 \end{algorithme}
