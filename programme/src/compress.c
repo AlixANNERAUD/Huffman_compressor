@@ -12,19 +12,7 @@
 
 // - - Fonctions privées
 
-void compute_statistics(Statistics *stat, FILE *input)
-{
-    Byte byte;
-    statistics_initialize(*stat);
-    fseek(input, 0, SEEK_SET);
-    while (feof(input) == 0)
-    {
-        fread(&byte, sizeof(byte), 1, input);
-        statistics_increase_count(*stat, byte);
-    }
-}
-
-void coding_table_from_huffman_tree_recursive(HuffmanTree tree, CodingTable *table, BinaryCode *current_code)
+void coding_table_from_huffman_tree_recursive(HuffmanTree tree, CodingTable *table, const BinaryCode *current_code)
 {
     if (huffman_tree_is_leaf(tree))
         coding_table_add(table, huffman_tree_get_value(tree), *current_code);
@@ -50,70 +38,89 @@ CodingTable coding_table_from_huffman_tree(HuffmanTree tree)
     return table;
 }
 
-void write_header(FILE destination, Statistics stat, FileSize size)
+CompressResult write_header(FILE *destination, Statistics statistics)
 {
-    fprintf(&destination, "HUFF");                                                           // Identifiant d'un fichier compressé
-    fprintf(&destination, "%llu", sizeof(*stat) + sizeof(size) + sizeof("HUFF") - 1 + size); // Taille total du fichier
-    fprintf(&destination, "%lu", sizeof(*stat) + sizeof(size) + sizeof("HUFF") - 1);         // Taille de l'entête
+    if (fprintf(destination, "HUFF") != 4) // On écrit l'identifiant
+        return COMPRESS_RESULT_ERROR_FAILED_TO_WRITE_HEADER;
+    char statisticsBuffer[sizeof(Statistics) + sizeof(FileSize)];
+    statistics_serialize(statistics, statisticsBuffer, sizeof(statisticsBuffer)); // On sérialise les statistiques
+    if (fwrite(statisticsBuffer, sizeof(statisticsBuffer), 1, destination) != 1)  // On les écrit dans le fichier
+        return COMPRESS_RESULT_ERROR_FAILED_TO_WRITE_HEADER;
+    return COMPRESS_RESULT_OK;
 }
 
-CompressResult compress_source_bytes(FILE source, FILE *destination, CodingTable table)
+CompressResult compress_source_bytes(FILE *source, FILE *destination, CodingTable table)
 {
-    BinaryCode bc;
-    Byte byte = '\0';
-    fseek(&source, 0, 0); // Set la position à 0 (0) depuis le début du fichier (0, seek_set)
-    while (feof(&source) == 0)
-    {                                                     // Tant que l'on a pas atteint la fin du fichier
-        fread(&byte, sizeof(byte), 1, &source);           // On lit le byte courant
-        bc = coding_table_get_value(&table, byte);        // Cherche dans la CT son équivalence en BC
-        if (fwrite(&bc, sizeof(bc), 1, destination) != 1) // Et on écrit sa compression dans le fichier destination
-            return COMPRESS_RESULT_ERROR_FAILED_TO_WRITE_OUTPUT_FILE;
+    rewind(source);
+
+    unsigned int i = 0; // Compteur de bits
+    Byte input_byte = byte_create(0);
+    Byte output_byte = byte_create(0);
+    while (fread(&input_byte, sizeof(input_byte), 1, source) == 1)
+    { // Tant que l'on a pas atteint la fin du fichier
+        BinaryCode bc = coding_table_get_value(&table, input_byte); // Cherche dans la CT son équivalence en BC
+
+        for (int j = 0; j < binary_code_get_length(&bc); j++)
+        {
+            byte_set_bit(&output_byte, i, binary_code_get_bit(&bc, j)); // On accède à chaque bit d'un code binaire dans un octet
+            i++;
+
+            if (i >= 8) // Si on a accumulé 8 bits ou qu'on est à la fin du fichier.
+            {
+                if (fwrite(&output_byte, sizeof(output_byte), 1, destination) != 1) // Et on écrit sa compression dans le fichier destination
+                    return COMPRESS_RESULT_ERROR_FAILED_TO_WRITE_OUTPUT_FILE;
+                
+                output_byte = byte_create(0);
+                i = 0;
+            }
+        }
     }
+    if (ferror(source))
+        return COMPRESS_RESULT_ERROR_FAILED_TO_READ_INPUT_FILE;
+
+    if (i > 0 && fwrite(&output_byte, sizeof(output_byte), 1, destination) != 1) // Si on a des bits en attente, on les écrit
+        return COMPRESS_RESULT_ERROR_FAILED_TO_WRITE_OUTPUT_FILE;
+
 
     return COMPRESS_RESULT_OK;
 }
 
-FileSize size_of_file(FILE *f)
-{
-    fseek(f, 0, SEEK_SET);
-    FileSize size = 0;
-    while (feof(f) == 0)
-    {                          // Tant que l'on a pas atteint la fin du fichier
-        fseek(f, 1, SEEK_CUR); // On avance d'un et on augmente la taille d'un
-        size++;
-    }
-    return size;
-}
 // - - Fonctions publiques
 
 CompressResult compress(FILE *input, FILE *output)
 {
-    // Préconditions
-    assert(input != NULL);
-    assert(output != NULL);
+    CompressResult result = COMPRESS_RESULT_OK;
 
-    if (ferror(input) || ferror(output))
+    Statistics statistics;
+
+    if (!statistics_compute_from_file(statistics, input))
         return COMPRESS_RESULT_ERROR_FILE;
 
-    if (feof(input))
-        return COMPRESS_RESULT_ERROR_PREMATURE_END_OF_FILE;
+    printf("File size : %lu\n", statistics_get_total_count(statistics));
 
-    CompressResult result = COMPRESS_RESULT_OK;
-    FileSize size;
-    Statistics stat;
-    HuffmanTree ht;
-    CodingTable ct;
-    statistics_initialize(stat);
-    compute_statistics(&stat, input);
-    ht = *huffman_tree_from_statistic(&stat);
+    HuffmanTree huffmanTree;
+    huffmanTree = huffman_tree_from_statistic(statistics);
 
-    assert(ht != NULL);
+    // printf("Arbre d'Huffman : \n");
+    // print_huffman_tree(ht, 0);
 
-    ct = coding_table_from_huffman_tree(ht);
+    CodingTable codingTable;
+    codingTable = coding_table_from_huffman_tree(huffmanTree);
 
-    result = compress_source_bytes(*input, output, ct);
-    size = size_of_file(output);
-    write_header(*output, stat, size);
+    for (int i = 0; i < 256; i++)
+    {
+        if (coding_table_search(&codingTable, byte_create(i), NULL))
+        {
+            BinaryCode bc = coding_table_get_value(&codingTable, i);
+            printf("%c : ", i);
+            for (int j = 0; j < bc.length; j++)
+                printf("%d", bc.bits[j]);
+            printf("\n");
+        }
+    }
+
+    write_header(output, statistics);
+    result = compress_source_bytes(input, output, codingTable);
 
     return result;
 }
