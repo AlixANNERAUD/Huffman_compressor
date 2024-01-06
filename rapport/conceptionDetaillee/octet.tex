@@ -2,7 +2,7 @@
 
 \begin{algorithme}
 
-    \type {Byte}{0..255}
+    \type {Byte}{0..255}%Pas sûr
     \espace
     \fonction{byte}{natural : \naturel}{\byte}{natural < 256}
     {res : \byte}
@@ -23,15 +23,15 @@
     {}
     {
         \sialorssinon{bit = bit0}
-            {byte &= ~(1 << position)}%Je sais pas comment faire
-            {temp |= (1 << position)}%Je sais pas comment faire
+            {\instruction{byte &= ~(1 << position)}} %Je sais pas comment faire
+            {\instruction{byte |= (1 << position)}} %Je sais pas comment faire
     }
     \espace
     \fonction{get_bit}{byte : \byte, position : \naturel}{\bit}
     {position $\leq$ 7}
     {res : \bit}
     {
-        \sialorssinon{((byte >> position)&1) = 1}%Je sais pas comment faire
+        \sialorssinon{((byte >> position)&1) = 1} %Je sais pas comment faire
             {\affecter{res}{bit1}}
             {\affecter{res}{bit0}}
         \retourner {res}
