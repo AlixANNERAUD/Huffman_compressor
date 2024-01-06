@@ -7,7 +7,7 @@
     \tadParametres{}
     \tadDependances{\bit, \naturel}
     \begin{tadOperations}{clone}
-        \tadOperation{create}{}{\binaryCode}
+        \tadOperation{binary\_code}{}{\binaryCode}
         \tadOperation{get\_length}{\tadParams{\binaryCode}}{\naturel}
         \tadOperationAvecPreconditions{get\_bit}{\tadParams{\binaryCode, \naturel}}{\bit}
         \tadOperationAvecPreconditions{add\_bit}{\tadParams{\binaryCode, \bit}}{\binaryCode}
@@ -16,7 +16,7 @@
         \tadOperation{clone}{\binaryCode}{\binaryCode}
     \end{tadOperations}
     \begin{tadSemantiques}{clone}
-        \tadSemantique{create}{Crée un code binaire vide.}
+        \tadSemantique{binary\_code}{Crée un code binaire vide.}
         \tadSemantique{get\_length}{Renvoie la longueur d'un code binaire (le nombre de bits).}
         \tadSemantique{get\_bit}{Renvoie un bit d'une position donnée d'un code binaire.}
         \tadSemantique{add\_bit}{Ajoute un bit à la fin d'un code binaire.}
@@ -31,7 +31,7 @@
         \tadAxiome{get\_bit(add\_bit(code,bit),get\_length(code))=bit}
     \end{tadAxiomes}
     \begin{tadPreconditions}{deleteLastBit(code)}
-		\tadPrecondition{get\_bit(code, i)}{0 $\leqslant$ i $\leqslant$ get\_length(code)}
+		\tadPrecondition{get\_bit(code, i)}{i $\leq$ get\_length(code)}
         \tadPrecondition{add\_bit(code, bit)}{get\_length(code) < MAXIMUM\_LENGTH}
         \tadPrecondition{remove\_bit(code, i)}{i < get\_length(code) et 0 < get\_length(code)}
         \tadPrecondition{remove\_last\_bit(code)}{0 < get\_length(code)}
