@@ -34,7 +34,7 @@ void test_statistics_count()
         CU_ASSERT_EQUAL(statistics_get_count(s, byte_create(i)), 0xFFFF - i);
 
     for (unsigned int i = 0; i < STATISTICS_MAX; i++)
-        statistics_increase_count(s, byte_create(i));
+        statistics_increment_count(s, byte_create(i));
 
     for (unsigned int i = 0; i < STATISTICS_MAX; i++)
         CU_ASSERT_EQUAL(statistics_get_count(s, byte_create(i)), 0xFFFF - i + 1)
@@ -44,12 +44,19 @@ void test_statistics_serialization()
 {
     Statistics s;
     statistics_initialize(s);
-    statistics_set_count(&s, 0, 1);
-    unsigned char *buffer[sizeof(Statistics)];
-    statistics_serialize(s, buffer, STATISTICS_MAX);
+    for (unsigned int i = 0; i < 0xFF; i++)
+        statistics_set_count(s, byte_create(i), 0xFF - i);
+    unsigned char buffer[sizeof(Statistics) + sizeof(FileSize)];
+    statistics_serialize(s, buffer, sizeof(buffer));
     Statistics s2;
-    statistics_deserialize(s2, buffer);
-    CU_ASSERT_EQUAL(statistics_get_count(&s2, 0), 1);
+    statistics_initialize(s2);
+    CU_ASSERT(statistics_deserialize(s2, buffer));
+    FileSize Sum = 0;
+    for (unsigned int i = 0; i < 0xFF; i++) {
+        CU_ASSERT_EQUAL(statistics_get_count(s2, byte_create(i)), 0xFF - i);
+        Sum += 0xFF - i;
+    }
+    CU_ASSERT_EQUAL(statistics_get_file_size(s2), Sum);
 }
 
 /**

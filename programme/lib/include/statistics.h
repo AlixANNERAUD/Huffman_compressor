@@ -11,9 +11,13 @@
 */
 #define STATISTICS_MAX 256
 
+#include "stdio.h"
 #include "common.h"
 #include "byte.h"
 
+/// @brief Type Statistique qui est un tableau de type `FileSize` de taille STATISTICS_MAX + 1.
+/// @details Les 256 premières cases du tableau correspondent aux statistiques de chaque octet.
+/// La dernière case du tableau correspond à la taille du fichier.
 typedef FileSize Statistics[STATISTICS_MAX];
 
 /**
@@ -28,7 +32,7 @@ void statistics_initialize(Statistics stat);
  * @param stat Les statistiques
  * @param e élément sous forme d'octet
 */
-unsigned int statistics_get_count(const Statistics stat, Byte e);
+FileSize statistics_get_count(const Statistics stat, Byte e);
 
 /**
  * @fn statistics_set_count(Statistics* stat, Byte e, unsigned int n)
@@ -45,7 +49,18 @@ void statistics_set_count(Statistics stat, Byte e, unsigned int n);
  * @param stat Les statistiques
  * @param e élément sous forme d'octet
 */
-void statistics_increase_count(Statistics stat, Byte e);
+void statistics_increment_count(Statistics stat, Byte e);
+
+/// @brief Fonction qui renvoie la taille du fichier.
+/// @param stat Les statistiques
+/// @return La taille du fichier.
+FileSize statistics_get_file_size(const Statistics stat);
+
+/// @brief Fonction qui calcule les statistiques à partir d'un fichier.
+/// @param statistics Les statistiques résultantes.
+/// @param file Le fichier d'entrée ouvert en lecture.
+/// @return Si le calcul s'est bien passé.
+bool statistics_compute_from_file(Statistics stat, FILE* file);
 
 /// @brief Fonction qui sérialise les statistiques dans un tableau d'octets.
 /// @param stats Les statistiques
@@ -55,4 +70,5 @@ void statistics_serialize(const Statistics stats, void* buffer, FileSize size);
 /// @brief Fonction qui désérialise les statistiques depuis un tableau d'octets.
 /// @param stats Les statistiques.
 /// @param buffer Le buffer d'une taille de 64 * 256 = 2048 octets.
-void statistics_deserialize(Statistics stats, const void* buffer);
+bool statistics_deserialize(Statistics stats, const void* buffer);
+
