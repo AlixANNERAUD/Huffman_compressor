@@ -7,34 +7,33 @@
     \tadParametres{}
     \tadDependances{\bit, \naturel}
     \begin{tadOperations}{clone}
-        \tadOperation{binary\_code}{}{\binaryCode}
+        \tadOperation{create}{}{\binaryCode}
         \tadOperation{get\_length}{\tadParams{\binaryCode}}{\naturel}
         \tadOperationAvecPreconditions{get\_bit}{\tadParams{\binaryCode, \naturel}}{\bit}
         \tadOperationAvecPreconditions{add\_bit}{\tadParams{\binaryCode, \bit}}{\binaryCode}
-        \tadOperationAvecPreconditions{delete\_bit}{\tadParams{\binaryCode, \naturel}}{\binaryCode}
-        \tadOperationAvecPreconditions{delete\_last\_bit}{\binaryCode}{\binaryCode}
+        \tadOperationAvecPreconditions{remove\_bit}{\tadParams{\binaryCode, \naturel}}{\binaryCode}
+        \tadOperationAvecPreconditions{remove\_last\_bit}{\binaryCode}{\binaryCode}
         \tadOperation{clone}{\binaryCode}{\binaryCode}
     \end{tadOperations}
     \begin{tadSemantiques}{clone}
-        \tadSemantique{binary\_code}{Crée un code binaire vide.}
+        \tadSemantique{create}{Crée un code binaire vide.}
         \tadSemantique{get\_length}{Renvoie la longueur d'un code binaire (le nombre de bits).}
         \tadSemantique{get\_bit}{Renvoie un bit d'une position donnée d'un code binaire.}
         \tadSemantique{add\_bit}{Ajoute un bit à la fin d'un code binaire.}
-        \tadSemantique{delete\_bit}{Supprime un bit d'une position donnée d'un code binaire.}
-        \tadSemantique{delete\_last\_bit}{Supprime le dernier bit d'un code binaire.}
+        \tadSemantique{remove\_bit}{Supprime un bit d'une position donnée d'un code binaire.}
+        \tadSemantique{remove\_last\_bit}{Supprime le dernier bit d'un code binaire.}
         \tadSemantique{clone}{Crée une copie d'un code binaire.}
     \end{tadSemantiques}
     \begin{tadAxiomes}
-        \tadAxiome{binary\_code(code)=binary\_code(clone(code))}
         \tadAxiome{get\_bit(code,i)=get\_bit(clone(code),i)}
-        \tadAxiome{get\_length(code)=get\_length(delete\_last\_bit(code))+1}
-        \tadAxiome{get\_bit(code,getLength(code))=get\_bit(delete\_last\_bit(addBit(code,bit)),get\_length(code))}
-        \tadAxiome{get\_bit(addBit(code,bit),get\_length(code))=bit}
+        \tadAxiome{get\_length(code)=get\_length(remove\_last\_bit(code))+1}
+        \tadAxiome{get\_bit(code,get\_length(code))=get\_bit(remove\_last\_bit(add\_bit(code,bit)),get\_length(code))}
+        \tadAxiome{get\_bit(add\_bit(code,bit),get\_length(code))=bit}
     \end{tadAxiomes}
     \begin{tadPreconditions}{deleteLastBit(code)}
 		\tadPrecondition{get\_bit(code, i)}{0 $\leqslant$ i $\leqslant$ get\_length(code)}
         \tadPrecondition{add\_bit(code, bit)}{get\_length(code) < MAXIMUM\_LENGTH}
-        \tadPrecondition{delete\_bit(code, i)}{0 $\leqslant$ i $\leqslant$ get\_length(code)}
-        \tadPrecondition{delete\_last\_bit(code)}{get\_length(code) $\ne$ 0}
+        \tadPrecondition{remove\_bit(code, i)}{i < get\_length(code) et 0 < get\_length(code)}
+        \tadPrecondition{remove\_last\_bit(code)}{0 < get\_length(code)}
     \end{tadPreconditions}
 \end{tad}
