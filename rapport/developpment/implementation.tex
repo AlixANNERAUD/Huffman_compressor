@@ -1,5 +1,7 @@
 \section{Implementation}
 
+Dans cette section, nous allons détailler et justifier les choix d'implémentation que nous avons fait pour ce projet.
+
 \subsection{Préconditions}
 
 Afin d'éviter tout comportement indéfini, nous avons vérifié les préconditions à l'exécution des fonctions.
@@ -10,7 +12,31 @@ Cela permet de détecter une bonne partie des erreurs d'implementation lors du d
 \subsection{Gestion des erreurs}
 
 Afin de gérer les erreurs au temps d'exécution, nous avons fait le choix de ne pas utiliser \texttt{errno.h} de la bibliothèque standard du C.
-Cette étant trop limitée, nous avons préféré <a completer>.
-A la place, nous avons créer des énumerations dans les fichiers d'entête (\texttt{.h}) afin de pouvoir gérer les erreurs de manière plus précise.
-Nous avons également ajouté des fonctions permettant de convertir ces énumerations en chaîne de caractères afin de pouvoir afficher des messages d'erreurs plus explicites.
+Cette étant trop limitée, nous avons préféré une gestion des erreurs récursive en utilisant les retours des fonctions et des énumérations.
+Ainsi, nous avons créé des énumérations pour chaque type d'erreur. De plus, nous avons également ajouté des fonctions permettant de convertir ces énumérations en chaîne de caractères afin de pouvoir afficher des messages d'erreurs plus explicites.
 Cela permet une gestion des erreurs plus précise et plus lisible.
+
+\subsection{Tests unitaires}
+
+Afin de tester le bon fonctionnement des TAD, nous avons écrit des tests unitaires pour chaque fonction.
+Pour cela, nous avons utilisé la bibliothèque \texttt{CUnit} qui permet de créer des suites de tests et d'afficher les résultats.
+Cette librairie est limitée, mais elle est suffisante pour notre cas d'utilisation et elle est facile à prendre en main.
+
+\subsection{Implémentation procédurale}
+
+L'implémentation procédurale en C s'est faite de la manière suivante :
+
+\begin{itemize}
+    \item Dans le cas d'une entrée (valable aussi pour une fonction), si le type en question à une taille inférieur ou égale à celle des pointeurs, alors nous passons l'argument par valeur (\texttt{Type}).
+    Sinon, nous passons l'argument par pointeur avec valeur constante (\texttt{const Type*}).
+    \footnote{Ce choix à été fait pour des raisons de performances. En effet, dans le cas d'une entrée, nous ne modifions pas la valeur de l'argument. Ainsi, si nous passons l'argument par valeur, nous évitons une copie inutile.}
+    \item Dans le cas d'une sortie ou d'une entrée/sortie, nous passons l'argument par pointeur (\texttt{Type*}) avec valeur mutable.
+\end{itemize}
+
+\subsection{Allocation de la mémoire}
+
+Afin de faciliter la gestion de la mémoire et maximiser les performances\footnote{En effet, l'allocation dynamique est une opération coûteuse en performances car elle nécessite un appel système.},
+nous avons fait le choix d'utiliser un maximum l'allocation statique.
+Cela n'est pas problématique vu que nos données ont une taille bien inférieure à la taille standard d'une la pile (8 Mo sur Linux).
+Ainsi, nous avons utilisé l'allocation dynamique uniquement pour les structures de données dont il nous est impossible de connaître la taille (maximale) à la compilation ou sans trop complexifier le code
+(uniquement pour les arbres d'Huffman).
