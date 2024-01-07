@@ -11,6 +11,9 @@
 #include "compress.h"
 #include "decompress.h"
 
+/// @brief Fonction qui affiche un message d'erreur sur la sortie d'erreur standard
+/// @param format Format du message
+/// @param  ... Arguments du message
 void print_error(const char *format, ...)
 {
     va_list args;
@@ -114,26 +117,25 @@ bool open_files(char mode, const char *input_file_path, FILE **input_file, FILE 
 
 int main(int argc, const char *argv[])
 {
+    // - Lecture et vérification des arguments
     char mode = '\0';
     const char *input_file_path;
-
     if (!read_arguments(argc, argv, &mode, &input_file_path))
         return EXIT_FAILURE;
-
-    printf("Input file path : %s\n", input_file_path);
-
+    // - Ouverture des fichiers
     FILE *inputFile;
     FILE *outputFile;
-
     if (!open_files(mode, input_file_path, &inputFile, &outputFile))
         return EXIT_FAILURE;
-
+    // - Compression / décompression
     if (mode == 'c')
     {
+        // - Compression
         printf("Compressing ...\n");
         clock_t start = clock();
         CompressResult compressResult = compress(inputFile, outputFile);
         clock_t end = clock();
+        // - Affichage du résultat
         if (compressResult != COMPRESS_RESULT_OK)
         {
             printf("Error while compressing file.\n");
@@ -147,10 +149,12 @@ int main(int argc, const char *argv[])
     }
     else if (mode == 'd')
     {
+        // - Décompression
         printf("Decompressing ...\n");
         clock_t start = clock();
         DecompressResult decompressResult = decompress(inputFile, outputFile);
         clock_t end = clock();
+        // - Affichage du résultat
         if (decompressResult != DECOMPRESS_RESULT_OK)
         {
             char errorBuffer[1024];
@@ -161,7 +165,7 @@ int main(int argc, const char *argv[])
         else
             printf("File decompressed successfully in %f seconds.\n", (double)(end - start) / CLOCKS_PER_SEC);
     }
-
+    // - Fermeture des fichiers
     fclose(inputFile);
     fclose(outputFile);
     return EXIT_SUCCESS;
