@@ -1,12 +1,14 @@
-#include "compress.h"
-
+// - Dépendances
+// - - Librairie standard
+#include <string.h> // strncmp
+// - - Locales
 #include "statistics.h"
 #include "huffmanTree.h"
 #include "statistics.h"
 #include "codingTable.h"
 #include "binaryCode.h"
+#include "compress.h"
 
-#include <string.h>
 
 // - Définitions
 
