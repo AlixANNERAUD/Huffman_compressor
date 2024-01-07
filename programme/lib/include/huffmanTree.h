@@ -16,7 +16,7 @@ typedef struct Node
     /// @brief Valeur (byte) du noeud. NB : Utile uniquement dans une feuille.
     Byte value;
     /// @brief Poids du noeud, son poids propre s'il est une feuille, la somme du poids de ses fils sinon.
-    unsigned int weight;
+    FileSize weight;
     /// @brief Fils gauche.
     struct Node *leftChild;
     /// @brief Fils droit.
@@ -31,7 +31,7 @@ typedef Node *HuffmanTree;
 /// @param value Byte pour lequel on crée la feuille
 /// @param weight poids (nb d'occurence) du Byte dans le fichier
 /// @return Un arbre d'Huffman qui est une feuille
-HuffmanTree huffman_tree_new_leaf(Byte value, unsigned int weight);
+HuffmanTree huffman_tree_new_leaf(Byte value, FileSize weight);
 
 /// @brief Fonction créant un arbre à partir de ses fils gauche et droit
 /// @param tree1 Futur fils gauhe
@@ -52,7 +52,7 @@ Byte huffman_tree_get_value(const HuffmanTree tree);
 /// @brief Accesseur du poids d'un noeud
 /// @param tree
 /// @return La valeur du noeud racine
-unsigned int huffman_tree_get_weight(const HuffmanTree tree);
+FileSize huffman_tree_get_weight(const HuffmanTree tree);
 
 /// @brief Accesseur du fils gauche d'un arbre (Précondition : Ne doit pas être une feuille)
 /// @param tree
