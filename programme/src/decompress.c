@@ -66,8 +66,8 @@ DecompressResult decompress_data(FILE *input, FILE *output, const HuffmanTree tr
         if (i > 7)
         {
             unsigned char bitsRead;
-            if (fread(&bitsRead, sizeof(bitsRead), 1, input) != 1)
-                return DECOMPRESS_RESULT_ERROR_PREMATURE_END_OF_FILE;
+            if (fread(&bitsRead, sizeof(bitsRead), 1, input) != 1 && ferror(input))
+                return DECOMPRESS_RESULT_ERROR_FILE;
             sourceByte = byte_create(bitsRead); // Conversion d'un naturel non signé d'un octet en octet
             i = 0;
         }
@@ -86,7 +86,7 @@ DecompressResult decompress_data(FILE *input, FILE *output, const HuffmanTree tr
         else
         {
             Bit bit = byte_get_bit(sourceByte, i); // On récupère le bit
-            if (bit == 0)
+            if (bit == BIT_0)
                 currentTree = currentTree->leftChild;
             else
                 currentTree = currentTree->rightChild;
@@ -111,6 +111,8 @@ DecompressResult decompress(FILE *input, FILE *output)
     HuffmanTree tree = huffman_tree_from_statistic(statistics);
     // - Décompression des données
     result = decompress_data(input, output, tree, statistics_get_total_count(statistics));
+    if (result != DECOMPRESS_RESULT_OK)
+        return result;
     huffman_tree_delete(tree); // On nettoie l'arbre
     // - Vérification du fichier décompressé en comparant les statistiques du fichier décompressé avec les statistiques du fichier compressé
     rewind(output); // On remet le curseur au début du fichier
