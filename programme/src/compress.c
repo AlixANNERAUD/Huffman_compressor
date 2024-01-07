@@ -14,6 +14,11 @@
 
 // - - Fonctions privées
 
+/// @brief Fonction utilisée dans coding_table_from_huffman_tree, construit la table de codage en fonction de l'abre d'Huffman. 
+/// @details Utilise l'abre d'Huffman pour généré l'équivalent en code binaire de chaque feuille (bit du fichier en entrée) de l'abre, et le stocker dans la table de codage.
+/// @param tree Arbre d'Huffman courrant.
+/// @param table Table de codage. 
+/// @param current_code Code binaire en construction, inscrit dans la table de codage une fois une feuille atteinte. 
 void coding_table_from_huffman_tree_recursive(HuffmanTree tree, CodingTable *table, BinaryCode *current_code)
 {
     if (huffman_tree_is_leaf(tree))
@@ -29,6 +34,9 @@ void coding_table_from_huffman_tree_recursive(HuffmanTree tree, CodingTable *tab
     }
 }
 
+/// @brief Fonction construisant la table de codage en fonction de l'arbre d'Huffman, par appel à la fonction coding_table_from_huffman_tree_recursive.
+/// @param tree Arbre d'Huffman correspondant au fichier à compresser. 
+/// @return La table de codage correspondant au fichier à compresser. 
 CodingTable coding_table_from_huffman_tree(HuffmanTree tree)
 {
     CodingTable table;
@@ -40,6 +48,11 @@ CodingTable coding_table_from_huffman_tree(HuffmanTree tree)
     return table;
 }
 
+/// @brief Fonction écrivant l'en-tête du fichier compressé, 
+/// @details L'en-tête contient l'identifiant "HUFF" et les statistiques du fichier à compresser. 
+/// @param destination Le fichier compressé.
+/// @param statistics Les statistiques du fichier à compresser.
+/// @return Le résultat de la compression. 
 CompressResult write_header(FILE *destination, Statistics statistics)
 {
     if (fprintf(destination, "HUFF") != 4) // On écrit l'identifiant
@@ -51,6 +64,11 @@ CompressResult write_header(FILE *destination, Statistics statistics)
     return COMPRESS_RESULT_OK;
 }
 
+/// @brief Fonction qui lit les octets du fichier à compresser et écrit les code binaires correspondants dans le fichier compressé. 
+/// @param source Le fchier à compresser.
+/// @param destination Le fichier compressé.
+/// @param table La table de codage donnant l'équivalence octet / code binaire.
+/// @return Le résultat de la compression.
 CompressResult compress_source_bytes(FILE *source, FILE *destination, CodingTable table)
 {
     rewind(source);
@@ -58,16 +76,16 @@ CompressResult compress_source_bytes(FILE *source, FILE *destination, CodingTabl
     unsigned int i = 0; // Compteur de bits
     Byte input_byte = byte_create(0);
     Byte output_byte = byte_create(0);
-    while (fread(&input_byte, sizeof(input_byte), 1, source) == 1)
-    { // Tant que l'on a pas atteint la fin du fichier
-        BinaryCode bc = coding_table_get_value(&table, input_byte); // Cherche dans la CT son équivalence en BC
+    while (fread(&input_byte, sizeof(input_byte), 1, source) == 1)              // Tant que l'on a pas atteint la fin du fichier
+    { 
+        BinaryCode bc = coding_table_get_value(&table, input_byte);             // Cherche dans la CT son équivalence en BC
 
         for (int j = 0; j < binary_code_get_length(&bc); j++)
         {
-            byte_set_bit(&output_byte, i, binary_code_get_bit(&bc, j)); // On accède à chaque bit d'un code binaire dans un octet
+            byte_set_bit(&output_byte, i, binary_code_get_bit(&bc, j));         // On accède à chaque bit d'un code binaire dans un octet
             i++;
 
-            if (i >= 8) // Si on a accumulé 8 bits ou qu'on est à la fin du fichier.
+            if (i >= 8)                                                         // Si on a accumulé 8 bits ou qu'on est à la fin du fichier.
             {
                 if (fwrite(&output_byte, sizeof(output_byte), 1, destination) != 1) // Et on écrit sa compression dans le fichier destination
                     return COMPRESS_RESULT_ERROR_FAILED_TO_WRITE_OUTPUT_FILE;
@@ -87,6 +105,11 @@ CompressResult compress_source_bytes(FILE *source, FILE *destination, CodingTabl
 
 // - - Fonctions publiques
 
+
+/// @brief Fonction principale pour compresser un fichier.
+/// @param input Fichier non-compressé
+/// @param output Fichier compressé
+/// @return Résultat de la compression
 CompressResult compress(FILE *input, FILE *output)
 {
     CompressResult result = COMPRESS_RESULT_OK;
@@ -100,7 +123,7 @@ CompressResult compress(FILE *input, FILE *output)
     // - Création de la table de codage
     CodingTable codingTable;
     codingTable = coding_table_from_huffman_tree(huffmanTree);
-    huffman_tree_delete(huffmanTree); // On libère la mémoire de l'arbre de Huffman
+    huffman_tree_delete(huffmanTree);                           // On libère la mémoire de l'arbre de Huffman
     // - Écriture de l'en-tête
     result = write_header(output, statistics);
     if (result != COMPRESS_RESULT_OK)
@@ -109,6 +132,11 @@ CompressResult compress(FILE *input, FILE *output)
     return compress_source_bytes(input, output, codingTable);
 }
 
+/// @brief Fonction pour transcrire un résultat de compression en chaîne de caractères.
+/// @param error Résultat de la décompression
+/// @param buffer Chaîne de caractères résultante
+/// @param bufferSize Taille de la chaîne de caractères résultante
+/// @return Résultat de la compression
 void compress_error_to_string(DecompressResult error, char *buffer, size_t bufferSize)
 {
     switch (error)
