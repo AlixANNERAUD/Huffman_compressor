@@ -80,8 +80,6 @@ CompressResult compress_source_bytes(FILE *source, FILE *destination, CodingTabl
 
     if (i > 0 && fwrite(&output_byte, sizeof(output_byte), 1, destination) != 1) // Si on a des bits en attente, on les écrit
         return COMPRESS_RESULT_ERROR_FAILED_TO_WRITE_OUTPUT_FILE;
-
-
     return COMPRESS_RESULT_OK;
 }
 
@@ -90,37 +88,21 @@ CompressResult compress_source_bytes(FILE *source, FILE *destination, CodingTabl
 CompressResult compress(FILE *input, FILE *output)
 {
     CompressResult result = COMPRESS_RESULT_OK;
-
+    // - Calcul des statistiques
     Statistics statistics;
-
     if (!statistics_compute_from_file(statistics, input))
         return COMPRESS_RESULT_ERROR_FILE;
-
-    printf("File size : %lu\n", statistics_get_total_count(statistics));
-
+    // - Création de l'arbre de Huffman
     HuffmanTree huffmanTree;
     huffmanTree = huffman_tree_from_statistic(statistics);
-
-    // printf("Arbre d'Huffman : \n");
-    // print_huffman_tree(ht, 0);
-
+    // - Création de la table de codage
     CodingTable codingTable;
     codingTable = coding_table_from_huffman_tree(huffmanTree);
-
-    for (int i = 0; i < 256; i++)
-    {
-        if (coding_table_search(&codingTable, byte_create(i), NULL))
-        {
-            BinaryCode bc = coding_table_get_value(&codingTable, i);
-            printf("%c : ", i);
-            for (int j = 0; j < bc.length; j++)
-                printf("%d", bc.bits[j]);
-            printf("\n");
-        }
-    }
-
-    write_header(output, statistics);
-    result = compress_source_bytes(input, output, codingTable);
-
-    return result;
+    huffman_tree_delete(huffmanTree); // On libère la mémoire de l'arbre de Huffman
+    // - Écriture de l'en-tête
+    result = write_header(output, statistics);
+    if (result != COMPRESS_RESULT_OK)
+        return result;
+    // - Compression des données
+    return compress_source_bytes(input, output, codingTable);
 }
