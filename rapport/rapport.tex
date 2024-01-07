@@ -3,12 +3,14 @@
 \usepackage[utf8]{inputenc} % encodage du fichier
 \usepackage[french]{babel} % document en français
 \usepackage[T1]{fontenc} % pour les caractères accentues
-\usepackage{pseudocode}
+\usepackage{packages/pseudocode}
 \usepackage{geometry} % pour les marges
 \usepackage{multirow} % pour combiner des cellules dans un tableau
 \usepackage{makecell}
 % Dépendances pour doxygen
-\usepackage{doxygen}
+\usepackage{packages/tabu_doxygen}
+\usepackage{packages/longtable_doxygen}
+\usepackage{packages/doxygen}
 \usepackage[pagebackref=true]{hyperref}
 \usepackage{ifthen}
 \newcommand{\+}{} % car manquante 
