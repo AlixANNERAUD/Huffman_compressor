@@ -53,15 +53,7 @@ $(TARGET): $(OBJECTS) $(LIB_OBJECTS)
 
 # Règle pour générer l'éxécutable des tests unitaires
 $(TEST_TARGET): $(TEST_OBJECTS) $(LIB_OBJECTS)
-	$(CC) $^ -o $@ $(CFLAGS_TEST)
-
-# Règle pour exécuter l'exécutable
-run: $(TARGET)
-	./$(TARGET) 
-
-test_compress: $(TARGET)
-	./$(TARGET) c test.txt
-	
+	$(CC) $^ -o $@ $(CFLAGS_TEST)	
 
 # Règle pour compiler et exécuter les tests unitaires
 test: $(TEST_TARGET) 
