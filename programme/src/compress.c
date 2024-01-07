@@ -108,3 +108,25 @@ CompressResult compress(FILE *input, FILE *output)
     // - Compression des données
     return compress_source_bytes(input, output, codingTable);
 }
+
+void compress_error_to_string(DecompressResult error, char *buffer, size_t bufferSize)
+{
+    switch (error)
+    {
+    case COMPRESS_RESULT_OK:
+        strncpy(buffer, "No error", bufferSize);
+        break;
+    case COMPRESS_RESULT_ERROR_FILE:
+        strncpy(buffer, "File error", bufferSize);
+        break;
+    case COMPRESS_RESULT_ERROR_PREMATURE_END_OF_FILE:
+        strncpy(buffer, "Premature end of file", bufferSize);
+        break;
+    case COMPRESS_RESULT_ERROR_FAILED_TO_WRITE_OUTPUT_FILE:
+        strncpy(buffer, "Failed to write output file", bufferSize);
+        break;
+    default:
+        strncpy(buffer, "Unknown error", bufferSize);
+        break;
+    }
+}

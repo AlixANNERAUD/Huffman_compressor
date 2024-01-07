@@ -25,3 +25,10 @@ typedef enum {
 /// @return Résultat de la compression
 CompressResult compress(FILE *in, FILE *out);
 
+/// @brief Fonction pour transcrire un résultat de compression en chaîne de caractères.
+/// @param error Résultat de la décompression
+/// @param buffer Chaîne de caractères résultante
+/// @param bufferSize Taille de la chaîne de caractères résultante
+/// @return Résultat de la compression
+void compress_error_to_string(DecompressResult error, char *buffer, size_t bufferSize)
+

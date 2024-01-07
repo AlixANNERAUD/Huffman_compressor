@@ -82,7 +82,7 @@ bool open_files(char mode, const char *input_file_path, FILE **input_file, FILE 
         return false;
     }
     *input_file = fopen(input_file_path, "r"); // On ouvre le fichier d'entrée en lecture
-    // - On vérifie que le a bien été ouvert
+    // - On vérifie que le fichier a bien été ouvert
     if (*input_file == NULL || ferror(*input_file))
     {
         print_error("Error while opening input file.\n");
@@ -139,10 +139,10 @@ int main(int argc, const char *argv[])
         if (compressResult != COMPRESS_RESULT_OK)
         {
             printf("Error while compressing file.\n");
-            // char errorBuffer[1024];
-            // FileSize buffer_size = sizeof(errorBuffer);
-            // compress_error_to_string(cr, errorBuffer, buffer_size);
-            // print_error("%s", errorBuffer);
+            char errorBuffer[1024];
+            FileSize buffer_size = sizeof(errorBuffer);
+            compress_error_to_string(cr, errorBuffer, buffer_size);
+            print_error("%s", errorBuffer);
         }
         else
             printf("File compressed successfully in %f seconds.\n", (double)(end - start) / CLOCKS_PER_SEC);
