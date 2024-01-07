@@ -12,7 +12,7 @@
 
 // - - Fonctions privées
 
-void coding_table_from_huffman_tree_recursive(HuffmanTree tree, CodingTable *table, const BinaryCode *current_code)
+void coding_table_from_huffman_tree_recursive(HuffmanTree tree, CodingTable *table, BinaryCode *current_code)
 {
     if (huffman_tree_is_leaf(tree))
         coding_table_add(table, huffman_tree_get_value(tree), *current_code);
