@@ -56,6 +56,12 @@ void statistics_increment_count(Statistics stat, Byte e);
 /// @return La taille du fichier.
 FileSize statistics_get_total_count(const Statistics stat);
 
+/// @brief Fonction qui compare deux statistiques.
+/// @param statistics1
+/// @param statistics2
+/// @return Si les statistiques sont égales.
+bool statistics_are_equals(const Statistics statistics1, const Statistics statistics2);
+
 /// @brief Fonction qui calcule les statistiques à partir d'un fichier.
 /// @param statistics Les statistiques résultantes.
 /// @param file Le fichier d'entrée ouvert en lecture.

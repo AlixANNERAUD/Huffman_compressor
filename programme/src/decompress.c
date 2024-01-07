@@ -96,6 +96,23 @@ DecompressResult decompress_data(FILE *input, FILE *output, const HuffmanTree tr
     return DECOMPRESS_RESULT_OK; // Si il n'y a pas eu de renvoi prématuré, c'est que tout s'est bien passé
 }
 
+/// @brief Fonction pour vérifier si les statistiques d'un fichier décompressé correspondent aux statistiques du fichier compressé.
+/// @param output Fichier décompressé
+/// @param inputStatistics Statistiques du fichier compressé
+/// @return Résultat de la vérification
+DecompressResult check_output_file(FILE *output, const Statistics inputStatistics)
+{
+    rewind(output); // On remet le curseur au début du fichier
+    // - Calcul des statistiques du fichier décompressé
+    Statistics outputStatistics;
+    if (!statistics_compute_from_file(outputStatistics, output))
+        return DECOMPRESS_RESULT_FAILED_TO_CHECK_OUTPUT_FILE;
+    // - Comparaison des statistiques
+    if (!statistics_are_equals(inputStatistics, outputStatistics))
+        return DECOMPRESS_RESULT_INCONSISTENT_DECOMPRESSED_FILE;
+    return DECOMPRESS_RESULT_OK;
+}
+
 // - - Fonctions publiques
 
 DecompressResult decompress(FILE *input, FILE *output)
@@ -114,18 +131,8 @@ DecompressResult decompress(FILE *input, FILE *output)
     if (result != DECOMPRESS_RESULT_OK)
         return result;
     huffman_tree_delete(tree); // On nettoie l'arbre
-    // - Vérification du fichier décompressé en comparant les statistiques du fichier décompressé avec les statistiques du fichier compressé
-    rewind(output); // On remet le curseur au début du fichier
-    Statistics outputStatistics;
-    if (!statistics_compute_from_file(outputStatistics, output))
-        return DECOMPRESS_RESULT_FAILED_TO_CHECK_OUTPUT_FILE;
-    for (int i = 0; i < 0xFF; i++)
-    {
-        Byte byte = byte_create(i);
-        if (statistics_get_count(statistics, byte) != statistics_get_count(outputStatistics, byte))
-            return DECOMPRESS_RESULT_INCONSISTENT_DECOMPRESSED_FILE;
-    }
-    return result;
+    // - Vérification du fichier décompressé
+    return check_output_file(output, statistics);
 }
 
 void decompress_error_to_string(DecompressResult error, char *buffer, size_t bufferSize)

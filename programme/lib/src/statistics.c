@@ -49,6 +49,11 @@ bool statistics_compute_from_file(Statistics statistics, FILE *file)
     return !ferror(file);
 }
 
+bool statistics_are_equals(const Statistics statistics1, const Statistics statistics2)
+{
+    return memcmp(statistics1, statistics2, sizeof(Statistics)) == 0; // Plus rapide que de faire une boucle for
+}
+
 /// @details Fonction qui copie simplement octet par octet les statistiques dans le buffer.
 void statistics_serialize(const Statistics stats, void *buffer, FileSize size)
 {
