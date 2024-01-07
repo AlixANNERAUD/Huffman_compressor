@@ -5,24 +5,24 @@
 \begin{tad}
     \tadNom{\byte}
     \tadDependances{\bit, \naturel}
-    \begin{tadOperations}{byte_to_natural}
+    \begin{tadOperations}{byte\_to\_natural}
         \tadOperationAvecPreconditions{byte}{\naturel}{\byte}
-        \tadOperation{byte_to_natural}{\byte}{\naturel}
-        \tadOperationAvecPreconditions{set_bit}{\tadParams{\byte,\naturel,\bit}}{\byte}
-        \tadOperationAvecPreconditions{get_bit}{\tadParams{\byte,\naturel}}{\bit}
+        \tadOperation{byte\_to\_natural}{\byte}{\naturel}
+        \tadOperationAvecPreconditions{set\_bit}{\tadParams{\byte,\naturel,\bit}}{\byte}
+        \tadOperationAvecPreconditions{get\_bit}{\tadParams{\byte,\naturel}}{\bit}
     \end{tadOperations}
-    \begin{tadSemantiques}{byte_to_natural}
+    \begin{tadSemantiques}{byte\_to\_natural}
         \tadSemantique{byte}{Crée un octet a partir d'un naturel.}
-        \tadSemantique{byte_to_natural}{Convertit un octet en naturel.}
-        \tadSemantique{set_bit}{Défini le i-ème bit.}
-        \tadSemantique{get_bit}{Obtient le i-ème bit.}
+        \tadSemantique{byte\_to\_natural}{Convertit un octet en naturel.}
+        \tadSemantique{set\_bit}{Défini le i-ème bit.}
+        \tadSemantique{get\_bit}{Obtient le i-ème bit.}
     \end{tadSemantiques}
     \begin{tadAxiomes}
-        \tadAxiome{get_bit(set_bit(byte, i, bit), i) = bit}
+        \tadAxiome{get\_bit(set\_bit(byte, i, bit), i) = bit}
     \end{tadAxiomes}
-    \begin{tadPreconditions}{get_bit(byte, i)}
+    \begin{tadPreconditions}{get\_bit(byte, i)}
         \tadPrecondition{byte(natural)}{natural < 256}
-		\tadPrecondition{set_bit(byte, i)}{i $\leq$ 7}
-		\tadPrecondition{get_bit(byte, i)}{i $\leq$ 7}
+		\tadPrecondition{set\_bit(byte, i)}{i $\leq$ 7}
+		\tadPrecondition{get\_bit(byte, i)}{i $\leq$ 7}
     \end{tadPreconditions}
 \end{tad}

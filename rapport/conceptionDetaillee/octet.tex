@@ -2,7 +2,7 @@
 
 \begin{algorithme}
 
-    \type {Byte}{0..255}%Pas sûr
+    \type{Byte}{0..255}
     \espace
     \fonction{byte}{natural : \naturel}{\byte}{natural < 256}
     {res : \byte}
@@ -11,27 +11,29 @@
         \retourner{res}
     }
     \espace
-    \fonction{byte_to_natural}{byte : \byte}{\naturel}{}
+    \fonction{byte\_to\_natural}{byte : \byte}{\naturel}{}
     {res : \naturel}
     {
         \affecter{res}{byte}
-        \retourner {res}
+        \retourner{res}
     }
     \espace
-    \procedure{set_bit}{\paramEntreeSortie{byte : \byte}, \paramEntree{position : \naturel}, \paramEntree{bit : \bit}}
+    \procedure{set\_bit}{\paramEntreeSortie{byte : \byte}, \paramEntree{position : \naturel}, \paramEntree{bit : \bit}}
     {position $\leq$ 7}
     {}
     {
-        \sialorssinon{bit = bit0}
-            {\instruction{byte &= ~(1 << position)}} %Je sais pas comment faire
-            {\instruction{byte |= (1 << position)}} %Je sais pas comment faire
+%        \sialorssinon{bit = bit0}
+%            {\instruction{byte \&= \~(1 << position)}} % A traduire en "français"
+%            {\instruction{byte \|= (1 << position)}}
+%    
+        \retourner{}
     }
     \espace
-    \fonction{get_bit}{byte : \byte, position : \naturel}{\bit}
+    \fonction{get\_bit}{byte : \byte, position : \naturel}{\bit}
     {position $\leq$ 7}
     {res : \bit}
     {
-        \sialorssinon{((byte >> position)&1) = 1} %Je sais pas comment faire
+        \sialorssinon{((byte >> position)\&1) = 1} %Je sais pas comment faire
             {\affecter{res}{bit1}}
             {\affecter{res}{bit0}}
         \retourner {res}
