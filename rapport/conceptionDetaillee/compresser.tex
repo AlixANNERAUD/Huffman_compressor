@@ -33,7 +33,7 @@
         \affecter{stat}{statistics()}
         \commentaire{Initialisation des structures de données}
         \instruction{seek(binaryFile, 0)}
-        \tantque{non(isEnd(source))}
+        \tantque{non(is\_end(source))}
         {
             \affecter{byte}{readByte(source)}
             \instruction{increaseCount(stat, byte)}
@@ -128,7 +128,7 @@
     
         
         \instruction{seek(source, 0)}
-        \tantque{non(isEnd(source))}
+        \tantque{non(is\_end(source))}
         {
             \affecter{byte}{readByte(source)}
             \affecter{binaryCode}{getCode(table,byte)}

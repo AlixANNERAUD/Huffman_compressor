@@ -61,7 +61,7 @@
     {stat : \statistics, e : Element}
     {
         \affecter{stat}{\instruction{statistics()}}
-        \tantque{non(\instruction{isEnd(file)})}{
+        \tantque{non(\instruction{is\_end(file)})}{
             \affecter{e}{\instruction{readByte(file)}}
             \instruction{increaseCount(stat, e)}
         }

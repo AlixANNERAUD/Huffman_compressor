@@ -1,11 +1,48 @@
 \section{Fondamentaux}
 
-On considère, sans plus de démonstration, les types fondamentaux suivants :
+On considère, sans plus de démonstration, les types fondamentaux suivants car ils sont standard a beaucoup de langages de programmation.
 
 \newcommand{\bit}{\textbf{Bit}}
 \newcommand{\mode}{\textbf{Mode}}
 
 \begin{algorithme}
-    \typeEnumere{\bit}{bit0,bit1}
-    \typeEnumere{\mode}{read, write}
+    \typeEnumere{\bit}{BIT\_0, BIT\_1}
+    \typeEnumere{\mode}{READ, WRITE}
 \end{algorithme}
+
+\newcommand{\binaryFile}{\textbf{BinaryFile}}
+
+\begin{tad}
+    \tadNom{\binaryFile}
+    \tadParametres{\chaine, \mode, \caractere}
+    \tadDependances{Element}
+    \begin{tadOperations}{test}
+        \tadOperationAvecPreconditions{open}{\tadParams{\binaryFile, \mode}}{\binaryFile}
+        \tadOperationAvecPreconditions{close}{\binaryFile}{\binaryFile}
+        \tadOperation{is\_open}{\binaryFile}{\booleen}
+        \tadOperationAvecPreconditions{get\_mode}{\binaryFile}{\mode}
+        \tadOperationAvecPreconditions{is\_end}{\binaryFile}{\booleen}
+        \tadOperationAvecPreconditions{seek}{\tadParams{\binaryFile, \naturel}}{\binaryFile}
+        \tadOperationAvecPreconditions{write}{\tadParams{\binaryFile, Element}}{\binaryFile}
+        \tadOperationAvecPreconditions{read}{\binaryFile}{Element}
+    \end{tadOperations}
+    \begin{tadSemantiques}{read<Type}
+        \tadSemantique{open}{Ouvre un fichier binaire en mode lecture ou écriture. Si le fichier est ouvert en mode écriture et qu'il existe déjà, il est écrasé. Sinon il est créé.}
+        \tadSemantique{close}{Ferme un fichier binaire.}
+        \tadSemantique{is\_open}{Renvoie vrai si le fichier est ouvert, faux sinon.}
+        \tadSemantique{get\_mode}{Renvoie le mode d'ouverture du fichier.}
+        \tadSemantique{is\_end}{Renvoie si le curseur se trouve à la fin du fichier.}
+        \tadSemantique{seek}{Déplace le curseur à la position donnée.}
+        \tadSemantique{write}{Écrit dans le fichier.}
+        \tadSemantique{read}{Lit dans le fichier.}
+    \end{tadSemantiques}
+    \begin{tadPreconditions}{}
+        \tadPrecondition{open(file, mode)}{non is\_open(file)}
+        \tadPrecondition{close(file)}{is\_open(file)}
+        \tadPrecondition{get\_mode(file)}{is\_open(file)}
+        \tadPrecondition{is\_end(file)}{is\_open(file)}
+        \tadPrecondition{seek(file, position)}{is\_open(file)}
+        \tadPrecondition{write(file, data)}{is\_open(file) et get\_mode(file) = WRITE}
+        \tadPrecondition{read(file)}{is\_open(file) et get\_mode(file) = READ}
+    \end{tadPreconditions}
+\end{tad}
