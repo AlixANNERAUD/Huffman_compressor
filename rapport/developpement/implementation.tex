@@ -1,4 +1,4 @@
-\section{Implementation}
+\section{Implémentation}
 
 Dans cette section, nous allons détailler et justifier les choix d'implémentation que nous avons fait pour ce projet.
 
@@ -11,8 +11,8 @@ Cela permet de détecter une bonne partie des erreurs d'implementation lors du d
 
 \subsection{Gestion des erreurs}
 
-Afin de gérer les erreurs au temps d'exécution, nous avons fait le choix de ne pas utiliser \texttt{errno.h} de la bibliothèque standard du C.
-Cette étant trop limitée, nous avons préféré une gestion des erreurs récursive en utilisant les retours des fonctions et des énumérations.
+Afin de gérer les erreurs au moment de l'exécution, nous avons fait le choix de ne pas utiliser \texttt{errno.h} de la bibliothèque standard du C.
+Cette bibliothèque étant trop limitée, nous avons préféré une gestion des erreurs récursive en utilisant les retours des fonctions et des énumérations.
 Ainsi, nous avons créé des énumérations pour chaque type d'erreur. De plus, nous avons également ajouté des fonctions permettant de convertir ces énumérations en chaîne de caractères afin de pouvoir afficher des messages d'erreurs plus explicites.
 Cela permet une gestion des erreurs plus précise et plus lisible.
 
@@ -37,12 +37,12 @@ L'implémentation procédurale en C s'est faite de la manière suivante :
 
 Afin de faciliter la gestion de la mémoire et maximiser les performances\footnote{En effet, l'allocation dynamique est une opération coûteuse en performances car elle nécessite un appel système.},
 nous avons fait le choix d'utiliser un maximum l'allocation statique.
-Cela n'est pas problématique vu que nos données ont une taille bien inférieure à la taille standard d'une la pile (8 Mo sur Linux).
+Cela n'est pas problématique vu que nos données ont une taille bien inférieure à la taille standard de la pile (8 Mo sur Linux).
 Ainsi, nous avons utilisé l'allocation dynamique uniquement pour les structures de données dont il nous est impossible de connaître la taille (maximale) à la compilation ou sans trop complexifier le code
 (uniquement pour les arbres d'Huffman).
 
 \subsection{Généricité}
 
 Le C ne prend pas en charge la généricité. Il a donc fallu trouver une solution afin de pouvoir implémenter la généricité exprimé dans l'analyse.
-Au final, nous avons fait le choix de ne prendre en compte la généricité et d'implémenter directement les fonctions pour chaque type.
+Au final, nous avons fait le choix de ne pas prendre en compte la généricité et d'implémenter directement les fonctions pour chaque type.
 Cela permet d'avoir un code plus lisible, simple et performant, sans avoir de duplication de code car chaque TAD n'est utilisé que dans un cadre bien précis et donc possède qu'une seule et unique implémentation.
