@@ -14,6 +14,7 @@
         \tadOperation{getWeight}{\huffmanTree}{\naturel}
         \tadOperationAvecPreconditions{getRightChild}{\huffmanTree}{\huffmanTree}
         \tadOperationAvecPreconditions{getLeftChild}{\huffmanTree}{\huffmanTree}
+        \tadOperation{isGreaterThan}{\huffmanTree, \huffmanTree}{\booleen}
     \end{tadOperations}
     \begin{tadSemantiques}{getLeftChild}
         \tadSemantique{newLeaf}{Créer un nœud d'Huffman de type feuille (avec un poids et une valeur, mais sans fils).}
@@ -22,6 +23,7 @@
         \tadSemantique{getValue}{Renvoi la valeur du noeud.}
         \tadSemantique{getRightChild}{Renvoi le fils droit du noeud.}
         \tadSemantique{getLeftChild}{Renvoi le fils gauche du noeud.}
+        \tadSemantique{isGreaterThan}{Renvoi vrai si le poids du premier arbre est supérieur à celui du second, ou dans le cas où ce sont des feuilles de même poids, si sa valeur est supérieure. Faux sinon.}
     \end{tadSemantiques}
     \begin{tadAxiomes}
         \tadAxiome{isLeaf(newTree(newLeaf(octet(16), 4), newLeaf(octet(32), 2))) = faux}
