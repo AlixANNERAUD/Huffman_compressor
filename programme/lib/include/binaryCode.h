@@ -13,7 +13,7 @@
  * @def BINARY_CODE_MAX
  * La taille maximale d'un code binaire
 */
-#define BINARY_CODE_MAX 1000
+#define BINARY_CODE_MAX 255
 
 /**
  * @struct BinaryCode
