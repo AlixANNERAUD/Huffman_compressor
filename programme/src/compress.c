@@ -116,7 +116,7 @@ CompressResult compress(FILE *input, FILE *output)
     // - Calcul des statistiques
     Statistics statistics;
     if (!statistics_compute_from_file(statistics, input))
-        return COMPRESS_RESULT_ERROR_FILE;
+        return COMPRESS_RESULT_ERROR_FAILED_TO_READ_INPUT_FILE;
     // - Création de l'arbre de Huffman
     HuffmanTree huffmanTree;
     huffmanTree = huffman_tree_from_statistic(statistics);
@@ -144,7 +144,7 @@ void compress_error_to_string(CompressResult error, char *buffer, size_t bufferS
     case COMPRESS_RESULT_OK:
         strncpy(buffer, "No error", bufferSize);
         break;
-    case COMPRESS_RESULT_ERROR_FILE:
+    case COMPRESS_RESULT_ERROR_FAILED_TO_READ_INPUT_FILE:
         strncpy(buffer, "File error", bufferSize);
         break;
     case COMPRESS_RESULT_ERROR_PREMATURE_END_OF_FILE:
