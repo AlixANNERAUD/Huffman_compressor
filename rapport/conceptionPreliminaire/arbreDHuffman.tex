@@ -1,12 +1,12 @@
 \section{Arbre de Huffman}
 
 \begin{algorithme}
-    \signatureFonction{newLeaf}{value : \byte, weight : \naturel}{\huffmanTree}{}
-    \signatureFonction{newTree}{tree1 : \huffmanTree,tree2 : \huffmanTree}{\huffmanTree}{}
-    \signatureFonction{isLeaf}{tree : \huffmanTree}{\booleen}{}
-    \signatureFonction{getValue}{tree : \huffmanTree}{\byte}{isLeaf(tree)}
-    \signatureFonction{getWeight}{tree : \huffmanTree}{\naturel}{}
-    \signatureFonction{getLeftChild}{tree : \huffmanTree}{\typePointeur{\huffmanTree}}{non(isLeaf(tree))}
-    \signatureFonction{getRightChild}{tree : \huffmanTree}{\typePointeur{\huffmanTree}}{non(isLeaf(tree))}
-    \signatureFonction{isGreaterThan}{tree1, tree2 : \huffmanTree}{\booleen}{}
+    \signatureFonction{new\_leaf}{value : \byte, weight : \naturel}{\huffmanTree}{}
+    \signatureFonction{new\_tree}{tree1 : \huffmanTree,tree2 : \huffmanTree}{\huffmanTree}{}
+    \signatureFonction{is\_leaf}{tree : \huffmanTree}{\booleen}{}
+    \signatureFonction{get\_value}{tree : \huffmanTree}{\byte}{is\_leaf(tree)}
+    \signatureFonction{get\_weight}{tree : \huffmanTree}{\naturel}{}
+    \signatureFonction{get\_left\_child}{tree : \huffmanTree}{\typePointeur{\huffmanTree}}{non(is\_leaf(tree))}
+    \signatureFonction{get\_right\_child}{tree : \huffmanTree}{\typePointeur{\huffmanTree}}{non(is\_leaf(tree))}
+    \signatureFonction{is\_greater\_than}{tree1, tree2 : \huffmanTree}{\booleen}{}
 \end{algorithme}

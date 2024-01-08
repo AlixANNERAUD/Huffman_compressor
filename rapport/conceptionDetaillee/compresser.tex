@@ -56,7 +56,7 @@
             \affecter{count}{getCount(stat, byte)}
             \sialors{count > 0}
             {
-                \affecter{leaf}{newLeaf(byte, count)}
+                \affecter{leaf}{new\_leaf(byte, count)}
                 \instruction{push(queue, leaf)}
             }
         }
@@ -68,7 +68,7 @@
             {
                 \affecter{rightLeaf}{pop(queue)}
                 \commentaire{Si la file contient au moins deux éléments, on les fusionne pour créer un nouvel arbre}
-                \affecter{tree}{newTree(leftLeaf, rightLeaf)}
+                \affecter{tree}{new\_tree(leftLeaf, rightLeaf)}
                 \instruction{push(queue, tree)}
             }
             {
@@ -94,9 +94,9 @@
     {}
     {}
     {
-        \sialorssinon{isLeaf(tree)}
+        \sialorssinon{is\_leaf(tree)}
         {
-            \instruction{add(table, getValue(tree), binaryCode)}
+            \instruction{add(table, get\_value(tree), binaryCode)}
         }
         {
             \instruction{addBit(current\_binary\_code, 0)}

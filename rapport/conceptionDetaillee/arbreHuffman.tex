@@ -12,7 +12,7 @@
     \espace
     \type {HuffmanTree}{\pointeur {Node}}
     \espace
-    \fonction{newLeaf}{value : \byte, weight : \naturel}{\huffmanTree}{}
+    \fonction{new\_leaf}{value : \byte, weight : \naturel}{\huffmanTree}{}
     {ht : huffmanTree}
     {
        \affecter{\pointeur{ht}.value}{value}
@@ -22,52 +22,52 @@
        \retourner{ht}
     }
     \espace
-    \fonction{newTree}{tree1 : \huffmanTree,tree2 : \huffmanTree}{\huffmanTree}{}
+    \fonction{new\_tree}{tree1 : \huffmanTree,tree2 : \huffmanTree}{\huffmanTree}{}
     {ht : huffmanTree}
     {
-        \affecter {\pointeur{ht}} {newLeaf(byte(0), \pointeur{tree1}.weight + \pointeur{tree2}.weight)}
+        \affecter {\pointeur{ht}} {new\_leaf(byte(0), \pointeur{tree1}.weight + \pointeur{tree2}.weight)}
         \affecter {\pointeur{\pointeur{ht}.leftChild}}{tree1}
         \affecter {\pointeur{\pointeur{ht}.rightChild}}{tree2}
     }
     \espace
-    \fonction{isLeaf}{tree : \huffmanTree}{\booleen}{}
+    \fonction{is\_leaf}{tree : \huffmanTree}{\booleen}{}
     {}
     {
         \retourner {(\pointeur{tree}.leftChild = \pointeurNULL) et (\pointeur{tree}.rightChild = \pointeurNULL)}
     }
     \espace
-    \fonction{getValue}{tree : \huffmanTree}{\byte}{isLeaf(tree)}
+    \fonction{get\_value}{tree : \huffmanTree}{\byte}{is\_leaf(tree)}
     {}
     {
         \retourner {\pointeur{tree}.value}
     }
     \espace
-    \fonction{getWeight}{tree : \huffmanTree}{\naturel}{}
+    \fonction{get\_weight}{tree : \huffmanTree}{\naturel}{}
     {}
     {
         \retourner {\pointeur{tree}.weight}
     }
     \espace
-    \fonction{getLeftChild}{tree : \huffmanTree}{\typePointeur{\huffmanTree}}{non(isLeaf(tree))}
+    \fonction{get\_left\_child}{tree : \huffmanTree}{\typePointeur{\huffmanTree}}{non(is\_leaf(tree))}
     {}
     {
         \retourner {\pointeur{\pointeur{tree}.leftChild}}
     }
     \espace
-    \fonction{getRightChild}{tree : \huffmanTree}{\typePointeur{\huffmanTree}}{non(isLeaf(tree))}
+    \fonction{get\_right\_child}{tree : \huffmanTree}{\typePointeur{\huffmanTree}}{non(is\_leaf(tree))}
     {}
     {
         \retourner {\pointeur{\pointeur{tree}.rightChild}}
     }
     \espace
-    \fonction{isGreaterThan}{tree1, tree2 : \huffmanTree}{\booleen}{}
+    \fonction{is\_greater\_than}{tree1, tree2 : \huffmanTree}{\booleen}{}
     {}
     {
-        \sialors{getWeight(tree1) > getWeight(tree2)}{
+        \sialors{get\_weight(tree1) > get\_weight(tree2)}{
             \retourner{Vrai}
         }
-        \sialors{getWeight(tree1) = getWeight(tree2) et isLeaf(tree1) et isLeaf(tree2)}{
-            \retourner{getValue(tree1) > getValue(tree2)}
+        \sialors{get\_weight(tree1) = get\_weight(tree2) et is\_leaf(tree1) et is\_leaf(tree2)}{
+            \retourner{get\_value(tree1) > get\_value(tree2)}
         }
 
         \retourner{Faux}

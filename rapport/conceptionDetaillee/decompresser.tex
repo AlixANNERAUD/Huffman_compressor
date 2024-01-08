@@ -74,21 +74,21 @@
     temp : \huffmanTree}
     {
         \affecter{temp}{ht}
-        \tantque{non(isLeaf(temp))}{
-            \tantque{pos < 9 et non(isLeaf(temp))}{
+        \tantque{non(is\_leaf(temp))}{
+            \tantque{pos < 9 et non(is\_leaf(temp))}{
                 \affecter{b}{getBit(byte, pos)}
                 \sialorssinon{b = 0}{
-                    \affecter{temp}{getLeftChild(temp)}
+                    \affecter{temp}{get\_left\_child(temp)}
                 }
                 {
-                    \affecter{temp}{getRightChild(temp)}
+                    \affecter{temp}{get\_right\_child(temp)}
                 }
                 \affecter{pos}{pos+1}
             }
             \affecter{pos}{1}
             \affecter{byte}{\instruction{readByte(compress)}}
         }
-        \retourner{getValue(temp), byte, pos}
+        \retourner{get\_value(temp), byte, pos}
     }
     \espace
 \end{algorithme}
