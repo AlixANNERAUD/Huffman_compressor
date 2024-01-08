@@ -82,17 +82,15 @@
     \espace
     \fonction{buildCodingTable}{tree : \huffmanTree}{\codingTable}{}
     {table : \codingTable,
-        binaryCode : \binaryCode,
-        byte : \byte}
+        binaryCode : \binaryCode}
     {
         \affecter{table}{codingTable()}
-        \affecter{binaryCode}{binary\_code()}
-        \affecter{byte}{0}
-        \instruction{buildCodingTableRecursive(tree, table, binaryCode, byte)}
+        \affecter{binaryCode}{binaryCode()}
+        \instruction{buildCodingTableRecursive(tree, table, binaryCode)}
         \retourner{table}
     }
     \espace
-    \procedure{buildCodingTableRecursive}{\paramEntree{tree : \huffmanTree}, \paramEntreeSortie{table : \codingTable}, \paramEntreeSortie{current\_binary\_code : \binaryCode}, \paramEntree{byte : \byte}}
+    \procedure{buildCodingTableRecursive}{\paramEntree{tree : \huffmanTree}, \paramEntreeSortie{table : \codingTable}, \paramEntreeSortie{current\_binary\_code : \binaryCode}}
     {}
     {}
     {
@@ -102,10 +100,10 @@
         }
         {
             \instruction{addBit(current\_binary\_code, 0)}
-            \instruction{buildCodingTableRecursive(getLeftLeaf(tree), table, current\_binary\_code, byte)}
+            \instruction{buildCodingTableRecursive(getLeftLeaf(tree), table, current\_binary\_code)}
             \instruction{removeLastBit(current\_binary\_code)}
             \instruction{addBit(current\_binary\_code, 1)}
-            \instruction{buildCodingTableRecursive(getRightLeaf(tree), table, current\_binary\_code, byte)}
+            \instruction{buildCodingTableRecursive(getRightLeaf(tree), table, current\_binary\_code)}
             \instruction{removeLastBit(current\_binary\_code)}
         }
     }
