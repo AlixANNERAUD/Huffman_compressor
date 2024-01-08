@@ -19,7 +19,7 @@ void test_statistics_statistics()
     statistics_initialize(s);
     for (int i = 0; i < STATISTICS_MAX; i++)
     {
-        CU_ASSERT_EQUAL(statistics_get_count(&s, i), 0);
+        CU_ASSERT_EQUAL(statistics_get_count(s, i), 0);
     }
 }
 
