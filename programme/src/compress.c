@@ -74,23 +74,23 @@ CompressResult compress_source_bytes(FILE *source, FILE *destination, CodingTabl
     rewind(source);
 
     unsigned int i = 0; // Compteur de bits
-    Byte input_byte = byte_create(0);
-    Byte output_byte = byte_create(0);
-    while (fread(&input_byte, sizeof(input_byte), 1, source) == 1)              // Tant que l'on a pas atteint la fin du fichier
+    Byte inputByte = byte_create(0);
+    Byte outputByte = byte_create(0);
+    while (fread(&inputByte, sizeof(inputByte), 1, source) == 1)              // Tant que l'on a pas atteint la fin du fichier
     { 
-        BinaryCode bc = coding_table_get_value(&table, input_byte);             // Cherche dans la CT son équivalence en BC
+        BinaryCode binaryCode = coding_table_get_value(&table, inputByte);             // Cherche dans la CT son équivalence en BC
 
-        for (unsigned int j = 0; j < binary_code_get_length(&bc); j++)
+        for (unsigned int j = 0; j < binary_code_get_length(&binaryCode); j++)
         {
-            byte_set_bit(&output_byte, i, binary_code_get_bit(&bc, j));         // On accède à chaque bit d'un code binaire dans un octet
+            byte_set_bit(&outputByte, i, binary_code_get_bit(&binaryCode, j));         // On accède à chaque bit d'un code binaire dans un octet
             i++;
 
             if (i >= 8)                                                         // Si on a accumulé 8 bits ou qu'on est à la fin du fichier.
             {
-                if (fwrite(&output_byte, sizeof(output_byte), 1, destination) != 1) // Et on écrit sa compression dans le fichier destination
+                if (fwrite(&outputByte, sizeof(outputByte), 1, destination) != 1) // Et on écrit sa compression dans le fichier destination
                     return COMPRESS_RESULT_ERROR_FAILED_TO_WRITE_OUTPUT_FILE;
                 
-                output_byte = byte_create(0);
+                outputByte = byte_create(0);
                 i = 0;
             }
         }
@@ -98,7 +98,7 @@ CompressResult compress_source_bytes(FILE *source, FILE *destination, CodingTabl
     if (ferror(source))
         return COMPRESS_RESULT_ERROR_FAILED_TO_READ_INPUT_FILE;
 
-    if (i > 0 && fwrite(&output_byte, sizeof(output_byte), 1, destination) != 1) // Si on a des bits en attente, on les écrit
+    if (i > 0 && fwrite(&outputByte, sizeof(outputByte), 1, destination) != 1) // Si on a des bits en attente, on les écrit
         return COMPRESS_RESULT_ERROR_FAILED_TO_WRITE_OUTPUT_FILE;
     return COMPRESS_RESULT_OK;
 }
