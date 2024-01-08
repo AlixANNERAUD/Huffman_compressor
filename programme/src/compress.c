@@ -80,7 +80,7 @@ CompressResult compress_source_bytes(FILE *source, FILE *destination, CodingTabl
     { 
         BinaryCode bc = coding_table_get_value(&table, input_byte);             // Cherche dans la CT son équivalence en BC
 
-        for (int j = 0; j < binary_code_get_length(&bc); j++)
+        for (unsigned int j = 0; j < binary_code_get_length(&bc); j++)
         {
             byte_set_bit(&output_byte, i, binary_code_get_bit(&bc, j));         // On accède à chaque bit d'un code binaire dans un octet
             i++;
@@ -137,7 +137,7 @@ CompressResult compress(FILE *input, FILE *output)
 /// @param buffer Chaîne de caractères résultante
 /// @param bufferSize Taille de la chaîne de caractères résultante
 /// @return Résultat de la compression
-void compress_error_to_string(DecompressResult error, char *buffer, size_t bufferSize)
+void compress_error_to_string(CompressResult error, char *buffer, size_t bufferSize)
 {
     switch (error)
     {
