@@ -20,7 +20,7 @@
         \affecter{\champ{pQ}{length}}{\champ{pQ}{length}-1}
         \retourner{\champ{pQ}{tab}[\champ{pQ}{length}+1]}}
 
-    \fonction{insert}{pQ : \priorityQueue,  e : Element}{\priorityQueue}{getLength(pQ) < MAXLENGTH}{temp : \huffmanTree}
+    \fonction{push}{pQ : \priorityQueue,  e : Element}{\priorityQueue}{getLength(pQ) < MAXLENGTH}{temp : \huffmanTree}
     {
         \affecter{\champ{pQ}{length}}{\champ{pQ}{length}+1}
         \sialors{\champ{e}{weight} = \champ{\champ{pQ}{tab}[1]}{weight}}{
