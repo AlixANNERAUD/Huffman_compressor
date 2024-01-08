@@ -2,49 +2,49 @@
 
 \begin{algorithme}
     \begin{enregistrement}{statistics}
-        \champEnregistrement{lesElements}{\tableau{1..256}{d'}{Element}}
-        \champEnregistrement{nbOccurrence}{\tableau{1..256}{de}{\naturel}}
+        \champEnregistrement{element}{\tableau{1..256}{de}{\byte}}
+        \champEnregistrement{occurence}{\tableau{1..256}{de}{\naturel}}
     \end{enregistrement}
     \espace
     \fonction{statistics}{}{\statistics}{}
     {res : \statistics, i : \naturel}
     {
-        \affecter{\champ{res}{lesElements}}{\tableau{1..256}{d'}{Element}}
-        \affecter{\champ{res}{nbOccurrence}}{\tableau{1..256}{de}{\naturel}}
+        \affecter{\champ{res}{element}}{\tableau{1..256}{de}{\byte}}
+        \affecter{\champ{res}{occurence}}{\tableau{1..256}{de}{\naturel}}
         \pour{i}{1}{256}{}{
-            \affecter{\champ{res}{nbOccurence}[i]}{0}
+            \affecter{\champ{res}{occurence}[i]}{0}
         }
         \retourner{res}        
     }
     \espace
-    \fonction{get\_count}{stat : \statistics, e : Element}{\naturel}{}
+    \fonction{get\_count}{stat : \statistics, e : \byte}{\naturel}{}
     {i : \naturel}
     {
         \affecter{i}{1}
-        \tantque{i $\leq$ 255 et non({e = {\champ{stat}{lesElements}}[i]})}{
+        \tantque{i $\leq$ 255 et non({e = {\champ{stat}{element}}[i]})}{
             \affecter{i}{i+1}
         }
-        \retourner{{\champ{stat}{nbOccurrence}}[i]}    
+        \retourner{{\champ{stat}{occurence}}[i]}    
     }
     \espace
-    \procedure{set\_count}{\paramEntreeSortie{stat : \statistics}, \paramEntree{e : Element, n : \naturel}}{}
+    \procedure{set\_count}{\paramEntreeSortie{stat : \statistics}, \paramEntree{e : \byte, n : \naturel}}{}
     {i : \naturel}
     {
         \affecter{i}{1}
-        \tantque{i $\leq$ 255 et non({e = {\champ{stat}{lesElements}}[i]})}{
+        \tantque{i $\leq$ 255 et non({e = {\champ{stat}{element}}[i]})}{
             \affecter{i}{i+1}
         }
-        \affecter{{\champ{stat}{nbOccurrence}}[i]}{n}
+        \affecter{{\champ{stat}{occurence}}[i]}{n}
     }
     \espace
-    \procedure{increase\_count}{\paramEntreeSortie{stat : \statistics}, \paramEntree{e : Element}}{}
+    \procedure{increase\_count}{\paramEntreeSortie{stat : \statistics}, \paramEntree{e : \byte}}{}
     {i : \naturel}
     {
         \affecter{i}{1}
-        \tantque{i $\leq$ 255 et non({e = {\champ{stat}{lesElements}}[i]})}{
+        \tantque{i $\leq$ 255 et non({e = {\champ{stat}{element}}[i]})}{
             \affecter{i}{i+1}
         }
-        \affecter{{\champ{stat}{nbOccurrence}}[i]}{{\champ{stat}{nbOccurrence}}[i]+1}
+        \affecter{{\champ{stat}{occurence}}[i]}{{\champ{stat}{occurence}}[i]+1}
     }
     \espace
     \fonction{get\_total\_count}{stat : \statistics}{\naturel}{}
@@ -52,13 +52,13 @@
     {
         \affecter{sum}{0}
         \pour{i}{1}{256}{}{
-            \affecter{sum}{sum + \champ{stat}{nbOccurence}[i]}
+            \affecter{sum}{sum + \champ{stat}{occurence}[i]}
         }
         \retourner{sum}
     }
     \espace
     \fonction{statistics\_from\_file}{file : \binaryFile}{\statistics}{}
-    {stat : \statistics, e : Element}
+    {stat : \statistics, e : \byte}
     {
         \affecter{stat}{\instruction{statistics()}}
         \tantque{non(\instruction{is\_end(file)})}{
@@ -74,7 +74,7 @@
     {
         \affecter{eq}{Vrai}
         \tantque{eq et i < 256}{
-            \sialors{non((\champ{s1}{lesElements}[i] = \champ{s2}{lesElements}[i]) et (\champ{s1}{nbOccurence}[i] = \champ{s2}{nbOccurence}[i]))}{
+            \sialors{non((\champ{s1}{element}[i] = \champ{s2}{element}[i]) et (\champ{s1}{occurence}[i] = \champ{s2}{occurence}[i]))}{
                 \affecter{eq}{Faux}
             }
         }

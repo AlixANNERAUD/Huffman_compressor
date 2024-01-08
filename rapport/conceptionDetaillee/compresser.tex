@@ -11,23 +11,23 @@
     {
         \affecter{error}{Faux}
         \instruction{open(source, read)}
-        \affecter{stat}{computeStatistics(source)}
+        \affecter{stat}{compute\_statistics(source)}
         \commentaire{Calcul des statistiques}
-        \affecter{tree}{buildHuffmanTree(stat)}
+        \affecter{tree}{build\_huffman\_tree(stat)}
         \commentaire{Construction de l'arbre de Huffman à partir des statistiques}
-        \affecter{table}{buildCodingTable(tree)}
+        \affecter{table}{build\_coding\_table(tree)}
         \commentaire{Construction de la table de codage à partir de l'arbre de Huffman}
         \affecter{destination}{binaryFile("compressFile")}
         \instruction{open(destination, write)}
-        \instruction{writeHeader(destination, stat)}
+        \instruction{write\_header(destination, stat)}
         \commentaire{Écriture de l'en-tête (identifiant, statistiques ...) dans le fichier de destination}
-        \instruction{compressSourceBytes(source, destination, table)}
+        \instruction{compress\_source\_bytes(source, destination, table)}
         \instruction{close(source)}
         \instruction{close(destination)}
         \affecter{error}{Vrai}
     }
     \espace
-    \fonction{computeStatistics}{source : \binaryFile}{\statistics}{}
+    \fonction{compute\_statistics}{source : \binaryFile}{\statistics}{}
     {byte : \byte, stat : \statistics}
     {
         \affecter{stat}{statistics()}
@@ -35,15 +35,15 @@
         \instruction{seek(binaryFile, 0)}
         \tantque{non(is\_end(source))}
         {
-            \affecter{byte}{readByte(source)}
+            \affecter{byte}{read\_byte(source)}
             \instruction{increase\_count(stat, byte)}
         }
         \retourner{stat}
         }
     \espace
-    \fonction{buildHuffmanTree}{stat : \statistics}{\huffmanTree}{}
+    \fonction{build\_huffman\_tree}{stat : \statistics}{\huffmanTree}{}
     {queue : \priorityQueue,
-        tree, leaf, rightLeaf, leftLeaf : \huffmanTree,
+        tree, leaf, right\_leaf, left\_leaf : \huffmanTree,
         byte : \byte,
         count : \naturel}
     {
@@ -61,18 +61,18 @@
             }
         }
 
-        \tantque{non(isEmpty(queue))}
+        \tantque{non(is\_empty(queue))}
         {
-            \affecter{leftLeaf}{pop(queue)}
-            \sialorssinon{non(isEmpty(queue))}
+            \affecter{left\_leaf}{pop(queue)}
+            \sialorssinon{non(is\_empty(queue))}
             {
-                \affecter{rightLeaf}{pop(queue)}
+                \affecter{right\_leaf}{pop(queue)}
                 \commentaire{Si la file contient au moins deux éléments, on les fusionne pour créer un nouvel arbre}
-                \affecter{tree}{new\_tree(leftLeaf, rightLeaf)}
+                \affecter{tree}{new\_tree(left\_leaf, right\_leaf)}
                 \instruction{push(queue, tree)}
             }
             {
-                \affecter{tree}{leftLeaf}
+                \affecter{tree}{left\_leaf}
                 \commentaire{S'il ne reste qu'un seul élément dans la file, c'est l'arbre de Huffman}
             }
         }
@@ -80,17 +80,17 @@
         \retourner{tree}
     }
     \espace
-    \fonction{buildCodingTable}{tree : \huffmanTree}{\codingTable}{}
+    \fonction{build\_coding\_table}{tree : \huffmanTree}{\codingTable}{}
     {table : \codingTable,
         binaryCode : \binaryCode}
     {
         \affecter{table}{codingTable()}
         \affecter{binaryCode}{binaryCode()}
-        \instruction{buildCodingTableRecursive(tree, table, binaryCode)}
+        \instruction{build\_coding\_table\_recursive(tree, table, binaryCode)}
         \retourner{table}
     }
     \espace
-    \procedure{buildCodingTableRecursive}{\paramEntree{tree : \huffmanTree}, \paramEntreeSortie{table : \codingTable}, \paramEntreeSortie{current\_binary\_code : \binaryCode}}
+    \procedure{build\_coding\_table\_recursive}{\paramEntree{tree : \huffmanTree}, \paramEntreeSortie{table : \codingTable}, \paramEntreeSortie{current\_binary\_code : \binaryCode}}
     {}
     {}
     {
@@ -99,16 +99,16 @@
             \instruction{add(table, get\_value(tree), binaryCode)}
         }
         {
-            \instruction{addBit(current\_binary\_code, 0)}
-            \instruction{buildCodingTableRecursive(getLeftLeaf(tree), table, current\_binary\_code)}
-            \instruction{removeLastBit(current\_binary\_code)}
-            \instruction{addBit(current\_binary\_code, 1)}
-            \instruction{buildCodingTableRecursive(getRightLeaf(tree), table, current\_binary\_code)}
-            \instruction{removeLastBit(current\_binary\_code)}
+            \instruction{add\_bit(current\_binary\_code, 0)}
+            \instruction{build\_coding\_table\_recursive(getleft\_leaf(tree), table, current\_binary\_code)}
+            \instruction{remove\_last\_bit(current\_binary\_code)}
+            \instruction{add\_bit(current\_binary\_code, 1)}
+            \instruction{build\_coding\_table\_recursive(get\_right\_leaf(tree), table, current\_binary\_code)}
+            \instruction{remove\_last\_bit(current\_binary\_code)}
         }
     }
     \espace
-    \procedure{writeHeader}{\paramEntree{destination : \binaryFile}, \paramEntree{stat : \statistics, size : \naturel}}
+    \procedure{write\_header}{\paramEntree{destination : \binaryFile}, \paramEntree{stat : \statistics, size : \naturel}}
     {}
     {}
     {
@@ -121,7 +121,7 @@
         \instruction{write}
     }
     \espace
-    \procedure{compressSourceBytes}{\paramEntree{source : \binaryFile}, \paramEntreeSortie{destination : \binaryFile}, \paramEntree{table : \codingTable}}
+    \procedure{compress\_source\_bytes}{\paramEntree{source : \binaryFile}, \paramEntreeSortie{destination : \binaryFile}, \paramEntree{table : \codingTable}}
     {}
     {binaryCode : \binaryCode, byte : \byte}
     {
@@ -130,7 +130,7 @@
         \instruction{seek(source, 0)}
         \tantque{non(is\_end(source))}
         {
-            \affecter{byte}{readByte(source)}
+            \affecter{byte}{read\_byte(source)}
             \affecter{binaryCode}{get\_code(table,byte)}
             \instruction{write(destination,binaryCode)} % à changer
         }

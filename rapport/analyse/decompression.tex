@@ -4,14 +4,14 @@
 \begin{itemize}
     \item decompress(\binaryFile) : \binaryFile, \booleen
     \begin{itemize}
-        \item readHeader(\binaryFile) : \statistics, \naturel, String
+        \item read\_header(\binaryFile) : \statistics, \naturel, String
         \begin{itemize}
-            \item checkFileType(\binaryFile) : \booleen
+            \item check\_file\_type(\binaryFile) : \booleen
         \end{itemize}
-        \item buildHuffmanTree(\statistics) : \huffmanTree
-        \item reconstructFile(\binaryFile, \huffmanTree) : \binaryFile
+        \item build\_huffmanTree(\statistics) : \huffmanTree
+        \item reconstruct\_file(\binaryFile, \huffmanTree) : \binaryFile
         \begin{itemize}
-            \item readBinaryCode(\binaryFile, \naturel, \byte, \huffmanTree) : \byte, \byte, \naturel
+            \item read\_binaryCode(\binaryFile, \naturel, \byte, \huffmanTree) : \byte, \byte, \naturel
         \end{itemize}
     \end{itemize}
 \end{itemize}

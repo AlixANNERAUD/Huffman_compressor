@@ -1,13 +1,13 @@
 \section{Compression}
 
 \begin{algorithme}
-    \signatureProcedure {compress}{\paramEntree {file : \binaryFile}, \paramEntreeSortie{compressFile : \binaryFile, \paramSortie{error : \booleen}}}{}
-    \signatureFonction {computeStatistics}{file : \binaryFile}{\statistics}{}
-    \signatureFonction {buildHuffmanTree}{stat : \statistics}{\huffmanTree}{}
-    \signatureFonction {buildCodingTable}{tree : \huffmanTree}{\codingTable}{}
-    \signatureProcedure {buildCodingTableRecursive}{\paramEntree{tree : \huffmanTree}, \paramEntreeSortie{table : \codingTable}, \paramEntreeSortie{current\_code : \binaryCode}}{}
-    \signatureProcedure {writeHeader}{\paramEntree {file : \binaryFile}, \paramEntree {table : \codingTable}, \paramEntreeSortie {compressFile : \binaryFile}}{}
-    \signatureProcedure {compressSourceBytes}{\paramEntree {file : \binaryFile}, \paramEntree {table : \codingTable}, \paramEntreeSortie {compressFile : \binaryFile}}{}
+    \signatureProcedure {compress}{\paramEntree {file : \binaryFile}, \paramEntreeSortie{compress\_file : \binaryFile, \paramSortie{error : \booleen}}}{}
+    \signatureFonction {compute\_statistics}{file : \binaryFile}{\statistics}{}
+    \signatureFonction {build\_huffman\_tree}{stat : \statistics}{\huffmanTree}{}
+    \signatureFonction {build\_coding\_table}{tree : \huffmanTree}{\codingTable}{}
+    \signatureProcedure {build\_coding\_table\_recursive}{\paramEntree{tree : \huffmanTree}, \paramEntreeSortie{table : \codingTable}, \paramEntreeSortie{current\_code : \binaryCode}}{}
+    \signatureProcedure {write\_header}{\paramEntree {file : \binaryFile}, \paramEntree {table : \codingTable}, \paramEntreeSortie {compress\_file : \binaryFile}}{}
+    \signatureProcedure {compress\_source\_bytes}{\paramEntree {file : \binaryFile}, \paramEntree {table : \codingTable}, \paramEntreeSortie {compress\_file : \binaryFile}}{}
 \end{algorithme}
 
-NB : buildHuffmanTree, initPriorityQueue et updatePriorityQueue sont les mêmes fonctions dans compresser et décompresser. 
+NB : build\_huffman\_tree, init\_priority\_queue et update\_priority\_queue sont les mêmes fonctions dans compresser et décompresser. 

@@ -5,13 +5,13 @@
     \item compress(\binaryFile) : \binaryFile
     %\item getStatistics(\binaryFile, \statistics, \naturel)
     \begin{itemize}
-        \item computeStatistics(\binaryFile) : \statistics
-        \item buildHuffmanTree(\statistics) : \huffmanTree
-        \item buildCodingTable(\huffmanTree) : \codingTable
+        \item compute\_statistics(\binaryFile) : \statistics
+        \item build\_huffman\_tree(\statistics) : \huffmanTree
+        \item build\_coding\_table(\huffmanTree) : \codingTable
         \begin{itemize}
-            \item buildCodingTableRecursive(\huffmanTree, \codingTable, \binaryCode): \codingTable
+            \item build\_coding\_table\_recursive(\huffmanTree, \codingTable, \binaryCode): \codingTable
         \end{itemize}
-        \item writeHeader(\binaryFile, \codingTable) : \binaryFile
-        \item compressSourceBytes(\binaryFile, \codingTable) : \binaryFile
+        \item write\_header(\binaryFile, \codingTable) : \binaryFile
+        \item compress\_source\_bytes(\binaryFile, \codingTable) : \binaryFile
     \end{itemize}
 \end{itemize}

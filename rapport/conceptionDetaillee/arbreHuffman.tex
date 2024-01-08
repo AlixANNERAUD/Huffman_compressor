@@ -6,8 +6,8 @@
     \begin {enregistrement}{Node}
         \champEnregistrement{value}{\byte}
         \champEnregistrement{weight}{\naturel}
-        \champEnregistrement{leftChild}{\huffmanTree}
-        \champEnregistrement{rightChild}{\huffmanTree}
+        \champEnregistrement{left\_child}{\huffmanTree}
+        \champEnregistrement{right\_child}{\huffmanTree}
     \end{enregistrement}
     \espace
     \type {HuffmanTree}{\pointeur {Node}}
@@ -17,8 +17,8 @@
     {
        \affecter{\pointeur{ht}.value}{value}
        \affecter{\pointeur{ht}.weight}{weight}
-       \affecter{\pointeur{\pointeur{ht}.leftChild}}{\pointeurNULL}
-       \affecter{\pointeur{\pointeur{ht}.rightChild}}{\pointeurNULL}
+       \affecter{\pointeur{\pointeur{ht}.left\_child}}{\pointeurNULL}
+       \affecter{\pointeur{\pointeur{ht}.right\_child}}{\pointeurNULL}
        \retourner{ht}
     }
     \espace
@@ -26,14 +26,14 @@
     {ht : huffmanTree}
     {
         \affecter {\pointeur{ht}} {new\_leaf(byte(0), \pointeur{tree1}.weight + \pointeur{tree2}.weight)}
-        \affecter {\pointeur{\pointeur{ht}.leftChild}}{tree1}
-        \affecter {\pointeur{\pointeur{ht}.rightChild}}{tree2}
+        \affecter {\pointeur{\pointeur{ht}.left\_child}}{tree1}
+        \affecter {\pointeur{\pointeur{ht}.right\_child}}{tree2}
     }
     \espace
     \fonction{is\_leaf}{tree : \huffmanTree}{\booleen}{}
     {}
     {
-        \retourner {(\pointeur{tree}.leftChild = \pointeurNULL) et (\pointeur{tree}.rightChild = \pointeurNULL)}
+        \retourner {(\pointeur{tree}.left\_child = \pointeurNULL) et (\pointeur{tree}.right\_child = \pointeurNULL)}
     }
     \espace
     \fonction{get\_value}{tree : \huffmanTree}{\byte}{is\_leaf(tree)}
@@ -51,13 +51,13 @@
     \fonction{get\_left\_child}{tree : \huffmanTree}{\typePointeur{\huffmanTree}}{non(is\_leaf(tree))}
     {}
     {
-        \retourner {\pointeur{\pointeur{tree}.leftChild}}
+        \retourner {\pointeur{\pointeur{tree}.left\_child}}
     }
     \espace
     \fonction{get\_right\_child}{tree : \huffmanTree}{\typePointeur{\huffmanTree}}{non(is\_leaf(tree))}
     {}
     {
-        \retourner {\pointeur{\pointeur{tree}.rightChild}}
+        \retourner {\pointeur{\pointeur{tree}.right\_child}}
     }
     \espace
     \fonction{is\_greater\_than}{tree1, tree2 : \huffmanTree}{\booleen}{}

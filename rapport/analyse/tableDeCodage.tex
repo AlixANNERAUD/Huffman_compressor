@@ -6,13 +6,13 @@
   \tadNom{\codingTable}
   \tadDependances{\byte, \naturel, \binaryCode, \huffmanTree, \booleen}
   \begin{tadOperations}{is\_present}
-    \tadOperation{codingTable}{}{\tadParams{\codingTable}}
+    \tadOperation{coding\_table}{}{\tadParams{\codingTable}}
     \tadOperationAvecPreconditions{add}{\tadParams{\codingTable, \byte, \binaryCode}}{\codingTable}
     \tadOperationAvecPreconditions{get\_code}{\tadParams{\codingTable, \byte}}{\binaryCode}
     \tadOperation{is\_present}{\tadParams{\codingTable, \byte}}{\booleen}
   \end{tadOperations}
   \begin{tadSemantiques}{is\_present}
-    \tadSemantique{codingTable}{Crée une table de codage vide.}
+    \tadSemantique{coding\_table}{Crée une table de codage vide.}
     \tadSemantique{add}{Ajoute une entrée clé (octet) / valeur (code binaire) à la table.}
     \tadSemantique{get\_code}{Retourne le code binaire associé à un octet donné dans la table de codage.}
     \tadSemantique{is\_present}{Retourne la présence d'une clé (octect) dans la table.}

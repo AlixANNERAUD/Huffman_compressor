@@ -1,12 +1,12 @@
 \section{Décompression}
 
 \begin{algorithme}
-    \signatureProcedure {decompress}{\paramEntree {compressFile : \binaryFile}, \paramEntreeSortie{outputFile : \binaryFile, \paramSortie{error : \booleen}}}{}
-    \signatureFonction{readHeader}{compressFile : \binaryFile} {\statistics, \naturel, String}{}
-    \signatureFonction {checkFileType}{huff : String}{\booleen}{}
-    \signatureFonction {buildHuffmanTree}{stat : \statistics}{\huffmanTree}{}
-    \signatureFonction {reconstructFile}{compressFile : \binaryFile, ht : \huffmanTree}{\binaryFile}{}
-    \signatureFonction {readBinaryCode}{compressFile : \binaryFile, pos : \naturel, byte : \byte, ht : \huffmanTree}{\byte, \byte, \naturel}{1 $\leq$ pos $\leq$ 8}
+    \signatureProcedure {decompress}{\paramEntree {compress\_file : \binaryFile}, \paramEntreeSortie{outputFile : \binaryFile, \paramSortie{error : \booleen}}}{}
+    \signatureFonction{read\_header}{compress\_file : \binaryFile} {\statistics, \naturel, String}{}
+    \signatureFonction {check\_file\_type}{huff : String}{\booleen}{}
+    \signatureFonction {build\_huffman\_tree}{stat : \statistics}{\huffmanTree}{}
+    \signatureFonction {reconstruct\_file}{compress\_file : \binaryFile, ht : \huffmanTree}{\binaryFile}{}
+    \signatureFonction {read\_binary\_code}{compress\_file : \binaryFile, pos : \naturel, byte : \byte, ht : \huffmanTree}{\byte, \byte, \naturel}{1 $\leq$ pos $\leq$ 8}
 \end{algorithme}
 
-NB : buildHuffmanTree est le même dans compresser et décompresser. 
+NB : build\_huffman\_tree est le même dans compresser et décompresser. 
