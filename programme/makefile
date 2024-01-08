@@ -13,7 +13,7 @@ INCLUDE_DIR = include
 BIN_DIR = bin
 SOURCES = $(wildcard $(SRC_DIR)/*.c)
 OBJECTS = $(SOURCES:$(SRC_DIR)/%.c=$(BIN_DIR)/%.o)
-TARGET = $(BIN_DIR)/main
+TARGET = $(BIN_DIR)/huffman
 CFLAGS = -Wall -Wextra -Wpedantic -I$(INCLUDE_DIR) -I$(LIB_INCLUDE_DIR) -g -ggdb 
 
 # Variables pour la compilation des tests unitaires

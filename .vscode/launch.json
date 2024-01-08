@@ -6,7 +6,7 @@
             "type": "cppdbg",
             "request": "launch",
             "targetArchitecture": "x64",
-            "program": "${workspaceRoot}/programme/bin/main",
+            "program": "${workspaceRoot}/programme/bin/huffman",
             "args": [
                 "c",
                 "test.txt"
@@ -31,7 +31,7 @@
             "type": "cppdbg",
             "request": "launch",
             "targetArchitecture": "x64",
-            "program": "${workspaceRoot}/programme/bin/main",
+            "program": "${workspaceRoot}/programme/bin/huffman",
             "args": [
                 "d",
                 "test.txt.huff"
