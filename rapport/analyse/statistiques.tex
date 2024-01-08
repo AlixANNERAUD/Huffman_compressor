@@ -8,9 +8,9 @@
 	\tadDependances{\naturel}
 	\begin{tadOperations}{insert}
 		\tadOperation{statistics}{}{\tadParams{\statistics}}
-		\tadOperationAvecPreconditions{getCount}{\tadParams{\statistics, Element}}{\naturel}
-		\tadOperationAvecPreconditions{setCount}{\tadParams{\statistics, Element, \naturel}}{\tadParams{\statistics}}
-		\tadOperationAvecPreconditions{increaseCount}{\tadParams{\statistics, Element}}{\tadParams{\statistics}}
+		\tadOperation{getCount}{\tadParams{\statistics, Element}}{\naturel}
+		\tadOperation{setCount}{\tadParams{\statistics, Element, \naturel}}{\tadParams{\statistics}}
+		\tadOperation{increaseCount}{\tadParams{\statistics, Element}}{\tadParams{\statistics}}
 		\tadOperation{getTotalCount}{\tadParams{\statistics}}{\tadParams{\naturel}}
 		\tadOperation{statisticsFromFile}{\tadParams{\binaryFile}}{\tadParams{\statistics}}
 		\tadOperation{areEqual}{\tadParams{\statistics, \statistics}}{\tadParams{\booleen}}
@@ -29,9 +29,4 @@
 		\tadAxiome{getCount(setCount(byte, statistics(), x), element) = x}
 		\tadAxiome{areEqual(s1, s2) \Leftrightarrow getCount(s1, e) = getCount(s2, e) \forall i < 256}
 	\end{tadAxiomes}
-	\begin{tadPreconditions}{getCode(table, byte)}
-		\tadPrecondition{getCount(s, e)}{0 $\le$ e < 256}
-		\tadPrecondition{setCount(s, e, n)}{0 $\le$ e < 256}
-		\tadPrecondition{increaseCount(s, e)}{0 $\le$ e < 256}
-	  \end{tadPreconditions}
 \end{tad}
