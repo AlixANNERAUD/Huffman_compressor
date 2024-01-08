@@ -36,7 +36,7 @@
         \tantque{non(is\_end(source))}
         {
             \affecter{byte}{readByte(source)}
-            \instruction{increaseCount(stat, byte)}
+            \instruction{increase\_count(stat, byte)}
         }
         \retourner{stat}
         }
@@ -53,7 +53,7 @@
         {
             \affecter{byte}{i}
             \commentaire{On crée une feuille d'arbre d'Huffman pour chaque octet disctinct présent dans le fichier}
-            \affecter{count}{getCount(stat, byte)}
+            \affecter{count}{get\_count(stat, byte)}
             \sialors{count > 0}
             {
                 \affecter{leaf}{new\_leaf(byte, count)}

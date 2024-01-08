@@ -8,25 +8,25 @@
 	\tadDependances{\naturel}
 	\begin{tadOperations}{insert}
 		\tadOperation{statistics}{}{\tadParams{\statistics}}
-		\tadOperation{getCount}{\tadParams{\statistics, Element}}{\naturel}
-		\tadOperation{setCount}{\tadParams{\statistics, Element, \naturel}}{\tadParams{\statistics}}
-		\tadOperation{increaseCount}{\tadParams{\statistics, Element}}{\tadParams{\statistics}}
-		\tadOperation{getTotalCount}{\tadParams{\statistics}}{\tadParams{\naturel}}
-		\tadOperation{statisticsFromFile}{\tadParams{\binaryFile}}{\tadParams{\statistics}}
-		\tadOperation{areEqual}{\tadParams{\statistics, \statistics}}{\tadParams{\booleen}}
+		\tadOperation{get\_count}{\tadParams{\statistics, Element}}{\naturel}
+		\tadOperation{set\_count}{\tadParams{\statistics, Element, \naturel}}{\tadParams{\statistics}}
+		\tadOperation{increase\_count}{\tadParams{\statistics, Element}}{\tadParams{\statistics}}
+		\tadOperation{get\_total\_count}{\tadParams{\statistics}}{\tadParams{\naturel}}
+		\tadOperation{statistics\_from\_file}{\tadParams{\binaryFile}}{\tadParams{\statistics}}
+		\tadOperation{are\_equal}{\tadParams{\statistics, \statistics}}{\tadParams{\booleen}}
 	\end{tadOperations}
-	\begin{tadSemantiques}{increaseCount}
+	\begin{tadSemantiques}{increase\_count}
 		\tadSemantique{statistics}{Crée un tableau de Statistics à 0 pour chaque element.}
-		\tadSemantique{getCount}{Renvoi le nombre d'occurrences d'un element.}
-		\tadSemantique{setCount}{Permet d'assigner un nombre d'occurrences à un element.}
-		\tadSemantique{increaseCount}{Permet d'augmenter d'un l'occurence d'un élément.}
-		\tadSemantique{getTotalCount}{Permet d'obtenir la somme des occurrences de tous les éléments apparaissants dans statistiques.}
-		\tadSemantique{statisticsFromFile}{Crée les statistiques pour un fichier donné.}
-		\tadSemantique{areEqual}{Permet de comparer deux tableaux de statistiques, renvoie vrai s'ils sont égaux.}
+		\tadSemantique{get\_count}{Renvoi le nombre d'occurrences d'un element.}
+		\tadSemantique{set\_count}{Permet d'assigner un nombre d'occurrences à un element.}
+		\tadSemantique{increase\_count}{Permet d'augmenter d'un l'occurence d'un élément.}
+		\tadSemantique{get\_total\_count}{Permet d'obtenir la somme des occurrences de tous les éléments apparaissants dans statistiques.}
+		\tadSemantique{statistics\_from\_file}{Crée les statistiques pour un fichier donné.}
+		\tadSemantique{are\_equal}{Permet de comparer deux tableaux de statistiques, renvoie vrai s'ils sont égaux.}
 	\end{tadSemantiques}
 	\begin{tadAxiomes}
-		\tadAxiome{getCount( statistics(), element) = 0 \forall element}
-		\tadAxiome{getCount(setCount(byte, statistics(), x), element) = x}
-		\tadAxiome{areEqual(s1, s2) \Leftrightarrow getCount(s1, e) = getCount(s2, e) \forall i < 256}
+		\tadAxiome{get\_count( statistics(), element) = 0 \forall element}
+		\tadAxiome{get\_count(set\_count(byte, statistics(), x), element) = x}
+		\tadAxiome{are\_equal(s1, s2) \Leftrightarrow get\_count(s1, e) = get\_count(s2, e) \forall i < 256}
 	\end{tadAxiomes}
 \end{tad}

@@ -17,7 +17,7 @@
         \retourner{res}        
     }
     \espace
-    \fonction{getCount}{stat : \statistics, e : Element}{\naturel}{}
+    \fonction{get\_count}{stat : \statistics, e : Element}{\naturel}{}
     {i : \naturel}
     {
         \affecter{i}{1}
@@ -27,7 +27,7 @@
         \retourner{{\champ{stat}{nbOccurrence}}[i]}    
     }
     \espace
-    \procedure{setCount}{\paramEntreeSortie{stat : \statistics}, \paramEntree{e : Element, n : \naturel}}{}
+    \procedure{set\_count}{\paramEntreeSortie{stat : \statistics}, \paramEntree{e : Element, n : \naturel}}{}
     {i : \naturel}
     {
         \affecter{i}{1}
@@ -37,7 +37,7 @@
         \affecter{{\champ{stat}{nbOccurrence}}[i]}{n}
     }
     \espace
-    \procedure{increaseCount}{\paramEntreeSortie{stat : \statistics}, \paramEntree{e : Element}}{}
+    \procedure{increase\_count}{\paramEntreeSortie{stat : \statistics}, \paramEntree{e : Element}}{}
     {i : \naturel}
     {
         \affecter{i}{1}
@@ -47,7 +47,7 @@
         \affecter{{\champ{stat}{nbOccurrence}}[i]}{{\champ{stat}{nbOccurrence}}[i]+1}
     }
     \espace
-    \fonction{getTotalCount}{stat : \statistics}{\naturel}{}
+    \fonction{get\_total\_count}{stat : \statistics}{\naturel}{}
     {sum, i : \naturel}
     {
         \affecter{sum}{0}
@@ -57,19 +57,19 @@
         \retourner{sum}
     }
     \espace
-    \fonction{statisticsFromFile}{file : \binaryFile}{\statistics}{}
+    \fonction{statistics\_from\_file}{file : \binaryFile}{\statistics}{}
     {stat : \statistics, e : Element}
     {
         \affecter{stat}{\instruction{statistics()}}
         \tantque{non(\instruction{is\_end(file)})}{
             \affecter{e}{\instruction{readByte(file)}}
-            \instruction{increaseCount(stat, e)}
+            \instruction{increase\_count(stat, e)}
         }
       
         \retourner{stat}
     }
     \espace
-    \fonction{areEqual}{s1, s2 : \statistics}{\booleen}{}
+    \fonction{are\_equal}{s1, s2 : \statistics}{\booleen}{}
     {eq : \booleen, i : \naturel}
     {
         \affecter{eq}{Vrai}
