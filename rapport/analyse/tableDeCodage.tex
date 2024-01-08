@@ -5,25 +5,25 @@
 \begin{tad}
   \tadNom{\codingTable}
   \tadDependances{\byte, \naturel, \binaryCode, \huffmanTree, \booleen}
-  \begin{tadOperations}{isPresent}
+  \begin{tadOperations}{is\_present}
     \tadOperation{codingTable}{}{\tadParams{\codingTable}}
     \tadOperationAvecPreconditions{add}{\tadParams{\codingTable, \byte, \binaryCode}}{\codingTable}
-    \tadOperationAvecPreconditions{getCode}{\tadParams{\codingTable, \byte}}{\binaryCode}
-    \tadOperation{isPresent}{\tadParams{\codingTable, \byte}}{\booleen}
+    \tadOperationAvecPreconditions{get\_code}{\tadParams{\codingTable, \byte}}{\binaryCode}
+    \tadOperation{is\_present}{\tadParams{\codingTable, \byte}}{\booleen}
   \end{tadOperations}
-  \begin{tadSemantiques}{isPresent}
+  \begin{tadSemantiques}{is\_present}
     \tadSemantique{codingTable}{Crée une table de codage vide.}
     \tadSemantique{add}{Ajoute une entrée clé (octet) / valeur (code binaire) à la table.}
-    \tadSemantique{getCode}{Retourne le code binaire associé à un octet donné dans la table de codage.}
-    \tadSemantique{isPresent}{Retourne la présence d'une clé (octect) dans la table.}
+    \tadSemantique{get\_code}{Retourne le code binaire associé à un octet donné dans la table de codage.}
+    \tadSemantique{is\_present}{Retourne la présence d'une clé (octect) dans la table.}
   \end{tadSemantiques}
   \begin{tadAxiomes}
-    \tadAxiome{getCode(add(Table,oct,code),oct)=code}
-    \tadAxiome{isPresent(add(Table,oct,code),oct)}
-    \tadAxiome{non(isPresent(codingTable(),oct))}
+    \tadAxiome{get\_code(add(Table,oct,code),oct)=code}
+    \tadAxiome{is\_present(add(Table,oct,code),oct)}
+    \tadAxiome{non(is\_present(codingTable(),oct))}
   \end{tadAxiomes}
-  \begin{tadPreconditions}{getCode(table, byte)}
-    \tadPrecondition{add(table, byte, binary\_code)}{non(isPresent(table, byte))}
-    \tadPrecondition{getCode(table, byte)}{isPresent(table, byte)}
+  \begin{tadPreconditions}{get\_code(table, byte)}
+    \tadPrecondition{add(table, byte, binary\_code)}{non(is\_present(table, byte))}
+    \tadPrecondition{get\_code(table, byte)}{is\_present(table, byte)}
   \end{tadPreconditions}
 \end{tad}

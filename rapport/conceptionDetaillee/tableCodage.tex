@@ -19,7 +19,7 @@
     }
     \espace
     \procedure{add}{\paramEntreeSortie{codingTable : \codingTable}, \paramEntree{byte : \byte}, \paramEntree{binaryCode : \binaryCode}}
-    {add(table, byte, binaryCode): non(isPresent(codingTable, byte))}
+    {add(table, byte, binaryCode): non(is\_present(codingTable, byte))}
     {i : [0..255]}
     {
         \affecter{i}{0}
@@ -32,8 +32,8 @@
         \affecter {codingTable.size}{codingTable.size + 1}
     }
     \espace
-    \fonction{getCode}{codingTable : \codingTable, byte : \byte}{\binaryCode}
-    {getCode(table, byte): isPresent(table, byte)}
+    \fonction{get\_code}{codingTable : \codingTable, byte : \byte}{\binaryCode}
+    {get\_code(table, byte): is\_present(table, byte)}
     {d, m, g : [0..255]}
     {
         \affecter{g}{0}
@@ -48,7 +48,7 @@
         \retourner {codingTable[d].BC}
     }
     \\
-    \fonction{isPresent}{codingTable : \codingTable, byte : \byte}{\booleen}{}
+    \fonction{is\_present}{codingTable : \codingTable, byte : \byte}{\booleen}{}
     {d, m, g : [0..255]}
     {
         \affecter{g}{0}
