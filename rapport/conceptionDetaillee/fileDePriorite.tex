@@ -14,13 +14,13 @@
         \retourner{pQ}
         }
     
-    \fonction{getLength}{pQ : \priorityQueue}{\naturel}{}{}{\retourner{\champ{pQ}{length}}}
+    \fonction{get\_length}{pQ : \priorityQueue}{\naturel}{}{}{\retourner{\champ{pQ}{length}}}
     
-    \fonction{pop}{pQ : \priorityQueue, }{\priorityQueue, Element}{getLength(pQ) > 0}{}{
+    \fonction{pop}{pQ : \priorityQueue, }{\priorityQueue, Element}{get\_length(pQ) > 0}{}{
         \affecter{\champ{pQ}{length}}{\champ{pQ}{length}-1}
         \retourner{\champ{pQ}{tab}[\champ{pQ}{length}+1]}}
 
-    \fonction{push}{pQ : \priorityQueue,  e : Element}{\priorityQueue}{getLength(pQ) < MAXLENGTH}{temp : \huffmanTree}
+    \fonction{push}{pQ : \priorityQueue,  e : Element}{\priorityQueue}{get\_length(pQ) < MAXLENGTH}{temp : \huffmanTree}
     {
         \affecter{\champ{pQ}{length}}{\champ{pQ}{length}+1}
         \sialors{\champ{e}{weight} = \champ{\champ{pQ}{tab}[1]}{weight}}{

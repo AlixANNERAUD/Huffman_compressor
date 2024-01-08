@@ -10,24 +10,24 @@ Cependant, l'ajout d'un élément se fait ici en fonction de son poids et de son
     \tadNom{\priorityQueue}
     \tadParametres{Element}
     \tadDependances{\naturel}
-    \begin{tadOperations}{insert}
+    \begin{tadOperations}{push}
         \tadOperation{priorityQueue}{}{\tadParams{\priorityQueue}}
-        \tadOperation{getLength}{\tadParams{\priorityQueue}}{\naturel}
+        \tadOperation{get\_length}{\tadParams{\priorityQueue}}{\naturel}
         \tadOperationAvecPreconditions{pop}{\tadParams{\priorityQueue}}{\tadParams{\priorityQueue, Element}}
         \tadOperationAvecPreconditions{push}{\tadParams{\priorityQueue, Element}}{\tadParams{\priorityQueue}}
     \end{tadOperations}
     \begin{tadSemantiques}{insert}
         \tadSemantique{priorityQueue}{Crée une file de priorité vide.}
-        \tadSemantique{getLength}{Renvoi la taille de la file de priorité.}
+        \tadSemantique{get\_length}{Renvoi la taille de la file de priorité.}
         \tadSemantique{pop}{Renvoi puis supprime l'élément situé en tête de file.}
         \tadSemantique{push}{Insère un élément dans la file de priorité en respectant l'ordre de priorité (poids puis ordre ascii en cas d'égalité).}
     \end{tadSemantiques}
     \begin{tadAxiomes}
-        \tadAxiome{getLength(insert(queue, tree)) = getLength(queue) + 1}
+        \tadAxiome{get\_length(insert(queue, tree)) = get\_length(queue) + 1}
         \tadAxiome{pop(insert(queue, tree)) = tree}
     \end{tadAxiomes}
     \begin{tadPreconditions}{insert(queue, element)}
-        \tadPrecondition{pop(queue)}{getLength(queue) > 0}
-        \tadPrecondition{push(queue, element)}{getLength(queue) < MAX\_LENGTH}
+        \tadPrecondition{pop(queue)}{get\_length(queue) > 0}
+        \tadPrecondition{push(queue, element)}{get\_length(queue) < MAXIMUM\_LENGTH}
     \end{tadPreconditions}
 \end{tad}
