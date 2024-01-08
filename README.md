@@ -20,11 +20,11 @@ To run the executable (`programme/bin/main`), you can use the following command:
 
 - To compress a file:
 ```bash
-./programme/bin/main c [FILE]
+./programme/bin/huffman c [FILE]
 ```
 - To decompress a file:
 ```bash
-./programme/bin/main d [FILE]
+./programme/bin/huffman d [FILE]
 ```
 
 > [!IMPORTANT]
