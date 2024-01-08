@@ -138,11 +138,10 @@ int main(int argc, const char *argv[])
         // - Affichage du résultat
         if (compressResult != COMPRESS_RESULT_OK)
         {
-            printf("Error while compressing file.\n");
             char errorBuffer[1024];
             FileSize buffer_size = sizeof(errorBuffer);
-            compress_error_to_string(cr, errorBuffer, buffer_size);
-            print_error("%s", errorBuffer);
+            compress_error_to_string(compressResult, errorBuffer, buffer_size);
+            print_error("Error while compressing file: %s\n.", errorBuffer);
         }
         else
             printf("File compressed successfully in %f seconds.\n", (double)(end - start) / CLOCKS_PER_SEC);
@@ -160,7 +159,8 @@ int main(int argc, const char *argv[])
             char errorBuffer[1024];
             FileSize buffer_size = sizeof(errorBuffer);
             decompress_error_to_string(decompressResult, errorBuffer, buffer_size);
-            print_error("%s", errorBuffer);
+            print_error("Error while decompressing file: %s\n.", errorBuffer);
+            
         }
         else
             printf("File decompressed successfully in %f seconds.\n", (double)(end - start) / CLOCKS_PER_SEC);
