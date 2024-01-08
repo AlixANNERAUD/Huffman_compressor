@@ -14,7 +14,7 @@ BIN_DIR = bin
 SOURCES = $(wildcard $(SRC_DIR)/*.c)
 OBJECTS = $(SOURCES:$(SRC_DIR)/%.c=$(BIN_DIR)/%.o)
 TARGET = $(BIN_DIR)/main
-CFLAGS = -Wall -Wpedantic -I$(INCLUDE_DIR) -I$(LIB_INCLUDE_DIR) -g -ggdb
+CFLAGS = -Wall -Wextra -Wpedantic -I$(INCLUDE_DIR) -I$(LIB_INCLUDE_DIR) -g -ggdb 
 
 # Variables pour la compilation des tests unitaires
 TEST_DIR = tests
@@ -24,7 +24,7 @@ TEST_SOURCES = $(wildcard $(TEST_SOURCE_DIR)/*.c)
 TEST_OBJECTS = $(TEST_SOURCES:$(TEST_SOURCE_DIR)/%.c=$(BIN_TEST_DIR)/%.o)
 BIN_TEST_DIR = $(BIN_DIR)/tests
 TEST_TARGET = $(BIN_TEST_DIR)/main
-CFLAGS_TEST = -Wall -Wpedantic -I$(TEST_INCLUDE_DIR) -I$(LIB_INCLUDE_DIR) -lcunit
+CFLAGS_TEST = -Wall -Wextra -Wpedantic -I$(TEST_INCLUDE_DIR) -I$(LIB_INCLUDE_DIR) -lcunit
 
 # Variables pour la compilation de la librairie
 LIB_DIR = lib
@@ -33,7 +33,7 @@ LIB_INCLUDE_DIR = $(LIB_DIR)/include
 LIB_SOURCES = $(wildcard $(LIB_SOURCE_DIR)/*.c)
 LIB_OBJECTS = $(LIB_SOURCES:$(LIB_SOURCE_DIR)/%.c=$(BIN_LIB_DIR)/%.o)
 BIN_LIB_DIR = $(BIN_DIR)/lib
-CFLAGS_LIB = -Wall -Wpedantic -I$(LIB_INCLUDE_DIR)
+CFLAGS_LIB = -Wall -Wextra -Wpedantic -I$(LIB_INCLUDE_DIR) -g -ggdb
 
 # Règle pour générer les fichiers objets à partir des fichiers source
 $(BIN_DIR)/%.o: $(SRC_DIR)/%.c
