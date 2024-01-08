@@ -2,7 +2,10 @@
 
 \begin{algorithme}
     \signatureFonction{statistics}{}{\statistics}{}
-    \signatureFonction{getCount}{stat : \statistics, e : Element}{\naturel}{}
-    \signatureProcedure{setCount}{\paramEntreeSortie{stat : \statistics}, \paramEntree{e : Element, n : \naturel}}{}
-    \signatureProcedure{increaseCount}{\paramEntreeSortie{stat : \statistics}, \paramEntree{e : Element}}{}
+    \signatureFonction{getCount}{stat : \statistics, e : Element}{\naturel}{0 $\le$ e < 256}
+    \signatureProcedure{setCount}{\paramEntreeSortie{stat : \statistics}, \paramEntree{e : Element, n : \naturel}}{0 $\le$ e < 256}
+    \signatureProcedure{increaseCount}{\paramEntreeSortie{stat : \statistics}, \paramEntree{e : Element}}{0 $\le$ e < 256}
+    \signatureFonction{getTotalCount}{stat : \statistics}{\naturel}{}
+    \signatureFonction{statisticsFromFile}{file : \binaryFile}{\statistics}{}
+    \signatureFonction{areEqual}{s1, s2 : \statistics}{\booleen}{}
 \end{algorithme}

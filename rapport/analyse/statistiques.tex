@@ -8,18 +8,30 @@
 	\tadDependances{\naturel}
 	\begin{tadOperations}{insert}
 		\tadOperation{statistics}{}{\tadParams{\statistics}}
-		\tadOperation{getCount}{\tadParams{\statistics, Element}}{\naturel}
-		\tadOperation{setCount}{\tadParams{\statistics, Element, \naturel}}{\tadParams{\statistics}}
-		\tadOperation{increaseCount}{\tadParams{\statistics, Element}}{\tadParams{\statistics}}
+		\tadOperationAvecPreconditions{getCount}{\tadParams{\statistics, Element}}{\naturel}
+		\tadOperationAvecPreconditions{setCount}{\tadParams{\statistics, Element, \naturel}}{\tadParams{\statistics}}
+		\tadOperationAvecPreconditions{increaseCount}{\tadParams{\statistics, Element}}{\tadParams{\statistics}}
+		\tadOperation{getTotalCount}{\tadParams{\statistics}}{\tadParams{\naturel}}
+		\tadOperation{statisticsFromFile}{\tadParams{\binaryFile}}{\tadParams{\statistics}}
+		\tadOperation{areEqual}{\tadParams{\statistics, \statistics}}{\tadParams{\booleen}}
 	\end{tadOperations}
 	\begin{tadSemantiques}{increaseCount}
 		\tadSemantique{statistics}{Crée un tableau de Statistics à 0 pour chaque element.}
 		\tadSemantique{getCount}{Renvoi le nombre d'occurrences d'un element.}
 		\tadSemantique{setCount}{Permet d'assigner un nombre d'occurrences à un element.}
 		\tadSemantique{increaseCount}{Permet d'augmenter d'un l'occurence d'un élément.}
+		\tadSemantique{getTotalCount}{Permet d'obtenir la somme des occurrences de tous les éléments apparaissants dans statistiques.}
+		\tadSemantique{statisticsFromFile}{Crée les statistiques pour un fichier donné.}
+		\tadSemantique{areEqual}{Permet de comparer deux tableaux de statistiques, renvoie vrai s'ils sont égaux.}
 	\end{tadSemantiques}
 	\begin{tadAxiomes}
-		\tadAxiome{getCount(element, statistics()) = 0 \forall element}
-		\tadAxiome{getCount(element, setCount(byte, statistics(), x)) = x}
+		\tadAxiome{getCount( statistics(), element) = 0 \forall element}
+		\tadAxiome{getCount(setCount(byte, statistics(), x), element) = x}
+		\tadAxiome{areEqual(s1, s2) \Leftrightarrow getCount(s1, e) = getCount(s2, e) \forall i < 256}
 	\end{tadAxiomes}
+	\begin{tadPreconditions}{getCode(table, byte)}
+		\tadPrecondition{getCount(s, e)}{0 $\le$ e < 256}
+		\tadPrecondition{setCount(s, e, n)}{0 $\le$ e < 256}
+		\tadPrecondition{increaseCount(s, e)}{0 $\le$ e < 256}
+	  \end{tadPreconditions}
 \end{tad}

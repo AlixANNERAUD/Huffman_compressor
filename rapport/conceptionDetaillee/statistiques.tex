@@ -7,10 +7,13 @@
     \end{enregistrement}
     \espace
     \fonction{statistics}{}{\statistics}{}
-    {res : statistics}
+    {res : \statistics, i : \naturel}
     {
         \affecter{\champ{res}{lesElements}}{\tableau{1..256}{d'}{Element}}
         \affecter{\champ{res}{nbOccurrence}}{\tableau{1..256}{de}{\naturel}}
+        \pour{i}{1}{256}{}{
+            \affecter{\champ{res}{nbOccurence}[i]}{0}
+        }
         \retourner{res}        
     }
     \espace
@@ -42,6 +45,40 @@
             \affecter{i}{i+1}
         }
         \affecter{{\champ{stat}{nbOccurrence}}[i]}{{\champ{stat}{nbOccurrence}}[i]+1}
+    }
+    \espace
+    \fonction{getTotalCount}{stat : \statistics}{\naturel}{}
+    {sum, i : \naturel}
+    {
+        \affecter{sum}{0}
+        \pour{i}{1}{256}{}{
+            \affecter{sum}{sum + \champ{stat}{nbOccurence}[i]}
+        }
+        \retourner{sum}
+    }
+    \espace
+    \fonction{statisticsFromFile}{file : \binaryFile}{\statistics}{}
+    {stat : \statistics, e : Element}
+    {
+        \affecter{stat}{\instruction{statistics()}}
+        \tantque{non(\instruction{isEnd(file)})}{
+            \affecter{e}{\instruction{readByte(file)}}
+            \instruction{increaseCount(stat, e)}
+        }
+      
+        \retourner{stat}
+    }
+    \espace
+    \fonction{areEqual}{s1, s2 : \statistics}{\booleen}{}
+    {eq : \booleen, i : \naturel}
+    {
+        \affecter{eq}{Vrai}
+        \tantque{eq et i < 256}{
+            \sialors{non((\champ{s1}{lesElements}[i] = \champ{s2}{lesElements}[i]) et (\champ{s1}{nbOccurence}[i] = \champ{s2}{nbOccurence}[i]))}{
+                \affecter{eq}{Faux}
+            }
+        }
+        \retourner{eq}
     }
     \espace
 \end{algorithme}
