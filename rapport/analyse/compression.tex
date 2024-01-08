@@ -8,9 +8,10 @@
         \item computeStatistics(\binaryFile) : \statistics
         \item buildHuffmanTree(\statistics) : \huffmanTree
         \item buildCodingTable(\huffmanTree) : \codingTable
+        \begin{itemize}
+            \item buildCodingTableRecursive(\huffmanTree, \codingTable, \binaryCode): \codingTable
+        \end{itemize}
         \item writeHeader(\binaryFile, \codingTable) : \binaryFile
         \item compressSourceBytes(\binaryFile, \codingTable) : \binaryFile
     \end{itemize}
 \end{itemize}
-
-\subsubsection{Signatures}
