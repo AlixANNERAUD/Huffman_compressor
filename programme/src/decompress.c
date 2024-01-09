@@ -6,6 +6,7 @@
 #include "huffmanTree.h"
 #include "statistics.h"
 #include "binaryCode.h"
+#include "progressBar.h"
 
 // - Définitions
 
@@ -58,6 +59,8 @@ DecompressResult decompress_data(FILE *input, FILE *output, const HuffmanTree tr
     HuffmanTree currentTree = tree;
     Byte sourceByte = byte_create(0);
     FileSize decompressedBytes = 0;
+    // - Progression
+    ProgressBar progressBar = progress_bar_create(fileSize, "Decompressing");
 
     // - Tant qu'on a pas atteint la taille du fichier original
     while (decompressedBytes < fileSize)
@@ -92,6 +95,8 @@ DecompressResult decompress_data(FILE *input, FILE *output, const HuffmanTree tr
                 currentTree = currentTree->rightChild;
             i++;
         }
+
+        progress_bar_update(&progressBar, decompressedBytes); // Mise à jour de la barre de progression
     }
     return DECOMPRESS_RESULT_OK; // Si il n'y a pas eu de renvoi prématuré, c'est que tout s'est bien passé
 }
