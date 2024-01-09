@@ -28,7 +28,8 @@ void test_statistics_count()
     Statistics s;
     statistics_initialize(s);
     for (unsigned int i = 0; i < STATISTICS_MAX; i++)
-        statistics_increment_count(s, byte_create(i));
+        for (unsigned int j = 0; j <= 0xFFFF - i; j++)
+            statistics_increment_count(s, byte_create(i));
 
     for (unsigned int i = 0; i < STATISTICS_MAX; i++)
         CU_ASSERT_EQUAL(statistics_get_count(s, byte_create(i)), 0xFFFF - i + 1)
