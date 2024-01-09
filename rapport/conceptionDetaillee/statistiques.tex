@@ -81,4 +81,13 @@
         \retourner{eq}
     }
     \espace
+    \fonction{is\_unique}{s : \statistics}{\booleen}{}
+    {i : \naturel}
+    {
+        \affecter{i}{1}
+        \tantque{i < 256 et \champ{s}{occurence}[i] = 0}{
+            \affecter{i}{i+1}
+        }
+        \retourner{i = 256}
+    }
 \end{algorithme}

@@ -1,5 +1,8 @@
 \subsection{Statistics}
 
+Les statistiques sont un simple tableau contenant le nombre d'occurrences de chaque octet dans un fichier.
+Elles seront à la fois utilisé pour la compression et la décompression (pour la reconstruction de l'arbre de Huffman).
+
 \newcommand{\statistics}{\textbf{Statistics}}
 
 \begin{tad}
@@ -14,6 +17,7 @@
 		\tadOperation{get\_total\_count}{\tadParams{\statistics}}{\tadParams{\naturel}}
 		\tadOperation{statistics\_from\_file}{\tadParams{\binaryFile}}{\tadParams{\statistics}}
 		\tadOperation{are\_equal}{\tadParams{\statistics, \statistics}}{\tadParams{\booleen}}
+		\tadOperation{is\_unique}{\tadParams{\statistics}}{\tadParams{\booleen}}
 	\end{tadOperations}
 	\begin{tadSemantiques}{increase\_count}
 		\tadSemantique{statistics}{Crée un tableau de Statistics à 0 pour chaque element.}
@@ -23,6 +27,7 @@
 		\tadSemantique{get\_total\_count}{Permet d'obtenir la somme des occurrences de tous les éléments apparaissants dans statistiques.}
 		\tadSemantique{statistics\_from\_file}{Crée les statistiques pour un fichier donné.}
 		\tadSemantique{are\_equal}{Permet de comparer deux tableaux de statistiques, renvoie vrai s'ils sont égaux.}
+		\tadSemantique{is\_unique}{Permet de savoir si un tableau de statistiques ne contient qu'un unique élément.}
 	\end{tadSemantiques}
 	\begin{tadAxiomes}
 		\tadAxiome{get\_count( statistics(), element) = 0 \forall element}

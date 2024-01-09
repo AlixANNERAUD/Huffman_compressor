@@ -1,5 +1,6 @@
 \subsection{Decompression}
 
+La partie décompression, comme son nom l'indique, sera en charge de décompresser un fichier compressé par la partie compression.
 
 \begin{itemize}
     \item decompress(\binaryFile) : \binaryFile, \booleen
@@ -8,7 +9,7 @@
         \begin{itemize}
             \item check\_file\_type(\binaryFile) : \booleen
         \end{itemize}
-        \item build\_huffmanTree(\statistics) : \huffmanTree
+        \item build\_huffman\_tree(\statistics) : \huffmanTree
         \item reconstruct\_file(\binaryFile, \huffmanTree) : \binaryFile
         \begin{itemize}
             \item read\_binaryCode(\binaryFile, \naturel, \byte, \huffmanTree) : \byte, \byte, \naturel
