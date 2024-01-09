@@ -4,6 +4,7 @@
 
 ProgressBar progress_bar_create(FileSize maximum, const char *message)
 {
+    assert(maximum >= 100);
     ProgressBar progressBar;
     progressBar.maximum = maximum;
     // - Calcul de l'intervalle de progression pour éviter d'afficher trop de fois la barre de progression
@@ -15,9 +16,15 @@ ProgressBar progress_bar_create(FileSize maximum, const char *message)
 
 void progress_bar_update(ProgressBar *progressBar, FileSize current)
 {
-    if (progressBar->percentage != 0 && current >= progressBar->nextShow)
+    if (current >= progressBar->nextShow)
     {
-        printf("%s: %u%%\n", progressBar->message, (unsigned int)(current / progressBar->percentage));
+        printf("%s: [", progressBar->message);
+        for (unsigned i = 0; i < 20; i++)
+            printf(i < current / (progressBar->percentage * 5) ? "#" : " ");
+        printf("] - %lu%%\r", current / progressBar->percentage);
+
         progressBar->nextShow += progressBar->percentage;
+    
+        fflush(stdout); // Force l'affichage
     }
 }
