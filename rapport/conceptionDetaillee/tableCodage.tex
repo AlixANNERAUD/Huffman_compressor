@@ -1,65 +1,66 @@
 \section{Table de codage}
 
+\constante{MAXIMUM\_SIZE}{256}
+
 \begin{algorithme}
-    \begin {enregistrement}{coupleByteBC}
-        \champEnregistrement {byte}{\byte}
-        \champEnregistrement {BC}{\binaryCode}
+    \begin {enregistrement}{CodingTableEntry}
+        \champEnregistrement {key}{\byte}
+        \champEnregistrement {value}{\binaryCode}
     \end{enregistrement}
 
     \begin {enregistrement}{CodingTable}
-        \champEnregistrement{table}{\tableau{0..255, 0..1}{de}{coupleByteBC}}
-        \champEnregistrement{size}{[0..255]}
+        \champEnregistrement{entries}{\tableau{0..255}{de}{CodingTableEntry}}
+        \champEnregistrement{length}{[0..255]}
     \end{enregistrement}
     \espace
-    \fonction{codingTable}{}{\codingTable}{}
+    \fonction{coding\_Table}{}{\codingTable}{}
     {codingTable : \codingTable}
     {
-       \affecter {codingTable.size}{0}
+       \affecter {codingTable.length}{0}
         \retourner {codingTable}
     }
     \espace
     \procedure{add}{\paramEntreeSortie{codingTable : \codingTable}, \paramEntree{byte : \byte}, \paramEntree{binaryCode : \binaryCode}}
-    {add(table, byte, binaryCode): non(is\_present(codingTable, byte))}
+    {non(search(codingTable, byte), null)}
     {i : [0..255]}
     {
-        \affecter{i}{0}
-        \tantque {codingTable[codingTable.size - i].byte > byte et i < codingTable.size}{
-            \affecter {codingTable[codingTable.size - i + 1]}{codingTable[codingTable.size - i]}
-            \affecter {i}{i+1}}
+        \affecter{i}{codingTable.length}
+        \tantque {codingTable.entries[i - 1].key > byte et i > 0}{
+            \affecter {codingTable.entries[i]}{codingTable.entries[i - 1]}
+            \affecter {i}{i-1}}
         \commentaire {La table de codage est ordonnée en fonction des bytes, ce qui réduit la complexité de l'encodage mais n'affecte pas celle du décodage}
-        \affecter {codingTable[codingTable.size - i + 1].BC}{binaryCode}
-        \affecter {codingTable[codingTable.size - i + 1].byte}{byte}
-        \affecter {codingTable.size}{codingTable.size + 1}
+        \affecter {codingTable.entries[i].value}{binaryCode}
+        \affecter {codingTable.entries[i].key}{byte}
+        \affecter {codingTable.length}{codingTable.length + 1}
     }
     \espace
-    \fonction{get\_code}{codingTable : \codingTable, byte : \byte}{\binaryCode}
-    {get\_code(table, byte): is\_present(table, byte)}
-    {d, m, g : [0..255]}
+    \fonction{get\_value}{codingTable : \codingTable, byte : \byte}{\binaryCode}
+    {search(codingTable, byte), \adresse{index}}
+    {index : [0..255]}
     {
-        \affecter{g}{0}
-        \affecter{d}{codingTable.size}
-        \tantque{g<d}{
-            \affecter {m}{(g + d) div 2}
-            \sialors{codingTable[m].byte > byte}{
-                {\affecter{d}{m-1}}
-                {\affecter{g}{m}}
-            }
-        }
-        \retourner {codingTable[d].BC}
+        \retourner {codingTable.entries[index].value}
     }
     \\
-    \fonction{is\_present}{codingTable : \codingTable, byte : \byte}{\booleen}{}
-    {d, m, g : [0..255]}
+    \fonction{search}{codingTable : \codingTable, byte : \byte}{\booleen}{}
+    {d, m, g, index: [0..255], found : \booleen}
     {
         \affecter{g}{0}
-        \affecter{d}{codingTable.size}
-        \tantque{g<d}{
+        \affecter{m}{0}
+        \affecter{d}{codingTable.length}
+        \affecter{found}{Faux}
+
+        \tantque{non found et g $\ne$ d}{
             \affecter {m}{(g + d) div 2}
-            \sialorssinon{codingTable[m].byte > byte}
-                {\affecter{d}{m-1}}
-                {\affecter{g}{m}}
+            \sialorssinon{codingTable.entries[m].key > byte}
+                {\affecter{d}{m}}
+                {\sialorssinon{codingTable.entries[m].key < byte}
+                    {\affecter{g}{m + 1}}
+                    {\affecter{found}{Vrai}}
+                    }
+            \sialors{index $\ne$ \pointeurNULL}
+                {\affecter{\pointeur{index}}{m}}
         }
-        \retourner{codingTable[d].byte = byte}
+        \retourner{found}
     }
     
 \end{algorithme}
