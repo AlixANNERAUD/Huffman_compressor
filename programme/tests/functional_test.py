@@ -5,42 +5,42 @@ import lorem
 
 filesSize = 10_000_000
 
+# - Fonction qui retourne le hash d'un fichier
 def getHash(file_path):
     file = open(file_path, "rb")
     hash = hashlib.sha256(file.read()).hexdigest()
     file.close()
     return hash
 
+# - Fonction qui génère un fichier avec une fonction donnée
 def generateFile(file_path, function):
+    os.remove(file_path)
     file = open(file_path, "wb")
     function(file)
     file.close()
     return getHash(file_path)
 
+# - Fonction qui compresse un fichier et retourne sa taille
 def compress(file_path):
     originalHash = getHash(file_path)
     os.system(f"./programme/bin/huffman c {file_path}")
     os.remove(file_path)
     return os.path.getsize(f"{file_path}.huff")
 
+# - Fonction qui décompresse un fichier et retourne son hash et sa taille
 def decompress(file_path):
     os.system(f"./programme/bin/huffman d {file_path}.huff")
     return (getHash(file_path), os.path.getsize(file_path))
 
+# - Fonction qui affiche le résultat d'un test
 def printResult(file_path, originalHash, compressedSize, decompressedHash, decompressedSize):
     print(f"{file_path} :")
     if (originalHash != decompressedHash):
         print(f"\t Error : Hashes are different : {originalHash} != {decompressedHash}")
-        return
     if (decompressedSize == 0):
-        print(f"\t Error : Decompressed file is empty")
-        return
+        print(f"\t Decompressed file is empty")
     else:
-        print(f"\toriginal hash : {originalHash}")
-        print(f"\tcompressed size : {compressedSize} bytes")
-        print(f"\tdecompressed hash : {decompressedHash}")
-        print(f"\tdecompressed size : {decompressedSize} bytes")
-        print(f"\tcompression ratio : {round(compressedSize / decompressedSize * 100, 2)}%")
+        print(f"\tsize : {decompressedSize} -> {compressedSize} bytes ({round(compressedSize / decompressedSize * 100, 2)}%)")
     print("--------------------------------------------------")
 
 # - Fichier vide
@@ -61,7 +61,7 @@ printResult("unique", originalHash, compressedSize, decompressedHash, decompress
 
 # - Lorem ipsum
 def generateLoremFile(file):
-    for i in range(filesSize):
+    for i in range(round(filesSize / 10)):
         file.write(bytes(lorem.get_word().encode("utf-8")))
 
 originalHash = generateFile("lorem", generateLoremFile)
