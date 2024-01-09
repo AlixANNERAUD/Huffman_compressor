@@ -9,7 +9,7 @@ ProgressBar progress_bar_create(FileSize maximum, const char *message)
     progressBar.maximum = maximum;
     // - Calcul de l'intervalle de progression pour éviter d'afficher trop de fois la barre de progression
     progressBar.percentage = maximum / 100;
-    progressBar.nextShow = progressBar.percentage;
+    progressBar.nextShow = 0;
     progressBar.message = message;
     return progressBar;
 }
