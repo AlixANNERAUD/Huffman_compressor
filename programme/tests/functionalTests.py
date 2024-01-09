@@ -50,11 +50,7 @@ decompressedHash, decompressedSize = decompress("empty")
 printResult("empty", originalHash, compressedSize, decompressedHash, decompressedSize)
 
 # - File avec un seul caractère
-def generateSingleFile(file):
-    for i in range(filesSize):
-        file.write(bytes([0]))
-
-originalHash = generateFile("single", generateSingleFile)
+originalHash = generateFile("single", lambda file: file.write(bytes([0])))
 compressedSize = compress("single")
 decompressedHash, decompressedSize = decompress("single")
 printResult("single", originalHash, compressedSize, decompressedHash, decompressedSize)
