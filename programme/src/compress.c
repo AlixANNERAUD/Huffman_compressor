@@ -73,8 +73,6 @@ CompressResult compress_source_bytes(FILE *source, FILE *destination, CodingTabl
 {
     rewind(source);
 
-    float lastProgress = 0;
-
     unsigned int i = 0; // Compteur de bits
     Byte inputByte = byte_create(0);
     Byte outputByte = byte_create(0);
