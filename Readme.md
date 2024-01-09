@@ -16,7 +16,7 @@ Here are the `make` commands (execute in the `programme` directory) to compile t
 
 ## 🏃‍♂️ Usage
 
-To run the executable (`programme/bin/main`), you can use the following command:
+To run the executable (`programme/bin/huffman`), you can use the following command:
 
 - To compress a file:
 ```bash
