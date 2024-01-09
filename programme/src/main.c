@@ -44,10 +44,6 @@ bool ends_with(const char *string, const char *suffix)
 /// @return `true` si les arguments ont bien été lus, `false` sinon
 bool read_arguments(int argc, const char *argv[], char *mode, const char **intput_file_path)
 {
-    // - On affiche les arguments
-    for (int i = 0; i < argc; i++)
-        printf("Argument %d : %s\n", i, argv[i]);
-
     // - On vérifie le nombre d'arguments
     if (argc != 3)
     {
