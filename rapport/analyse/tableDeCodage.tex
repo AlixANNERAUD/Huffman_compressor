@@ -4,26 +4,26 @@
 
 \begin{tad}
   \tadNom{\codingTable}
-  \tadDependances{\byte, \naturel, \binaryCode, \huffmanTree, \booleen}
-  \begin{tadOperations}{is\_present}
+  \tadDependances{\byte, \naturel, \binaryCode, \booleen}
+  \begin{tadOperations}{coding\_table}
     \tadOperation{coding\_table}{}{\tadParams{\codingTable}}
     \tadOperationAvecPreconditions{add}{\tadParams{\codingTable, \byte, \binaryCode}}{\codingTable}
-    \tadOperationAvecPreconditions{get\_code}{\tadParams{\codingTable, \byte}}{\binaryCode}
-    \tadOperation{is\_present}{\tadParams{\codingTable, \byte}}{\booleen}
+    \tadOperationAvecPreconditions{get\_value}{\tadParams{\codingTable, \byte}}{\binaryCode}
+    \tadOperation{search}{\tadParams{\codingTable, \byte, \naturel}}{\booleen}
   \end{tadOperations}
-  \begin{tadSemantiques}{is\_present}
+  \begin{tadSemantiques}{coding\_table}
     \tadSemantique{coding\_table}{Crée une table de codage vide.}
     \tadSemantique{add}{Ajoute une entrée clé (octet) / valeur (code binaire) à la table.}
-    \tadSemantique{get\_code}{Retourne le code binaire associé à un octet donné dans la table de codage.}
-    \tadSemantique{is\_present}{Retourne la présence d'une clé (octect) dans la table.}
+    \tadSemantique{get\_value}{Retourne le code binaire associé à un octet donné dans la table de codage.}
+    \tadSemantique{search}{Retourne la présence d'une clé (octect) dans la table et l'indice de la clé si besoin.}
   \end{tadSemantiques}
   \begin{tadAxiomes}
-    \tadAxiome{get\_code(add(Table,oct,code),oct)=code}
-    \tadAxiome{is\_present(add(Table,oct,code),oct)}
-    \tadAxiome{non(is\_present(codingTable(),oct))}
+    \tadAxiome{get\_value(add(Table,oct,code),oct)=code}
+    \tadAxiome{search(add(Table,oct,code),oct,i)}
+    \tadAxiome{non(search(codingTable(),oct),i)}
   \end{tadAxiomes}
-  \begin{tadPreconditions}{get\_code(table, byte)}
-    \tadPrecondition{add(table, byte, binary\_code)}{non(is\_present(table, byte))}
-    \tadPrecondition{get\_code(table, byte)}{is\_present(table, byte)}
+  \begin{tadPreconditions}{get\_value(table, byte)}
+    \tadPrecondition{add(table, byte, binary\_code)}{non(search(table, byte),i)}
+    \tadPrecondition{get\_value(table, byte)}{search(table, byte,i)}
   \end{tadPreconditions}
 \end{tad}
