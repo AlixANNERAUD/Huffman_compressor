@@ -38,7 +38,7 @@ def printResult(file_path, originalHash, compressedSize, decompressedHash, decom
     if (originalHash != decompressedHash):
         print(f"\t Error : Hashes are different : {originalHash} != {decompressedHash}")
     if (decompressedSize == 0):
-        print(f"\t Decompressed file is empty")
+        print(f"\t Decompressed file is empty : {compressedSize} bytes")
     else:
         print(f"\tsize : {decompressedSize} -> {compressedSize} bytes ({round(compressedSize / decompressedSize * 100, 2)}%)")
     print("--------------------------------------------------")

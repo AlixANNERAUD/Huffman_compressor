@@ -84,4 +84,5 @@ bool statistics_is_unique(const Statistics statistics)
     for (int i = 0; i < STATISTICS_MAX; i++)
         if (statistics[i] > 0)
             return statistics[i] == statistics_get_total_count(statistics);
+    return false;
 }
