@@ -1,4 +1,4 @@
-# 📜 Huffman compressor
+<h1 align="center">🗜️ Huffman compressor 📜</h1>
 
 ## 🚀 Introduction
 
