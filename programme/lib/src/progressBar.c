@@ -15,7 +15,7 @@ ProgressBar progress_bar_create(FileSize maximum, const char *message)
 
 void progress_bar_update(ProgressBar *progressBar, FileSize current)
 {
-    if (current >= progressBar->nextShow)
+    if (progressBar->percentage != 0 && current >= progressBar->nextShow)
     {
         printf("%s: %u%%\n", progressBar->message, (unsigned int)(current / progressBar->percentage));
         progressBar->nextShow += progressBar->percentage;
