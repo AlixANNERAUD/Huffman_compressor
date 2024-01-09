@@ -21,11 +21,6 @@ FileSize statistics_get_count(const Statistics stat, Byte e)
     return stat[byte_to_natural(e)];
 }
 
-void statistics_set_count(Statistics stat, Byte e, unsigned int n)
-{
-    stat[byte_to_natural(e)] = n;
-}
-
 void statistics_increment_count(Statistics stat, Byte e)
 {
     stat[byte_to_natural(e)]++;
@@ -82,4 +77,11 @@ bool statistics_deserialize(Statistics stats, const void *buffer)
     memcpy(stats, &byteBuffer[sizeof(FileSize)], sizeof(Statistics)); // On copie les statistiques
 
     return fileSize == statistics_get_total_count(stats);
+}
+
+bool statistics_is_unique(const Statistics statistics)
+{
+    for (int i = 0; i < STATISTICS_MAX; i++)
+        if (statistics[i] > 0)
+            return statistics[i] == statistics_get_total_count(statistics);
 }

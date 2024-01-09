@@ -118,6 +118,22 @@ DecompressResult check_output_file(FILE *output, const Statistics inputStatistic
     return DECOMPRESS_RESULT_OK;
 }
 
+DecompressResult decompress_data_unique(const Statistics statistics, FILE *output)
+{
+    for (unsigned int i = 0; i <= 0xFF; i++)
+    {
+        Byte byte = byte_create(i);
+        FileSize count = statistics_get_count(statistics, byte);
+        for (FileSize j = 0; j < count; j++)
+        {
+            unsigned char naturalToWrite = byte_to_natural(byte);
+            if (fwrite(&naturalToWrite, sizeof(naturalToWrite), 1, output) != 1)
+                return DECOMPRESS_RESULT_ERROR_FAILED_TO_WRITE_OUTPUT_FILE;
+        }
+    }
+    return DECOMPRESS_RESULT_OK;
+}
+
 // - - Fonctions publiques
 
 DecompressResult decompress(FILE *input, FILE *output)
@@ -127,8 +143,12 @@ DecompressResult decompress(FILE *input, FILE *output)
     Statistics statistics;
     statistics_initialize(statistics);
     result = read_header(input, statistics);
+    // Si il y a une erreur, ou que le fichier original est vide on arrête la décompression ici
     if (result != DECOMPRESS_RESULT_OK || statistics_get_total_count(statistics) == 0)
         return result;
+    // Si le fichier original ne contient qu'une seul modalité
+    if (statistics_is_unique(statistics))
+        return decompress_data_unique(statistics, output);    
     // - Reconstruction de l'arbre de Huffman
     HuffmanTree tree = huffman_tree_from_statistic(statistics);
     // - Décompression des données

@@ -126,7 +126,8 @@ CompressResult compress(FILE *input, FILE *output)
 
     HuffmanTree huffmanTree;
     CodingTable codingTable;
-    if (statistics_get_total_count(statistics) != 0)
+    // Vérifie si le fichier n'est pas vide avant ou ne contient qu'un seul octet avant de créer l'arbre de Huffman et la table de codage (risque d'avoir des pointeurs nuls)
+    if (statistics_get_total_count(statistics) != 0 && !statistics_is_unique(statistics)) 
     {
         // - Création de l'arbre de Huffman
         huffmanTree = huffman_tree_from_statistic(statistics);
@@ -136,7 +137,8 @@ CompressResult compress(FILE *input, FILE *output)
     }
     // - Écriture de l'en-tête
     result = write_header(output, statistics);
-    if (result != COMPRESS_RESULT_OK || statistics_get_total_count(statistics) == 0)
+    // Si il y a une erreur, ou que le fichier est vide ou ne contient qu'un seul octet, on arrête la compression ici
+    if (result != COMPRESS_RESULT_OK || statistics_get_total_count(statistics) == 0 || statistics_is_unique(statistics))
         return result;
     // - Compression des données
     return compress_source_bytes(input, output, codingTable, statistics_get_total_count(statistics));

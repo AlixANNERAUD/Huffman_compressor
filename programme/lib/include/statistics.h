@@ -35,15 +35,6 @@ void statistics_initialize(Statistics stat);
 FileSize statistics_get_count(const Statistics stat, Byte e);
 
 /**
- * @fn statistics_set_count(Statistics* stat, Byte e, unsigned int n)
- * @brief Fonction qui permet de définir le nombre d'occurences d'un élément e
- * @param stat Les statistiques
- * @param e élément sous forme d'octet
- * @param n Nombre d'occurences de e
-*/
-void statistics_set_count(Statistics stat, Byte e, unsigned int n);
-
-/**
  * @fn statistics_increase_count(Statistics* stat, Byte e)
  * @brief Fonction qui permet d'augmenter de 1 le nombre d'occurence d'un élément e
  * @param stat Les statistiques
@@ -69,12 +60,16 @@ bool statistics_are_equals(const Statistics statistics1, const Statistics statis
 bool statistics_compute_from_file(Statistics stat, FILE* file);
 
 /// @brief Fonction qui sérialise les statistiques dans un tableau d'octets.
-/// @param stats Les statistiques
+/// @param statistics Les statistiques
 /// @param buffer Le buffer d'une taille de 64 * 256 = 2048 octets.
-void statistics_serialize(const Statistics stats, void* buffer, FileSize size);
+void statistics_serialize(const Statistics statistics, void* buffer, FileSize size);
 
 /// @brief Fonction qui désérialise les statistiques depuis un tableau d'octets.
-/// @param stats Les statistiques.
+/// @param statistics Les statistiques.
 /// @param buffer Le buffer d'une taille de 64 * 256 = 2048 octets.
-bool statistics_deserialize(Statistics stats, const void* buffer);
+bool statistics_deserialize(Statistics statistics, const void* buffer);
 
+/// @brief Fonction qui renvoi si les statistiques sont uniques (une seule modalité)
+/// @param statistics Les statistiques
+/// @return Si les statistiques sont uniques.
+bool statistics_is_unique(const Statistics statistics);
