@@ -2,7 +2,7 @@
 
 ## 🚀 Introduction
 
-This is a group project for the course "Advanced algorithmic and C programming" at the INSA Rouen Normandie engineering school. The goal of this project was to implement a Huffman compressor in C.
+This is a group project for the course "Advanced algorithmic and C programming" at the [INSA Rouen Normandie](https://www.insa-rouen.fr/) engineering school. The goal of this project was to implement a Huffman compressor in C.
 
 ## 🛠️ Compilation
 
