@@ -14,7 +14,8 @@ def getHash(file_path):
 
 # - Fonction qui génère un fichier avec une fonction donnée
 def generateFile(file_path, function):
-    os.remove(file_path)
+    if (os.path.exists(file_path)):
+        os.remove(file_path)
     file = open(file_path, "wb")
     function(file)
     file.close()
@@ -24,7 +25,6 @@ def generateFile(file_path, function):
 def compress(file_path):
     originalHash = getHash(file_path)
     os.system(f"./programme/bin/huffman c {file_path}")
-    os.remove(file_path)
     return os.path.getsize(f"{file_path}.huff")
 
 # - Fonction qui décompresse un fichier et retourne son hash et sa taille
@@ -48,6 +48,16 @@ originalHash = generateFile("empty", lambda file: None)
 compressedSize = compress("empty")
 decompressedHash, decompressedSize = decompress("empty")
 printResult("empty", originalHash, compressedSize, decompressedHash, decompressedSize)
+
+# - File avec un seul caractère
+def generateSingleFile(file):
+    for i in range(filesSize):
+        file.write(bytes([0]))
+
+originalHash = generateFile("single", generateSingleFile)
+compressedSize = compress("single")
+decompressedHash, decompressedSize = decompress("single")
+printResult("single", originalHash, compressedSize, decompressedHash, decompressedSize)
 
 # - Fichier avec un unique caractère
 def generateUniqueFile(file):
