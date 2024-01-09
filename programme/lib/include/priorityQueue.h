@@ -7,7 +7,7 @@
 
 /// @brief Structure représentant une file de priorité.
 typedef struct PriorityQueue {
-    /// @brief Noeuds de la file de priorité.
+    /// @brief nœuds de la file de priorité.
     HuffmanTree nodes[PRIORITY_QUEUE_MAXIMUM_SIZE];
     /// @brief Taille de la file de priorité.
     size_t length;
