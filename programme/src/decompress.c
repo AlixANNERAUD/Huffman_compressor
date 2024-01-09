@@ -55,6 +55,9 @@ DecompressResult read_header(FILE *input, Statistics statistics)
 /// @return DECOMPRESS_RESULT_OK si la décompression s'est bien passée, un autre résultat sinon
 DecompressResult decompress_data(FILE *input, FILE *output, const HuffmanTree tree, FileSize fileSize)
 {
+    if (fileSize == 0)
+        return DECOMPRESS_RESULT_OK;
+
     unsigned char i = 8;
     HuffmanTree currentTree = tree;
     Byte sourceByte = byte_create(0);

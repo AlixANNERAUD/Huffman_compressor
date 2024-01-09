@@ -123,16 +123,20 @@ CompressResult compress(FILE *input, FILE *output)
     Statistics statistics;
     if (!statistics_compute_from_file(statistics, input))
         return COMPRESS_RESULT_ERROR_FAILED_TO_READ_INPUT_FILE;
-    // - Création de l'arbre de Huffman
+
     HuffmanTree huffmanTree;
-    huffmanTree = huffman_tree_from_statistic(statistics);
-    // - Création de la table de codage
     CodingTable codingTable;
-    codingTable = coding_table_from_huffman_tree(huffmanTree);
-    huffman_tree_delete(huffmanTree); // On libère la mémoire de l'arbre de Huffman
+    if (statistics_get_total_count(statistics) != 0)
+    {
+        // - Création de l'arbre de Huffman
+        huffmanTree = huffman_tree_from_statistic(statistics);
+        // - Création de la table de codage
+        codingTable = coding_table_from_huffman_tree(huffmanTree);
+        huffman_tree_delete(huffmanTree); // On libère la mémoire de l'arbre de Huffman
+    }
     // - Écriture de l'en-tête
     result = write_header(output, statistics);
-    if (result != COMPRESS_RESULT_OK)
+    if (result != COMPRESS_RESULT_OK || statistics_get_total_count(statistics) == 0)
         return result;
     // - Compression des données
     return compress_source_bytes(input, output, codingTable, statistics_get_total_count(statistics));
