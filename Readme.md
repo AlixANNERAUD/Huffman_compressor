@@ -13,6 +13,7 @@ Here are the `make` commands (execute in the `programme` directory) to compile t
 - `make run` to run the program.
 - `make test` to run the tests.
 - `make doc` to generate the documentation.
+- `make report` to generate the report (`make doc` must be executed before).
 
 ## 🏃‍♂️ Usage
 
