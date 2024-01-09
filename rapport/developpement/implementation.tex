@@ -24,7 +24,7 @@ L'implémentation procédurale en C s'est faite de la manière suivante :
     \item Dans le cas d'une entrée (valable aussi pour une fonction), si le type en question à une taille inférieur ou égale à celle des pointeurs, alors nous passons l'argument par valeur (\texttt{Type}).
     Sinon, nous passons l'argument par pointeur avec valeur constante (\texttt{const Type*}).
     \footnote{Ce choix à été fait pour des raisons de performances. En effet, dans le cas d'une entrée, nous ne modifions pas la valeur de l'argument. Ainsi, si nous passons l'argument par valeur, nous évitons une copie inutile.}
-    \item Dans le cas d'une sortie ou d'une entrée/sortie, nous passons l'argument par pointeur (\texttt{Type*}) avec valeur mutable.
+    \item Dans le cas d'une sortie ou d'une entrée/sortie, nous passons l'argument par pointeur avec valeur mutable (\texttt{Type*}).
 \end{itemize}
 
 \subsection{Allocation de la mémoire}
