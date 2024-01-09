@@ -55,9 +55,6 @@ DecompressResult read_header(FILE *input, Statistics statistics)
 /// @return DECOMPRESS_RESULT_OK si la décompression s'est bien passée, un autre résultat sinon
 DecompressResult decompress_data(FILE *input, FILE *output, const HuffmanTree tree, FileSize fileSize)
 {
-    if (fileSize == 0)
-        return DECOMPRESS_RESULT_OK;
-
     unsigned char i = 8;
     HuffmanTree currentTree = tree;
     Byte sourceByte = byte_create(0);
@@ -130,7 +127,7 @@ DecompressResult decompress(FILE *input, FILE *output)
     Statistics statistics;
     statistics_initialize(statistics);
     result = read_header(input, statistics);
-    if (result != DECOMPRESS_RESULT_OK)
+    if (result != DECOMPRESS_RESULT_OK || statistics_get_total_count(statistics) == 0)
         return result;
     // - Reconstruction de l'arbre de Huffman
     HuffmanTree tree = huffman_tree_from_statistic(statistics);
