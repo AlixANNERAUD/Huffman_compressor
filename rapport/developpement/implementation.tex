@@ -16,12 +16,6 @@ Cette bibliothèque étant trop limitée, nous avons préféré une gestion des 
 Ainsi, nous avons créé des énumérations pour chaque type d'erreur. De plus, nous avons également ajouté des fonctions permettant de convertir ces énumérations en chaîne de caractères afin de pouvoir afficher des messages d'erreurs plus explicites.
 Cela permet une gestion des erreurs plus précise et plus lisible.
 
-\subsection{Tests unitaires}
-
-Afin de tester le bon fonctionnement des TAD, nous avons écrit des tests unitaires pour chaque fonction.
-Pour cela, nous avons utilisé la bibliothèque \texttt{CUnit} qui permet de créer des suites de tests et d'afficher les résultats.
-Cette librairie est limitée, mais elle est suffisante pour notre cas d'utilisation et elle est facile à prendre en main.
-
 \subsection{Implémentation procédurale}
 
 L'implémentation procédurale en C s'est faite de la manière suivante :
@@ -46,3 +40,15 @@ Ainsi, nous avons utilisé l'allocation dynamique uniquement pour les structures
 Le C ne prend pas en charge la généricité. Il a donc fallu trouver une solution afin de pouvoir implémenter la généricité exprimé dans l'analyse.
 Au final, nous avons fait le choix de ne pas prendre en compte la généricité et d'implémenter directement les fonctions pour chaque type.
 Cela permet d'avoir un code plus lisible, simple et performant, sans avoir de duplication de code car chaque TAD n'est utilisé que dans un cadre bien précis et donc possède qu'une seule et unique implémentation.
+
+\subsection{Tests unitaires}
+
+Afin de tester le bon fonctionnement des TAD, nous avons écrit des tests unitaires pour chaque fonction.
+Pour cela, nous avons utilisé la bibliothèque \texttt{CUnit} qui permet de créer des suites de tests et d'afficher les résultats.
+Cette librairie est limitée, mais elle est suffisante pour notre cas d'utilisation et elle est facile à prendre en main.
+Grace à ces tests, nous avons pu déceler des erreurs d'implémentation et de corriger des bugs de manière efficace.
+
+\subsection{Tests fonctionnels}
+
+Afin de tester le bon fonctionnement du programme, nous avons écrit un script Python (\texttt{programme/tests/functionnalTests.py}) qui permet de tester le programme avec différents types de fichiers.
+Cela nous a permis de déceler des erreurs d'implémentation et de corriger des bugs.
