@@ -1,10 +1,10 @@
 \section{Table de codage}
 
 \begin{algorithme}
-    \signatureFonction{codingTable}{}{\codingTable}{}
+    \signatureFonction{coding\_Table}{}{\codingTable}{}
     \signatureProcedure{add}{\paramEntreeSortie{codingTable : \codingTable}, \paramEntree{byte : \byte}, \paramEntree{binaryCode : \binaryCode}}
-    {add(table, byte, binary\_code): non(is\_present(codingTable, byte))}
-    \signatureFonction{get\_code}{codingTable : \codingTable, byte : \byte}{\binaryCode}
-    {get\_code(table, byte): is\_present(table, byte)}
-    \signatureFonction{is\_present}{codingTable : \codingTable, byte : \byte}{\booleen}{}
+    {add(table, byte, binary\_code): non(search(codingTable, byte), null)}
+    \signatureFonction{get\_value}{codingTable : \codingTable, byte : \byte}{\binaryCode}
+    {get\_value(table, byte): search(table, byte, i)}
+    \signatureFonction{search}{codingTable : \codingTable, byte : \byte, indice : \typePointeur{\naturel}}{\booleen}{}
 \end{algorithme}
