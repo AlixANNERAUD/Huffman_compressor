@@ -1,0 +1,31 @@
+\chapter{Conclusion}
+
+\section{Résultats}
+
+Au final, notre compresseur d'Huffman semble performer correctement dans une grande majorité des cas.
+En effet, nous avons pu constater que la compression est efficace pour des fichiers d'une certaines taille (supérieur à la taille de la table de statistiques), d'autant plus avec une quantité réduite de caractères différents.
+Voici une liste de résultat obtenus avec notre programme :
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+Fichier & Taille initiale & Taille compressée & Rapport \\ \hline
+Vide & 0 octets & 2.060 octets & - \\
+Fichier de 1 caractère & 1 octet & 2.060 octets & -2060 \% \\ 
+Fichier d'un unique caractère & 10.000.000 octets & 2.060 octets & 99,98 \% \\ 
+Fichier "lorem ipsum" & 5.553.066 octets & 2.794.592 octets & 49,67 \% \\ 
+Fichier totalement aléatoire & 10.000.000 octets & 10.002.060 octets & -0,02 \% \\ 
+Fichier équilibré & 10.000.000 octets & 10.002.060 octets & -0,02 \% \\
+Fichier déséquilibré & 5.011.517 octets & 4.859.920 octets & 3,02 \% \\
+\hline
+\end{tabular}
+\caption{Résultats de la compression de fichiers sources C.\\
+(voir \texttt{programme/tests/functionnalTests.py})}
+\end{table}
+
+\section{Bilan}
+
+Ainsi ce projet nous a permis de mettre en pratique les notions vues en cours d'algorithmique avancée et de programmation en C.
+En effet, nous avons pu implémenter un algorithme de compression de données, et nous avons pu nous rendre compte des difficultés liées à la programmation en C.
+Nous avons pu également nous habituer aux outils usuels du développement logiciel (compilateur, débogueur, gestionnaire de version, etc.).
